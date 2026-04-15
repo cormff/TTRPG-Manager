@@ -65,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
     return [
       _buildDrawerItem(context: context, icon: Icons.gamepad, text: 'My Games', onTap: () {
         Navigator.pop(context);
-        Navigator.pushNamed(context, '/my_games');
+        Navigator.pushNamed(context, '/my_games_gm_view');
       }),
       _buildDrawerItem(context: context, icon: Icons.add_box, text: 'Create Game', onTap: () {
         Navigator.pop(context);
@@ -103,7 +103,7 @@ class CustomDrawer extends StatelessWidget {
       }),
       _buildDrawerItem(context: context, icon: Icons.gamepad, text: 'My Games', onTap: () {
         Navigator.pop(context);
-        Navigator.pushNamed(context, '/my_games');
+        Navigator.pushNamed(context, '/my_games_player_view');
       }),
       _buildDrawerItem(context: context, icon: Icons.note, text: 'Notes', onTap: () {
         Navigator.pop(context);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ttrpg_manager/widgets/custom_textfield.dart';
-import 'package:ttrpg_manager/widgets/primary_button.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
+import '../../widgets/custom_textfield.dart';
+import '../../widgets/primary_button.dart';
 import 'login_view.dart';
 
 class RegisterView extends StatefulWidget {
@@ -16,23 +18,29 @@ class _RegisterViewState extends State<RegisterView> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
 
-  void _register() {
-    // In a real app, you would handle user registration logic here.
-    // For this placeholder, we just navigate back to the login screen.
-    Navigator.of(context).pop();
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 40),
             CustomTextField(
               controller: _usernameController,
               labelText: 'Username',
@@ -56,18 +64,46 @@ class _RegisterViewState extends State<RegisterView> {
               obscureText: true,
             ),
             const SizedBox(height: 24.0),
-            PrimaryButton(
-              onPressed: _register,
-              text: 'Register',
-            ),
-            TextButton(
+
+            authProvider.isLoading
+                ? const CircularProgressIndicator(color: Colors.deepPurple) // Yükleniyorsa simge çıkar
+                : PrimaryButton(
               onPressed: () {
-                Navigator.push(
+                // Şifre kontrolü (confirm password)
+                if (_passwordController.text != _confirmPasswordController.text) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Passwords do not match!")),
+                  );
+                  return;
+                }
+
+                // Boş alan kontrolü
+                if (_usernameController.text.isEmpty || _emailController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Please fill all fields")),
+                  );
+                  return;
+                }
+
+                // Provider üzerinden API'ye gönderiyoruz
+                context.read<AuthProvider>().register(
+                  _usernameController.text,
+                  _emailController.text,
+                  _passwordController.text,
                   context,
-                  MaterialPageRoute(builder: (context) => LoginView()),
                 );
               },
-              child: Text(
+              text: 'Register',
+            ),
+
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const LoginView()),
+                );
+              },
+              child: const Text(
                 "Already registered? Log in",
                 style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
               ),

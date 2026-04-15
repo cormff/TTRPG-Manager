@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/providers/auth_provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/views/auth/login_view.dart';
 import 'package:ttrpg_manager/views/auth/register_view.dart';
 import 'package:ttrpg_manager/views/main_scaffold.dart';
 import 'package:ttrpg_manager/utils/app_theme.dart';
-import 'package:ttrpg_manager/views/game/my_games_view.dart';
+import 'package:ttrpg_manager/views/gm/my_games_gm_view.dart';
+import 'package:ttrpg_manager/views/player/my_games_player_view.dart';
 import 'package:ttrpg_manager/views/gm/create_game_view.dart';
 import 'package:ttrpg_manager/views/gm/my_maps_view.dart';
 import 'package:ttrpg_manager/views/player/join_game_view.dart';
@@ -16,6 +18,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserRoleProvider()),
       ],
       child: const MyApp(),
@@ -37,7 +40,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginView(),
         '/register': (context) => const RegisterView(),
         '/main_scaffold': (context) => const MainScaffold(),
-        '/my_games': (context) => const MyGamesView(),
+        '/my_games_player_view': (context) => const MyGamesPlayerView(),
+        '/my_games_gm_view': (context) => const MyGamesGMView(),
         '/create_game': (context) => const CreateGameView(),
         '/my_maps': (context) => const MyMapsView(),
         '/notes': (context) => const NotesView(),
