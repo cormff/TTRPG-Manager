@@ -6,9 +6,16 @@ enum UserRole {
 }
 
 class UserRoleProvider with ChangeNotifier {
-  UserRole _userRole = UserRole.player; // Default role
+  UserRole _userRole = UserRole.player;
+  String _username = "Ozi1308";
 
   UserRole get userRole => _userRole;
+  String get username => _username;
+
+  void setUsername(String name) {
+    _username = name;
+    notifyListeners();
+  }
 
   void setUserRole(UserRole role) {
     _userRole = role;
