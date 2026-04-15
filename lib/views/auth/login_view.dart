@@ -19,9 +19,13 @@ class _LoginViewState extends State<LoginView> {
 
   void _login() {
     final userRoleProvider = Provider.of<UserRoleProvider>(context, listen: false);
+    
+    // Kullanıcı adını ve rolü provider'a set ediyoruz
+    if (_usernameController.text.isNotEmpty) {
+      userRoleProvider.setUsername(_usernameController.text);
+    }
     userRoleProvider.setUserRole(_selectedRole);
 
-    // Rol ne olursa olsun BÜTÜN navigasyon artık MainScaffold üzerinden dönmeli
     Navigator.of(context).pushReplacementNamed('/main_scaffold');
   }
 
