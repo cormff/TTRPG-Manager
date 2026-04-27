@@ -31,17 +31,17 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  // --- GİRİŞ METODU (EKSİK OLAN KISIM) ---
-  Future<bool> login(String email, String password) async {
+// --- GİRİŞ METODU (GÜNCELLENMİŞ) ---
+  Future<Map<String, dynamic>?> login(String email, String password) async {
     _isLoading = true;
-    notifyListeners(); // Ekranı "Yükleniyor" durumuna sokar
+    notifyListeners();
 
-    // AuthService üzerinden Java API'sine istek atıyoruz
-    final success = await _authService.loginUser(email, password);
+    // AuthService artık bize ya kullanıcı verisini içeren bir Map döner ya da null döner
+    final Map<String, dynamic>? userData = await _authService.loginUser(email, password);
 
     _isLoading = false;
-    notifyListeners(); // Yükleme bittiğinde ekranı günceller
+    notifyListeners();
 
-    return success; // Sonucu LoginView'a döndürür
+    return userData; // Sonucu LoginView'a gönderiyoruz ki ID ve ismi kaydedebilsin
   }
 }

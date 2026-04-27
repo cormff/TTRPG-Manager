@@ -45,8 +45,10 @@ class _MainScaffoldState extends State<MainScaffold> {
     ];
 
 
+    final String username = Provider.of<UserRoleProvider>(context).username;
+
     final String appBarTitle = _selectedIndex == 0
-        ? (isGM ? 'GM Dashboard' : 'Player Dashboard')
+        ? (isGM ? '$username - GM' : '$username - Player')
         : 'My Games';
 
     return Scaffold(

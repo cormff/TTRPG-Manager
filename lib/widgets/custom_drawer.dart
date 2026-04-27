@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
+import 'package:ttrpg_manager/providers/notes_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -50,6 +51,10 @@ class CustomDrawer extends StatelessWidget {
                 icon: Icons.logout,
                 text: 'Logout',
                 onTap: () {
+                  // 1. Önce eski kullanıcının notlarını RAM'den (hafızadan) temizliyoruz
+                  Provider.of<NotesProvider>(context, listen: false).clearData();
+
+                  // 2. Rolü sıfırlayıp Login sayfasına geri dönüyoruz
                   userRoleProvider.setUserRole(UserRole.player);
                   Navigator.of(context).pushReplacementNamed('/login');
                 },

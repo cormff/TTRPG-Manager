@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../services/game_service.dart';
+import 'package:provider/provider.dart';
+import '../../providers/user_role_provider.dart';
 
 class MyGamesGMView extends StatefulWidget {
   const MyGamesGMView({super.key});
@@ -19,6 +21,9 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    // 1. Güncel kullanıcının ID'sini çekiyoruz
+    final currentUserId = context.watch<UserRoleProvider>().userId;
+
     return Scaffold(
       // backgroundColor: Colors.black KALDIRILDI! Artık app_theme.dart içindeki scaffoldBackgroundColor (grey[900]) geçerli.
       appBar: AppBar(
@@ -35,7 +40,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
         color: theme.primaryColor,
         backgroundColor: theme.scaffoldBackgroundColor,
         child: FutureBuilder<List<dynamic>>(
-          future: _gameService.getMyGames(1),
+          future: _gameService.getMyGames(currentUserId ?? 0),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(

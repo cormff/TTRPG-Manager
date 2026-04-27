@@ -7,16 +7,21 @@ enum UserRole {
 
 class UserRoleProvider with ChangeNotifier {
   UserRole _userRole = UserRole.player;
-  String _username = "Ozi1308";
+  String _username = "";
+  int? _userId; // Yeni eklenen alan
 
   UserRole get userRole => _userRole;
   String get username => _username;
+  int? get userId => _userId; // ID'yi dışarı açıyoruz
 
-  void setUsername(String name) {
+  void setUserData(int id, String name, UserRole role) {
+    _userId = id;
     _username = name;
+    _userRole = role;
     notifyListeners();
   }
 
+  // Yan menüden veya ayarlardan sadece rolü değiştirmek için kullanılan metot
   void setUserRole(UserRole role) {
     _userRole = role;
     notifyListeners();

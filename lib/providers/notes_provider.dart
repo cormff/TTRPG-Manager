@@ -1,43 +1,89 @@
 import 'package:flutter/material.dart';
 import '../models/note_model.dart';
+import '../services/note_service.dart';
 
 class NotesProvider with ChangeNotifier {
-  final List<Note> _notes = [];
+  final NoteService _noteService = NoteService();
 
-  List<Note> get gmNotes => _notes.where((note) => note.type == NoteType.gm).toList();
-  List<Note> get playerNotes => _notes.where((note) => note.type == NoteType.player).toList();
+  List<Note> _gmNotes = [];
+  List<Note> _playerNotes = [];
+  bool _isLoading = false;
 
-  void addNote(String title, String content, NoteType type, {String? tag}) {
+  List<Note> get gmNotes => _gmNotes;
+  List<Note> get playerNotes => _playerNotes;
+  bool get isLoading => _isLoading;
+
+// Artık fetchAllNotes metoduna userId'yi dışarıdan parametre olarak alıyoruz
+  Future<void> fetchAllNotes(int userId) async {
+    _isLoading = true;
+    notifyListeners();
+
+    _gmNotes = await _noteService.fetchNotes(userId, 'GM');
+    _playerNotes = await _noteService.fetchNotes(userId, 'PLAYER');
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+// addNote metodunda da userId'yi kullanıyoruz
+  Future<void> addNote(String title, String content, NoteType type, int userId, {String? tag, String? subTag}) async {
     final newNote = Note(
-      id: DateTime.now().toString(),
+      title: title, content: content, tag: tag, subTag: subTag,
+      type: type, userId: userId, // Parametre gelen userId
+    );
+
+    final savedNote = await _noteService.createNote(newNote);
+    if (savedNote != null) {
+      if (type == NoteType.gm) {
+        _gmNotes.add(savedNote);
+      } else {
+        _playerNotes.add(savedNote);
+      }
+      notifyListeners(); // Ekranı güncelle
+    }
+  }
+
+  Future<void> updateNote(int id, String title, String content, {String? tag, String? subTag}) async {
+    final allNotes = [..._gmNotes, ..._playerNotes];
+    final existingNote = allNotes.firstWhere((n) => n.id == id);
+
+    final updatedNote = Note(
+      id: id,
       title: title,
       content: content,
-      createdAt: DateTime.now(),
-      type: type,
       tag: tag,
+      subTag: subTag,
+      type: existingNote.type,
+      userId: existingNote.userId,
     );
-    _notes.add(newNote);
-    notifyListeners();
-  }
 
-  void deleteNote(String id) {
-    _notes.removeWhere((note) => note.id == id);
-    notifyListeners();
-  }
-
-  void updateNote(String id, String title, String content, {String? tag}) {
-    final index = _notes.indexWhere((note) => note.id == id);
-    if (index != -1) {
-      final oldNote = _notes[index];
-      _notes[index] = Note(
-        id: oldNote.id,
-        title: title,
-        content: content,
-        createdAt: oldNote.createdAt,
-        type: oldNote.type,
-        tag: tag,
-      );
+    final success = await _noteService.updateNote(id, updatedNote);
+    if (success) {
+      if (existingNote.type == NoteType.gm) {
+        final index = _gmNotes.indexWhere((n) => n.id == id);
+        if (index != -1) _gmNotes[index] = updatedNote;
+      } else {
+        final index = _playerNotes.indexWhere((n) => n.id == id);
+        if (index != -1) _playerNotes[index] = updatedNote;
+      }
       notifyListeners();
     }
+  }
+
+  Future<void> deleteNote(int id) async {
+    final success = await _noteService.deleteNote(id);
+    if (success) {
+      _gmNotes.removeWhere((n) => n.id == id);
+      _playerNotes.removeWhere((n) => n.id == id);
+      notifyListeners();
+    }
+  }
+
+  // Çıkış (Logout) yapıldığında RAM'deki eski verileri silmek için kullanılır
+  void clearData() {
+    _gmNotes.clear();
+    _playerNotes.clear();
+    _isLoading = false;
+    notifyListeners(); // Arayüze "Veriler sıfırlandı" bilgisini gönder
   }
 }

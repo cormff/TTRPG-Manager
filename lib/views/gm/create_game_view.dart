@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Provider paketi eklendi
+import '../../providers/user_role_provider.dart'; // Rol ve ID için eklendi
 import '../../services/game_service.dart';
 
 class CreateGameView extends StatefulWidget {
@@ -16,13 +18,25 @@ class _CreateGameViewState extends State<CreateGameView> {
   bool _isLoading = false;
 
   void _submitForm() async {
+    // 1. O an giriş yapmış kullanıcının ID'sini alıyoruz
+    final currentUserId = Provider.of<UserRoleProvider>(context, listen: false).userId;
+
+    if (currentUserId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Oturum hatası! Lütfen tekrar giriş yapın.")),
+      );
+      return;
+    }
+
     setState(() => _isLoading = true);
 
+    // 2. createGame servisine currentUserId'yi (gmId olarak) gönderiyoruz
     final success = await GameService().createGame(
       _titleController.text,
       _descController.text,
       _maxPlayers,
       _isPublic,
+      currentUserId, // <--- YENİ EKLENEN PARAMETRE
     );
 
     setState(() => _isLoading = false);

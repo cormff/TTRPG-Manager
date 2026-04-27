@@ -20,24 +20,24 @@ class AuthService {
     }
   }
 
-  Future<bool> loginUser(String email, String password) async {
+  Future<Map<String, dynamic>?> loginUser(String email, String password) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/login'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
-          "email": email.trim(), // Boşlukları temizle
+          "email": email.trim(),
           "password": password,
         }),
       );
 
-      print("Status Code: ${response.statusCode}");
-      print("Response Body: ${response.body}");
-
-      return response.statusCode == 200;
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+      return null; // Başarısızsa null döndür
     } catch (e) {
       print("Bağlantı Hatası: $e");
-      return false;
+      return null;
     }
   }
 }

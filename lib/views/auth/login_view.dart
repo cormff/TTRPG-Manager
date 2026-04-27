@@ -22,22 +22,19 @@ class _LoginViewState extends State<LoginView> {
     final authProvider = context.read<AuthProvider>();
     final userRoleProvider = context.read<UserRoleProvider>();
 
-    // 1. Java API üzerinden giriş kontrolü yapıyoruz
-    // Backend'de yazdığımız metot email beklediği için ilk parametreye email veriyoruz
-    final bool success = await authProvider.login(
+    final userData = await authProvider.login(
       _emailController.text,
       _passwordController.text,
     );
 
-    if (success) {
-      // 2. Giriş başarılıysa rolü set et ve ana ekrana geç
-      userRoleProvider.setUserRole(_selectedRole);
+    if (userData != null) {
+      userRoleProvider.setUserData(userData['id'], userData['username'], _selectedRole);
 
       if (mounted) {
         Navigator.of(context).pushReplacementNamed('/main_scaffold');
       }
     } else {
-      // 3. Giriş başarısızsa kullanıcıya hata göster
+      // Giriş başarısız durumu
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
