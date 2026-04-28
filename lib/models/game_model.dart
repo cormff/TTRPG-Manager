@@ -28,7 +28,7 @@ class Game {
       title: json['title'] ?? 'Adsız Oyun',
       description: json['description'] ?? '',
       maxPlayers: json['maxPlayers'] ?? 4,
-      isPublic: json['isPublic'] ?? false,
+      isPublic: json['publicGame'] ?? false, // JSON'dan publicGame olarak oku
       gmId: json['gmId'] ?? 0,
       joinedPlayers: json['joinedPlayers'] ?? [],
       maps: json['maps'] ?? [],
@@ -42,7 +42,7 @@ class Game {
       'title': title,
       'description': description,
       'maxPlayers': maxPlayers,
-      'isPublic': isPublic,
+      'publicGame': isPublic, // JSON'a publicGame olarak yaz
       'gmId': gmId,
     };
   }

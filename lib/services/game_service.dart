@@ -43,11 +43,12 @@ class GameService {
         // Eğer Java'da @PutMapping("/update/{id}") yapsaydın, burası da '$baseUrl/update/$gameId' olmalıydı.
         Uri.parse('$baseUrl/$gameId'),
         headers: {"Content-Type": "application/json"},
+        // updateGame ve createGame metotları içinde
         body: jsonEncode({
           "title": title,
           "description": description,
           "maxPlayers": maxPlayers,
-          "isPublic": isPublic,
+          "publicGame": isPublic, // Key değişti, değer aynı kalabilir
           "gmId": gmId
         }),
       );
