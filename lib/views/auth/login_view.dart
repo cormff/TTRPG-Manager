@@ -52,56 +52,59 @@ class _LoginViewState extends State<LoginView> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextField(
-              controller: _emailController,
-              labelText: 'Email',
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 16.0),
-            CustomTextField(
-              controller: _passwordController,
-              labelText: 'Password',
-              obscureText: true,
-            ),
-            const SizedBox(height: 16.0),
-            DropdownButtonFormField<UserRole>(
-              value: _selectedRole,
-              decoration: const InputDecoration(labelText: 'Select Role'),
-              items: const [
-                DropdownMenuItem(value: UserRole.gameMaster, child: Text('Game Master')),
-                DropdownMenuItem(value: UserRole.player, child: Text('Player')),
-              ],
-              onChanged: (UserRole? newValue) {
-                if (newValue != null) setState(() => _selectedRole = newValue);
-              },
-            ),
-            const SizedBox(height: 24.0),
-
-            isLoading
-                ? const CircularProgressIndicator()
-                : PrimaryButton(
-              onPressed: _login,
-              text: 'Login',
-            ),
-
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const RegisterView()),
-                );
-              },
-              child: const Text(
-                "Don't have an account? Register",
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+      // ÇÖZÜM BURADA BAŞLIYOR: Center ve SingleChildScrollView eklendi
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0), // Padding'i direkt buraya verdik
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomTextField(
+                controller: _emailController,
+                labelText: 'Email',
+                keyboardType: TextInputType.emailAddress,
               ),
-            ),
-          ],
+              const SizedBox(height: 16.0),
+              CustomTextField(
+                controller: _passwordController,
+                labelText: 'Password',
+                obscureText: true,
+              ),
+              const SizedBox(height: 16.0),
+              DropdownButtonFormField<UserRole>(
+                value: _selectedRole,
+                decoration: const InputDecoration(labelText: 'Select Role'),
+                items: const [
+                  DropdownMenuItem(value: UserRole.gameMaster, child: Text('Game Master')),
+                  DropdownMenuItem(value: UserRole.player, child: Text('Player')),
+                ],
+                onChanged: (UserRole? newValue) {
+                  if (newValue != null) setState(() => _selectedRole = newValue);
+                },
+              ),
+              const SizedBox(height: 24.0),
+
+              isLoading
+                  ? const CircularProgressIndicator()
+                  : PrimaryButton(
+                onPressed: _login,
+                text: 'Login',
+              ),
+
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterView()),
+                  );
+                },
+                child: const Text(
+                  "Don't have an account? Register",
+                  style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

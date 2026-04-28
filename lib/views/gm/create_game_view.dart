@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Provider paketi eklendi
-import '../../providers/user_role_provider.dart'; // Rol ve ID için eklendi
-import '../../services/game_service.dart';
+import 'package:provider/provider.dart';
+import '../../providers/games_provider.dart';
+import '../../providers/user_role_provider.dart';
 
 class CreateGameView extends StatefulWidget {
   const CreateGameView({super.key});
@@ -18,31 +18,24 @@ class _CreateGameViewState extends State<CreateGameView> {
   bool _isLoading = false;
 
   void _submitForm() async {
-    // 1. O an giriş yapmış kullanıcının ID'sini alıyoruz
     final currentUserId = Provider.of<UserRoleProvider>(context, listen: false).userId;
-
-    if (currentUserId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Oturum hatası! Lütfen tekrar giriş yapın.")),
-      );
-      return;
-    }
+    if (currentUserId == null) return;
 
     setState(() => _isLoading = true);
 
-    // 2. createGame servisine currentUserId'yi (gmId olarak) gönderiyoruz
-    final success = await GameService().createGame(
+    // Servis yerine Provider'ı kullanıyoruz
+    final success = await Provider.of<GamesProvider>(context, listen: false).createGame(
       _titleController.text,
       _descController.text,
       _maxPlayers,
       _isPublic,
-      currentUserId, // <--- YENİ EKLENEN PARAMETRE
+      currentUserId,
     );
 
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Campaign Created!")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Oyun Başarıyla Oluşturuldu!")));
       Navigator.pop(context);
     }
   }

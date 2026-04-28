@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../services/game_service.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_role_provider.dart';
+import '../../providers/games_provider.dart';
+import '../../models/game_model.dart';
+import '../../views/game/game_details_view.dart';
 
 class MyGamesGMView extends StatefulWidget {
   const MyGamesGMView({super.key});
@@ -11,73 +13,59 @@ class MyGamesGMView extends StatefulWidget {
 }
 
 class _MyGamesGMViewState extends State<MyGamesGMView> {
-  final GameService _gameService = GameService();
-
-  Future<void> _refreshGames() async {
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userId = context.read<UserRoleProvider>().userId;
+      if (userId != null) {
+        // Sayfa açıldığında oyunları çek
+        context.read<GamesProvider>().fetchGMGames(userId);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    // 1. Güncel kullanıcının ID'sini çekiyoruz
-    final currentUserId = context.watch<UserRoleProvider>().userId;
+    // Provider'ı dinliyoruz
+    final gamesProvider = context.watch<GamesProvider>();
+    // Oyunları en yeniden en eskiye sıralıyoruz
+    final games = gamesProvider.gmGames.reversed.toList();
 
     return Scaffold(
-      // backgroundColor: Colors.black KALDIRILDI! Artık app_theme.dart içindeki scaffoldBackgroundColor (grey[900]) geçerli.
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text('Oyunlarım'),
       ),
-      body: RefreshIndicator(
-        onRefresh: _refreshGames,
-        color: theme.primaryColor,
-        backgroundColor: theme.scaffoldBackgroundColor,
-        child: FutureBuilder<List<dynamic>>(
-          future: _gameService.getMyGames(currentUserId ?? 0),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(color: theme.primaryColor),
-              );
-            } else if (snapshot.hasError) {
-              return _buildErrorState(theme);
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return _buildEmptyState(theme);
-            }
-
-            final games = snapshot.data!;
-
-            return ListView.builder(
-              itemCount: games.length,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              itemBuilder: (context, index) {
-                final game = games[index];
-                return _buildGameTile(game, theme);
-              },
-            );
-          },
-        ),
+      body: gamesProvider.isLoading
+          ? Center(child: CircularProgressIndicator(color: theme.primaryColor))
+          : games.isEmpty
+          ? _buildEmptyState(theme)
+          : ListView.builder(
+        itemCount: games.length,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        itemBuilder: (context, index) {
+          final game = games[index];
+          return _buildGameTile(game, theme);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primaryColor,
         onPressed: () {
-          Navigator.pushNamed(context, '/create_game').then((_) => _refreshGames());
+          // Geri dönüldüğünde zaten provider kendi kendini güncelliyor
+          Navigator.pushNamed(context, '/create_game');
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 
-  Widget _buildGameTile(dynamic game, ThemeData theme) {
-    final bool isGamePublic = game['isPublic'] ?? game['public'] ?? false;
-
+  // Artık dynamic yerine oluşturduğumuz Game modelini bekliyoruz
+  Widget _buildGameTile(Game game, ThemeData theme) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -93,7 +81,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           child: Icon(Icons.casino, color: theme.primaryColor, size: 30),
         ),
         title: Text(
-          game['title'] ?? 'Adsız Macera',
+          game.title, // game['title'] yerine game.title
           style: theme.textTheme.titleLarge,
         ),
         subtitle: Padding(
@@ -102,7 +90,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                game['description'] ?? 'Açıklama yok...',
+                game.description.isEmpty ? 'Açıklama yok...' : game.description,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium,
@@ -113,18 +101,18 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   Icon(Icons.people, size: 14, color: theme.textTheme.bodyMedium?.color),
                   const SizedBox(width: 4),
                   Text(
-                    "${game['maxPlayers']} Oyuncu",
+                    "${game.maxPlayers} Oyuncu",
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                   const SizedBox(width: 12),
                   Icon(
-                    isGamePublic ? Icons.public : Icons.lock,
+                    game.isPublic ? Icons.public : Icons.lock,
                     size: 14,
                     color: theme.textTheme.bodyMedium?.color,
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    isGamePublic ? 'Herkese Açık' : 'Özel',
+                    game.isPublic ? 'Herkese Açık' : 'Özel',
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                 ],
@@ -134,7 +122,13 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
         ),
         trailing: Icon(Icons.chevron_right, color: theme.primaryColor),
         onTap: () {
-          // TODO: Oyun detay sayfasına yönlendirilecek
+          // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GameDetailsView(game: game),
+            ),
+          );
         },
       ),
     );
@@ -152,16 +146,6 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             style: theme.textTheme.bodyLarge,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildErrorState(ThemeData theme) {
-    return Center(
-      child: Text(
-        "Veriler çekilirken bir hata oluştu.\nSunucuyu kontrol edin.",
-        textAlign: TextAlign.center,
-        style: TextStyle(color: theme.colorScheme.error),
       ),
     );
   }

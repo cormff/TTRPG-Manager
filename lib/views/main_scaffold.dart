@@ -58,26 +58,8 @@ class _MainScaffoldState extends State<MainScaffold> {
       ),
       drawer: const CustomDrawer(),
 
-      body: isGM ? gmScreens[_selectedIndex] : playerScreens[_selectedIndex],
+      body: isGM ? const GMDashboard() : const PlayerDashboard(),
 
-
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF1E1E1E),
-        selectedItemColor: Colors.deepPurpleAccent,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
-            label: 'My Games',
-          ),
-        ],
-      ),
     );
   }
 }

@@ -15,6 +15,7 @@ import 'package:ttrpg_manager/views/game/notes_view.dart';
 import 'package:ttrpg_manager/views/game/rule_books_view.dart';
 
 import 'package:ttrpg_manager/providers/notes_provider.dart';
+import 'package:ttrpg_manager/providers/games_provider.dart';
 
 void main() {
   runApp(
@@ -22,6 +23,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserRoleProvider()),
+        ChangeNotifierProvider(create: (_) => GamesProvider()),
         ChangeNotifierProvider(create: (_) => NotesProvider()),
       ],
       child: const MyApp(),

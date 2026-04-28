@@ -35,4 +35,27 @@ class GameService {
     }
     return [];
   }
+
+  Future<bool> updateGame(int gameId, String title, String description, int maxPlayers, bool isPublic, int gmId) async {
+    try {
+      final response = await http.put(
+        // URL KISMINA DİKKAT: Java'da /api/games/{id} şeklinde karşılayacağımız için burası böyle olmalı.
+        // Eğer Java'da @PutMapping("/update/{id}") yapsaydın, burası da '$baseUrl/update/$gameId' olmalıydı.
+        Uri.parse('$baseUrl/$gameId'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "title": title,
+          "description": description,
+          "maxPlayers": maxPlayers,
+          "isPublic": isPublic,
+          "gmId": gmId
+        }),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Oyun güncellenirken hata: $e");
+      return false;
+    }
+  }
 }
