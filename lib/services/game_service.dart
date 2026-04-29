@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GameService {
-  final String baseUrl = "http://10.0.2.2:8080/api/games";
+  final String baseUrl = 'http://10.0.2.2:8080/api/games';
 
 // game_service.dart içindeki createGame metodu
   Future<bool> createGame(String title, String description, int maxPlayers, bool isPublic, int gmId) async {
@@ -27,13 +27,25 @@ class GameService {
   }
 
   Future<List<dynamic>> getMyGames(int gmId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/my-games/$gmId'),
-    );
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+    try {
+      final url = '$baseUrl/my-games/$gmId';
+      print(">>> İstek atılan URL: $url");
+
+      final response = await http.get(Uri.parse(url));
+
+      print(">>> Sunucu Cevap Kodu: ${response.statusCode}");
+      print(">>> Sunucudan Gelen Cevap: ${response.body}");
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        print(">>> HATA: Sunucu 200 OK döndürmedi!");
+        return [];
+      }
+    } catch (e) {
+      print(">>> KRİTİK HATA: $e");
+      return [];
     }
-    return [];
   }
 
   Future<bool> updateGame(int gameId, String title, String description, int maxPlayers, bool isPublic, int gmId) async {

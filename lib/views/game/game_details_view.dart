@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../models/game_model.dart';
 import 'package:provider/provider.dart';
 import '../../providers/games_provider.dart';
+import '../../providers/maps_provider.dart';
 
 class GameDetailsView extends StatefulWidget {
   final Game game;
@@ -40,6 +43,13 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     _descController = TextEditingController(text: _currentDesc);
     _maxPlayers = _currentMaxPlayers;
     _isPublic = _currentIsPublic;
+
+    // YENİ EKLENEN: Sayfa yüklendiğinde bu oyuna ait haritaları getir
+    if (widget.game.id != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<MapsProvider>().fetchMapsForGame(widget.game.id!);
+      });
+    }
   }
 
   @override
@@ -225,27 +235,176 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                 ),
               ),
 
-            // --- HARİTA KISMI ---
+// --- HARİTA KISMI ---
             if (!_isEditing) ...[
               const SizedBox(height: 24),
-              Text("Bağlı Haritalar", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)), // Mor Başlık
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Bağlı Haritalar", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
+                  // Harita Ekleme Butonu (Şimdilik boş, bir sonraki adımda dolduracağız)
+// Harita Ekleme Butonu
+                  IconButton(
+                    icon: Icon(Icons.add_box, color: primaryColor, size: 28),
+                    onPressed: () {
+                      // Havuzdaki haritaları çekiyoruz
+                      final allMaps = context.read<MapsProvider>().allMaps;
+
+                      if (allMaps.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Önce Harita Havuzuna harita eklemelisin!")),
+                        );
+                        return;
+                      }
+
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: theme.cardColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                        builder: (context) {
+                          return SafeArea(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Havuza Eklenen Haritalar",
+                                    style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    height: 200,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: allMaps.length,
+                                      itemBuilder: (context, index) {
+                                        final map = allMaps[index];
+                                        final isNetwork = map.imageUrl.startsWith('http');
+
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            Navigator.pop(context); // Modalı kapat
+
+                                            // Tıklanan haritayı oyuna bağla
+                                            final success = await context.read<MapsProvider>().createMap(
+                                              map.name,
+                                              map.imageUrl,
+                                              gameId: widget.game.id,
+                                            );
+
+                                            if (success && context.mounted) {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(content: Text("Harita oyuna bağlandı!"), backgroundColor: Colors.green),
+                                              );
+                                            }
+                                          },
+                                          child: Container(
+                                            width: 160,
+                                            margin: const EdgeInsets.only(right: 12),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(12),
+                                              border: Border.all(color: primaryColor.withOpacity(0.5)),
+                                              image: DecorationImage(
+                                                image: isNetwork
+                                                    ? NetworkImage(map.imageUrl) as ImageProvider
+                                                    : FileImage(File(map.imageUrl)),
+                                                fit: BoxFit.cover,
+                                                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.darken),
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                map.name,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
               const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: theme.cardColor,
-                  borderRadius: BorderRadius.circular(12),
-                  // Harita kutucuğunun dış çizgisi mor yapıldı
-                  border: Border.all(color: primaryColor.withOpacity(0.5), style: BorderStyle.solid),
-                ),
-                child: Column(
-                  children: [
-                    Icon(Icons.map, size: 40, color: primaryColor.withOpacity(0.7)), // İkon morlaştırıldı
-                    const SizedBox(height: 8),
-                    Text("Henüz bu oyuna harita bağlanmamış.", style: TextStyle(color: Colors.grey[400])),
-                  ],
-                ),
+
+              // Provider'ı dinleyerek haritaları gösteren yapı
+              Consumer<MapsProvider>(
+                builder: (context, mapsProvider, child) {
+                  if (mapsProvider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (mapsProvider.currentGameMaps.isEmpty) {
+                    return Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: theme.cardColor,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: primaryColor.withOpacity(0.5), style: BorderStyle.solid),
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(Icons.map, size: 40, color: primaryColor.withOpacity(0.7)),
+                          const SizedBox(height: 8),
+                          Text("Henüz bu oyuna harita bağlanmamış.", style: TextStyle(color: Colors.grey[400])),
+                        ],
+                      ),
+                    );
+                  }
+
+                  // Haritalar varsa yatay bir listede göster
+                  return SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: mapsProvider.currentGameMaps.length,
+                      itemBuilder: (context, index) {
+                        final map = mapsProvider.currentGameMaps[index];
+                        return Container(
+                          width: 160,
+                          margin: const EdgeInsets.only(right: 12),
+                          decoration: BoxDecoration(
+                            color: theme.cardColor,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: primaryColor.withOpacity(0.4)),
+                            // Eğer resim linki varsa arka plana resmi koyup üzerini biraz karartıyoruz
+                            image: map.imageUrl.isNotEmpty
+                                ? DecorationImage(
+                              image: NetworkImage(map.imageUrl),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
+                            )
+                                : null,
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                map.name,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ]
           ],

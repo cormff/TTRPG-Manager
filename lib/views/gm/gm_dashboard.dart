@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/notes_provider.dart';
-import '../../providers/games_provider.dart'; // YENİ: GamesProvider eklendi
+import '../../providers/games_provider.dart';
+import '../game/game_details_view.dart';
+import '../../providers/maps_provider.dart';
+import '../../views/gm/my_maps_view.dart';
 
 class GMDashboard extends StatefulWidget {
   const GMDashboard({super.key});
@@ -12,7 +17,6 @@ class GMDashboard extends StatefulWidget {
 }
 
 class _GMDashboardState extends State<GMDashboard> {
-  // ESKİ gameService ve yerel _games listesi TAMAMEN SİLİNDİ!
 
   @override
   void initState() {
@@ -22,16 +26,21 @@ class _GMDashboardState extends State<GMDashboard> {
       final userId = userRoleProvider.userId;
 
       if (userId != null) {
-        // Notları çek
         final notesProvider = context.read<NotesProvider>();
         if (notesProvider.gmNotes.isEmpty) {
           notesProvider.fetchAllNotes(userId);
         }
 
-        // Oyunları çek (GamesProvider üzerinden)
         final gamesProvider = context.read<GamesProvider>();
         if (gamesProvider.gmGames.isEmpty) {
           gamesProvider.fetchGMGames(userId);
+        }
+
+        final mapsProvider = context.read<MapsProvider>();
+        if (mapsProvider.allMaps.isEmpty) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.read<MapsProvider>().fetchAllMaps();
+          });
         }
       }
     });
@@ -85,12 +94,10 @@ class _GMDashboardState extends State<GMDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Notları Dinle
     final notesProvider = context.watch<NotesProvider>();
     final allGmNotes = notesProvider.gmNotes.reversed.toList();
     final displayNotes = allGmNotes.take(5).toList();
 
-    // 2. Oyunları Dinle (YENİ)
     final gamesProvider = context.watch<GamesProvider>();
     final allGmGames = gamesProvider.gmGames.reversed.toList();
 
@@ -109,47 +116,56 @@ class _GMDashboardState extends State<GMDashboard> {
                   : SizedBox(
                 height: 110,
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
-                  // Limit 4, butonu göstermek için +1 ekliyoruz
                   itemCount: (allGmGames.length > 4 ? 4 : allGmGames.length) + 1,
                   itemBuilder: (context, index) {
                     int displayCount = allGmGames.length > 4 ? 4 : allGmGames.length;
 
                     if (index == displayCount) return _buildViewMoreButton("/my_games_gm_view");
 
-                    // Artık 'game' değişkeni ham JSON değil, harika Game modelimiz!
                     final game = allGmGames[index];
 
-                    return Container(
-                      width: 150,
-                      margin: const EdgeInsets.only(right: 12),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(15),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Theme.of(context).cardColor, Theme.of(context).primaryColor.withOpacity(0.1)],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GameDetailsView(game: game),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Theme.of(context).cardColor, Theme.of(context).primaryColor.withOpacity(0.1)],
+                          ),
+                          border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3)),
                         ),
-                        border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.casino, color: Theme.of(context).primaryColor, size: 28),
-                            const SizedBox(height: 8),
-                            Text(
-                              game.title, // YENİ: game['title'] yerine game.title
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                            ),
-                            const SizedBox(height: 4),
-                            Text("${game.maxPlayers} Oyuncu", style: TextStyle(fontSize: 11, color: Colors.grey[400])), // YENİ: game.maxPlayers
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.casino, color: Theme.of(context).primaryColor, size: 28),
+                              const SizedBox(height: 8),
+                              Text(
+                                game.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                              const SizedBox(height: 4),
+                              Text("${game.maxPlayers} Oyuncu", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -165,6 +181,7 @@ class _GMDashboardState extends State<GMDashboard> {
               SizedBox(
                 height: 100,
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
                   itemCount: 1,
                   itemBuilder: (context, index) {
@@ -177,16 +194,108 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 3. HARİTALAR KISMI ---
-              _buildSectionHeader("Haritalar"),
+              _buildSectionHeader("Haritalar"), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
               const SizedBox(height: 8),
+
               SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    if (index == 0) return _buildViewMoreButton("/my_maps");
-                    return const SizedBox();
+                height: 120,
+                child: Consumer<MapsProvider>(
+                  builder: (context, mapsProvider, child) {
+                    if (mapsProvider.isLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (mapsProvider.allMaps.isEmpty) {
+                      return const Text("Henüz havuza harita eklemedin.", style: TextStyle(color: Colors.grey));
+                    }
+
+                    return ListView.builder(
+                      padding: EdgeInsets.zero, // YENİ: Ekstra boşluk silindi, tam soldan başlar
+                      scrollDirection: Axis.horizontal,
+                      itemCount: mapsProvider.allMaps.length + 1,
+                      itemBuilder: (context, index) {
+
+                        // OK TUŞU
+                        if (index == mapsProvider.allMaps.length) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const MyMapsView()),
+                              );
+                            },
+                            child: Container(
+                              width: 60,
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.only(right: 12),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Theme.of(context).primaryColor.withOpacity(0.2),
+                              ),
+                              child: Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColorLight, size: 20),
+                            ),
+                          );
+                        }
+
+                        // HARİTA KARTLARI
+                        final map = mapsProvider.allMaps[index];
+                        final isNetwork = map.imageUrl.startsWith('http');
+
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                backgroundColor: Colors.transparent,
+                                insetPadding: const EdgeInsets.all(10),
+                                child: InteractiveViewer(
+                                  panEnabled: true,
+                                  minScale: 0.5,
+                                  maxScale: 4.0,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: isNetwork
+                                        ? Image.network(map.imageUrl, fit: BoxFit.contain)
+                                        : Image.file(File(map.imageUrl), fit: BoxFit.contain),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 160,
+                            margin: const EdgeInsets.only(right: 12),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.4)),
+                              image: DecorationImage(
+                                image: isNetwork
+                                    ? NetworkImage(map.imageUrl) as ImageProvider
+                                    : FileImage(File(map.imageUrl)),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.darken),
+                              ),
+                            ),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.6),
+                                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
+                                ),
+                                child: Text(
+                                  map.name,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
               ),
