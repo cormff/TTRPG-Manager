@@ -1,6 +1,9 @@
+// lib/views/game/game_details_view.dart
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // YENİ: Kopyalama işlemi (Clipboard) için eklendi
 import '../../models/game_model.dart';
 import 'package:provider/provider.dart';
 import '../../providers/games_provider.dart';
@@ -21,7 +24,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
   late int _maxPlayers;
   late bool _isPublic;
 
-  // İptal edilirse geri dönülecek "son kaydedilmiş" verileri tutuyoruz
   late String _currentTitle;
   late String _currentDesc;
   late int _currentMaxPlayers;
@@ -33,7 +35,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
   @override
   void initState() {
     super.initState();
-    // İlk açılışta widget'tan gelen verileri alıyoruz
     _currentTitle = widget.game.title;
     _currentDesc = widget.game.description;
     _currentMaxPlayers = widget.game.maxPlayers;
@@ -44,7 +45,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     _maxPlayers = _currentMaxPlayers;
     _isPublic = _currentIsPublic;
 
-    // YENİ EKLENEN: Sayfa yüklendiğinde bu oyuna ait haritaları getir
     if (widget.game.id != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.read<MapsProvider>().fetchMapsForGame(widget.game.id!);
@@ -63,7 +63,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     setState(() {
       _isEditing = !_isEditing;
       if (!_isEditing) {
-        // Düzenlemekten vazgeçilirse son kaydedilmiş (current) verilere geri dön
         _titleController.text = _currentTitle;
         _descController.text = _currentDesc;
         _maxPlayers = _currentMaxPlayers;
@@ -73,7 +72,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
   }
 
   Future<void> _saveChanges() async {
-    if (widget.game.id == null) return; // ID yoksa kaydetme (Güvenlik)
+    if (widget.game.id == null) return;
 
     setState(() => _isLoading = true);
 
@@ -89,7 +88,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     setState(() => _isLoading = false);
 
     if (success) {
-      // Başarılı olursa "son kaydedilmiş" verileri yeni değerlerle güncelle
       _currentTitle = _titleController.text;
       _currentDesc = _descController.text;
       _currentMaxPlayers = _maxPlayers;
@@ -99,7 +97,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Oyun başarıyla güncellendi!"), backgroundColor: Colors.green),
         );
-        setState(() => _isEditing = false); // Düzenleme modundan çık
+        setState(() => _isEditing = false);
       }
     } else {
       if (mounted) {
@@ -107,6 +105,20 @@ class _GameDetailsViewState extends State<GameDetailsView> {
           const SnackBar(content: Text("Güncelleme başarısız oldu. Sunucuyu kontrol edin."), backgroundColor: Colors.red),
         );
       }
+    }
+  }
+
+  // YENİ EKLENEN METOT: Davet Kodunu Panoya Kopyalar
+  void _copyInviteCode() {
+    if (widget.game.inviteCode != null) {
+      Clipboard.setData(ClipboardData(text: widget.game.inviteCode!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Davet kodu panoya kopyalandı: ${widget.game.inviteCode}"),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: const Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -124,7 +136,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
             icon: Icon(_isEditing ? Icons.close : Icons.edit),
             onPressed: () {
               if (_isEditing) {
-                // Düzenlemeden vazgeçilirse eski verilere dön
                 _titleController.text = widget.game.title;
                 _descController.text = widget.game.description;
                 _maxPlayers = widget.game.maxPlayers;
@@ -140,12 +151,49 @@ class _GameDetailsViewState extends State<GameDetailsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // --- YENİ EKLENEN: DAVET KODU ALANI ---
+            if (widget.game.inviteCode != null && !_isEditing)
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: primaryColor.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: primaryColor.withOpacity(0.5)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Oyun Davet Kodu", style: TextStyle(color: Colors.grey[400], fontSize: 12)),
+                        const SizedBox(height: 4),
+                        SelectableText(
+                          widget.game.inviteCode!,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2.0, // Harfler arası boşluk
+                            color: primaryLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.copy, color: primaryLight),
+                      onPressed: _copyInviteCode,
+                      tooltip: 'Kodu Kopyala',
+                    ),
+                  ],
+                ),
+              ),
+
             // --- BİLGİ / DÜZENLEME FORMU ---
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                // Karta çok hafif mor bir dış çerçeve ekliyoruz
                 side: BorderSide(color: primaryColor.withOpacity(0.2), width: 1),
               ),
               child: Padding(
@@ -159,11 +207,11 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       style: const TextStyle(color: Colors.white70),
                       decoration: InputDecoration(
                         labelText: 'Oyun Adı',
-                        labelStyle: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), // Mor Etiket
+                        labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         border: InputBorder.none,
                       ),
                     ),
-                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1), // Yarı saydam mor çizgi
+                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1),
 
                     TextField(
                       controller: _descController,
@@ -172,18 +220,18 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       style: const TextStyle(color: Colors.white70),
                       decoration: InputDecoration(
                         labelText: 'Hikaye / Açıklama',
-                        labelStyle: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), // Mor Etiket
+                        labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         border: InputBorder.none,
                       ),
                     ),
-                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1), // Yarı saydam mor çizgi
+                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1),
 
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Maksimum Oyuncu:", style: TextStyle(color: primaryLight, fontSize: 16)), // Mor Etiket
+                          Text("Maksimum Oyuncu:", style: TextStyle(color: primaryLight, fontSize: 16)),
                           _isEditing
                               ? DropdownButton<int>(
                             value: _maxPlayers,
@@ -195,21 +243,15 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         ],
                       ),
                     ),
-                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1), // Yarı saydam mor çizgi
+                    Divider(color: primaryColor.withOpacity(0.4), thickness: 1),
 
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text("Herkese Açık (Public)", style: TextStyle(color: primaryLight, fontSize: 16)),
-
-                      // Yuvarlak kısım (thumb) açıkken beyaz olsun
                       activeColor: Colors.white,
-                      // Arka plan (track) açıkken mor olsun
                       activeTrackColor: primaryColor,
-
-                      // İstersen kapalıykenki renkleri de özelleştirebilirsin:
                       inactiveThumbColor: Colors.grey,
                       inactiveTrackColor: Colors.grey.withOpacity(0.3),
-
                       value: _isPublic,
                       onChanged: _isEditing ? (val) => setState(() => _isPublic = val) : null,
                     ),
@@ -235,19 +277,16 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                 ),
               ),
 
-// --- HARİTA KISMI ---
+            // --- HARİTA KISMI ---
             if (!_isEditing) ...[
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Bağlı Haritalar", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
-                  // Harita Ekleme Butonu (Şimdilik boş, bir sonraki adımda dolduracağız)
-// Harita Ekleme Butonu
                   IconButton(
                     icon: Icon(Icons.add_box, color: primaryColor, size: 28),
                     onPressed: () {
-                      // Havuzdaki haritaları çekiyoruz
                       final allMaps = context.read<MapsProvider>().allMaps;
 
                       if (allMaps.isEmpty) {
@@ -287,9 +326,8 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                                         return GestureDetector(
                                           onTap: () async {
-                                            Navigator.pop(context); // Modalı kapat
+                                            Navigator.pop(context);
 
-                                            // Tıklanan haritayı oyuna bağla
                                             final success = await context.read<MapsProvider>().createMap(
                                               map.name,
                                               map.imageUrl,
@@ -340,7 +378,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
               ),
               const SizedBox(height: 8),
 
-              // Provider'ı dinleyerek haritaları gösteren yapı
               Consumer<MapsProvider>(
                 builder: (context, mapsProvider, child) {
                   if (mapsProvider.isLoading) {
@@ -366,7 +403,6 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     );
                   }
 
-                  // Haritalar varsa yatay bir listede göster
                   return SizedBox(
                     height: 120,
                     child: ListView.builder(
@@ -381,10 +417,12 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                             color: theme.cardColor,
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: primaryColor.withOpacity(0.4)),
-                            // Eğer resim linki varsa arka plana resmi koyup üzerini biraz karartıyoruz
                             image: map.imageUrl.isNotEmpty
                                 ? DecorationImage(
-                              image: NetworkImage(map.imageUrl),
+                              // YENİ: HTTP ise NetworkImage, değilse FileImage kullan
+                              image: map.imageUrl.startsWith('http')
+                                  ? NetworkImage(map.imageUrl) as ImageProvider
+                                  : FileImage(File(map.imageUrl)),
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
                             )

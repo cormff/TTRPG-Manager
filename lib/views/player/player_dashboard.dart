@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/notes_provider.dart';
+import '../../providers/games_provider.dart'; // YENİ: GamesProvider eklendi
+import 'player_game_details_view.dart'; // YENİ: Oyuna tıklayınca detaylara gitmesi için (Dosya yolunu gerekirse kendi yapına göre ayarla)
 
 class PlayerDashboard extends StatefulWidget {
   const PlayerDashboard({super.key});
@@ -16,11 +18,18 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notesProvider = context.read<NotesProvider>();
+      final gamesProvider = context.read<GamesProvider>(); // YENİ
       final userRoleProvider = context.read<UserRoleProvider>();
       final userId = userRoleProvider.userId;
 
-      if (userId != null && notesProvider.playerNotes.isEmpty) {
-        notesProvider.fetchAllNotes(userId);
+      if (userId != null) {
+        if (notesProvider.playerNotes.isEmpty) {
+          notesProvider.fetchAllNotes(userId);
+        }
+        // YENİ: Oyuncunun katıldığı oyunları çek
+        if (gamesProvider.playerGames.isEmpty) {
+          gamesProvider.fetchPlayerGames(userId);
+        }
       }
     });
   }
@@ -57,7 +66,8 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
   Widget _buildViewMoreButton(String route) {
     return GestureDetector(
       onTap: () {
-        // Navigator.pushNamed(context, route);
+      // YENİ: Yorum satırı açıldı, artık yönlendirme çalışacak
+        Navigator.pushNamed(context, route);
       },
       child: Container(
         width: 60,
@@ -77,6 +87,10 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     final allPlayerNotes = notesProvider.playerNotes.reversed.toList();
     final displayNotes = allPlayerNotes.take(5).toList();
 
+    // YENİ: Oyunları Dinle
+    final gamesProvider = context.watch<GamesProvider>();
+    final allPlayerGames = gamesProvider.playerGames.reversed.toList();
+
     final int dummyGamesCount = 2;
     final int dummyCharactersCount = 8;
 
@@ -87,32 +101,77 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+// --- 1. OYUNLAR KISMI ---
               _buildSectionHeader("Son Oyunlar"),
               const SizedBox(height: 8),
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: (dummyGamesCount > 4 ? 4 : dummyGamesCount) + 1,
-                  itemBuilder: (context, index) {
-                    int maxItems = dummyGamesCount > 4 ? 4 : dummyGamesCount;
-                    if (index == maxItems) return _buildViewMoreButton("/my_games_player_view");
 
-                    return Container(
-                      width: 140,
-                      margin: const EdgeInsets.only(right: 12),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5)),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.casino, color: Theme.of(context).primaryColor, size: 32),
-                          const SizedBox(height: 8),
-                          Text("Oyun ${dummyGamesCount - index}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                        ],
+              gamesProvider.isLoading
+                  ? const SizedBox(height: 110, child: Center(child: CircularProgressIndicator()))
+                  : SizedBox(
+                height: 110,
+                child: allPlayerGames.isEmpty
+                    ? const Center(
+                  child: Text(
+                    "Henüz bir oyuna katılmadın.",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                )
+                    : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: (allPlayerGames.length > 4 ? 4 : allPlayerGames.length) + 1,
+                  itemBuilder: (context, index) {
+                    int displayCount = allPlayerGames.length > 4 ? 4 : allPlayerGames.length;
+
+                    // Listenin sonuna gelindiyse ok tuşunu göster
+                    if (index == displayCount) return _buildViewMoreButton("/my_games_player_view");
+
+                    final game = allPlayerGames[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        // Oyuna tıklanınca detay sayfasına gönder (Harita, hikaye vs.)
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlayerGameDetailsView(game: game),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Theme.of(context).cardColor, Theme.of(context).primaryColor.withOpacity(0.1)],
+                          ),
+                          border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.casino, color: Theme.of(context).primaryColor, size: 28),
+                              const SizedBox(height: 8),
+                              Text(
+                                game.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} Oyuncu",
+                                  style: TextStyle(fontSize: 11, color: Colors.grey[400])
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   },

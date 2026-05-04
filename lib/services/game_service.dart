@@ -71,4 +71,68 @@ class GameService {
       return false;
     }
   }
+
+  // YENİ: Halka açık (Player'ların katılabileceği) oyunları getirir
+  Future<List<dynamic>> getPublicGames() async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/public'));
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+      return [];
+    } catch (e) {
+      print("Halka açık oyunları çekerken hata: $e");
+      return [];
+    }
+  }
+
+  // YENİ: Oyuncunun (Player) daha önce katıldığı kendi oyunlarını getirir
+  Future<List<dynamic>> getJoinedGames(int playerId) async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/joined/$playerId'));
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+      return [];
+    } catch (e) {
+      print("Katılınan oyunları çekerken hata: $e");
+      return [];
+    }
+  }
+
+  // YENİ: Bir oyuncuyu bir oyuna dahil etme (Katılma) isteği atar
+  Future<Map<String, dynamic>> joinGame(int gameId, int playerId) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/$gameId/join/$playerId'),
+        // Body göndermemize gerek yok, verileri URL'den (PathVariable) veriyoruz
+      );
+
+      if (response.statusCode == 200) {
+        return {"success": true, "message": "Oyuna başarıyla katıldınız!"};
+      } else {
+        return {"success": false, "message": response.body}; // Backend'den gelen hata mesajı (örn: "Oda dolu")
+      }
+    } catch (e) {
+      print("Oyuna katılırken hata: $e");
+      return {"success": false, "message": "Bağlantı hatası oluştu."};
+    }
+  }
+  // YENİ: Davet koduyla oyuna katılma isteği
+  Future<Map<String, dynamic>> joinGameByCode(String inviteCode, int playerId) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/join-by-code/$inviteCode/$playerId'),
+      );
+
+      if (response.statusCode == 200) {
+        return {"success": true, "message": "Oyuna başarıyla katıldınız!"};
+      } else {
+        return {"success": false, "message": response.body};
+      }
+    } catch (e) {
+      print("Davet koduyla katılırken hata: $e");
+      return {"success": false, "message": "Bağlantı hatası oluştu."};
+    }
+  }
 }
