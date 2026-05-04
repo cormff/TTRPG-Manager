@@ -146,9 +146,11 @@ class _GameDetailsViewState extends State<GameDetailsView> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              // ... (altındaki kodlar aynen kalıyor)
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // --- YENİ EKLENEN: DAVET KODU ALANI ---
@@ -273,6 +275,51 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: primaryColor,
                     foregroundColor: Colors.white,
+                  ),
+                ),
+              ),
+
+            // --- OYUNU BİTİR BUTONU (SADECE DÜZENLEME MODUNDA DEĞİLKEN GÖRÜNÜR) ---
+            if (!_isEditing && !widget.game.isFinished)
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      // Onay Penceresi Göster
+                      final confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          backgroundColor: theme.cardColor,
+                          title: const Text("Oyunu Bitir", style: TextStyle(color: Colors.white)),
+                          content: const Text("Bu oyunu bitirip arşive kaldırmak istediğine emin misin? Bu işlem geri alınamaz.", style: TextStyle(color: Colors.white70)),
+                          actions: [
+                            TextButton(onPressed: () => Navigator.pop(context, false), child: const Text("İptal", style: TextStyle(color: Colors.grey))),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                              onPressed: () => Navigator.pop(context, true),
+                              child: const Text("Evet, Bitir", style: TextStyle(color: Colors.white)),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (confirm == true) {
+                        // Provider üzerinden oyunu bitir
+                        final success = await context.read<GamesProvider>().finishGame(widget.game.id!, widget.game.gmId);
+                        if (success && context.mounted) {
+                          Navigator.pop(context); // Detay sayfasını kapatıp listeye dön
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Oyun başarıyla arşive kaldırıldı!"), backgroundColor: Colors.green));
+                        }
+                      }
+                    },
+                    icon: const Icon(Icons.archive, color: Colors.redAccent),
+                    label: const Text("Oyunu Bitir (Arşive Kaldır)", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      side: const BorderSide(color: Colors.redAccent, width: 1.5),
+                    ),
                   ),
                 ),
               ),
@@ -447,7 +494,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
             ]
           ],
         ),
-      ),
+      ),)
     );
   }
 }

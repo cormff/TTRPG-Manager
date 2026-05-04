@@ -135,4 +135,50 @@ class GameService {
       return {"success": false, "message": "Bağlantı hatası oluştu."};
     }
   }
+
+  // YENİ: Oyunu bitirme (Arşivleme) isteği
+  Future<bool> finishGame(int gameId) async {
+    try {
+      final response = await http.put(Uri.parse('$baseUrl/$gameId/finish'));
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Oyun bitirilirken hata: $e");
+      return false;
+    }
+  }
+
+  // YENİ: Oyuncu ID'lerinden İsimleri Çeken Metot
+  Future<Map<int, String>> getUsernames(List<int> userIds) async {
+    if (userIds.isEmpty) return {};
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:8080/api/users/usernames'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(userIds),
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> rawData = jsonDecode(response.body);
+        // JSON'dan gelen String anahtarları (key) int'e çeviriyoruz
+        return rawData.map((key, value) => MapEntry(int.parse(key), value.toString()));
+      }
+      return {};
+    } catch (e) {
+      print("Oyuncu isimleri çekilirken hata: $e");
+      return {};
+    }
+  }
+
+  // YENİ: Spesifik bir oyuna ait notları çeken metot
+  Future<List<dynamic>> getGameNotes(int gameId) async {
+    try {
+      final response = await http.get(Uri.parse('http://10.0.2.2:8080/api/notes/game/$gameId'));
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+      return [];
+    } catch (e) {
+      print("Oyun notları çekilirken hata: $e");
+      return [];
+    }
+  }
 }

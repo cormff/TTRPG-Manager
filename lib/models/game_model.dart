@@ -8,6 +8,9 @@ class Game {
 
   final String? inviteCode; // YENİ: Davet kodu eklendi
 
+  // 1. Değişkeni ekle (diğer final değişkenlerin altına)
+  final bool isFinished;
+
 // YENİ: Artık backend'den sadece katılan oyuncuların ID'leri dönüyor
   final List<int> joinedPlayerIds;
   final List<dynamic>? maps;
@@ -22,6 +25,7 @@ class Game {
     this.inviteCode, // YENİ
     this.joinedPlayerIds = const [], // Varsayılan boş liste
     this.maps,
+    this.isFinished = false, // YENİ
   });
 
   // JSON'dan Dart nesnesine çevirme (Backend'den veri çekerken)
@@ -39,6 +43,7 @@ class Game {
           ? List<int>.from(json['joinedPlayerIds'])
           : [],
       maps: json['maps'] ?? [],
+      isFinished: json['isFinished'] ?? false, // YENİ
     );
   }
 
@@ -51,6 +56,7 @@ class Game {
       'maxPlayers': maxPlayers,
       'publicGame': isPublic, // JSON'a publicGame olarak yaz
       'gmId': gmId,
+      'isFinished': isFinished, // YENİ
     };
   }
 }

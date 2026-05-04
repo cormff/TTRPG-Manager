@@ -115,6 +115,17 @@ class GamesProvider with ChangeNotifier {
     }
   }
 
+  // YENİ: Oyunu Bitir (Sadece GM)
+  Future<bool> finishGame(int gameId, int gmId) async {
+    final success = await _gameService.finishGame(gameId);
+
+    if (success) {
+      // Başarılı olursa listeyi yenile ki durum güncellensin
+      await fetchGMGames(gmId);
+    }
+    return success;
+  }
+
   void clearData() {
     _gmGames.clear();
     _playerGames.clear();

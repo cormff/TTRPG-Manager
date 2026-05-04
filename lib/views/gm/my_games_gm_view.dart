@@ -4,6 +4,7 @@ import '../../providers/user_role_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../models/game_model.dart';
 import '../../views/game/game_details_view.dart';
+import '../../views/gm/finished_game_details_view.dart';
 
 class MyGamesGMView extends StatefulWidget {
   const MyGamesGMView({super.key});
@@ -122,13 +123,16 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
         ),
         trailing: Icon(Icons.chevron_right, color: theme.primaryColor),
         onTap: () {
+          if (game.isFinished) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FinishedGameDetailsView(game: game)));
+          } else {
           // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => GameDetailsView(game: game),
             ),
-          );
+          ); }
         },
       ),
     );

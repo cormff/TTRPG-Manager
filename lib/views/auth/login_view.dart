@@ -5,6 +5,8 @@ import '../../providers/user_role_provider.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/primary_button.dart';
 import 'register_view.dart';
+// En üste bu importu eklemeyi unutma:
+import '../../providers/notes_provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -28,9 +30,14 @@ class _LoginViewState extends State<LoginView> {
     );
 
     if (userData != null) {
-      userRoleProvider.setUserData(userData['id'], userData['username'], _selectedRole);
+      final int newUserId = userData['id']; // Yeni kullanıcının ID'sini alıyoruz
+
+      userRoleProvider.setUserData(newUserId, userData['username'], _selectedRole);
 
       if (mounted) {
+        // ÇÖZÜM BURASI: Yeni hesaba geçer geçmez o hesabın notlarını çekiyoruz!
+        Provider.of<NotesProvider>(context, listen: false).fetchAllNotes(newUserId);
+
         Navigator.of(context).pushReplacementNamed('/main_scaffold');
       }
     } else {
