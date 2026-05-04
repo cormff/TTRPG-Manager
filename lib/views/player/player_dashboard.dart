@@ -34,6 +34,18 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     });
   }
 
+  // YENİ: Ekranı aşağı kaydırınca çalışacak yenileme metodu
+  Future<void> _refreshData() async {
+    final userId = context.read<UserRoleProvider>().userId;
+    if (userId != null) {
+      // Oyuncu verilerini paralel olarak çekiyoruz
+      await Future.wait([
+        context.read<NotesProvider>().fetchAllNotes(userId),
+        context.read<GamesProvider>().fetchPlayerGames(userId),
+      ]);
+    }
+  }
+
   Color _getTagColor(String tag) {
     switch (tag) {
       case 'NPC': return Colors.blue;
@@ -95,10 +107,17 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     final int dummyCharactersCount = 8;
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+        body: SafeArea(
+          // YENİ: RefreshIndicator eklendi
+            child: RefreshIndicator(
+              onRefresh: _refreshData,
+              color: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).cardColor,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(), // YENİ: Her zaman kaydırılabilir olmalı
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  // ... (Kalan tüm Column içeriği aynı kalacak) ...
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 // --- 1. OYUNLAR KISMI ---
@@ -267,7 +286,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
             ],
           ),
         ),
-      ),
+      ), )
     );
   }
 }

@@ -46,6 +46,19 @@ class _GMDashboardState extends State<GMDashboard> {
     });
   }
 
+  // YENİ: Ekranı aşağı kaydırınca çalışacak yenileme metodu
+  Future<void> _refreshData() async {
+    final userId = context.read<UserRoleProvider>().userId;
+    if (userId != null) {
+      // Future.wait ile tüm istekleri aynı anda (paralel) başlatıp bitmelerini bekliyoruz
+      await Future.wait([
+        context.read<NotesProvider>().fetchAllNotes(userId),
+        context.read<GamesProvider>().fetchGMGames(userId),
+        context.read<MapsProvider>().fetchAllMaps(),
+      ]);
+    }
+  }
+
   Color _getTagColor(String tag) {
     switch (tag) {
       case 'NPC': return Colors.blue;
@@ -102,10 +115,16 @@ class _GMDashboardState extends State<GMDashboard> {
     final allGmGames = gamesProvider.gmGames.reversed.toList();
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+        body: SafeArea(
+          // YENİ: RefreshIndicator eklendi
+          child: RefreshIndicator(
+            onRefresh: _refreshData, // Yukarıda yazdığımız metot
+            color: Theme.of(context).primaryColor, // Yükleniyor ikonunun rengi
+            backgroundColor: Theme.of(context).cardColor,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(), // YENİ: Liste kısa olsa bile kaydırılıp yenilenebilmesi için
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
@@ -367,7 +386,7 @@ class _GMDashboardState extends State<GMDashboard> {
             ],
           ),
         ),
-      ),
+      ),)
     );
   }
 }

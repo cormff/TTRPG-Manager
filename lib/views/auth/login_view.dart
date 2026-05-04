@@ -7,6 +7,8 @@ import '../../widgets/primary_button.dart';
 import 'register_view.dart';
 // En üste bu importu eklemeyi unutma:
 import '../../providers/notes_provider.dart';
+import '../../providers/games_provider.dart';
+import '../../providers/maps_provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -35,8 +37,22 @@ class _LoginViewState extends State<LoginView> {
       userRoleProvider.setUserData(newUserId, userData['username'], _selectedRole);
 
       if (mounted) {
-        // ÇÖZÜM BURASI: Yeni hesaba geçer geçmez o hesabın notlarını çekiyoruz!
+        // ÇÖZÜM BURASI: Yeni hesaba geçer geçmez TÜM verileri çekiyoruz!
+
+        // 1. Notları Çek
         Provider.of<NotesProvider>(context, listen: false).fetchAllNotes(newUserId);
+
+        // 2. Rolüne göre Oyunları ve Haritaları Çek
+        final gamesProvider = Provider.of<GamesProvider>(context, listen: false);
+        if (_selectedRole == UserRole.gameMaster) {
+          // GM ise kendi oyunlarını ve haritalarını getir
+          gamesProvider.fetchGMGames(newUserId);
+          Provider.of<MapsProvider>(context, listen: false).fetchAllMaps();
+        } else {
+          // Oyuncu ise katıldığı oyunları getir
+          // Not: Kendi provider'ındaki metoda göre ismi fetchJoinedGames veya fetchPlayerGames olabilir
+          gamesProvider.fetchPlayerGames(newUserId);
+        }
 
         Navigator.of(context).pushReplacementNamed('/main_scaffold');
       }
