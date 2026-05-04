@@ -12,7 +12,7 @@ import 'package:ttrpg_manager/views/gm/create_game_view.dart';
 import 'package:ttrpg_manager/views/gm/my_maps_view.dart';
 import 'package:ttrpg_manager/views/player/join_game_view.dart';
 import 'package:ttrpg_manager/views/game/notes_view.dart';
-import 'package:ttrpg_manager/views/game/rule_books_view.dart';
+import 'package:ttrpg_manager/views/rulebook/rule_books_view.dart';
 
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 import 'package:ttrpg_manager/providers/games_provider.dart';
