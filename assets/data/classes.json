@@ -1,0 +1,249 @@
+{
+    "Classes": {
+        "Class Features": {
+            "description": "The description of each class includes features that are common to members of that class. The following entries appear among the traits of most classes.",
+            "Hit Points": "Your class determines your Hit Dice and your starting hit points. Your hit points determine how much damage you can take before falling unconscious.",
+            "Proficiencies": "By virtue of your class, your character gains proficiencies in certain armor, weapons, tools, skills, and saving throws.",
+            "Equipment": "Your class provides starting equipment, including weapons, armor, and other adventuring gear."
+        },
+        "Barbarian": {
+            "Barbarian Traits": {
+                "description": "A fierce warrior of primitive background who can enter a battle rage.",
+                "Hit Points": "1d12 per barbarian level. 12 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor, medium armor, shields. Simple weapons, martial weapons. Saving throws: Strength, Constitution.",
+                "Equipment": "You start with the following equipment: (a) a greataxe or (b) any martial melee weapon; (a) two handaxes or (b) any simple weapon; An explorer's pack and four javelins.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Rage": "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain advantage on Strength checks and saves, bonus damage to melee weapon attacks, and resistance to bludgeoning, piercing, and slashing damage.",
+                        "Unarmored Defense": "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit."
+                    },
+                    "Level 2": {
+                        "Reckless Attack": "Starting at 2nd level, you can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly. Doing so gives you advantage on melee weapon attack rolls using Strength during this turn, but attack rolls against you have advantage until your next turn.",
+                        "Danger Sense": "At 2nd level, you gain an uncanny sense of when things nearby aren't as they should be, giving you an edge when you dodge away from danger. You have advantage on Dexterity saving throws against effects that you can see, such as traps and spells."
+                    },
+                    "Level 3": {
+                        "Primal Path": "At 3rd level, you choose a path that shapes the nature of your rage, such as the Path of the Berserker or the Path of the Totem Warrior. Your choice grants you features at 3rd level and again at 6th, 10th, and 14th levels."
+                    }
+                }
+            }
+        },
+        "Bard": {
+            "Bard Traits": {
+                "description": "An inspiring magician whose power echoes the music of creation.",
+                "Hit Points": "1d8 per bard level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor. Simple weapons, hand crossbows, longswords, rapiers, shortswords. Three musical instruments of your choice. Saving throws: Dexterity, Charisma.",
+                "Equipment": "You start with the following equipment: (a) a rapier, (b) a longsword, or (c) any simple weapon; (a) a diplomat's pack or (b) an entertainer's pack; (a) a lute or (b) any other musical instrument; Leather armor and a dagger.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Spellcasting": "You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Charisma is your spellcasting ability for your bard spells.",
+                        "Bardic Inspiration": "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6."
+                    },
+                    "Level 2": {
+                        "Jack of All Trades": "Starting at 2nd level, you can add half your proficiency bonus, rounded down, to any ability check you make that doesn't already include your proficiency bonus.",
+                        "Song of Rest": "Beginning at 2nd level, you can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points."
+                    },
+                    "Level 3": {
+                        "Bard College": "At 3rd level, you delve into the advanced techniques of a bard college of your choice, such as the College of Lore or the College of Valor. Your choice grants you features at 3rd level and again at 6th and 14th level."
+                    }
+                }
+            }
+        },
+        "Cleric": {
+            "Cleric Traits": {
+                "description": "Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities.",
+                "Hit Points": "1d8 per cleric level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor, medium armor, shields. All simple weapons. Saving throws: Wisdom, Charisma.",
+                "Equipment": "You start with the following equipment: (a) a mace or (b) a warhammer (if proficient); (a) scale mail, (b) leather armor, or (c) chain mail (if proficient); (a) a light crossbow and 20 bolts or (b) any simple weapon; (a) a priest's pack or (b) an explorer's pack; A shield and a holy symbol.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Spellcasting": "As a conduit for divine power, you can cast cleric spells. You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. Wisdom is your spellcasting ability.",
+                        "Divine Domain": "Choose one domain related to your deity, such as Life, Light, or War. Your choice grants you domain spells and other features when you choose it at 1st level. It also grants you additional ways to use Channel Divinity when you gain that feature at 2nd level, and additional benefits at 6th, 8th, and 17th levels."
+                    },
+                    "Level 2": {
+                        "Channel Divinity": "At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain."
+                    }
+                }
+            }
+        },
+        "Druid": {
+            "Druid Traits": {
+                "description": "A priest of the Old Faith, wielding the powers of nature and adopting animal forms.",
+                "Hit Points": "1d8 per druid level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor, medium armor, shields (druids will not wear armor or use shields made of metal). Clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears. Herbalism kit. Saving throws: Intelligence, Wisdom.",
+                "Equipment": "You start with the following equipment: (a) a wooden shield or (b) any simple weapon; (a) a scimitar or (b) any simple melee weapon; Leather armor, an explorer's pack, and a druidic focus.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Druidic": "You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages.",
+                        "Spellcasting": "Drawing on the divine essence of nature itself, you can cast spells to shape that essence to your will. Wisdom is your spellcasting ability."
+                    },
+                    "Level 2": {
+                        "Wild Shape": "Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.",
+                        "Druid Circle": "At 2nd level, you choose to identify with a circle of druids, such as the Circle of the Land or the Circle of the Moon. Your choice grants you features at 2nd level and again at 6th, 10th, and 14th level."
+                    }
+                }
+            }
+        },
+        "Fighter": {
+            "Fighter Traits": {
+                "description": "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. They are well acquainted with death, both meting it out and staring it defiantly in the face.",
+                "Hit Points": "1d10 per fighter level. 10 + your Constitution modifier at 1st level.",
+                "Proficiencies": "All armor, shields. Simple weapons, martial weapons. Saving throws: Strength, Constitution.",
+                "Equipment": "You start with the following equipment: (a) chain mail or (b) leather armor, longbow, and 20 arrows; (a) a martial weapon and a shield or (b) two martial weapons; (a) a light crossbow and 20 bolts or (b) two handaxes; (a) a dungeoneer's pack or (b) an explorer's pack.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Fighting Style": "You adopt a particular style of fighting as your specialty. Choose one of the options available to your class, such as Archery, Defense, Dueling, or Great Weapon Fighting.",
+                        "Second Wind": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level."
+                    },
+                    "Level 2": {
+                        "Action Surge": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action."
+                    },
+                    "Level 3": {
+                        "Martial Archetype": "At 3rd level, you choose an archetype that you strive to emulate in your combat styles and techniques, such as Champion or Battle Master. The archetype you choose grants you features at 3rd level and again at 7th, 10th, 15th, and 18th level."
+                    }
+                }
+            }
+        },
+        "Monk": {
+            "Monk Traits": {
+                "description": "A master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.",
+                "Hit Points": "1d8 per monk level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Simple weapons, shortswords. Choose one type of artisan's tools or one musical instrument. Saving throws: Strength, Dexterity.",
+                "Equipment": "You start with the following equipment: (a) a shortsword or (b) any simple weapon; (a) a dungeoneer's pack or (b) an explorer's pack; 10 darts.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Unarmored Defense": "Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.",
+                        "Martial Arts": "At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes and monk weapons. You can roll a d4 in place of the normal damage of your unarmed strike or monk weapon, and you can make an unarmed strike as a bonus action."
+                    },
+                    "Level 2": {
+                        "Ki": "Starting at 2nd level, your training allows you to harness the mystic energy of ki. Your access to this energy is represented by a number of ki points. You can spend these points to fuel various ki features: Flurry of Blows, Patient Defense, and Step of the Wind.",
+                        "Unarmored Movement": "Starting at 2nd level, your speed increases by 10 feet while you are not wearing armor or wielding a shield."
+                    },
+                    "Level 3": {
+                        "Monastic Tradition": "When you reach 3rd level, you commit yourself to a monastic tradition, such as the Way of the Open Hand. Your tradition grants you features at 3rd level and again at 6th, 11th, and 17th level."
+                    }
+                }
+            }
+        },
+        "Paladin": {
+            "Paladin Traits": {
+                "description": "A holy warrior bound to a sacred oath.",
+                "Hit Points": "1d10 per paladin level. 10 + your Constitution modifier at 1st level.",
+                "Proficiencies": "All armor, shields. Simple weapons, martial weapons. Saving throws: Wisdom, Charisma.",
+                "Equipment": "You start with the following equipment: (a) a martial weapon and a shield or (b) two martial weapons; (a) five javelins or (b) any simple melee weapon; (a) a priest's pack or (b) an explorer's pack; Chain mail and a holy symbol.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Divine Sense": "The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears. As an action, you can open your awareness to detect such forces.",
+                        "Lay on Hands": "Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest. With that pool, you can restore a total number of hit points equal to your paladin level x 5."
+                    },
+                    "Level 2": {
+                        "Fighting Style": "At 2nd level, you adopt a style of fighting as your specialty, such as Defense or Dueling.",
+                        "Spellcasting": "By 2nd level, you have learned to draw on divine magic through meditation and prayer to cast spells as a cleric does. Charisma is your spellcasting ability.",
+                        "Divine Smite": "Starting at 2nd level, when you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage."
+                    },
+                    "Level 3": {
+                        "Sacred Oath": "When you reach 3rd level, you swear the oath that binds you as a paladin forever, such as the Oath of Devotion. Your choice grants you features at 3rd level and again at 7th, 15th, and 20th level."
+                    }
+                }
+            }
+        },
+        "Ranger": {
+            "Ranger Traits": {
+                "description": "A warrior who combats threats on the edges of civilization.",
+                "Hit Points": "1d10 per ranger level. 10 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor, medium armor, shields. Simple weapons, martial weapons. Saving throws: Strength, Dexterity.",
+                "Equipment": "You start with the following equipment: (a) scale mail or (b) leather armor; (a) two shortswords or (b) two simple melee weapons; (a) a dungeoneer's pack or (b) an explorer's pack; A longbow and a quiver of 20 arrows.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Favored Enemy": "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.",
+                        "Natural Explorer": "You are particularly familiar with one type of natural environment and are adept at traveling and surviving in such regions."
+                    },
+                    "Level 2": {
+                        "Fighting Style": "At 2nd level, you adopt a particular style of fighting as your specialty, such as Archery or Two-Weapon Fighting.",
+                        "Spellcasting": "By the time you reach 2nd level, you have learned to use the magical essence of nature to cast spells, much as a druid does. Wisdom is your spellcasting ability."
+                    },
+                    "Level 3": {
+                        "Ranger Archetype": "At 3rd level, you choose an archetype that you strive to emulate: Hunter or Beast Master. Your choice grants you features at 3rd level and again at 7th, 11th, and 15th level."
+                    }
+                }
+            }
+        },
+        "Rogue": {
+            "Rogue Traits": {
+                "description": "Rogues rely on skill, stealth, and their foes' vulnerabilities to get the upper hand in any situation. They have a knack for finding the solution to just about any problem.",
+                "Hit Points": "1d8 per rogue level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor. Simple weapons, hand crossbows, longswords, rapiers, shortswords. Thieves' tools. Saving throws: Dexterity, Intelligence.",
+                "Equipment": "You start with the following equipment: (a) a rapier or (b) a shortsword; (a) a shortbow and quiver of 20 arrows or (b) a shortsword; (a) a burglar's pack, (b) a dungeoneer's pack, or (c) an explorer's pack; Leather armor, two daggers, and thieves' tools.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Expertise": "At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves' tools. Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.",
+                        "Sneak Attack": "Beginning at 1st level, you know how to strike subtly and exploit a foe's distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll.",
+                        "Thieves' Cant": "During your rogue training you learned thieves' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation."
+                    },
+                    "Level 2": {
+                        "Cunning Action": "Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action."
+                    },
+                    "Level 3": {
+                        "Roguish Archetype": "At 3rd level, you choose an archetype that you emulate in the exercise of your rogue abilities, such as Thief. Your choice grants you features at 3rd level and then again at 9th, 13th, and 17th level."
+                    }
+                }
+            }
+        },
+        "Sorcerer": {
+            "Sorcerer Traits": {
+                "description": "A spellcaster who draws on inherent magic from a gift or bloodline.",
+                "Hit Points": "1d6 per sorcerer level. 6 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Daggers, darts, slings, quarterstaffs, light crossbows. Saving throws: Constitution, Charisma.",
+                "Equipment": "You start with the following equipment: (a) a light crossbow and 20 bolts or (b) any simple weapon; (a) a component pouch or (b) an arcane focus; (a) a dungeoneer's pack or (b) an explorer's pack; Two daggers.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Spellcasting": "An event in your past, or in the life of a parent or ancestor, left an indelible mark on you, infusing you with arcane magic. Charisma is your spellcasting ability.",
+                        "Sorcerous Origin": "Choose a sorcerous origin, which describes the source of your innate magical power, such as Draconic Bloodline or Wild Magic. Your choice grants you features when you choose it at 1st level and again at 6th, 14th, and 18th level."
+                    },
+                    "Level 2": {
+                        "Font of Magic": "At 2nd level, you tap into a deep wellspring of magic within yourself. This spring is represented by sorcery points, which allow you to create a variety of magical effects."
+                    },
+                    "Level 3": {
+                        "Metamagic": "At 3rd level, you gain the ability to twist your spells to suit your needs. You gain two of the following Metamagic options of your choice: Careful Spell, Distant Spell, Empowered Spell, Extended Spell, Heightened Spell, Quickened Spell, Subtle Spell, or Twinned Spell."
+                    }
+                }
+            }
+        },
+        "Warlock": {
+            "Warlock Traits": {
+                "description": "A wielder of magic that is derived from a bargain with an extraplanar entity.",
+                "Hit Points": "1d8 per warlock level. 8 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Light armor. Simple weapons. Saving throws: Wisdom, Charisma.",
+                "Equipment": "You start with the following equipment: (a) a light crossbow and 20 bolts or (b) any simple weapon; (a) a component pouch or (b) an arcane focus; (a) a scholar's pack or (b) a dungeoneer's pack; Leather armor, any simple weapon, and two daggers.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Otherworldly Patron": "At 1st level, you have struck a bargain with an otherworldly being of your choice, such as The Fiend, The Archfey, or The Great Old One. Your choice grants you features at 1st level and again at 6th, 10th, and 14th level.",
+                        "Pact Magic": "Your arcane research and the magic bestowed on you by your patron have given you facility with spells. Charisma is your spellcasting ability."
+                    },
+                    "Level 2": {
+                        "Eldritch Invocations": "In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. At 2nd level, you gain two eldritch invocations of your choice."
+                    },
+                    "Level 3": {
+                        "Pact Boon": "At 3rd level, your otherworldly patron bestows a gift upon you for your loyal service. You gain one of the following features of your choice: Pact of the Chain, Pact of the Blade, or Pact of the Tome."
+                    }
+                }
+            }
+        },
+        "Wizard": {
+            "Wizard Traits": {
+                "description": "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute-force mind control.",
+                "Hit Points": "1d6 per wizard level. 6 + your Constitution modifier at 1st level.",
+                "Proficiencies": "Daggers, darts, slings, quarterstaffs, light crossbows. Saving throws: Intelligence, Wisdom.",
+                "Equipment": "You start with the following equipment: (a) a quarterstaff or (b) a dagger; (a) a component pouch or (b) an arcane focus; (a) a scholar's pack or (b) an explorer's pack; A spellbook.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Spellcasting": "As a student of arcane magic, you have a spellbook containing spells that show the first glimmerings of your true power. Intelligence is your spellcasting ability for your wizard spells."
+                    },
+                    "Level 2": {
+                        "Arcane Recovery": "You have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up).",
+                        "Arcane Tradition": "When you reach 2nd level, you choose an arcane tradition, shaping your practice of magic through one of eight schools, such as Evocation or Abjuration. Your choice grants you features at 2nd level and again at 6th, 10th, and 14th level."
+                    }
+                }
+            }
+        }
+    }
+}
