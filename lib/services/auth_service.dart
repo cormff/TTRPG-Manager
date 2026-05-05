@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/user_model.dart';
+import 'api_config.dart';
 
 class AuthService {
-  // Android Emülatör: http://10.0.2.2:8080 | iOS/Web: http://localhost:8080
-  final String baseUrl = "http://10.0.2.2:8080/api/users";
+  final String baseUrl = "http://${ApiConfig.host}:8080/api/users";
 
   Future<bool> registerUser(UserModel user) async {
     try {
@@ -25,10 +25,7 @@ class AuthService {
       final response = await http.post(
         Uri.parse('$baseUrl/login'),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "email": email.trim(),
-          "password": password,
-        }),
+        body: jsonEncode({"email": email.trim(), "password": password}),
       );
 
       if (response.statusCode == 200) {

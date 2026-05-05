@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/note_model.dart';
+import 'api_config.dart';
 
 class NoteService {
-  final String baseUrl = "http://10.0.2.2:8080/api/notes";
+  final String baseUrl = "http://${ApiConfig.host}:8080/api/notes";
 
   // Veritabanından notları çekme
   Future<List<Note>> fetchNotes(int userId, String noteType) async {

@@ -7,6 +7,7 @@ import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart';
 import '../game/game_details_view.dart';
 import '../../providers/maps_provider.dart';
+import '../../providers/characters_provider.dart';
 import '../../views/gm/my_maps_view.dart';
 
 class GMDashboard extends StatefulWidget {
@@ -17,7 +18,6 @@ class GMDashboard extends StatefulWidget {
 }
 
 class _GMDashboardState extends State<GMDashboard> {
-
   @override
   void initState() {
     super.initState();
@@ -41,6 +41,11 @@ class _GMDashboardState extends State<GMDashboard> {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             context.read<MapsProvider>().fetchAllMaps();
           });
+        }
+
+        final charactersProvider = context.read<CharactersProvider>();
+        if (charactersProvider.npcCharacters.isEmpty) {
+          charactersProvider.fetchNpcCharacters(userId);
         }
       }
     });
@@ -113,6 +118,8 @@ class _GMDashboardState extends State<GMDashboard> {
 
     final gamesProvider = context.watch<GamesProvider>();
     final allGmGames = gamesProvider.gmGames.reversed.toList();
+    final charactersProvider = context.watch<CharactersProvider>();
+    final allNpcs = charactersProvider.npcCharacters.reversed.toList();
 
     return Scaffold(
         body: SafeArea(
@@ -131,19 +138,26 @@ class _GMDashboardState extends State<GMDashboard> {
               _buildSectionHeader("Games"),
               const SizedBox(height: 8),
               gamesProvider.isLoading
-                  ? const SizedBox(height: 110, child: Center(child: CircularProgressIndicator()))
+                  ? const SizedBox(
+                      height: 110,
+                      child: Center(child: CircularProgressIndicator()),
+                    )
                   : SizedBox(
-                height: 110,
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: (allGmGames.length > 4 ? 4 : allGmGames.length) + 1,
-                  itemBuilder: (context, index) {
-                    int displayCount = allGmGames.length > 4 ? 4 : allGmGames.length;
+                      height: 110,
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            (allGmGames.length > 4 ? 4 : allGmGames.length) + 1,
+                        itemBuilder: (context, index) {
+                          int displayCount = allGmGames.length > 4
+                              ? 4
+                              : allGmGames.length;
 
-                    if (index == displayCount) return _buildViewMoreButton("/my_games_gm_view");
+                          if (index == displayCount)
+                            return _buildViewMoreButton("/my_games_gm_view");
 
-                    final game = allGmGames[index];
+                          final game = allGmGames[index];
 
                     return GestureDetector(
                       onTap: () {
@@ -197,18 +211,76 @@ class _GMDashboardState extends State<GMDashboard> {
               // --- 2. KARAKTERLER KISMI ---
               _buildSectionHeader("Characters"),
               const SizedBox(height: 8),
-              SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    if (index == 0) return _buildViewMoreButton("/characters");
-                    return const SizedBox();
-                  },
-                ),
-              ),
+              charactersProvider.isLoading
+                  ? const SizedBox(
+                      height: 100,
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : SizedBox(
+                      height: 100,
+                      child: allNpcs.isEmpty
+                          ? ListView(
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.horizontal,
+                              children: [_buildViewMoreButton("/characters")],
+                            )
+                          : ListView.builder(
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  (allNpcs.length > 6 ? 6 : allNpcs.length) + 1,
+                              itemBuilder: (context, index) {
+                                final maxItems = allNpcs.length > 6
+                                    ? 6
+                                    : allNpcs.length;
+                                if (index == maxItems)
+                                  return _buildViewMoreButton("/characters");
+
+                                final npc = allNpcs[index];
+                                return Container(
+                                  width: 95,
+                                  margin: const EdgeInsets.only(right: 12),
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Theme.of(
+                                        context,
+                                      ).primaryColor.withOpacity(0.5),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.smart_toy,
+                                        color: Colors.blue[300],
+                                        size: 26,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        npc.name,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Lv.${npc.level}',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                    ),
 
               const SizedBox(height: 24),
 

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/map_model.dart';
+import 'api_config.dart';
 
 class MapService {
-  // Eğer emülatör kullanıyorsan localhost yerine 10.0.2.2 yapman gerekebilir!
-  final String baseUrl = 'http://10.0.2.2:8080/api/maps';
+  final String baseUrl = 'http://${ApiConfig.host}:8080/api/maps';
 
   // 1. Oyuna Ait Haritaları Getir
   Future<List<GameMap>> getMapsByGame(int gameId) async {
@@ -42,7 +42,8 @@ class MapService {
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(map.toJson()),
       );
-      return response.statusCode == 200; // 200 OK dönerse başarıyla kaydedildi demektir
+      return response.statusCode ==
+          200; // 200 OK dönerse başarıyla kaydedildi demektir
     } catch (e) {
       print("Harita oluştururken hata: $e");
       return false;

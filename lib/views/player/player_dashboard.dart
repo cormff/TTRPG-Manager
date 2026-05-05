@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart'; // YENİ: GamesProvider eklendi
+import '../../providers/characters_provider.dart';
 import 'player_game_details_view.dart'; // YENİ: Oyuna tıklayınca detaylara gitmesi için (Dosya yolunu gerekirse kendi yapına göre ayarla)
 
 class PlayerDashboard extends StatefulWidget {
@@ -19,6 +20,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notesProvider = context.read<NotesProvider>();
       final gamesProvider = context.read<GamesProvider>(); // YENİ
+      final charactersProvider = context.read<CharactersProvider>();
       final userRoleProvider = context.read<UserRoleProvider>();
       final userId = userRoleProvider.userId;
 
@@ -29,6 +31,9 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
         // YENİ: Oyuncunun katıldığı oyunları çek
         if (gamesProvider.playerGames.isEmpty) {
           gamesProvider.fetchPlayerGames(userId);
+        }
+        if (charactersProvider.playerCharacters.isEmpty) {
+          charactersProvider.fetchPlayerCharacters(userId);
         }
       }
     });
