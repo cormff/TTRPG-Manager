@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'races_view.dart';
 import 'classes_view.dart';
 import 'spells_view.dart';
+import 'monsters_view.dart';
 
 class RuleBooksView extends StatelessWidget {
   const RuleBooksView({super.key});
@@ -38,6 +39,13 @@ class RuleBooksView extends StatelessWidget {
             subtitle: 'Weapons, armor, tools, and adventuring gear',
             icon: Icons.shopping_bag_outlined, // Ekipmanlar için güzel bir çanta ikonu
             destination: const EquipmentView(),
+          ),
+          _buildMenuCard(
+            context,
+            title: 'Monsters',
+            subtitle: 'Creatures, stats, legendary actions, and beasts',
+            icon: Icons.adb_rounded, // Veya Icons.pets olabilir
+            destination: const MonstersView(),
           ),
           _buildMenuCard(
             context,

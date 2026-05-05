@@ -24,8 +24,12 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
   }
 
   String? _getRuleImageUrl(String name) {
+    final lowerName = name.toLowerCase();
+    // Genel başlıklar veya açıklama içeren alt başlıklar için resim arama
+    if (lowerName.contains('traits') || lowerName.contains('features') || lowerName.contains('overview')) return null;
+
     final categoryTitle = widget.title.toLowerCase().trim();
-    final itemName = name.trim().toLowerCase().replaceAll('-', '');
+    final itemName = name.trim().toLowerCase().replaceAll('-', '').replaceAll(' ', '');
 
     if (categoryTitle.contains("race")) {
       return 'assets/images/races/$itemName.png';
@@ -55,7 +59,7 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
         // --- HATA GİDERİCİ MANTIK BURASI ---
         // Sadece bu özel anahtar kelimeleri içeren ve belli isimlere sahip olanları "Genel Bilgi" sayıyoruz.
         // Boylece "Acid Splash" gibi içinde 's' harfi geçen her şeyi genel bilgi sanmayacak.
-        List<String> generalHeaders = ["Racial Traits", "Class Features", "Spellcasting Features", "Personal Characteristics"];
+        List<String> generalHeaders = ["Racial Traits", "Class Features", "Spellcasting Features", "Personal Characteristics", "Equipment Rules", "Monster Rules"];
         bool isGeneral = generalHeaders.contains(keyName) ||
             (keyName.toLowerCase().contains("traits") && !keyName.contains("("));
 
@@ -83,10 +87,10 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
 
         categories.add(RuleCategory(
           title: keyName,
-          icon: isGeneral ? Icons.auto_stories : (widget.title == "Spells" ? Icons.auto_awesome : Icons.person_outline),
+          icon: isGeneral ? Icons.auto_stories : (widget.title == "Spells" ? Icons.auto_awesome : (widget.title == "Monsters" ? Icons.pets : Icons.bookmark_border)),
           items: items,
           isGeneralInfo: isGeneral,
-          imageUrl: _getRuleImageUrl(keyName),
+          imageUrl: isGeneral ? null : _getRuleImageUrl(keyName),
         ));
       });
 
@@ -106,7 +110,34 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
       currentLevel = int.tryParse(levelMatch.group(1) ?? '');
     }
 
-    if (value is Map && !value.containsKey('table') && name.toLowerCase() != 'description') {
+    if (value is! Map) {
+      _addRuleItem(items, name, value, level: currentLevel);
+      return;
+    }
+
+    // 1. Tablo objesi ise (Expansion happens in _addRuleItem)
+    if (value.containsKey('table')) {
+      _addRuleItem(items, name, value, level: currentLevel);
+      return;
+    }
+
+    // 2. Equipment için: Eğer bir açıklama varsa bunu ekle ve alt öğelere devam et (Konteyner mantığı)
+    if (widget.title == "Equipment" && value.containsKey('description') && name.toLowerCase() != 'description') {
+      final String overviewTitle = name.toLowerCase() == 'description' ? 'Overview' : "$name (Overview)";
+      _addRuleItem(items, overviewTitle, value['description'], level: currentLevel);
+      
+      value.forEach((subName, subValue) {
+        if (subName != 'description') {
+          _processTrait(items, subName, subValue, parentLevel: currentLevel);
+        }
+      });
+      return;
+    }
+
+    // 3. Spells veya diğerleri için LeafObject kontrolü
+    bool isLeafObject = value.containsKey('description');
+
+    if (!isLeafObject && name.toLowerCase() != 'description') {
       value.forEach((subName, subValue) {
         _processTrait(items, subName, subValue, parentLevel: currentLevel);
       });
@@ -128,6 +159,45 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
 
     if (value is Map && value.isEmpty) return;
 
+    // --- EQUIPMENT TABLO GENİŞLETME ---
+    if (widget.title == "Equipment" && value is Map && value.containsKey('table')) {
+      final table = value['table'] as Map<String, dynamic>;
+      final String? tableDescription = value['description'];
+      final columns = table.keys.toList();
+
+      if (columns.isNotEmpty) {
+        int rowCount = 0;
+        for (var col in columns) {
+          if (table[col] is List && (table[col] as List).length > rowCount) {
+            rowCount = (table[col] as List).length;
+          }
+        }
+
+        for (int i = 0; i < rowCount; i++) {
+          final idCol = columns[0];
+          final colList = table[idCol] as List;
+          final itemName = i < colList.length ? colList[i].toString() : "Item ${i + 1}";
+
+          String itemDetails = "";
+          if (tableDescription != null) itemDetails += "$tableDescription\n\n";
+
+          for (int j = 1; j < columns.length; j++) {
+            final colName = columns[j];
+            final dataList = table[colName] as List;
+            final val = i < dataList.length ? dataList[i].toString() : "—";
+            itemDetails += "• $colName: $val\n";
+          }
+
+          items.add(RuleItem(
+            title: itemName,
+            description: itemDetails.trim(),
+            level: finalLevel,
+          ));
+        }
+        return;
+      }
+    }
+
     items.add(RuleItem(
       title: displayTitle,
       description: _parseTraitValue(value).trim(),
@@ -135,49 +205,77 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
     ));
   }
 
-  String _parseTraitValue(dynamic value) {
+  // Eski _parseTraitValue fonksiyonunu tamamen silip bunu yapıştırın:
+
+  String _parseTraitValue(dynamic value, {int depth = 0}) {
+    // Sonsuz döngüyü engellemek için maksimum derinlik
+    if (depth > 5) return "...";
+
+    String indent = List.filled(depth * 2, ' ').join();
+
     if (value is String) return value;
-    if (value is List) return value.join(", ");
+
+    if (value is List) {
+      if (value.every((element) => element is String)) {
+        return value.map((e) => "$indent• $e").join('\n');
+      }
+      return value.map((e) => _parseTraitValue(e, depth: depth + 1)).join('\n');
+    }
+
     if (value is Map) {
       if (value.containsKey('table')) {
         final table = value['table'] as Map<String, dynamic>;
         final description = value['description'] as String?;
-        String result = description != null ? "$description\n\n" : "";
+        String result = description != null ? "$indent$description\n\n" : "";
 
         List<String> columns = table.keys.toList();
         if (columns.isNotEmpty) {
-          int rowCount = (table[columns[0]] as List).length;
-          for (int i = 0; i < rowCount; i++) {
+          int maxRows = 0;
+          // Güvenli satır sayma
+          for (var col in columns) {
+            if (table[col] is List) {
+              int colLen = (table[col] as List).length;
+              if (colLen > maxRows) maxRows = colLen;
+            }
+          }
+
+          result += "$indent${columns.join(' | ')}\n";
+          result += "$indent${List.filled(columns.length * 5, '-').join()}\n";
+
+          // Güvenli içerik okuma (Satır 274'teki sorunu çözen kısım)
+          for (int i = 0; i < maxRows; i++) {
             List<String> rowValues = [];
             for (var col in columns) {
-              rowValues.add("${table[col][i]}");
+              if (table[col] is List) {
+                final List colList = table[col] as List; // as List olarak zorluyoruz
+                rowValues.add(i < colList.length ? "${colList[i]}" : "—");
+              } else {
+                rowValues.add("—");
+              }
             }
-            result += "• ${rowValues.join(' | ')}\n";
+            result += "$indent${rowValues.join(' | ')}\n";
           }
         }
         return result;
       }
 
       String result = "";
-      if (value.containsKey('description')) {
-        result += "${value['description']}\n\n";
+      // SADECE content varsa önce onu bas.
+      if (value.containsKey('content')) {
+        result += _parseTraitValue(value['content'], depth: depth) + "\n\n";
       }
 
       value.forEach((k, v) {
-        if (k != 'description') {
-          final parsedValue = _parseTraitValue(v);
-          if (parsedValue.contains('\n')) {
-            result += "[$k]\n$parsedValue\n\n";
-          } else {
-            result += "• $k: $parsedValue\n\n";
-          }
+        if (k != 'content' && k != 'description' && k != 'table') {
+          // Alt başlıkları göster
+          result += "$indent[$k]\n";
+          result += _parseTraitValue(v, depth: depth + 1) + "\n\n";
         }
       });
-      return result.trim();
+      return result.trimRight();
     }
     return value.toString();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -285,6 +383,10 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
                       Text(
                         widget.title == "Spells"
                             ? "Everything you need to know about slots, concentration and components."
+                            : widget.title == "Equipment"
+                            ? "Core rules for armor, weapons, wealth, and item management."
+                            : widget.title == "Monsters" // <-- Yeni Eklenti
+                            ? "Rules for creature stats, sizes, challenge ratings, and actions."
                             : "Essential mechanics and shared traits every player should know.",
                         style: const TextStyle(color: Colors.white70, fontSize: 13),
                       ),
