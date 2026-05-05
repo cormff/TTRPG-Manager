@@ -60,6 +60,7 @@ class _GMDashboardState extends State<GMDashboard> {
         context.read<NotesProvider>().fetchAllNotes(userId),
         context.read<GamesProvider>().fetchGMGames(userId),
         context.read<MapsProvider>().fetchAllMaps(),
+        context.read<CharactersProvider>().fetchNpcCharacters(userId),
       ]);
     }
   }
@@ -209,78 +210,78 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 2. KARAKTERLER KISMI ---
-              _buildSectionHeader("Characters"),
+              _buildSectionHeader("NPC's"),
               const SizedBox(height: 8),
               charactersProvider.isLoading
                   ? const SizedBox(
-                      height: 100,
-                      child: Center(child: CircularProgressIndicator()),
-                    )
+                height: 100,
+                child: Center(child: CircularProgressIndicator()),
+              )
                   : SizedBox(
-                      height: 100,
-                      child: allNpcs.isEmpty
-                          ? ListView(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.horizontal,
-                              children: [_buildViewMoreButton("/characters")],
-                            )
-                          : ListView.builder(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  (allNpcs.length > 6 ? 6 : allNpcs.length) + 1,
-                              itemBuilder: (context, index) {
-                                final maxItems = allNpcs.length > 6
-                                    ? 6
-                                    : allNpcs.length;
-                                if (index == maxItems)
-                                  return _buildViewMoreButton("/characters");
+                height: 100,
+                child: allNpcs.isEmpty
+                    ? ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.horizontal,
+                  children: [_buildViewMoreButton("/characters")],
+                )
+                    : ListView.builder(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.horizontal,
+                  itemCount:
+                  (allNpcs.length > 6 ? 6 : allNpcs.length) + 1,
+                  itemBuilder: (context, index) {
+                    final maxItems = allNpcs.length > 6
+                        ? 6
+                        : allNpcs.length;
+                    if (index == maxItems)
+                      return _buildViewMoreButton("/characters");
 
-                                final npc = allNpcs[index];
-                                return Container(
-                                  width: 95,
-                                  margin: const EdgeInsets.only(right: 12),
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      color: Theme.of(
-                                        context,
-                                      ).primaryColor.withOpacity(0.5),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.smart_toy,
-                                        color: Colors.blue[300],
-                                        size: 26,
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Text(
-                                        npc.name,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Lv.${npc.level}',
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          color: Colors.grey[400],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                    final npc = allNpcs[index];
+                    return Container(
+                      width: 95,
+                      margin: const EdgeInsets.only(right: 12),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Theme.of(
+                            context,
+                          ).primaryColor.withOpacity(0.5),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.smart_toy,
+                            color: Colors.blue[300],
+                            size: 26,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            npc.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
                             ),
-                    ),
+                          ),
+                          Text(
+                            'Lv.${npc.level}',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey[400],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
 
               const SizedBox(height: 24),
 

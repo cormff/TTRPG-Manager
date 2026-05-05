@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/notes_provider.dart';
-import '../../providers/games_provider.dart'; // YENİ: GamesProvider eklendi
+import '../../providers/games_provider.dart';
 import '../../providers/characters_provider.dart';
-import 'player_game_details_view.dart'; // YENİ: Oyuna tıklayınca detaylara gitmesi için (Dosya yolunu gerekirse kendi yapına göre ayarla)
+import 'player_game_details_view.dart';
 
 class PlayerDashboard extends StatefulWidget {
   const PlayerDashboard({super.key});
@@ -19,7 +19,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notesProvider = context.read<NotesProvider>();
-      final gamesProvider = context.read<GamesProvider>(); // YENİ
+      final gamesProvider = context.read<GamesProvider>();
       final charactersProvider = context.read<CharactersProvider>();
       final userRoleProvider = context.read<UserRoleProvider>();
       final userId = userRoleProvider.userId;
@@ -28,7 +28,6 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
         if (notesProvider.playerNotes.isEmpty) {
           notesProvider.fetchAllNotes(userId);
         }
-        // YENİ: Oyuncunun katıldığı oyunları çek
         if (gamesProvider.playerGames.isEmpty) {
           gamesProvider.fetchPlayerGames(userId);
         }
@@ -39,14 +38,13 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     });
   }
 
-  // YENİ: Ekranı aşağı kaydırınca çalışacak yenileme metodu
   Future<void> _refreshData() async {
     final userId = context.read<UserRoleProvider>().userId;
     if (userId != null) {
-      // Oyuncu verilerini paralel olarak çekiyoruz
       await Future.wait([
         context.read<NotesProvider>().fetchAllNotes(userId),
         context.read<GamesProvider>().fetchPlayerGames(userId),
+        context.read<CharactersProvider>().fetchPlayerCharacters(userId),
       ]);
     }
   }
@@ -83,7 +81,6 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
   Widget _buildViewMoreButton(String route) {
     return GestureDetector(
       onTap: () {
-      // YENİ: Yorum satırı açıldı, artık yönlendirme çalışacak
         Navigator.pushNamed(context, route);
       },
       child: Container(
@@ -104,28 +101,28 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     final allPlayerNotes = notesProvider.playerNotes.reversed.toList();
     final displayNotes = allPlayerNotes.take(5).toList();
 
-    // YENİ: Oyunları Dinle
     final gamesProvider = context.watch<GamesProvider>();
     final allPlayerGames = gamesProvider.playerGames.reversed.toList();
+
+    final charactersProvider = context.watch<CharactersProvider>();
+    final allCharacters = charactersProvider.playerCharacters.reversed.toList();
 
     final int dummyGamesCount = 2;
     final int dummyCharactersCount = 8;
 
     return Scaffold(
         body: SafeArea(
-          // YENİ: RefreshIndicator eklendi
             child: RefreshIndicator(
               onRefresh: _refreshData,
               color: Theme.of(context).primaryColor,
               backgroundColor: Theme.of(context).cardColor,
               child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(), // YENİ: Her zaman kaydırılabilir olmalı
+                physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  // ... (Kalan tüm Column içeriği aynı kalacak) ...
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-// --- 1. OYUNLAR KISMI ---
+              // --- 1. OYUNLAR KISMI ---
               _buildSectionHeader("Games"),
               const SizedBox(height: 8),
 
@@ -204,26 +201,83 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("My Characters"),
+              _buildSectionHeader("Characters"),
               const SizedBox(height: 8),
-              SizedBox(
+              charactersProvider.isLoading
+                  ? const SizedBox(
                 height: 100,
-                child: ListView.builder(
+                child: Center(child: CircularProgressIndicator()),
+              )
+                  : SizedBox(
+                height: 100,
+                child: allCharacters.isEmpty
+                    ? const Center(
+                  child: Text(
+                    "No characters have been created yet.",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                )
+                    : ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: (dummyCharactersCount > 6 ? 6 : dummyCharactersCount) + 1,
+                  itemCount:
+                  (allCharacters.length > 6
+                      ? 6
+                      : allCharacters.length) +
+                      1,
                   itemBuilder: (context, index) {
-                    int maxItems = dummyCharactersCount > 6 ? 6 : dummyCharactersCount;
-                    if (index == maxItems) return _buildViewMoreButton("/characters");
+                    int maxItems = allCharacters.length > 6
+                        ? 6
+                        : allCharacters.length;
+                    if (index == maxItems)
+                      return _buildViewMoreButton("/characters");
 
+                    final character = allCharacters[index];
                     return Container(
-                      width: 80,
+                      width: 90,
                       margin: const EdgeInsets.only(right: 12),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                        border: Border.all(
+                          color: Theme.of(
+                            context,
+                          ).primaryColor.withOpacity(0.5),
+                        ),
                       ),
-                      child: Center(child: Icon(Icons.person_outline, color: Colors.grey[500], size: 40)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (character.avatarUrl.isNotEmpty)
+                            CircleAvatar(
+                              radius: 16,
+                              backgroundImage: AssetImage(character.avatarUrl),
+                            )
+                          else
+                            Icon(
+                              Icons.person_outline,
+                              color: Colors.grey[400],
+                              size: 30,
+                            ),
+                          const SizedBox(height: 4),
+                          Text(
+                            character.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'Lv.${character.level}',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey[400],
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
