@@ -1,11 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 
 class GameService {
-  final String baseUrl = 'http://10.0.2.2:8080/api/games';
+  final String baseUrl = 'http://${ApiConfig.host}:8080/api/games';
 
-// game_service.dart içindeki createGame metodu
-  Future<bool> createGame(String title, String description, int maxPlayers, bool isPublic, int gmId) async {
+  // game_service.dart içindeki createGame metodu
+  Future<bool> createGame(
+    String title,
+    String description,
+    int maxPlayers,
+    bool isPublic,
+    int gmId,
+  ) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/create'), // Java API adresine göre değiştir
@@ -15,7 +22,7 @@ class GameService {
           "description": description,
           "maxPlayers": maxPlayers,
           "isPublic": isPublic,
-          "gmId": gmId // <--- BURAYI DA JSON'A EKLEDİK
+          "gmId": gmId, // <--- BURAYI DA JSON'A EKLEDİK
         }),
       );
 
@@ -48,7 +55,14 @@ class GameService {
     }
   }
 
-  Future<bool> updateGame(int gameId, String title, String description, int maxPlayers, bool isPublic, int gmId) async {
+  Future<bool> updateGame(
+    int gameId,
+    String title,
+    String description,
+    int maxPlayers,
+    bool isPublic,
+    int gmId,
+  ) async {
     try {
       final response = await http.put(
         // URL KISMINA DİKKAT: Java'da /api/games/{id} şeklinde karşılayacağımız için burası böyle olmalı.
@@ -61,7 +75,7 @@ class GameService {
           "description": description,
           "maxPlayers": maxPlayers,
           "publicGame": isPublic, // Key değişti, değer aynı kalabilir
-          "gmId": gmId
+          "gmId": gmId,
         }),
       );
 
@@ -111,15 +125,22 @@ class GameService {
       if (response.statusCode == 200) {
         return {"success": true, "message": "Oyuna başarıyla katıldınız!"};
       } else {
-        return {"success": false, "message": response.body}; // Backend'den gelen hata mesajı (örn: "Oda dolu")
+        return {
+          "success": false,
+          "message": response.body,
+        }; // Backend'den gelen hata mesajı (örn: "Oda dolu")
       }
     } catch (e) {
       print("Oyuna katılırken hata: $e");
       return {"success": false, "message": "Bağlantı hatası oluştu."};
     }
   }
+
   // YENİ: Davet koduyla oyuna katılma isteği
-  Future<Map<String, dynamic>> joinGameByCode(String inviteCode, int playerId) async {
+  Future<Map<String, dynamic>> joinGameByCode(
+    String inviteCode,
+    int playerId,
+  ) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/join-by-code/$inviteCode/$playerId'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
+import 'package:ttrpg_manager/providers/characters_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -18,23 +19,29 @@ class CustomDrawer extends StatelessWidget {
               SafeArea(
                 bottom: false, // Alt tarafta güvenli alan bırakma
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 24,
+                  ),
                   child: Row(
                     children: [
                       // Role göre değişen şık bir ikon
                       Icon(
-                        isGameMaster ? Icons.auto_awesome : Icons.person_outline,
+                        isGameMaster
+                            ? Icons.auto_awesome
+                            : Icons.person_outline,
                         color: Theme.of(context).primaryColor,
                         size: 32,
                       ),
                       const SizedBox(width: 16),
                       Text(
                         isGameMaster ? 'Game Master' : 'Player',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 1.2,
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              letterSpacing: 1.2,
+                            ),
                       ),
                     ],
                   ),
@@ -52,7 +59,14 @@ class CustomDrawer extends StatelessWidget {
                 text: 'Logout',
                 onTap: () {
                   // 1. Önce eski kullanıcının notlarını RAM'den (hafızadan) temizliyoruz
-                  Provider.of<NotesProvider>(context, listen: false).clearData();
+                  Provider.of<NotesProvider>(
+                    context,
+                    listen: false,
+                  ).clearData();
+                  Provider.of<CharactersProvider>(
+                    context,
+                    listen: false,
+                  ).clearData();
 
                   // 2. Rolü sıfırlayıp Login sayfasına geri dönüyoruz
                   userRoleProvider.setUserRole(UserRole.player);
@@ -66,28 +80,65 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildGMMenuItems(BuildContext context, UserRoleProvider userRoleProvider) {
+  List<Widget> _buildGMMenuItems(
+    BuildContext context,
+    UserRoleProvider userRoleProvider,
+  ) {
     return [
-      _buildDrawerItem(context: context, icon: Icons.gamepad, text: 'My Games', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/my_games_gm_view');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.add_box, text: 'Create Game', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/create_game');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.map, text: 'My Maps', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/my_maps');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.note, text: 'Notes', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/notes');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.book, text: 'Rule Books', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/rule_books');
-      }),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.gamepad,
+        text: 'My Games',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/my_games_gm_view');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.add_box,
+        text: 'Create Game',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/create_game');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.map,
+        text: 'My Maps',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/my_maps');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.groups_2,
+        text: "NPC'ler",
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/characters');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.note,
+        text: 'Notes',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/notes');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.book,
+        text: 'Rule Books',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/rule_books');
+        },
+      ),
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
@@ -100,24 +151,56 @@ class CustomDrawer extends StatelessWidget {
     ];
   }
 
-  List<Widget> _buildPlayerMenuItems(BuildContext context, UserRoleProvider userRoleProvider) {
+  List<Widget> _buildPlayerMenuItems(
+    BuildContext context,
+    UserRoleProvider userRoleProvider,
+  ) {
     return [
-      _buildDrawerItem(context: context, icon: Icons.group_add, text: 'Join Game', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/join_game');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.gamepad, text: 'My Games', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/my_games_player_view');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.note, text: 'Notes', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/notes');
-      }),
-      _buildDrawerItem(context: context, icon: Icons.book, text: 'Rule Books', onTap: () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/rule_books');
-      }),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.group_add,
+        text: 'Join Game',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/join_game');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.gamepad,
+        text: 'My Games',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/my_games_player_view');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.groups,
+        text: 'Characters',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/characters');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.note,
+        text: 'Notes',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/notes');
+        },
+      ),
+      _buildDrawerItem(
+        context: context,
+        icon: Icons.book,
+        text: 'Rule Books',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/rule_books');
+        },
+      ),
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
@@ -135,7 +218,7 @@ class CustomDrawer extends StatelessWidget {
     required BuildContext context,
     required IconData icon,
     required String text,
-    required VoidCallback onTap
+    required VoidCallback onTap,
   }) {
     return ListTile(
       leading: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
