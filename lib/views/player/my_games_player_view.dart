@@ -34,7 +34,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Katıldığım Oyunlar'),
+        title: const Text('My Joined Games'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -43,7 +43,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
           : myGames.isEmpty
           ? const Center(
         child: Text(
-          'Henüz bir oyuna katılmadın.',
+          'You have not joined any games yet.',
           style: TextStyle(color: Colors.grey, fontSize: 16),
         ),
       )
@@ -72,7 +72,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               subtitle: Text(
-                "${game.joinedPlayerIds.length} / ${game.maxPlayers} Oyuncu",
+                "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
                 style: const TextStyle(color: Colors.white70),
               ),
               trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16),

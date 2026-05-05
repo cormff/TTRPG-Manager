@@ -128,7 +128,7 @@ class _GMDashboardState extends State<GMDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Oyunlar"),
+              _buildSectionHeader("Games"),
               const SizedBox(height: 8),
               gamesProvider.isLoading
                   ? const SizedBox(height: 110, child: Center(child: CircularProgressIndicator()))
@@ -182,7 +182,7 @@ class _GMDashboardState extends State<GMDashboard> {
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               ),
                               const SizedBox(height: 4),
-                              Text("${game.maxPlayers} Oyuncu", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
+                              Text("${game.maxPlayers} Players", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
                             ],
                           ),
                         ),
@@ -195,7 +195,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 2. KARAKTERLER KISMI ---
-              _buildSectionHeader("Karakterler"),
+              _buildSectionHeader("Characters"),
               const SizedBox(height: 8),
               SizedBox(
                 height: 100,
@@ -213,7 +213,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 3. HARİTALAR KISMI ---
-              _buildSectionHeader("Haritalar"), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
+              _buildSectionHeader("Maps"), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
               const SizedBox(height: 8),
 
               SizedBox(
@@ -225,7 +225,7 @@ class _GMDashboardState extends State<GMDashboard> {
                     }
 
                     if (mapsProvider.allMaps.isEmpty) {
-                      return const Text("Henüz havuza harita eklemedin.", style: TextStyle(color: Colors.grey));
+                      return const Text("No maps has been added yet.", style: TextStyle(color: Colors.grey));
                     }
 
                     return ListView.builder(
@@ -322,13 +322,13 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 4. NOTLAR KISMI ---
-              _buildSectionHeader("Son Notlar"),
+              _buildSectionHeader("Notes"),
               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("Henüz hiç not eklenmemiş.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text("No notes has been added yet.", style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -379,7 +379,7 @@ class _GMDashboardState extends State<GMDashboard> {
                       Navigator.pushNamed(context, "/notes");
                     },
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("Tüm Notları Gör"),
+                    label: const Text("See all notes"),
                   ),
                 ),
               ),

@@ -55,7 +55,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Oyun Arşivi'),
+        title: const Text('Game Archive'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -98,7 +98,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    widget.game.description.isEmpty ? "Hikaye yazılmamış..." : widget.game.description,
+                    widget.game.description.isEmpty ? "Story has not been told..." : widget.game.description,
                     style: const TextStyle(fontSize: 16, color: Colors.grey, height: 1.5),
                   ),
                 ],
@@ -108,16 +108,16 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 2. OYUNCULAR (İSİMLERİYLE BERABER) ---
-            Text("Maceracılar", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text("Adventurers", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (widget.game.joinedPlayerIds.isEmpty)
-              const Text("Bu oyuna kimse katılmamış.", style: TextStyle(color: Colors.grey))
+              const Text("No players have joined this game.", style: TextStyle(color: Colors.grey))
             else
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: widget.game.joinedPlayerIds.map((id) {
-                  final playerName = _playerNames[id] ?? "Bilinmeyen Kahraman";
+                  final playerName = _playerNames[id] ?? "Unkown Hero";
                   return Chip(
                     avatar: const CircleAvatar(backgroundColor: Colors.amber, child: Icon(Icons.person, color: Colors.black, size: 16)),
                     label: Text(playerName, style: const TextStyle(color: Colors.white)),
@@ -130,12 +130,12 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 3. HARİTALAR ---
-            Text("Keşfedilen Diyarlar", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text("Discovered Realms", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             Consumer<MapsProvider>(
               builder: (context, mapsProvider, child) {
                 if (mapsProvider.currentGameMaps.isEmpty) {
-                  return const Text("Bu oyunda hiç harita kullanılmamış.", style: TextStyle(color: Colors.grey));
+                  return const Text("No maps have been added for this game.", style: TextStyle(color: Colors.grey));
                 }
                 return SizedBox(
                   height: 120,
@@ -170,10 +170,10 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 4. OYUN NOTLARI ---
-            Text("Oyun Kayıtları & Notlar", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text("Game Records & Notes", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (_gameNotes.isEmpty)
-              const Text("Bu oyuna ait not bulunamadı.", style: TextStyle(color: Colors.grey))
+              const Text("No note added for this campaign!", style: TextStyle(color: Colors.grey))
             else
               ListView.builder(
                 shrinkWrap: true,
@@ -186,7 +186,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     child: ListTile(
                       leading: const Icon(Icons.bookmark, color: Colors.amber),
-                      title: Text(note['title'] ?? 'İsimsiz Not', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      title: Text(note['title'] ?? 'Nameless Note', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                       subtitle: Text(note['content'] ?? '', maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white70)),
                     ),
                   );

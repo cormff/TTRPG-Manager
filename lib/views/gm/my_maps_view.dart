@@ -57,12 +57,12 @@ class _MyMapsViewState extends State<MyMapsView> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Yeni Harita Ekle", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+                    Text("Add New Map", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 16),
 
                     TextField(
                       controller: titleController,
-                      decoration: const InputDecoration(labelText: 'Harita Adı', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(labelText: 'Map Name', border: OutlineInputBorder()),
                     ),
                     const SizedBox(height: 16),
 
@@ -70,14 +70,14 @@ class _MyMapsViewState extends State<MyMapsView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ChoiceChip(
-                          label: const Text("Galeriden Seç"),
+                          label: const Text("Pick from gallery"),
                           selected: selectedMode == 0,
                           selectedColor: Theme.of(context).primaryColor,
                           onSelected: (val) => setModalState(() { selectedMode = 0; localImagePath = null; urlController.clear(); }),
                         ),
                         const SizedBox(width: 12),
                         ChoiceChip(
-                          label: const Text("URL Gir"),
+                          label: const Text("Enter URL"),
                           selected: selectedMode == 1,
                           selectedColor: Theme.of(context).primaryColor,
                           onSelected: (val) => setModalState(() { selectedMode = 1; localImagePath = null; urlController.clear(); }),
@@ -106,7 +106,7 @@ class _MyMapsViewState extends State<MyMapsView> {
                               children: [
                                 Icon(Icons.add_photo_alternate, size: 40, color: Theme.of(context).primaryColorLight),
                                 const SizedBox(height: 8),
-                                Text("Galeriyi Aç", style: TextStyle(color: Theme.of(context).primaryColorLight)),
+                                Text("Open gallery", style: TextStyle(color: Theme.of(context).primaryColorLight)),
                               ],
                             )
                                 : null,
@@ -117,7 +117,7 @@ class _MyMapsViewState extends State<MyMapsView> {
                     if (selectedMode == 1)
                       TextField(
                         controller: urlController,
-                        decoration: const InputDecoration(labelText: 'Resim URLsi', border: OutlineInputBorder(), prefixIcon: Icon(Icons.link)),
+                        decoration: const InputDecoration(labelText: 'Image URL', border: OutlineInputBorder(), prefixIcon: Icon(Icons.link)),
                         onChanged: (val) => setModalState(() {}),
                       ),
 
@@ -166,7 +166,7 @@ class _MyMapsViewState extends State<MyMapsView> {
                           }
                         },
                         icon: const Icon(Icons.save),
-                        label: const Text("Haritayı Havuza Ekle"),
+                        label: const Text("Add map to pool"),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           backgroundColor: Theme.of(context).primaryColor,
@@ -187,7 +187,7 @@ class _MyMapsViewState extends State<MyMapsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Harita Havuzu')),
+      appBar: AppBar(title: const Text('Map Pool')),
 
       // Consumer ile gerçek verileri dinliyoruz
       body: Consumer<MapsProvider>(
@@ -197,7 +197,7 @@ class _MyMapsViewState extends State<MyMapsView> {
           }
 
           if (mapsProvider.allMaps.isEmpty) {
-            return const Center(child: Text('Henüz veritabanında harita yok.', style: TextStyle(color: Colors.grey)));
+            return const Center(child: Text('No maps have been added yet.', style: TextStyle(color: Colors.grey)));
           }
 
           return GridView.builder(

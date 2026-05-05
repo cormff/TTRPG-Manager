@@ -21,7 +21,7 @@ class GameService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print("Oyun oluşturulurken hata: $e");
+      print("Error while creating the game: $e");
       return false;
     }
   }
@@ -29,21 +29,21 @@ class GameService {
   Future<List<dynamic>> getMyGames(int gmId) async {
     try {
       final url = '$baseUrl/my-games/$gmId';
-      print(">>> İstek atılan URL: $url");
+      print(">>> Wanted URL: $url");
 
       final response = await http.get(Uri.parse(url));
 
-      print(">>> Sunucu Cevap Kodu: ${response.statusCode}");
-      print(">>> Sunucudan Gelen Cevap: ${response.body}");
+      print(">>> Server Responso Code: ${response.statusCode}");
+      print(">>> Server Response: ${response.body}");
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
-        print(">>> HATA: Sunucu 200 OK döndürmedi!");
+        print(">>> ERROR: Server did not return 200 OK!");
         return [];
       }
     } catch (e) {
-      print(">>> KRİTİK HATA: $e");
+      print(">>> CRITICAL ERROR: $e");
       return [];
     }
   }
@@ -67,7 +67,7 @@ class GameService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print("Oyun güncellenirken hata: $e");
+      print("Error while updating the game: $e");
       return false;
     }
   }
@@ -81,7 +81,7 @@ class GameService {
       }
       return [];
     } catch (e) {
-      print("Halka açık oyunları çekerken hata: $e");
+      print("Error while pulling public games: $e");
       return [];
     }
   }
@@ -95,7 +95,7 @@ class GameService {
       }
       return [];
     } catch (e) {
-      print("Katılınan oyunları çekerken hata: $e");
+      print("Error while pulling joined games: $e");
       return [];
     }
   }
@@ -109,13 +109,13 @@ class GameService {
       );
 
       if (response.statusCode == 200) {
-        return {"success": true, "message": "Oyuna başarıyla katıldınız!"};
+        return {"success": true, "message": "Succesfully joined to game!"};
       } else {
         return {"success": false, "message": response.body}; // Backend'den gelen hata mesajı (örn: "Oda dolu")
       }
     } catch (e) {
-      print("Oyuna katılırken hata: $e");
-      return {"success": false, "message": "Bağlantı hatası oluştu."};
+      print("Error while joining: $e");
+      return {"success": false, "message": "Connection Error"};
     }
   }
   // YENİ: Davet koduyla oyuna katılma isteği
@@ -126,13 +126,13 @@ class GameService {
       );
 
       if (response.statusCode == 200) {
-        return {"success": true, "message": "Oyuna başarıyla katıldınız!"};
+        return {"success": true, "message": "Succesfully joined to game!"};
       } else {
         return {"success": false, "message": response.body};
       }
     } catch (e) {
-      print("Davet koduyla katılırken hata: $e");
-      return {"success": false, "message": "Bağlantı hatası oluştu."};
+      print("Error while joining via code: $e");
+      return {"success": false, "message": "Connection Error"};
     }
   }
 
@@ -142,7 +142,7 @@ class GameService {
       final response = await http.put(Uri.parse('$baseUrl/$gameId/finish'));
       return response.statusCode == 200;
     } catch (e) {
-      print("Oyun bitirilirken hata: $e");
+      print("Error while ending the game: $e");
       return false;
     }
   }
@@ -163,7 +163,7 @@ class GameService {
       }
       return {};
     } catch (e) {
-      print("Oyuncu isimleri çekilirken hata: $e");
+      print("Error while pulling player names: $e");
       return {};
     }
   }
@@ -177,7 +177,7 @@ class GameService {
       }
       return [];
     } catch (e) {
-      print("Oyun notları çekilirken hata: $e");
+      print("Error while pulling game notes: $e");
       return [];
     }
   }

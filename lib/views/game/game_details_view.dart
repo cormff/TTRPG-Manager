@@ -8,6 +8,7 @@ import '../../models/game_model.dart';
 import 'package:provider/provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/maps_provider.dart';
+import '../../providers/notes_provider.dart';
 
 class GameDetailsView extends StatefulWidget {
   final Game game;
@@ -48,6 +49,8 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     if (widget.game.id != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.read<MapsProvider>().fetchMapsForGame(widget.game.id!);
+        // YENİ: Oyunun kendi klonlanmış notlarını çek
+        context.read<NotesProvider>().fetchGameNotes(widget.game.id!);
       });
     }
   }
@@ -95,14 +98,14 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Oyun başarıyla güncellendi!"), backgroundColor: Colors.green),
+          const SnackBar(content: Text("Game successfully updated!"), backgroundColor: Colors.green),
         );
         setState(() => _isEditing = false);
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Güncelleme başarısız oldu. Sunucuyu kontrol edin."), backgroundColor: Colors.red),
+          const SnackBar(content: Text("Update failed. Try again later."), backgroundColor: Colors.red),
         );
       }
     }
@@ -114,7 +117,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
       Clipboard.setData(ClipboardData(text: widget.game.inviteCode!));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Davet kodu panoya kopyalandı: ${widget.game.inviteCode}"),
+          content: Text("Invitation code copied: ${widget.game.inviteCode}"),
           backgroundColor: Theme.of(context).primaryColor,
           duration: const Duration(seconds: 2),
         ),
@@ -130,7 +133,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isEditing ? 'Oyunu Düzenle' : widget.game.title),
+        title: Text(_isEditing ? 'Edit game' : widget.game.title),
         actions: [
           IconButton(
             icon: Icon(_isEditing ? Icons.close : Icons.edit),
@@ -169,7 +172,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Oyun Davet Kodu", style: TextStyle(color: Colors.grey[400], fontSize: 12)),
+                        Text("Game invitation code", style: TextStyle(color: Colors.grey[400], fontSize: 12)),
                         const SizedBox(height: 4),
                         SelectableText(
                           widget.game.inviteCode!,
@@ -185,7 +188,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     IconButton(
                       icon: Icon(Icons.copy, color: primaryLight),
                       onPressed: _copyInviteCode,
-                      tooltip: 'Kodu Kopyala',
+                      tooltip: 'Copy code',
                     ),
                   ],
                 ),
@@ -208,7 +211,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       enabled: _isEditing,
                       style: const TextStyle(color: Colors.white70),
                       decoration: InputDecoration(
-                        labelText: 'Oyun Adı',
+                        labelText: 'Game Name',
                         labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         border: InputBorder.none,
                       ),
@@ -221,7 +224,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       maxLines: 4,
                       style: const TextStyle(color: Colors.white70),
                       decoration: InputDecoration(
-                        labelText: 'Hikaye / Açıklama',
+                        labelText: 'Story / Description',
                         labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         border: InputBorder.none,
                       ),
@@ -233,7 +236,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Maksimum Oyuncu:", style: TextStyle(color: primaryLight, fontSize: 16)),
+                          Text("Max Player:", style: TextStyle(color: primaryLight, fontSize: 16)),
                           _isEditing
                               ? DropdownButton<int>(
                             value: _maxPlayers,
@@ -249,7 +252,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text("Herkese Açık (Public)", style: TextStyle(color: primaryLight, fontSize: 16)),
+                      title: Text("Public Game", style: TextStyle(color: primaryLight, fontSize: 16)),
                       activeColor: Colors.white,
                       activeTrackColor: primaryColor,
                       inactiveThumbColor: Colors.grey,
@@ -270,7 +273,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                 child: ElevatedButton.icon(
                   onPressed: _saveChanges,
                   icon: const Icon(Icons.save),
-                  label: const Text("Değişiklikleri Kaydet"),
+                  label: const Text("Save Changes"),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: primaryColor,
@@ -292,14 +295,14 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         context: context,
                         builder: (context) => AlertDialog(
                           backgroundColor: theme.cardColor,
-                          title: const Text("Oyunu Bitir", style: TextStyle(color: Colors.white)),
-                          content: const Text("Bu oyunu bitirip arşive kaldırmak istediğine emin misin? Bu işlem geri alınamaz.", style: TextStyle(color: Colors.white70)),
+                          title: const Text("Finish Campaing", style: TextStyle(color: Colors.white)),
+                          content: const Text("Are you sure you want to finish this campaign? This action cannot be undone!", style: TextStyle(color: Colors.white70)),
                           actions: [
                             TextButton(onPressed: () => Navigator.pop(context, false), child: const Text("İptal", style: TextStyle(color: Colors.grey))),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                               onPressed: () => Navigator.pop(context, true),
-                              child: const Text("Evet, Bitir", style: TextStyle(color: Colors.white)),
+                              child: const Text("Yes, end the game", style: TextStyle(color: Colors.white)),
                             ),
                           ],
                         ),
@@ -310,12 +313,12 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         final success = await context.read<GamesProvider>().finishGame(widget.game.id!, widget.game.gmId);
                         if (success && context.mounted) {
                           Navigator.pop(context); // Detay sayfasını kapatıp listeye dön
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Oyun başarıyla arşive kaldırıldı!"), backgroundColor: Colors.green));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Game successfully finished!"), backgroundColor: Colors.green));
                         }
                       }
                     },
                     icon: const Icon(Icons.archive, color: Colors.redAccent),
-                    label: const Text("Oyunu Bitir (Arşive Kaldır)", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                    label: const Text("End Campaing", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       side: const BorderSide(color: Colors.redAccent, width: 1.5),
@@ -330,7 +333,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Bağlı Haritalar", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
+                  Text("Linked Maps", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
                   IconButton(
                     icon: Icon(Icons.add_box, color: primaryColor, size: 28),
                     onPressed: () {
@@ -338,7 +341,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                       if (allMaps.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Önce Harita Havuzuna harita eklemelisin!")),
+                          const SnackBar(content: Text("Firstly a map has to be added to map pool!")),
                         );
                         return;
                       }
@@ -358,7 +361,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Havuza Eklenen Haritalar",
+                                    "Maps",
                                     style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 16),
@@ -383,7 +386,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                                             if (success && context.mounted) {
                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                const SnackBar(content: Text("Harita oyuna bağlandı!"), backgroundColor: Colors.green),
+                                                const SnackBar(content: Text("Map linked!"), backgroundColor: Colors.green),
                                               );
                                             }
                                           },
@@ -444,7 +447,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         children: [
                           Icon(Icons.map, size: 40, color: primaryColor.withOpacity(0.7)),
                           const SizedBox(height: 8),
-                          Text("Henüz bu oyuna harita bağlanmamış.", style: TextStyle(color: Colors.grey[400])),
+                          Text("No maps has been linked to this game.", style: TextStyle(color: Colors.grey[400])),
                         ],
                       ),
                     );
@@ -490,7 +493,152 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     ),
                   );
                 },
+
               ),
+              // ============================================
+              // --- YENİ: NOTLAR KISMI BURADAN BAŞLIYOR ---
+              // ============================================
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Game records & Notes", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
+                  IconButton(
+                    icon: Icon(Icons.add_box, color: primaryColor, size: 28),
+                    onPressed: () {
+                      // Havuzdaki (gameId = null) şablon notlar
+                      final allNotes = context.read<NotesProvider>().gmNotes;
+
+                      if (allNotes.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Firstly a note has to be added to note pool!")),
+                        );
+                        return;
+                      }
+
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: theme.cardColor,
+                        isScrollControlled: true, // YENİ: Listenin ekrana sığması için kontrolü ele alır
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                        builder: (context) {
+                          return SafeArea(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min, // İçerik ne kadarsa o kadar uzar
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Notes",
+                                    style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 16),
+
+                                  // ÇÖZÜM BURASI: Sabit SizedBox(height: 300) yerine Flexible kullanıyoruz
+                                  Flexible(
+                                    child: ListView.builder(
+                                      shrinkWrap: true, // YENİ: Listeyi sadece içindeki elemanlar kadar yer kaplamaya zorlar
+                                      itemCount: allNotes.length,
+                                      itemBuilder: (context, index) {
+                                        final note = allNotes[index];
+                                        return Card(
+                                          margin: const EdgeInsets.only(bottom: 8),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                          child: ListTile(
+                                            title: Text(note.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                            subtitle: Text(note.content, maxLines: 1, overflow: TextOverflow.ellipsis),
+                                            trailing: Icon(Icons.add_circle_outline, color: primaryColor),
+                                            onTap: () async {
+                                              Navigator.pop(context); // Menüyü kapat
+
+                                              // Klonlama (Kopya oluşturma) işlemini tetikle
+                                              final success = await context.read<NotesProvider>().cloneNoteToGame(
+                                                note.id!, // Hangi not
+                                                widget.game.id!, // Hangi oyuna
+                                              );
+
+                                              if (success && context.mounted) {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text("Added"), backgroundColor: Colors.green),
+                                                );
+                                              } else if (context.mounted) {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text("Error occured while adding the note."), backgroundColor: Colors.red),
+                                                );
+                                              }
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Oyuna Bağlı Notları Listeleme Alanı
+              Consumer<NotesProvider>(
+                builder: (context, notesProvider, child) {
+                  if (notesProvider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (notesProvider.currentGameNotes.isEmpty) {
+                    return Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: theme.cardColor,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: primaryColor.withOpacity(0.5), style: BorderStyle.solid),
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(Icons.notes, size: 40, color: primaryColor.withOpacity(0.7)),
+                          const SizedBox(height: 8),
+                          Text("No notes has been added yet to this game.", style: TextStyle(color: Colors.grey[400])),
+                        ],
+                      ),
+                    );
+                  }
+
+                  // Notlar kart şeklinde dikey listelenir
+                  return ListView.builder(
+                    shrinkWrap: true, // Scrollable (SingleChildScrollView) içinde olduğu için zorunlu
+                    physics: const NeverScrollableScrollPhysics(), // Kaydırma işlemini ana ekrana bırak
+                    itemCount: notesProvider.currentGameNotes.length,
+                    itemBuilder: (context, index) {
+                      final note = notesProvider.currentGameNotes[index];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        elevation: 2,
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          title: Text(note.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(note.content, maxLines: 2, overflow: TextOverflow.ellipsis),
+                          ),
+                          // Notun detayına gitmek istersen buraya onTap ekleyebilirsin
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              // --- NOTLAR KISMI BİTİŞ ---
             ]
           ],
         ),

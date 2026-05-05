@@ -121,7 +121,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Son Oyunlar"),
+              _buildSectionHeader("Games"),
               const SizedBox(height: 8),
 
               gamesProvider.isLoading
@@ -131,7 +131,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                 child: allPlayerGames.isEmpty
                     ? const Center(
                   child: Text(
-                    "Henüz bir oyuna katılmadın.",
+                    "You have not joined any games yet.",
                     style: TextStyle(color: Colors.grey),
                   ),
                 )
@@ -185,7 +185,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} Oyuncu",
+                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
                                   style: TextStyle(fontSize: 11, color: Colors.grey[400])
                               ),
                             ],
@@ -199,7 +199,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Karakterlerim"),
+              _buildSectionHeader("My Characters"),
               const SizedBox(height: 8),
               SizedBox(
                 height: 100,
@@ -226,13 +226,13 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Son Notlar"),
+              _buildSectionHeader("Notes"),
               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("Henüz hiç not eklenmemiş.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text("No notes have been created yet.", style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -279,7 +279,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   child: TextButton.icon(
                     onPressed: () => Navigator.pushNamed(context, "/notes"),
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("Tüm Notları Gör"),
+                    label: const Text("See all notes"),
                   ),
                 ),
               ),

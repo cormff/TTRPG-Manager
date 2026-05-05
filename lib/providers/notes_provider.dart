@@ -13,6 +13,9 @@ class NotesProvider with ChangeNotifier {
   List<Note> get playerNotes => _playerNotes;
   bool get isLoading => _isLoading;
 
+  List<Note> _currentGameNotes = []; // Aktif oyunun notları
+  List<Note> get currentGameNotes => _currentGameNotes;
+
 // Artık fetchAllNotes metoduna userId'yi dışarıdan parametre olarak alıyoruz
   Future<void> fetchAllNotes(int userId) async {
     _isLoading = true;
@@ -23,6 +26,28 @@ class NotesProvider with ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  // YENİ: Seçilen oyunun notlarını hafızaya alır
+  Future<void> fetchGameNotes(int gameId) async {
+    _isLoading = true;
+    notifyListeners();
+
+    _currentGameNotes = await _noteService.fetchNotesByGameId(gameId);
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  // YENİ: Havuzdan seçilen notu oyuna kopyalar ve listeyi günceller
+  Future<bool> cloneNoteToGame(int noteId, int gameId) async {
+    final clonedNote = await _noteService.cloneNoteToGame(noteId, gameId);
+    if (clonedNote != null) {
+      _currentGameNotes.add(clonedNote); // Ekranda anında görünmesi için listeye ekle
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 
 // addNote metodunda da userId'yi kullanıyoruz

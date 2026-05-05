@@ -49,7 +49,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Oyuna başarıyla katıldınız!"), backgroundColor: Colors.green),
+        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -82,7 +82,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Oyuna başarıyla katıldınız!"), backgroundColor: Colors.green),
+        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -102,7 +102,7 @@ class _JoinGameViewState extends State<JoinGameView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Oyun Keşfet'),
+        title: const Text('Find Games'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -113,7 +113,7 @@ class _JoinGameViewState extends State<JoinGameView> {
           children: [
             // --- 1. DAVET KODU KISMI (PRIVATE OYUNLAR İÇİN) ---
             const Text(
-              "Gizli Bir Oyuna Katıl",
+              "Join to a Private Game",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 8),
@@ -125,7 +125,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                     keyboardType: TextInputType.text, // YENİ: Artık harf de girebilirler
                     textCapitalization: TextCapitalization.characters, // Otomatik büyük harf
                     decoration: InputDecoration(
-                      hintText: "Örn: A7X9BQ",
+                      hintText: "Ex: A7X9BQ",
                       filled: true,
                       fillColor: theme.cardColor,
                       border: OutlineInputBorder(
@@ -144,7 +144,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text("Katıl", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                  child: const Text("Join", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
               ],
             ),
@@ -153,7 +153,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
             // --- 2. HALKA AÇIK OYUNLAR LİSTESİ ---
             const Text(
-              "Halka Açık Oyunlar",
+              "Public Games",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 12),
@@ -162,7 +162,7 @@ class _JoinGameViewState extends State<JoinGameView> {
               child: gamesProvider.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : publicGames.isEmpty
-                  ? const Center(child: Text("Şu an halka açık bir oyun bulunmuyor.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text("No public games have been created yet.", style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 itemCount: publicGames.length,
                 itemBuilder: (context, index) {
@@ -201,7 +201,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            game.description.isEmpty ? "Açıklama yok..." : game.description,
+                            game.description.isEmpty ? "No description..." : game.description,
                             style: const TextStyle(color: Colors.grey, fontSize: 13),
                           ),
                           const SizedBox(height: 12),
@@ -226,9 +226,9 @@ class _JoinGameViewState extends State<JoinGameView> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
                               child: Text(
-                                isMyCreatedGame ? "Kendi Oyunun" :
-                                isAlreadyJoined ? "Zaten Katıldın" :
-                                isFull ? "Oda Dolu" : "Oyuna Katıl",
+                                isMyCreatedGame ? "Your Game" :
+                                isAlreadyJoined ? "Already Joined" :
+                                isFull ? "World is full" : "Join Game",
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),

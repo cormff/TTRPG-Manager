@@ -20,7 +20,7 @@ class PlayerGameDetailsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Oyun Detayları'),
+        title: const Text('Game Details'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -47,7 +47,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    game.description.isEmpty ? "GM henüz bir hikaye yazmamış..." : game.description,
+                    game.description.isEmpty ? "GM has not added a description yet..." : game.description,
                     style: const TextStyle(fontSize: 16, color: Colors.grey, height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -56,7 +56,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                       Icon(Icons.people, color: theme.primaryColorLight, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        "${game.joinedPlayerIds.length} / ${game.maxPlayers} Oyuncu Katıldı",
+                        "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players Joined",
                         style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -69,7 +69,7 @@ class PlayerGameDetailsView extends StatelessWidget {
 
             // --- AKTİF HARİTA KISMI ---
             const Text(
-              "Aktif Harita",
+              "Active Map",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 12),
@@ -121,7 +121,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
                       ),
                       child: Text(
-                        mapName ?? "İsimsiz Harita",
+                        mapName ?? "Nameless Map",
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       ),
@@ -142,7 +142,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                   children: [
                     Icon(Icons.map_outlined, size: 48, color: Colors.grey),
                     SizedBox(height: 12),
-                    Text("GM bu oyuna henüz bir harita eklememiş.", style: TextStyle(color: Colors.grey)),
+                    Text("GM has not added a map to this game yet.", style: TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),

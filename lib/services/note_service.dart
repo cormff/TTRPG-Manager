@@ -53,4 +53,33 @@ class NoteService {
     final response = await http.delete(Uri.parse('$baseUrl/delete/$id'));
     return response.statusCode == 200;
   }
+
+  // YENİ: Spesifik bir oyuna ait kopyalanmış notları çeker
+  Future<List<Note>> fetchNotesByGameId(int gameId) async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/game/$gameId'));
+      if (response.statusCode == 200) {
+        List<dynamic> body = jsonDecode(response.body);
+        return body.map((dynamic item) => Note.fromJson(item)).toList();
+      }
+      return [];
+    } catch (e) {
+      print("Oyun notlarını çekerken hata: $e");
+      return [];
+    }
+  }
+
+  // YENİ: Havuzdaki bir notu belirtilen oyuna kopyalar
+  Future<Note?> cloneNoteToGame(int noteId, int gameId) async {
+    try {
+      final response = await http.post(Uri.parse('$baseUrl/clone/$noteId/to-game/$gameId'));
+      if (response.statusCode == 200) {
+        return Note.fromJson(jsonDecode(response.body));
+      }
+      return null;
+    } catch (e) {
+      print("Not kopyalanırken hata: $e");
+      return null;
+    }
+  }
 }

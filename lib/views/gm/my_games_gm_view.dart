@@ -40,7 +40,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('Oyunlarım'),
+        title: const Text('My Games'),
       ),
       body: gamesProvider.isLoading
           ? Center(child: CircularProgressIndicator(color: theme.primaryColor))
@@ -91,7 +91,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                game.description.isEmpty ? 'Açıklama yok...' : game.description,
+                game.description.isEmpty ? 'No description...' : game.description,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium,
@@ -102,7 +102,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   Icon(Icons.people, size: 14, color: theme.textTheme.bodyMedium?.color),
                   const SizedBox(width: 4),
                   Text(
-                    "${game.maxPlayers} Oyuncu",
+                    "${game.maxPlayers} Players",
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                   const SizedBox(width: 12),
@@ -113,7 +113,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    game.isPublic ? 'Herkese Açık' : 'Özel',
+                    game.isPublic ? 'Public' : 'Private',
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                 ],
@@ -146,7 +146,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           Icon(Icons.map_outlined, size: 80, color: theme.hintColor),
           const SizedBox(height: 16),
           Text(
-            "Henüz bir dünya oluşturmadınız.",
+            "No games have been created yet.",
             style: theme.textTheme.bodyLarge,
           ),
         ],
