@@ -212,7 +212,17 @@ class _JoinGameViewState extends State<JoinGameView> {
                                   ? null
                                   : () => _handleJoinGame(game.id!),
                               style: ElevatedButton.styleFrom(
+                                // Aktif olduğunda (Oyuna Katıl) görünecek renk
                                 backgroundColor: theme.primaryColor.withOpacity(0.8),
+
+                                // ÇÖZÜM BURASI: Tıklanabilir olmadığında (null iken) alacağı renkler
+                                disabledBackgroundColor: isMyCreatedGame ? Colors.black26 :
+                                isAlreadyJoined ? Colors.deepPurple :
+                                Colors.grey.withOpacity(0.5), // "Oda Dolu" durumu için
+
+                                // Devre dışı kalsa bile yazının beyaz ve okunaklı kalmasını sağlar
+                                disabledForegroundColor: Colors.white,
+
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
                               child: Text(
