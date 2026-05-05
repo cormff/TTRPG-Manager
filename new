@@ -1,0 +1,102 @@
+multi_replace_file_content(
+    absolutePath="C:/Users/buyuk/StudioProjects/ttrpg-manager/lib/views/rulebook/shared/dynamic_rule_list.dart",
+    replacementChunks=[
+        {
+            "startLine": 23,
+            "endLine": 34,
+            "targetContent": """  String? _getRuleImageUrl(String name) {
+    final categoryTitle = widget.title.toLowerCase().trim();
+    final itemName = name.trim().toLowerCase().replaceAll('-', '');
+
+    if (categoryTitle.contains("race")) {
+      return 'assets/images/races/$itemName.png';
+    }
+
+    if (categoryTitle.contains("class")) {
+      return 'assets/images/classes/$itemName.png';
+    }
+
+    return null;
+  }""",
+            "replacementContent": """  String? _getRuleImageUrl(String name) {
+    final lowerName = name.toLowerCase();
+    // Genel başlıklar veya açıklama içeren alt başlıklar için resim arama
+    if (lowerName.contains('traits') || lowerName.contains('features') || lowerName.contains('overview')) return null;
+
+    final categoryTitle = widget.title.toLowerCase().trim();
+    final itemName = name.trim().toLowerCase().replaceAll('-', '').replaceAll(' ', '');
+
+    if (categoryTitle.contains("race")) {
+      return 'assets/images/races/$itemName.png';
+    }
+
+    if (categoryTitle.contains("class")) {
+      return 'assets/images/classes/$itemName.png';
+    }
+
+    return null;
+  }"""
+        },
+        {
+            "startLine": 74,
+            "endLine": 80,
+            "targetContent": """        categories.add(RuleCategory(
+          title: keyName,
+          icon: isGeneral ? Icons.auto_stories : (widget.title == "Spells" ? Icons.auto_awesome : Icons.person_outline),
+          items: items,
+          isGeneralInfo: isGeneral,
+          imageUrl: _getRuleImageUrl(keyName),
+        ));""",
+            "replacementContent": """        categories.add(RuleCategory(
+          title: keyName,
+          icon: isGeneral ? Icons.auto_stories : (widget.title == "Spells" ? Icons.auto_awesome : Icons.person_outline),
+          items: items,
+          isGeneralInfo: isGeneral,
+          imageUrl: isGeneral ? null : _getRuleImageUrl(keyName),
+        ));"""
+        },
+        {
+            "startLine": 101,
+            "endLine": 107,
+            "targetContent": """    if (value is Map && !value.containsKey('table') && name.toLowerCase() != 'description') {
+      value.forEach((subName, subValue) {
+        _processTrait(items, subName, subValue, parentLevel: currentLevel);
+      });
+    } else {
+      _addRuleItem(items, name, value, level: currentLevel);
+    }""",
+            "replacementContent": """    // Eğer değer bir Map ise ve içinde 'description' veya 'table' varsa, bu bir yaprak öğedir (Büyü veya Eşya gibi), daha derine inme.
+    bool isLeafObject = value is Map && (value.containsKey('description') || value.containsKey('table'));
+
+    if (value is Map && !isLeafObject && name.toLowerCase() != 'description') {
+      value.forEach((subName, subValue) {
+        _processTrait(items, subName, subValue, parentLevel: currentLevel);
+      });
+    } else {
+      _addRuleItem(items, name, value, level: currentLevel);
+    }"""
+        },
+        {
+            "startLine": 141,
+            "endLine": 147,
+            "targetContent": """          int rowCount = (table[columns[0]] as List).length;
+          for (int i = 0; i < rowCount; i++) {
+            List<String> rowValues = [];
+            for (var col in columns) {
+              rowValues.add("${table[col][i]}");
+            }
+            result += "• ${rowValues.join(' | ')}\\n";
+          }""",
+            "replacementContent": """          int rowCount = (table[columns[0]] as List).length;
+          for (int i = 0; i < rowCount; i++) {
+            List<String> rowValues = [];
+            for (var col in columns) {
+              final colData = table[col] as List;
+              // Sütun uzunlukları farklı olsa bile güvenli bir şekilde oku
+              rowValues.add(i < colData.length ? "${colData[i]}" : "-");
+            }
+            result += "• ${rowValues.join(' | ')}\\n";
+          }"""
+        }
+    ]
+)
