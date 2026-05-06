@@ -13,6 +13,7 @@ class CharactersView extends StatefulWidget {
   State<CharactersView> createState() => _CharactersViewState();
 }
 
+
 class _CharactersViewState extends State<CharactersView> {
   static const List<String> availableAvatars = [
     'assets/images/avatars/human_fighter.png',
