@@ -260,6 +260,16 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
       }
 
       String result = "";
+      // Eğer description varsa önce onu bas (Spells vb. için)
+      if (value.containsKey('description')) {
+        final desc = value['description'];
+        if (desc is String) {
+          result += "$indent$desc\n\n";
+        } else {
+          result += _parseTraitValue(desc, depth: depth) + "\n\n";
+        }
+      }
+
       // SADECE content varsa önce onu bas.
       if (value.containsKey('content')) {
         result += _parseTraitValue(value['content'], depth: depth) + "\n\n";
