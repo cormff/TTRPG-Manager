@@ -1,249 +1,94 @@
 {
     "Sınıflar": {
         "Sınıf Özellikleri": {
-            "açıklama": "Her sınıfın açıklaması, o sınıfın üyelerinde ortak olan özellikleri içerir. Çoğu sınıfın özellikleri arasında aşağıdaki girdiler yer alır.[cite: 1]",
-            "Vuruş Puanları": "Sınıfınız Vuruş Zarlarınızı ve başlangıç vuruş puanlarınızı belirler. Vuruş puanlarınız bilincinizi kaybetmeden önce ne kadar hasar alabileceğinizi belirler.[cite: 1]",
-            "Yeterlilikler": "Sınıfınız sayesinde karakteriniz belirli zırh, silah, alet, yetenek ve kurtarma atışlarında yeterlilik kazanır.[cite: 1]",
-            "Ekipman": "Sınıfınız silahlar, zırhlar ve diğer macera teçhizatları dahil olmak üzere başlangıç ekipmanı sağlar.[cite: 1]"
+            "açıklama": "Her sınıfın açıklaması, o sınıfın üyelerinde ortak olan özellikleri içerir. Çoğu sınıfın özellikleri arasında aşağıdaki girdiler yer alır.",
+            "Vuruş Puanları": "Sınıfınız Vuruş Zarlarınızı ve başlangıç vuruş puanlarınızı belirler. Vuruş puanlarınız bilincinizi kaybetmeden önce ne kadar hasar alabileceğinizi belirler.",
+            "Yeterlilikler": "Sınıfınız sayesinde karakteriniz belirli zırh, silah, alet, yetenek ve kurtarma atışlarında yeterlilik kazanır.",
+            "Ekipman": "Sınıfınız silahlar, zırhlar ve diğer macera teçhizatları dahil olmak üzere başlangıç ekipmanı sağlar."
         },
         "Barbar": {
             "Barbar Özellikleri": {
-                "açıklama": "Savaş öfkesine kapılabilen ilkel bir geçmişe sahip vahşi bir savaşçı.[cite: 1]",
-                "Vuruş Puanları": "Her barbar seviyesi için 1d12. 1. seviyede 12 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Güç, Dayanıklılık.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir büyük balta veya (b) herhangi bir askeri yakın dövüş silahı; (a) iki el baltası veya (b) herhangi bir basit silah; Bir kaşif çantası ve dört cirit.[cite: 1]",
+                "açıklama": "Savaş öfkesine kapılabilen ilkel bir geçmişe sahip vahşi bir savaşçı.",
+                "Vuruş Puanları": "Her barbar seviyesi için 1d12. 1. seviyede 12 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Güç, Dayanıklılık.",
+                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir büyük balta veya (b) herhangi bir askeri yakın dövüş silahı; (a) iki el baltası veya (b) herhangi bir basit silah; Bir kaşif çantası ve dört cirit.",
                 "Sınıf Özellikleri": {
                     "Seviye 1": {
-                        "Öfke": "Savaşta ilkel bir vahşetle savaşırsınız. Sıranız geldiğinde bonus eylem olarak öfkeye girebilirsiniz. Öfkeliyken Güç kontrolleri ve kurtarmalarında avantaj, yakın dövüş silahı saldırılarında bonus hasar ve ezici, delici ve kesici hasarlara karşı direnç kazanırsınız.[cite: 1]",
-                        "Zırhsız Savunma": "Zırh giymediğinizde Zırh Sınıfınız 10 + Çeviklik değiştiriciniz + Dayanıklılık değiştiricinize eşittir. Kalkan kullanırken de bu avantajdan yararlanabilirsiniz.[cite: 1]"
+                        "Öfke": "Savaşta ilkel bir vahşetle savaşırsınız. Sıranız geldiğinde bonus eylem olarak öfkeye girebilirsiniz. Öfkeliyken Güç kontrolleri ve kurtarmalarında avantaj, yakın dövüş silahı saldırılarında bonus hasar ve ezici, delici ve kesici hasarlara karşı direnç kazanırsınız.",
+                        "Zırhsız Savunma": "Zırh giymediğinizde Zırh Sınıfınız 10 + Çeviklik değiştiriciniz + Dayanıklılık değiştiricinize eşittir. Kalkan kullanırken de bu avantajdan yararlanabilirsiniz."
                     },
                     "Seviye 2": {
-                        "Pervasız Saldırı": "2. seviyeden itibaren, şiddetli bir çaresizlikle saldırmak için tüm savunma endişelerinizi bir kenara bırakabilirsiniz. Sıranızdaki ilk saldırınızı yaparken pervasızca saldırmaya karar verebilirsiniz. Bunu yapmak bu tur boyunca Güç kullanan yakın dövüş silahı saldırı zarlarında size avantaj sağlar, ancak bir sonraki turunuza kadar size karşı yapılan saldırı zarları avantajlı olur.[cite: 1]",
-                        "Tehlike Hissi": "2. seviyede, yakındaki şeylerin olması gerektiği gibi olmadığına dair olağanüstü bir his kazanırsınız, bu da tehlikeden kaçarken size avantaj sağlar. Tuzaklar ve büyüler gibi görebildiğiniz etkilere karşı Çeviklik kurtarma atışlarında avantajınız vardır.[cite: 1]"
+                        "Pervasız Saldırı": "2. seviyeden itibaren, şiddetli bir çaresizlikle saldırmak için tüm savunma endişelerinizi bir kenara bırakabilirsiniz. Sıranızdaki ilk saldırınızı yaparken pervasızca saldırmaya karar verebilirsiniz. Bunu yapmak bu tur boyunca Güç kullanan yakın dövüş silahı saldırı zarlarında size avantaj sağlar, ancak bir sonraki turunuza kadar size karşı yapılan saldırı zarları avantajlı olur.",
+                        "Tehlike Hissi": "2. seviyede, yakındaki şeylerin olması gerektiği gibi olmadığına dair olağanüstü bir his kazanırsınız, bu da tehlikeden kaçarken size avantaj sağlar. Tuzaklar ve büyüler gibi görebildiğiniz etkilere karşı Çeviklik kurtarma atışlarında avantajınız vardır."
                     },
                     "Seviye 3": {
-                        "İlkel Yol": "3. seviyede, Vahşi Savaşçı Yolu veya Totem Savaşçısı Yolu gibi öfkenizin doğasını şekillendiren bir yol seçersiniz. Seçiminiz size 3. seviyede ve ardından 6., 10. ve 14. seviyelerde özellikler kazandırır.[cite: 1]"
+                        "İlkel Yol": "3. seviyede, Vahşi Savaşçı Yolu veya Totem Savaşçısı Yolu gibi öfkenizin doğasını şekillendiren bir yol seçersiniz. Seçiminiz size 3. seviyede ve ardından 6., 10. ve 14. seviyelerde özellikler kazandırır."
                     }
                 }
             }
         },
         "Ozan": {
             "Ozan Özellikleri": {
-                "açıklama": "Gücü yaratılışın müziğini yankılayan ilham verici bir büyücü.[cite: 1]",
-                "Vuruş Puanları": "Her ozan seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh. Basit silahlar, el arbaletleri, uzun kılıçlar, meçler, kısa kılıçlar. Seçtiğiniz üç müzik aleti. Kurtarma atışları: Çeviklik, Karizma.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir meç, (b) bir uzun kılıç veya (c) herhangi bir basit silah; (a) bir diplomat çantası veya (b) bir şovmen çantası; (a) bir lavta veya (b) herhangi bir diğer müzik aleti; Deri zırh ve bir hançer.[cite: 1]",
+                "açıklama": "Gücü yaratılışın müziğini yankılayan ilham verici bir büyücü.",
+                "Vuruş Puanları": "Her ozan seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh. Basit silahlar, el arbaletleri, uzun kılıçlar, meçler, kısa kılıçlar. Seçtiğiniz üç müzik aleti. Kurtarma atışları: Çeviklik, Karizma.",
+                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir meç, (b) bir uzun kılıç veya (c) herhangi bir basit silah; (a) bir diplomat çantası veya (b) bir şovmen çantası; (a) bir lavta veya (b) herhangi bir diğer müzik aleti; Deri zırh ve bir hançer.",
                 "Sınıf Özellikleri": {
                     "Seviye 1": {
-                        "Büyü Yapma": "Gerçekliğin dokusunu istekleriniz ve müziğinizle uyum içinde çözmeyi ve yeniden şekillendirmeyi öğrendiniz. Ozan büyüleriniz için büyü yapma yeteneğiniz Karizma'dır.[cite: 1]",
-                        "Ozan İlhamı": "Etkileyici sözler veya müzikle başkalarına ilham verebilirsiniz. Bunu yapmak için, sıranız geldiğinde bonus eylem kullanarak 60 fit (18 metre) yakınınızda sizi duyabilen kendinizden başka bir yaratık seçersiniz. Bu yaratık bir Ozan İlhamı zarı, yani bir d6 kazanır.[cite: 1]"
+                        "Büyü Yapma": "Gerçekliğin dokusunu istekleriniz ve müziğinizle uyum içinde çözmeyi ve yeniden şekillendirmeyi öğrendiniz. Ozan büyüleriniz için büyü yapma yeteneğiniz Karizma'dır.",
+                        "Ozan İlhamı": "Etkileyici sözler veya müzikle başkalarına ilham verebilirsiniz. Bunu yapmak için, sıranız geldiğinde bonus eylem kullanarak 60 fit (18 metre) yakınınızda sizi duyabilen kendinizden başka bir yaratık seçersiniz. Bu yaratık bir Ozan İlhamı zarı, yani bir d6 kazanır."
                     },
                     "Seviye 2": {
-                        "On Parmağında On Marifet": "2. seviyeden itibaren, henüz yeterlilik bonusunuzu içermeyen herhangi bir yetenek kontrolüne, yeterlilik bonusunuzun yarısını (aşağı yuvarlanmış olarak) ekleyebilirsiniz.[cite: 1]",
-                        "Dinlenme Şarkısı": "2. seviyeden başlayarak, kısa bir dinlenme sırasında yaralı müttefiklerinizi canlandırmaya yardımcı olmak için rahatlatıcı müzik veya hitabet kullanabilirsiniz. Siz veya performansınızı duyabilen herhangi bir dost yaratık, kısa dinlenmenin sonunda bir veya daha fazla Vuruş Zarı harcayarak vuruş puanı geri kazanırsa, bu yaratıkların her biri fazladan 1d6 vuruş puanı kazanır.[cite: 1]"
+                        "On Parmağında On Marifet": "2. seviyeden itibaren, henüz yeterlilik bonusunuzu içermeyen herhangi bir yetenek kontrolüne, yeterlilik bonusunuzun yarısını (aşağı yuvarlanmış olarak) ekleyebilirsiniz.",
+                        "Dinlenme Şarkısı": "2. seviyeden başlayarak, kısa bir dinlenme sırasında yaralı müttefiklerinizi canlandırmaya yardımcı olmak için rahatlatıcı müzik veya hitabet kullanabilirsiniz. Siz veya performansınızı duyabilen herhangi bir dost yaratık, kısa dinlenmenin sonunda bir veya daha fazla Vuruş Zarı harcayarak vuruş puanı geri kazanırsa, bu yaratıkların her biri fazladan 1d6 vuruş puanı kazanır."
                     },
                     "Seviye 3": {
-                        "Ozan Koleji": "3. seviyede, İrfan Koleji veya Cesaret Koleji gibi seçtiğiniz bir ozan kolejinin ileri tekniklerine dalarsınız. Seçiminiz size 3. seviyede ve ardından 6. ve 14. seviyelerde özellikler kazandırır.[cite: 1]"
+                        "Ozan Koleji": "3. seviyede, İrfan Koleji veya Cesaret Koleji gibi seçtiğiniz bir ozan kolejinin ileri tekniklerine dalarsınız. Seçiminiz size 3. seviyede ve ardından 6. ve 14. seviyelerde özellikler kazandırır."
                     }
                 }
             }
         },
         "Ruhban": {
             "Ruhban Özellikleri": {
-                "açıklama": "Ruhbanlar, ölümlü dünya ile tanrıların uzak boyutları arasındaki aracılardır. Hizmet ettikleri tanrılar kadar çeşitli olan ruhbanlar, tanrılarının eserlerini somutlaştırmaya çalışırlar.[cite: 1]",
-                "Vuruş Puanları": "Her ruhban seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Tüm basit silahlar. Kurtarma atışları: Bilgelik, Karizma.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir gürz veya (b) bir savaş çekici (yeterliliğiniz varsa); (a) pul zırh, (b) deri zırh veya (c) zincir zırh (yeterliliğiniz varsa); (a) bir hafif arbalet ve 20 ok veya (b) herhangi bir basit silah; (a) bir rahip çantası veya (b) bir kaşif çantası; Bir kalkan ve kutsal bir sembol.[cite: 1]",
+                "açıklama": "Ruhbanlar, ölümlü dünya ile tanrıların uzak boyutları arasındaki aracılardır. Hizmet ettikleri tanrılar kadar çeşitli olan ruhbanlar, tanrılarının eserlerini somutlaştırmaya çalışırlar.",
+                "Vuruş Puanları": "Her ruhban seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Tüm basit silahlar. Kurtarma atışları: Bilgelik, Karizma.",
+                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir gürz veya (b) bir savaş çekici (yeterliliğiniz varsa); (a) pul zırh, (b) deri zırh veya (c) zincir zırh (yeterliliğiniz varsa); (a) bir hafif arbalet ve 20 ok veya (b) herhangi bir basit silah; (a) bir rahip çantası veya (b) bir kaşif çantası; Bir kalkan ve kutsal bir sembol.",
                 "Sınıf Özellikleri": {
                     "Seviye 1": {
-                        "Büyü Yapma": "İlahi gücün bir kanalı olarak ruhban büyüleri yapabilirsiniz. Ruhban büyü listesinden seçerek yapabileceğiniz ruhban büyüleri listesini hazırlarsınız. Büyü yapma yeteneğiniz Bilgelik'tir.[cite: 1]",
-                        "İlahi Alan": "Tanrınızla ilgili Hayat, Işık veya Savaş gibi bir alan seçin. Seçiminiz 1. seviyede size alan büyüleri ve diğer özellikler kazandırır. Ayrıca 2. seviyede İlahi Yönlendirme özelliğini kazandığınızda onu kullanmanın ek yollarını ve 6., 8. ve 17. seviyelerde ek avantajlar sağlar.[cite: 1]"
+                        "Büyü Yapma": "İlahi gücün bir kanalı olarak ruhban büyüleri yapabilirsiniz. Ruhban büyü listesinden seçerek yapabileceğiniz ruhban büyüleri listesini hazırlarsınız. Büyü yapma yeteneğiniz Bilgelik'tir.",
+                        "İlahi Alan": "Tanrınızla ilgili Hayat, Işık veya Savaş gibi bir alan seçin. Seçiminiz 1. seviyede size alan büyüleri ve diğer özellikler kazandırır. Ayrıca 2. seviyede İlahi Yönlendirme özelliğini kazandığınızda onu kullanmanın ek yollarını ve 6., 8. ve 17. seviyelerde ek avantajlar sağlar."
                     },
                     "Seviye 2": {
-                        "İlahi Yönlendirme": "2. seviyede, doğrudan tanrınızdan gelen ilahi enerjiyi yönlendirme ve bu enerjiyi büyülü etkileri beslemek için kullanma yeteneği kazanırsınız. İki etki ile başlarsınız: Ölümsüzü Uzaklaştır ve alanınız tarafından belirlenen bir etki.[cite: 1]"
+                        "İlahi Yönlendirme": "2. seviyede, doğrudan tanrınızdan gelen ilahi enerjiyi yönlendirme ve bu enerjiyi büyülü etkileri beslemek için kullanma yeteneği kazanırsınız. İki etki ile başlarsınız: Ölümsüzü Uzaklaştır ve alanınız tarafından belirlenen bir etki."
                     }
                 }
             }
         },
         "Druid": {
             "Druid Özellikleri": {
-                "açıklama": "Doğanın güçlerini kullanan ve hayvan formlarına bürünen Eski İnanç'ın bir rahibi.[cite: 1]",
-                "Vuruş Puanları": "Her druid seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar (druidler metalden yapılmış zırh giymez veya kalkan kullanmaz). Sopalar, hançerler, dartlar, ciritler, gürzler, asalar, palalar, oraklar, sapanlar, mızraklar. Şifalı bitki kiti. Kurtarma atışları: Zeka, Bilgelik.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) tahta bir kalkan veya (b) herhangi bir basit silah; (a) bir pala veya (b) herhangi bir basit yakın dövüş silahı; Deri zırh, bir kaşif çantası ve bir druid odağı.[cite: 1]",
+                "açıklama": "Doğanın güçlerini kullanan ve hayvan formlarına bürünen Eski İnanç'ın bir rahibi.",
+                "Vuruş Puanları": "Her druid seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar (druidler metalden yapılmış zırh giymez veya kalkan kullanmaz). Sopalar, hançerler, dartlar, ciritler, gürzler, asalar, palalar, oraklar, sapanlar, mızraklar. Şifalı bitki kiti. Kurtarma atışları: Zeka, Bilgelik.",
+                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) tahta bir kalkan veya (b) herhangi bir basit silah; (a) bir pala veya (b) herhangi bir basit yakın dövüş silahı; Deri zırh, bir kaşif çantası ve bir druid odağı.",
                 "Sınıf Özellikleri": {
                     "Seviye 1": {
-                        "Druid Dili": "Druidlerin gizli dili olan Druid dilini biliyorsunuz. Dili konuşabilir ve gizli mesajlar bırakmak için kullanabilirsiniz.[cite: 1]",
-                        "Büyü Yapma": "Doğanın ilahi özünden yararlanarak, bu özü kendi isteğinize göre şekillendirmek için büyüler yapabilirsiniz. Büyü yapma yeteneğiniz Bilgelik'tir.[cite: 1]"
+                        "Druid Dili": "Druidlerin gizli dili olan Druid dilini biliyorsunuz. Dili konuşabilir ve gizli mesajlar bırakmak için kullanabilirsiniz.",
+                        "Büyü Yapma": "Doğanın ilahi özünden yararlanarak, bu özü kendi isteğinize göre şekillendirmek için büyüler yapabilirsiniz. Büyü yapma yeteneğiniz Bilgelik'tir."
                     },
                     "Seviye 2": {
-                        "Vahşi Şekil": "2. seviyeden itibaren, daha önce gördüğünüz bir canavarın şekline sihirli bir şekilde bürünmek için eyleminizi kullanabilirsiniz. Bu özelliği iki kez kullanabilirsiniz. Kısa veya uzun bir dinlenmeyi bitirdiğinizde harcanan kullanımları geri kazanırsınız.[cite: 1]",
-                        "Druid Çemberi": "2. seviyede, Kara Çemberi veya Ay Çemberi gibi bir druid çemberiyle özdeşleşmeyi seçersiniz. Seçiminiz size 2. seviyede ve ardından 6., 10. ve 14. seviyede özellikler kazandırır.[cite: 1]"
+                        "Vahşi Şekil": "2. seviyeden itibaren, daha önce gördüğünüz bir canavarın şekline sihirli bir şekilde bürünmek için eyleminizi kullanabilirsiniz. Bu özelliği iki kez kullanabilirsiniz. Kısa veya uzun bir dinlenmeyi bitirdiğinizde harcanan kullanımları geri kazanırsınız.",
+                        "Druid Çemberi": "2. seviyede, Kara Çemberi veya Ay Çemberi gibi bir druid çemberiyle özdeşleşmeyi seçersiniz. Seçiminiz size 2. seviyede ve ardından 6., 10. ve 14. seviyede özellikler kazandırır."
                     }
                 }
             }
         },
         "Savaşçı": {
             "Savaşçı Özellikleri": {
-                "açıklama": "Savaşçılar, silahlar ve zırhlar konusunda eşsiz bir ustalığa ve savaş becerileri konusunda kapsamlı bir bilgiye sahiptir. Onlar hem ölümü dağıtarak hem de gözlerinin içine meydan okurcasına bakarak ölümle yakından tanışmışlardır.[cite: 1]",
-                "Vuruş Puanları": "Her savaşçı seviyesi için 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Tüm zırhlar, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Güç, Dayanıklılık.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) zincir zırh veya (b) deri zırh, uzun yay ve 20 ok; (a) bir askeri silah ve bir kalkan veya (b) iki askeri silah; (a) bir hafif arbalet ve 20 ok veya (b) iki el baltası; (a) bir zindancı çantası veya (b) bir kaşif çantası.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Dövüş Stili": "Uzmanlık alanınız olarak belirli bir dövüş tarzını benimsersiniz. Okçuluk, Savunma, Düello veya Ağır Silah Dövüşü gibi sınıfınız için mevcut olan seçeneklerden birini seçin.[cite: 1]",
-                        "İkinci Rüzgar": "Kendinizi zarardan korumak için yararlanabileceğiniz sınırlı bir dayanıklılık kuyunuz var. Sıranız geldiğinde, 1d10 + savaşçı seviyenize eşit vuruş puanı geri kazanmak için bir bonus eylem kullanabilirsiniz.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Eylem Dalgası": "2. seviyeden itibaren, normal sınırlarınızın ötesine geçebilirsiniz. Sıranız geldiğinde, normal eyleminize ve olası bonus eyleminize ek olarak bir eylem daha alabilirsiniz.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Askeri Arketip": "3. seviyede, Şampiyon veya Savaş Ustası gibi dövüş stillerinizde ve tekniklerinizde taklit etmeye çalıştığınız bir arketip seçersiniz. Seçtiğiniz arketip size 3. seviyede ve ardından 7., 10., 15. ve 18. seviyelerde özellikler kazandırır.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Keşiş": {
-            "Keşiş Özellikleri": {
-                "açıklama": "Fiziksel ve ruhsal mükemmellik arayışında bedenin gücünü dizginleyen bir dövüş sanatları ustası.[cite: 1]",
-                "Vuruş Puanları": "Her keşiş seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Basit silahlar, kısa kılıçlar. Bir tür zanaatkar aleti veya bir müzik aleti seçin. Kurtarma atışları: Güç, Çeviklik.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir kısa kılıç veya (b) herhangi bir basit silah; (a) bir zindancı çantası veya (b) bir kaşif çantası; 10 dart.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Zırhsız Savunma": "1. seviyeden itibaren, zırh giymediğiniz ve kalkan taşımadığınız sürece ZS'niz 10 + Çeviklik değiştiriciniz + Bilgelik değiştiricinize eşittir.[cite: 1]",
-                        "Dövüş Sanatları": "1. seviyede dövüş sanatları uygulamanız size silahsız saldırılar ve keşiş silahları kullanan savaş stillerinde ustalık kazandırır. Silahsız saldırınızın veya keşiş silahınızın normal hasarı yerine 1d4 atabilir ve bonus eylem olarak silahsız bir saldırı yapabilirsiniz.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Ki": "2. seviyeden itibaren eğitiminiz, ki'nin mistik enerjisinden yararlanmanızı sağlar. Bu enerjiye erişiminiz bir dizi ki puanı ile temsil edilir. Bu puanları çeşitli ki özelliklerini beslemek için harcayabilirsiniz: Darbe Fırtınası, Sabırlı Savunma ve Rüzgarın Adımı.[cite: 1]",
-                        "Zırhsız Hareket": "2. seviyeden itibaren zırh giymediğinizde veya kalkan taşımadığınızda hızınız 10 fit (3 metre) artar.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Manastır Geleneği": "3. seviyeye ulaştığınızda, Açık El Yolu gibi bir manastır geleneğine kendinizi adarsınız. Geleneğiniz size 3. seviyede ve ardından 6., 11. ve 17. seviyede özellikler kazandırır.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Paladin": {
-            "Paladin Özellikleri": {
-                "açıklama": "Kutsal bir yemine bağlı kutsal bir savaşçı.[cite: 1]",
-                "Vuruş Puanları": "Her paladin seviyesi için 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Tüm zırhlar, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Bilgelik, Karizma.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir askeri silah ve bir kalkan veya (b) iki askeri silah; (a) beş cirit veya (b) herhangi bir basit yakın dövüş silahı; (a) bir rahip çantası veya (b) bir kaşif çantası; Zincir zırh ve kutsal bir sembol.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "İlahi His": "Güçlü bir kötülüğün varlığı duyularınızda iğrenç bir koku gibi belirir ve güçlü bir iyilik kulaklarınızda cennet müziği gibi çınlar. Bir eylem olarak, bu tür güçleri tespit etmek için farkındalığınızı açabilirsiniz.[cite: 1]",
-                        "Ellerle Şifa": "Kutsanmış dokunuşunuz yaraları iyileştirebilir. Uzun bir dinlenme yaptığınızda yenilenen bir iyileştirme gücü havuzunuz vardır. Bu havuzla paladin seviyeniz x 5'e eşit toplam vuruş puanını geri kazandırabilirsiniz.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Dövüş Stili": "2. seviyede, Savunma veya Düello gibi uzmanlığınız olarak bir dövüş tarzı benimsersiniz.[cite: 1]",
-                        "Büyü Yapma": "2. seviyeye kadar, bir ruhbanın yaptığı gibi büyü yapmak için meditasyon ve dua yoluyla ilahi büyüden yararlanmayı öğrendiniz. Büyü yapma yeteneğiniz Karizma'dır.[cite: 1]",
-                        "İlahi Çarpma": "2. seviyeden itibaren, bir yakın dövüş silahıyla bir yaratığa vurduğunuzda, hedefe silahın hasarına ek olarak parlak hasar vermek için bir büyü yuvası harcayabilirsiniz.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Kutsal Yemin": "3. seviyeye ulaştığınızda, sizi sonsuza dek bir paladin olarak bağlayan yemini, örneğin Bağlılık Yemini'ni edersiniz. Seçiminiz size 3. seviyede ve ardından 7., 15. ve 20. seviyelerde özellikler kazandırır.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Kolcu": {
-            "Kolcu Özellikleri": {
-                "açıklama": "Medeniyetin sınırlarında tehditlerle savaşan bir savaşçı.[cite: 1]",
-                "Vuruş Puanları": "Her kolcu seviyesi için 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Güç, Çeviklik.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) pul zırh veya (b) deri zırh; (a) iki kısa kılıç veya (b) iki basit yakın dövüş silahı; (a) bir zindancı çantası veya (b) bir kaşif çantası; Bir uzun yay ve 20 okluk bir sadak.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Favori Düşman": "1. seviyeden başlayarak belirli bir düşman türünü inceleme, izleme, avlama ve hatta onunla konuşma konusunda önemli bir deneyime sahipsiniz.[cite: 1]",
-                        "Doğal Kaşif": "Bir tür doğal çevreye özellikle aşinasınız ve bu tür bölgelerde seyahat etme ve hayatta kalma konusunda ustasınız.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Dövüş Stili": "2. seviyede, Okçuluk veya İki Silahlı Dövüş gibi uzmanlık alanınız olarak belirli bir dövüş stili benimsersiniz.[cite: 1]",
-                        "Büyü Yapma": "2. seviyeye ulaştığınızda, tıpkı bir druidin yaptığı gibi büyü yapmak için doğanın büyülü özünü kullanmayı öğrendiniz. Büyü yapma yeteneğiniz Bilgelik'tir.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Kolcu Arketipi": "3. seviyede, taklit etmeye çabaladığınız bir arketip seçersiniz: Avcı veya Canavar Efendisi. Seçiminiz size 3. seviyede ve ardından 7., 11. ve 15. seviyede özellikler kazandırır.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Düzenbaz": {
-            "Düzenbaz Özellikleri": {
-                "açıklama": "Düzenbazlar herhangi bir durumda üstünlük sağlamak için becerilerine, gizliliğe ve düşmanlarının zayıflıklarına güvenirler. Hemen hemen her sorunun çözümünü bulma konusunda yetenekleri vardır.[cite: 1]",
-                "Vuruş Puanları": "Her düzenbaz seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh. Basit silahlar, el arbaletleri, uzun kılıçlar, meçler, kısa kılıçlar. Hırsız aletleri. Kurtarma atışları: Çeviklik, Zeka.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir meç veya (b) bir kısa kılıç; (a) bir kısa yay ve 20 okluk sadak veya (b) bir kısa kılıç; (a) bir hırsız çantası, (b) bir zindancı çantası veya (c) bir kaşif çantası; Deri zırh, iki hançer ve hırsız aletleri.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Uzmanlık": "1. seviyede, iki yetenek yeterliliğinizi veya bir yetenek yeterliliğinizi ve hırsız aletleriyle olan yeterliliğinizi seçin. Seçilen yeterliliklerden herhangi birini kullanan herhangi bir yetenek kontrolü yaptığınızda yeterlilik bonusunuz iki katına çıkar.[cite: 1]",
-                        "Sinsi Saldırı": "1. seviyeden başlayarak sinsice saldırmayı ve düşmanın dikkat dağınıklığından faydalanmayı bilirsiniz. Saldırı zarında avantajınız varsa, bir saldırıyla vurduğunuz bir yaratığa her turda bir kez fazladan 1d6 hasar verebilirsiniz.[cite: 1]",
-                        "Hırsız Argosu": "Düzenbaz eğitiminiz sırasında, normal görünen bir konuşmada mesajları gizlemenizi sağlayan gizli bir lehçe, jargon ve kod karışımı olan hırsız argosunu öğrendiniz.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Kurnaz Eylem": "2. seviyeden itibaren, hızlı düşünmeniz ve çevikliğiniz hızlı hareket etmenizi ve eyleme geçmenizi sağlar. Savaşta her turunuzda bir bonus eylem alabilirsiniz. Bu eylem yalnızca Atılım, Çözülme veya Saklanma eylemlerini gerçekleştirmek için kullanılabilir.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Düzenbaz Arketipi": "3. seviyede, Hırsız gibi düzenbaz yeteneklerinizi kullanırken örnek aldığınız bir arketip seçersiniz. Seçiminiz size 3. seviyede ve daha sonra 9., 13. ve 17. seviyede özellikler kazandırır.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Büyücü (Sorcerer)": {
-            "Büyücü Özellikleri": {
-                "açıklama": "Bir hediyeden veya kan bağından gelen içsel büyüden güç alan bir büyücü.[cite: 1]",
-                "Vuruş Puanları": "Her büyücü seviyesi için 1d6. 1. seviyede 6 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hançerler, dartlar, sapanlar, asalar, hafif arbaletler. Kurtarma atışları: Dayanıklılık, Karizma.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir hafif arbalet ve 20 ok veya (b) herhangi bir basit silah; (a) bir malzeme kesesi veya (b) bir gizemli odak; (a) bir zindancı çantası veya (b) bir kaşif çantası; İki hançer.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Büyü Yapma": "Geçmişinizdeki veya bir ebeveyninizin veya atanızın hayatındaki bir olay sizde silinmez bir iz bırakarak sizi gizemli büyüyle aşıladı. Büyü yapma yeteneğiniz Karizma'dır.[cite: 1]",
-                        "Büyücülük Kökeni": "Ejder Kanı veya Vahşi Büyü gibi doğuştan gelen büyülü gücünüzün kaynağını tanımlayan bir büyücülük kökeni seçin. Seçiminiz onu 1. seviyede seçtiğinizde ve yine 6., 14. ve 18. seviyelerde size özellikler kazandırır.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Büyü Pınarı": "2. seviyede kendi içinizdeki derin bir büyü pınarına dokunursunuz. Bu pınar, çeşitli büyülü etkiler yaratmanıza olanak tanıyan büyücülük puanları ile temsil edilir.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Metabüyü": "3. seviyede, büyülerinizi ihtiyaçlarınıza göre çarpıtma yeteneği kazanırsınız. Seçtiğiniz şu Metabüyü seçeneklerinden ikisini kazanırsınız: Dikkatli Büyü, Uzak Büyü, Güçlendirilmiş Büyü, Uzatılmış Büyü, Yükseltilmiş Büyü, Hızlandırılmış Büyü, İnce Büyü veya İkiz Büyü.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Warlock": {
-            "Warlock Özellikleri": {
-                "açıklama": "Farklı boyuttan bir varlıkla yapılan pazarlıktan elde edilen büyüyü kullanan kişi.[cite: 1]",
-                "Vuruş Puanları": "Her warlock seviyesi için 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hafif zırh. Basit silahlar. Kurtarma atışları: Bilgelik, Karizma.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir hafif arbalet ve 20 ok veya (b) herhangi bir basit silah; (a) bir bileşen kesesi veya (b) bir gizemli odak; (a) bir bilgin çantası veya (b) bir zindancı çantası; Deri zırh, herhangi bir basit silah ve iki hançer.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Dünya Dışı Patron": "1. seviyede, İblis, Baş Peri veya Yüce Eskilerden biri gibi seçtiğiniz dünya dışı bir varlıkla bir pazarlık yaptınız. Seçiminiz size 1. seviyede ve ardından 6., 10. ve 14. seviyede özellikler kazandırır.[cite: 1]",
-                        "Pakt Büyüsü": "Gizemli araştırmalarınız ve patronunuz tarafından size bahşedilen büyü, size büyüler konusunda yetenek kazandırdı. Büyü yapma yeteneğiniz Karizma'dır.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Tekinsiz Yakarışlar": "Okült irfan incelemenizde, sizi kalıcı bir büyülü yetenekle dolduran yasaklanmış bilginin parçaları olan tekinsiz yakarışları ortaya çıkardınız. 2. seviyede seçtiğiniz iki tekinsiz yakarış kazanırsınız.[cite: 1]"
-                    },
-                    "Seviye 3": {
-                        "Pakt Lütfu": "3. seviyede, sadık hizmetiniz için dünya dışı patronunuz size bir hediye bahşeder. Şu özelliklerden birini seçebilirsiniz: Zincir Paktı, Kılıç Paktı veya Cilt Paktı.[cite: 1]"
-                    }
-                }
-            }
-        },
-        "Büyücü (Wizard)": {
-            "Büyücü Özellikleri": {
-                "açıklama": "Büyücüler (Wizard), yaptıkları büyüler tarafından bir sınıf olarak tanımlanan ve birleştirilen yüce büyü kullanıcılarıdır. Kozmosa nüfuz eden büyünün ince örgüsünden yararlanan büyücüler patlayıcı ateş, elektrik arkı, ince aldatmaca ve kaba kuvvet zihin kontrolü büyüleri yaparlar.[cite: 1]",
-                "Vuruş Puanları": "Her büyücü seviyesi için 1d6. 1. seviyede 6 + Dayanıklılık değiştiriciniz.[cite: 1]",
-                "Yeterlilikler": "Hançerler, dartlar, sapanlar, asalar, hafif arbaletler. Kurtarma atışları: Zeka, Bilgelik.[cite: 1]",
-                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) bir asa veya (b) bir hançer; (a) bir bileşen kesesi veya (b) bir gizemli odak; (a) bir bilgin çantası veya (b) bir kaşif çantası; Bir büyü kitabı.[cite: 1]",
-                "Sınıf Özellikleri": {
-                    "Seviye 1": {
-                        "Büyü Yapma": "Gizemli büyünün bir öğrencisi olarak, gerçek gücünüzün ilk parıltılarını gösteren büyüleri içeren bir büyü kitabınız var. Büyücü büyüleriniz için büyü yapma yeteneğiniz Zeka'dır.[cite: 1]"
-                    },
-                    "Seviye 2": {
-                        "Gizemli İyileşme": "Büyü kitabınızı inceleyerek sihirli enerjinizin bir kısmını geri kazanmayı öğrendiniz. Kısa bir dinlenmeyi bitirdiğinizde günde bir kez, geri kazanmak için harcanmış büyü yuvalarını seçebilirsiniz. Büyü yuvalarının birleşik seviyesi, büyücü seviyenizin yarısına (yukarı yuvarlanmış) eşit veya bundan daha az olabilir.[cite: 1]",
-                        "Gizemli Gelenek": "2. seviyeye ulaştığınızda, Yaratım veya Koruma gibi sekiz okuldan biri aracılığıyla büyü pratiğinizi şekillendiren gizemli bir gelenek seçersiniz. Seçiminiz size 2. seviyede ve ardından 6., 10. ve 14. seviyelerde özellikler kazandırır.[cite: 1]"
-                    }
-                }
+                "açıklama": "Savaşçılar, silahlar ve zırhlar konusunda eşsiz bir ustalığa ve savaş becerileri konusunda kapsamlı bir bilgiye sahiptir. Onlar hem ölümü dağıtarak hem de gözlerinin içine meydan okurcasına bakarak ölümle yakından tanışmışlardır.",
+                "Vuruş Puanları": "Her savaşçı seviyesi için 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Tüm zırhlar, kalkanlar. Basit silahlar, askeri silahlar. Kurtarma atışları: Güç, Dayanıklılık.",
+                "Ekipman": "Şu ekipmanlarla başlarsınız: (a) zincir zırh veya (b) deri zırh, uzun yay ve 20 ok; (a) bir askeri silah ve bir kalkan veya (b) iki askeri"
             }
         }
-    }
-}
+    }}

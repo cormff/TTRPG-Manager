@@ -1,37 +1,37 @@
 {
     "Irklar": {
         "Irk Özellikleri": {
-            "açıklama": "Her ırkın açıklaması, o ırkın üyelerinde ortak olan ırksal özellikleri içerir. Çoğu ırkın özellikleri arasında aşağıdaki girdiler yer alır.[cite: 4]",
-            "Yetenek Skoru Artışı": "Her ırk, bir karakterin yetenek skorlarından bir veya birkaçını artırır.[cite: 4]",
-            "Yaş": "Yaş girdisi, ırkın bir üyesinin ne zaman yetişkin kabul edildiğini ve ırkın beklenen yaşam süresini belirtir...[cite: 4]",
-            "Hizalama": "Çoğu ırkın, bu girdide açıklanan belirli hizalamalara yönelik eğilimleri vardır...[cite: 4]",
-            "Boyut": "Çoğu ırkın karakterleri, kabaca 4 ila 8 fit boyundaki yaratıkları içeren Orta boyut kategorisindedir...[cite: 4]",
-            "Hız": "Hızınız, seyahat ederken ve savaşırken ne kadar uzağa hareket edebileceğinizi belirler.[cite: 4]",
-            "Diller": "Irkınız sayesinde karakteriniz belirli dilleri konuşabilir, okuyabilir ve yazabilir.[cite: 4]",
-            "Alt Irklar": "Bazı ırkların alt ırkları vardır. Bir alt ırkın üyeleri, alt ırkları için belirtilen özelliklere ek olarak ana ırkın özelliklerine de sahiptir...[cite: 4]"
+            "açıklama": "Her ırkın açıklaması, o ırkın üyelerinde ortak olan ırksal özellikleri içerir. Çoğu ırkın özellikleri arasında aşağıdaki girdiler yer alır.",
+            "Yetenek Skoru Artışı": "Her ırk, bir karakterin yetenek skorlarından bir veya birkaçını artırır.",
+            "Yaş": "Yaş girdisi, ırkın bir üyesinin ne zaman yetişkin kabul edildiğini ve ırkın beklenen yaşam süresini belirtir...",
+            "Hizalama": "Çoğu ırkın, bu girdide açıklanan belirli hizalamalara yönelik eğilimleri vardır...",
+            "Boyut": "Çoğu ırkın karakterleri, kabaca 4 ila 8 fit boyundaki yaratıkları içeren Orta boyut kategorisindedir...",
+            "Hız": "Hızınız, seyahat ederken ve savaşırken ne kadar uzağa hareket edebileceğinizi belirler.",
+            "Diller": "Irkınız sayesinde karakteriniz belirli dilleri konuşabilir, okuyabilir ve yazabilir.",
+            "Alt Irklar": "Bazı ırkların alt ırkları vardır. Bir alt ırkın üyeleri, alt ırkları için belirtilen özelliklere ek olarak ana ırkın özelliklerine de sahiptir..."
         },
         "Cüce": {
             "Cüce Özellikleri": {
-                "açıklama": "Cüce karakteriniz, cüce doğasının ayrılmaz bir parçası olan çeşitli doğuştan yeteneklere sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Dayanıklılık skorunuz 2 artar.[cite: 4]",
-                "Yaş": "Cüceler insanlarla aynı hızda olgunlaşır, ancak 50 yaşına ulaşana kadar genç kabul edilirler. Ortalama olarak yaklaşık 350 yıl yaşarlar.[cite: 4]",
-                "Hizalama": "Çoğu cüce düzenlidir ve iyi düzenlenmiş bir toplumun faydalarına sıkı sıkıya inanır. Ayrıca güçlü bir adil oyun duygusu ile iyiye eğilimlidirler...[cite: 4]",
-                "Boyut": "Cüceler 4 ila 5 fit arasında durur ve ortalama 150 libre ağırlığındadır. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 25 fittir. Ağır zırh giyildiğinde hızınız azalmaz.[cite: 4]",
+                "açıklama": "Cüce karakteriniz, cüce doğasının ayrılmaz bir parçası olan çeşitli doğuştan yeteneklere sahiptir.",
+                "Yetenek Skoru Artışı": "Dayanıklılık skorunuz 2 artar.",
+                "Yaş": "Cüceler insanlarla aynı hızda olgunlaşır, ancak 50 yaşına ulaşana kadar genç kabul edilirler. Ortalama olarak yaklaşık 350 yıl yaşarlar.",
+                "Hizalama": "Çoğu cüce düzenlidir ve iyi düzenlenmiş bir toplumun faydalarına sıkı sıkıya inanır. Ayrıca güçlü bir adil oyun duygusu ile iyiye eğilimlidirler...",
+                "Boyut": "Cüceler 4 ila 5 fit arasında durur ve ortalama 150 libre ağırlığındadır. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 25 fittir. Ağır zırh giyildiğinde hızınız azalmaz.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Yeraltı yaşamına alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz. 60 fit yakınınızdaki loş ışıkta sanki parlak ışıkmış gibi ve karanlıkta loş ışıkmış gibi görebilirsiniz...[cite: 4]",
-                    "Cüce Direnci": "Zehirlenmeye karşı kurtarma atışlarında avantajınız vardır ve zehir hasarına karşı direnciniz vardır.[cite: 4]",
-                    "Cüce Savaş Eğitimi": "Savaş baltası, el baltası, hafif çekiç ve savaş çekici ile yeterliliğiniz vardır.[cite: 4]",
-                    "Alet Yeterliliği": "Seçtiğiniz bir zanaatkar aleti ile yeterlilik kazanırsınız: demirci aletleri, bira üreticisi malzemeleri veya duvarcı aletleri.[cite: 4]",
-                    "Taş Ustalığı": "Taş işçiliğinin kökeni ile ilgili bir Zeka (Tarih) kontrolü yaptığınızda, Tarih yeteneğinde yeterli sayılırsınız ve kontrole normal yeterlilik bonusunuz yerine yeterlilik bonusunuzun iki katını eklersiniz.[cite: 4]"
+                    "Karanlık Görüşü": "Yeraltı yaşamına alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz. 60 fit yakınınızdaki loş ışıkta sanki parlak ışıkmış gibi ve karanlıkta loş ışıkmış gibi görebilirsiniz...",
+                    "Cüce Direnci": "Zehirlenmeye karşı kurtarma atışlarında avantajınız vardır ve zehir hasarına karşı direnciniz vardır.",
+                    "Cüce Savaş Eğitimi": "Savaş baltası, el baltası, hafif çekiç ve savaş çekici ile yeterliliğiniz vardır.",
+                    "Alet Yeterliliği": "Seçtiğiniz bir zanaatkar aleti ile yeterlilik kazanırsınız: demirci aletleri, bira üreticisi malzemeleri veya duvarcı aletleri.",
+                    "Taş Ustalığı": "Taş işçiliğinin kökeni ile ilgili bir Zeka (Tarih) kontrolü yaptığınızda, Tarih yeteneğinde yeterli sayılırsınız ve kontrole normal yeterlilik bonusunuz yerine yeterlilik bonusunuzun iki katını eklersiniz."
                 },
-                "Diller": "Ortak dili ve Cüce dilini konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]",
+                "Diller": "Ortak dili ve Cüce dilini konuşabilir, okuyabilir ve yazabilirsiniz...",
                 "Alt Irklar": {
                     "Tepe Cücesi": {
-                        "açıklama": "Bir tepe cücesi olarak keskin duyulara, derin bir sezgiye ve olağanüstü bir dirence sahipsiniz.[cite: 4]",
-                        "Yetenek Skoru Artışı": "Bilgelik skorunuz 1 artar.[cite: 4]",
+                        "açıklama": "Bir tepe cücesi olarak keskin duyulara, derin bir sezgiye ve olağanüstü bir dirence sahipsiniz.",
+                        "Yetenek Skoru Artışı": "Bilgelik skorunuz 1 artar.",
                         "Irk Özellikleri": {
-                            "Cüce Sağlamlığı": "Maksimum vuruş puanınız 1 artar ve seviye atladığınız her seferinde 1 artar.[cite: 4]"
+                            "Cüce Sağlamlığı": "Maksimum vuruş puanınız 1 artar ve seviye atladığınız her seferinde 1 artar."
                         }
                     }
                 }
@@ -39,27 +39,27 @@
         },
         "Elf": {
             "Elf Özellikleri": {
-                "açıklama": "Elf karakteriniz, binlerce yıllık elf zarafetinin bir sonucu olan çeşitli doğal yeteneklere sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Çeviklik skorunuz 2 artar.[cite: 4]",
-                "Yaş": "Elfler insanlarla yaklaşık aynı yaşta fiziksel olgunluğa ulaşmasına rağmen, elflerin yetişkinlik anlayışı fiziksel büyümenin ötesine geçerek dünyevi deneyimi kapsar... 750 yaşına kadar yaşayabilirler.[cite: 4]",
-                "Hizalama": "Elfler özgürlüğü, çeşitliliği ve kendini ifade etmeyi severler, bu yüzden kaosun daha nazik yönlerine güçlü bir şekilde eğilimlidirler...[cite: 4]",
-                "Boyut": "Elflerin boyu 5 fitin altından 6 fitin üzerine kadar değişir ve ince yapılıdırlar. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
+                "açıklama": "Elf karakteriniz, binlerce yıllık elf zarafetinin bir sonucu olan çeşitli doğal yeteneklere sahiptir.",
+                "Yetenek Skoru Artışı": "Çeviklik skorunuz 2 artar.",
+                "Yaş": "Elfler insanlarla yaklaşık aynı yaşta fiziksel olgunluğa ulaşmasına rağmen, elflerin yetişkinlik anlayışı fiziksel büyümenin ötesine geçerek dünyevi deneyimi kapsar... 750 yaşına kadar yaşayabilirler.",
+                "Hizalama": "Elfler özgürlüğü, çeşitliliği ve kendini ifade etmeyi severler, bu yüzden kaosun daha nazik yönlerine güçlü bir şekilde eğilimlidirler...",
+                "Boyut": "Elflerin boyu 5 fitin altından 6 fitin üzerine kadar değişir ve ince yapılıdırlar. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Alacakaranlık ormanlarına ve gece gökyüzüne alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz...[cite: 4]",
-                    "Keskin Duyular": "Algı yeteneğinde yeterliliğiniz vardır.[cite: 4]",
-                    "Peri Soyu": "Büyülenmeye karşı kurtarma atışlarında avantajınız vardır ve büyü sizi uyutamaz.[cite: 4]",
-                    "Trans": "Elflerin uyumaya ihtiyacı yoktur. Bunun yerine, günde 4 saat yarı bilinçli kalarak derin meditasyon yaparlar...[cite: 4]"
+                    "Karanlık Görüşü": "Alacakaranlık ormanlarına ve gece gökyüzüne alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz...",
+                    "Keskin Duyular": "Algı yeteneğinde yeterliliğiniz vardır.",
+                    "Peri Soyu": "Büyülenmeye karşı kurtarma atışlarında avantajınız vardır ve büyü sizi uyutamaz.",
+                    "Trans": "Elflerin uyumaya ihtiyacı yoktur. Bunun yerine, günde 4 saat yarı bilinçli kalarak derin meditasyon yaparlar..."
                 },
-                "Diller": "Ortak dili ve Elf dilini konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]",
+                "Diller": "Ortak dili ve Elf dilini konuşabilir, okuyabilir ve yazabilirsiniz...",
                 "Alt Irklar": {
                     "Yüce Elf": {
-                        "açıklama": "Bir yüce elf olarak keskin bir zekaya ve büyünün en azından temellerinde bir ustalığa sahipsiniz...[cite: 4]",
-                        "Yetenek Skoru Artışı": "Zeka skorunuz 1 artar.[cite: 4]",
+                        "açıklama": "Bir yüce elf olarak keskin bir zekaya ve büyünün en azından temellerinde bir ustalığa sahipsiniz...",
+                        "Yetenek Skoru Artışı": "Zeka skorunuz 1 artar.",
                         "Irk Özellikleri": {
-                            "Elf Silah Eğitimi": "Uzun kılıç, kısa kılıç, kısa yay ve uzun yay ile yeterliliğiniz vardır.[cite: 4]",
-                            "Büyücük": "Büyücü büyü listesinden seçtiğiniz bir büyücüğü bilirsiniz. Büyü yapma yeteneğiniz Zeka'dır.[cite: 4]",
-                            "Ek Dil": "Seçtiğiniz ek bir dili konuşabilir, okuyabilir ve yazabilirsiniz.[cite: 4]"
+                            "Elf Silah Eğitimi": "Uzun kılıç, kısa kılıç, kısa yay ve uzun yay ile yeterliliğiniz vardır.",
+                            "Büyücük": "Büyücü büyü listesinden seçtiğiniz bir büyücüğü bilirsiniz. Büyü yapma yeteneğiniz Zeka'dır.",
+                            "Ek Dil": "Seçtiğiniz ek bir dili konuşabilir, okuyabilir ve yazabilirsiniz."
                         }
                     }
                 }
@@ -67,24 +67,24 @@
         },
         "Buçukluk": {
             "Buçukluk Özellikleri": {
-                "açıklama": "Buçukluk karakteriniz diğer tüm buçukluklarla ortak olan bir dizi özelliğe sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Çeviklik skorunuz 2 artar.[cite: 4]",
-                "Yaş": "Bir buçukluk 20 yaşında yetişkinliğe ulaşır ve genellikle ikinci yüzyılının ortalarına kadar yaşar.[cite: 4]",
-                "Hizalama": "Çoğu buçukluk düzenli iyidir. Kural olarak iyi kalpli ve naziktirler...[cite: 4]",
-                "Boyut": "Buçuklukların boyu ortalama 3 fit ve ağırlıkları 40 libredir. Boyutunuz Küçük'tür.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 25 fittir.[cite: 4]",
+                "açıklama": "Buçukluk karakteriniz diğer tüm buçukluklarla ortak olan bir dizi özelliğe sahiptir.",
+                "Yetenek Skoru Artışı": "Çeviklik skorunuz 2 artar.",
+                "Yaş": "Bir buçukluk 20 yaşında yetişkinliğe ulaşır ve genellikle ikinci yüzyılının ortalarına kadar yaşar.",
+                "Hizalama": "Çoğu buçukluk düzenli iyidir. Kural olarak iyi kalpli ve naziktirler...",
+                "Boyut": "Buçuklukların boyu ortalama 3 fit ve ağırlıkları 40 libredir. Boyutunuz Küçük'tür.",
+                "Hız": "Temel yürüme hızınız 25 fittir.",
                 "Irk Özellikleri": {
-                    "Şanslı": "Bir saldırı zarı, yetenek kontrolü veya kurtarma atışı için d20 zarında 1 attığınızda zarı yeniden atabilir ve yeni sonucu kullanmak zorunda kalırsınız.[cite: 4]",
-                    "Cesur": "Korkutulmaya karşı kurtarma atışlarında avantajınız vardır.[cite: 4]",
-                    "Buçukluk Çevikliği": "Sizden daha büyük boyuttaki herhangi bir yaratığın alanından geçebilirsiniz.[cite: 4]"
+                    "Şanslı": "Bir saldırı zarı, yetenek kontrolü veya kurtarma atışı için d20 zarında 1 attığınızda zarı yeniden atabilir ve yeni sonucu kullanmak zorunda kalırsınız.",
+                    "Cesur": "Korkutulmaya karşı kurtarma atışlarında avantajınız vardır.",
+                    "Buçukluk Çevikliği": "Sizden daha büyük boyuttaki herhangi bir yaratığın alanından geçebilirsiniz."
                 },
-                "Diller": "Ortak dili ve Buçukluk dilini konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]",
+                "Diller": "Ortak dili ve Buçukluk dilini konuşabilir, okuyabilir ve yazabilirsiniz...",
                 "Alt Irklar": {
                     "Hafif Ayak": {
-                        "açıklama": "Bir hafif ayak buçukluğu olarak, diğer insanları siper alarak bile kolayca gözden kaybolabilirsiniz...[cite: 4]",
-                        "Yetenek Skoru Artışı": "Karizma skorunuz 1 artar.[cite: 4]",
+                        "açıklama": "Bir hafif ayak buçukluğu olarak, diğer insanları siper alarak bile kolayca gözden kaybolabilirsiniz...",
+                        "Yetenek Skoru Artışı": "Karizma skorunuz 1 artar.",
                         "Irk Özellikleri": {
-                            "Doğuştan Sinsi": "Sadece sizden en az bir boyut büyük bir yaratık tarafından engellendiğinizde bile saklanmaya çalışabilirsiniz.[cite: 4]"
+                            "Doğuştan Sinsi": "Sadece sizden en az bir boyut büyük bir yaratık tarafından engellendiğinizde bile saklanmaya çalışabilirsiniz."
                         }
                     }
                 }
@@ -92,58 +92,58 @@
         },
         "İnsan": {
             "İnsan Özellikleri": {
-                "açıklama": "İnsanlar hakkında genelleme yapmak zordur, ancak insan karakteriniz bu özelliklere sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Yetenek skorlarınızın her biri 1 artar.[cite: 4]",
-                "Yaş": "İnsanlar yirmili yaşlarının sonlarına doğru yetişkinliğe ulaşır ve bir asırdan az yaşarlar.[cite: 4]",
-                "Hizalama": "İnsanların belirli bir hizalamaya eğilimleri yoktur. En iyiler ve en kötüler onların arasında bulunur.[cite: 4]",
-                "Boyut": "İnsanların boyları ve yapıları büyük ölçüde değişir, 5 fitten 6 fitin çok üzerine kadar. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
-                "Diller": "Ortak dili ve seçtiğiniz fazladan bir dili konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]"
+                "açıklama": "İnsanlar hakkında genelleme yapmak zordur, ancak insan karakteriniz bu özelliklere sahiptir.",
+                "Yetenek Skoru Artışı": "Yetenek skorlarınızın her biri 1 artar.",
+                "Yaş": "İnsanlar yirmili yaşlarının sonlarına doğru yetişkinliğe ulaşır ve bir asırdan az yaşarlar.",
+                "Hizalama": "İnsanların belirli bir hizalamaya eğilimleri yoktur. En iyiler ve en kötüler onların arasında bulunur.",
+                "Boyut": "İnsanların boyları ve yapıları büyük ölçüde değişir, 5 fitten 6 fitin çok üzerine kadar. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
+                "Diller": "Ortak dili ve seçtiğiniz fazladan bir dili konuşabilir, okuyabilir ve yazabilirsiniz..."
             }
         },
         "Ejderdoğan": {
             "Ejderdoğan Özellikleri": {
-                "açıklama": "Ejder soyunuz, diğer ejderdoğanlarla paylaştığınız çeşitli özelliklerde kendini gösterir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Güç skorunuz 2, Karizma skorunuz 1 artar.[cite: 4]",
-                "Yaş": "Genç ejderdoğanlar hızla büyür. Yumurtadan çıktıktan saatler sonra yürürler, 3 yaşında 10 yaşındaki bir insan çocuğunun boyutuna gelirler ve 15 yaşında yetişkin olurlar. Yaklaşık 80 yaşına kadar yaşarlar.[cite: 4]",
-                "Hizalama": "Ejderdoğanlar uçlarda olma eğilimindedir, iyi ve kötü arasındaki kozmik savaşta bilinçli olarak bir tarafı seçerler...[cite: 4]",
-                "Boyut": "Ejderdoğanlar insanlardan daha uzun ve ağırdır, 6 fitin çok üzerinde dururlar ve ortalama 250 libredirler. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
+                "açıklama": "Ejder soyunuz, diğer ejderdoğanlarla paylaştığınız çeşitli özelliklerde kendini gösterir.",
+                "Yetenek Skoru Artışı": "Güç skorunuz 2, Karizma skorunuz 1 artar.",
+                "Yaş": "Genç ejderdoğanlar hızla büyür. Yumurtadan çıktıktan saatler sonra yürürler, 3 yaşında 10 yaşındaki bir insan çocuğunun boyutuna gelirler ve 15 yaşında yetişkin olurlar. Yaklaşık 80 yaşına kadar yaşarlar.",
+                "Hizalama": "Ejderdoğanlar uçlarda olma eğilimindedir, iyi ve kötü arasındaki kozmik savaşta bilinçli olarak bir tarafı seçerler...",
+                "Boyut": "Ejderdoğanlar insanlardan daha uzun ve ağırdır, 6 fitin çok üzerinde dururlar ve ortalama 250 libredirler. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
                 "Irk Özellikleri": {
                     "Ejder Soyu": {
                         "tablo": {
-                            "Ejderha": ["Siyah[cite: 4]", "Mavi[cite: 4]", "Pirinç[cite: 4]", "Bronz[cite: 4]", "Bakır[cite: 4]", "Altın[cite: 4]", "Yeşil[cite: 4]", "Kırmızı[cite: 4]", "Gümüş[cite: 4]", "Beyaz[cite: 4]"],
-                            "Hasar Türü": ["Asit[cite: 4]", "Yıldırım[cite: 4]", "Ateş[cite: 4]", "Yıldırım[cite: 4]", "Asit[cite: 4]", "Ateş[cite: 4]", "Zehir[cite: 4]", "Ateş[cite: 4]", "Soğuk[cite: 4]", "Soğuk[cite: 4]"],
-                            "Nefes Silahı": ["5'e 30 ft. hat (Çev. kur.)[cite: 4]", "5'e 30 ft. hat (Çev. kur.)[cite: 4]", "5'e 30 ft. hat (Çev. kur.)[cite: 4]", "5'e 30 ft. hat (Çev. kur.)[cite: 4]", "5'e 30 ft. hat (Çev. kur.)[cite: 4]", "15 ft. koni (Çev. kur.)[cite: 4]", "15 ft. koni (Day. kur.)[cite: 4]", "15 ft. koni (Çev. kur.)[cite: 4]", "15 ft. koni (Day. kur.)[cite: 4]", "15 ft. koni (Day. kur.)[cite: 4]"]
+                            "Ejderha": ["Siyah", "Mavi", "Pirinç", "Bronz", "Bakır", "Altın", "Yeşil", "Kırmızı", "Gümüş", "Beyaz"],
+                            "Hasar Türü": ["Asit", "Yıldırım", "Ateş", "Yıldırım", "Asit", "Ateş", "Zehir", "Ateş", "Soğuk", "Soğuk"],
+                            "Nefes Silahı": ["5'e 30 ft. hat (Çev. kur.)", "5'e 30 ft. hat (Çev. kur.)", "5'e 30 ft. hat (Çev. kur.)", "5'e 30 ft. hat (Çev. kur.)", "5'e 30 ft. hat (Çev. kur.)", "15 ft. koni (Çev. kur.)", "15 ft. koni (Day. kur.)", "15 ft. koni (Çev. kur.)", "15 ft. koni (Day. kur.)", "15 ft. koni (Day. kur.)"]
                         },
-                        "açıklama": "Ejder soyuna sahipsiniz. Ejder Soyu tablosundan bir ejderha türü seçin. Nefes silahınız ve hasar direnciniz tabloda gösterildiği gibi ejderha türüne göre belirlenir.[cite: 4]"
+                        "açıklama": "Ejder soyuna sahipsiniz. Ejder Soyu tablosundan bir ejderha türü seçin. Nefes silahınız ve hasar direnciniz tabloda gösterildiği gibi ejderha türüne göre belirlenir."
                     },
-                    "Nefes Silahı": "Yıkıcı enerji üflemek için eyleminizi kullanabilirsiniz. Ejder soyunuz nefesin boyutunu, şeklini ve hasar türünü belirler...[cite: 4]",
-                    "Hasar Direnci": "Ejder soyunuzla ilişkili hasar türüne karşı direnciniz vardır.[cite: 4]"
+                    "Nefes Silahı": "Yıkıcı enerji üflemek için eyleminizi kullanabilirsiniz. Ejder soyunuz nefesin boyutunu, şeklini ve hasar türünü belirler...",
+                    "Hasar Direnci": "Ejder soyunuzla ilişkili hasar türüne karşı direnciniz vardır."
                 },
-                "Diller": "Ortak dili ve Ejder dilini konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]"
+                "Diller": "Ortak dili ve Ejder dilini konuşabilir, okuyabilir ve yazabilirsiniz..."
             }
         },
         "Gnom": {
             "Gnom Özellikleri": {
-                "açıklama": "Gnom karakterinizin diğer tüm gnomlarla ortak olan bazı özellikleri vardır.[cite: 4]",
-                "Yetenek Skoru Artışı": "Zeka skorunuz 2 artar.[cite: 4]",
-                "Yaş": "Gnomlar insanlarla aynı hızda olgunlaşır ve çoğunun yaklaşık 40 yaşında yetişkin bir hayata yerleşmesi beklenir. 350 ila neredeyse 500 yıl yaşayabilirler.[cite: 4]",
-                "Hizalama": "Gnomlar çoğunlukla iyidir...[cite: 4]",
-                "Boyut": "Gnomlar 3 ila 4 fit boyundadır ve ortalama 40 libredir. Boyutunuz Küçük'tür.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 25 fittir.[cite: 4]",
+                "açıklama": "Gnom karakterinizin diğer tüm gnomlarla ortak olan bazı özellikleri vardır.",
+                "Yetenek Skoru Artışı": "Zeka skorunuz 2 artar.",
+                "Yaş": "Gnomlar insanlarla aynı hızda olgunlaşır ve çoğunun yaklaşık 40 yaşında yetişkin bir hayata yerleşmesi beklenir. 350 ila neredeyse 500 yıl yaşayabilirler.",
+                "Hizalama": "Gnomlar çoğunlukla iyidir...",
+                "Boyut": "Gnomlar 3 ila 4 fit boyundadır ve ortalama 40 libredir. Boyutunuz Küçük'tür.",
+                "Hız": "Temel yürüme hızınız 25 fittir.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Yeraltı yaşamına alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz...[cite: 4]",
-                    "Gnom Kurnazlığı": "Büyüye karşı tüm Zeka, Bilgelik ve Karizma kurtarma atışlarında avantajınız vardır.[cite: 4]"
+                    "Karanlık Görüşü": "Yeraltı yaşamına alışkın olduğunuz için karanlık ve loş ortamlarda üstün görüşe sahipsiniz...",
+                    "Gnom Kurnazlığı": "Büyüye karşı tüm Zeka, Bilgelik ve Karizma kurtarma atışlarında avantajınız vardır."
                 },
-                "Diller": "Ortak dili ve Gnom dilini konuşabilir, okuyabilir ve yazabilirsiniz...[cite: 4]",
+                "Diller": "Ortak dili ve Gnom dilini konuşabilir, okuyabilir ve yazabilirsiniz...",
                 "Alt Irklar": {
                     "Kaya Gnomu": {
-                        "açıklama": "Bir kaya gnomu olarak, diğer gnomların ötesinde doğal bir yaratıcılığa ve dayanıklılığa sahipsiniz.[cite: 4]",
-                        "Yetenek Skoru Artışı": "Dayanıklılık skorunuz 1 artar.[cite: 4]",
+                        "açıklama": "Bir kaya gnomu olarak, diğer gnomların ötesinde doğal bir yaratıcılığa ve dayanıklılığa sahipsiniz.",
+                        "Yetenek Skoru Artışı": "Dayanıklılık skorunuz 1 artar.",
                         "Irk Özellikleri": {
-                            "Mucit İrfanı": "Büyülü eşyalar, simya nesneleri veya teknolojik cihazlarla ilgili bir Zeka (Tarih) kontrolü yaptığınızda, normalde uyguladığınız yeterlilik bonusu yerine yeterlilik bonusunuzun iki katını ekleyebilirsiniz.[cite: 4]",
-                            "Tenekeci": "Zanaatkar aletleriyle (tenekeci aletleri) yeterliliğiniz vardır. Bu aletleri kullanarak...[cite: 4]"
+                            "Mucit İrfanı": "Büyülü eşyalar, simya nesneleri veya teknolojik cihazlarla ilgili bir Zeka (Tarih) kontrolü yaptığınızda, normalde uyguladığınız yeterlilik bonusu yerine yeterlilik bonusunuzun iki katını ekleyebilirsiniz.",
+                            "Tenekeci": "Zanaatkar aletleriyle (tenekeci aletleri) yeterliliğiniz vardır. Bu aletleri kullanarak..."
                         }
                     }
                 }
@@ -151,51 +151,51 @@
         },
         "Yarı Elf": {
             "Yarı Elf Özellikleri": {
-                "açıklama": "Yarı elf karakteriniz elflerle ortak bazı özelliklere ve yarı elflere özgü bazı özelliklere sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Karizma skorunuz 2 artar ve seçtiğiniz diğer iki yetenek skoru 1 artar.[cite: 4]",
-                "Yaş": "Yarı elfler insanlarla aynı hızda olgunlaşır ve 20 yaş civarında yetişkinliğe ulaşır. Ancak insanlardan çok daha uzun yaşarlar, genellikle 180 yılı aşarlar.[cite: 4]",
-                "Hizalama": "Yarı elfler, elf miraslarının kaotik eğilimini paylaşırlar...[cite: 4]",
-                "Boyut": "Yarı elfler insanlarla yaklaşık aynı boyuttadır, 5 ile 6 fit arasında değişir. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
+                "açıklama": "Yarı elf karakteriniz elflerle ortak bazı özelliklere ve yarı elflere özgü bazı özelliklere sahiptir.",
+                "Yetenek Skoru Artışı": "Karizma skorunuz 2 artar ve seçtiğiniz diğer iki yetenek skoru 1 artar.",
+                "Yaş": "Yarı elfler insanlarla aynı hızda olgunlaşır ve 20 yaş civarında yetişkinliğe ulaşır. Ancak insanlardan çok daha uzun yaşarlar, genellikle 180 yılı aşarlar.",
+                "Hizalama": "Yarı elfler, elf miraslarının kaotik eğilimini paylaşırlar...",
+                "Boyut": "Yarı elfler insanlarla yaklaşık aynı boyuttadır, 5 ile 6 fit arasında değişir. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Elf kanınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...[cite: 4]",
-                    "Peri Soyu": "Büyülenmeye karşı kurtarma atışlarında avantajınız vardır ve büyü sizi uyutamaz.[cite: 4]",
-                    "Yetenek Çok Yönlülüğü": "Seçtiğiniz iki yetenekte yeterlilik kazanırsınız.[cite: 4]"
+                    "Karanlık Görüşü": "Elf kanınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...",
+                    "Peri Soyu": "Büyülenmeye karşı kurtarma atışlarında avantajınız vardır ve büyü sizi uyutamaz.",
+                    "Yetenek Çok Yönlülüğü": "Seçtiğiniz iki yetenekte yeterlilik kazanırsınız."
                 },
-                "Diller": "Ortak dili, Elf dilini ve seçtiğiniz bir ek dili konuşabilir, okuyabilir ve yazabilirsiniz.[cite: 4]"
+                "Diller": "Ortak dili, Elf dilini ve seçtiğiniz bir ek dili konuşabilir, okuyabilir ve yazabilirsiniz."
             }
         },
         "Yarı Ork": {
             "Yarı Ork Özellikleri": {
-                "açıklama": "Yarı ork karakteriniz ork soyunuzdan türeyen bazı özelliklere sahiptir.[cite: 4]",
-                "Yetenek Skoru Artışı": "Güç skorunuz 2 artar ve Dayanıklılık skorunuz 1 artar.[cite: 4]",
-                "Yaş": "Yarı orklar insanlardan biraz daha hızlı olgunlaşarak 14 yaş civarında yetişkinliğe ulaşırlar. Gözle görülür şekilde daha hızlı yaşlanırlar ve nadiren 75 yıldan fazla yaşarlar.[cite: 4]",
-                "Hizalama": "Yarı orklar ork ebeveynlerinden kaosa doğru bir eğilim miras alırlar ve iyiye güçlü bir şekilde eğilimli değillerdir...[cite: 4]",
-                "Boyut": "Yarı orklar insanlardan biraz daha büyük ve iridirler ve boyları 5 ile 6 fitin çok üzerine kadar değişir. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
+                "açıklama": "Yarı ork karakteriniz ork soyunuzdan türeyen bazı özelliklere sahiptir.",
+                "Yetenek Skoru Artışı": "Güç skorunuz 2 artar ve Dayanıklılık skorunuz 1 artar.",
+                "Yaş": "Yarı orklar insanlardan biraz daha hızlı olgunlaşarak 14 yaş civarında yetişkinliğe ulaşırlar. Gözle görülür şekilde daha hızlı yaşlanırlar ve nadiren 75 yıldan fazla yaşarlar.",
+                "Hizalama": "Yarı orklar ork ebeveynlerinden kaosa doğru bir eğilim miras alırlar ve iyiye güçlü bir şekilde eğilimli değillerdir...",
+                "Boyut": "Yarı orklar insanlardan biraz daha büyük ve iridirler ve boyları 5 ile 6 fitin çok üzerine kadar değişir. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Ork kanınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...[cite: 4]",
-                    "Tehditkar": "Korkutma yeteneğinde yeterlilik kazanırsınız.[cite: 4]",
-                    "Acımasız Dayanıklılık": "0 vuruş puanına düştüğünüzde ancak doğrudan ölmediğinizde, bunun yerine 1 vuruş puanına düşebilirsiniz. Uzun bir dinlenmeyi bitirene kadar bu özelliği tekrar kullanamazsınız.[cite: 4]",
-                    "Vahşi Saldırılar": "Yakın dövüş silahı saldırısıyla kritik bir vuruş yaptığınızda, silahın hasar zarlarından birini fazladan bir kez daha atabilir ve bunu kritik vuruşun ekstra hasarına ekleyebilirsiniz.[cite: 4]"
+                    "Karanlık Görüşü": "Ork kanınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...",
+                    "Tehditkar": "Korkutma yeteneğinde yeterlilik kazanırsınız.",
+                    "Acımasız Dayanıklılık": "0 vuruş puanına düştüğünüzde ancak doğrudan ölmediğinizde, bunun yerine 1 vuruş puanına düşebilirsiniz. Uzun bir dinlenmeyi bitirene kadar bu özelliği tekrar kullanamazsınız.",
+                    "Vahşi Saldırılar": "Yakın dövüş silahı saldırısıyla kritik bir vuruş yaptığınızda, silahın hasar zarlarından birini fazladan bir kez daha atabilir ve bunu kritik vuruşun ekstra hasarına ekleyebilirsiniz."
                 },
-                "Diller": "Ortak dili ve Ork dilini konuşabilir, okuyabilir ve yazabilirsiniz (Orijinal metinde burada Vahşi Saldırılar tekrar etmişti).[cite: 4]"
+                "Diller": "Ortak dili ve Ork dilini konuşabilir, okuyabilir ve yazabilirsiniz (Orijinal metinde burada Vahşi Saldırılar tekrar etmişti)."
             }
         },
         "Tiefling": {
             "Tiefling Özellikleri": {
-                "açıklama": "Tiefling'ler cehennemden gelen soylarının bir sonucu olarak bazı ırksal özellikleri paylaşırlar.[cite: 4]",
-                "Yetenek Skoru Artışı": "Zeka skorunuz 1 artar ve Karizma skorunuz 2 artar.[cite: 4]",
-                "Yaş": "Tiefling'ler insanlarla aynı oranda olgunlaşırlar ancak birkaç yıl daha uzun yaşarlar.[cite: 4]",
-                "Hizalama": "Zalim bir doğaları olmayabilir, ancak birçoğu kaotik bir yola sapar. (Orijinal metindeki tekrar hatası düzeltildi).[cite: 4]",
-                "Boyut": "Tiefling'ler insanlarla aynı boyuttadır. Boyutunuz Orta'dır.[cite: 4]",
-                "Hız": "Temel yürüme hızınız 30 fittir.[cite: 4]",
+                "açıklama": "Tiefling'ler cehennemden gelen soylarının bir sonucu olarak bazı ırksal özellikleri paylaşırlar.",
+                "Yetenek Skoru Artışı": "Zeka skorunuz 1 artar ve Karizma skorunuz 2 artar.",
+                "Yaş": "Tiefling'ler insanlarla aynı oranda olgunlaşırlar ancak birkaç yıl daha uzun yaşarlar.",
+                "Hizalama": "Zalim bir doğaları olmayabilir, ancak birçoğu kaotik bir yola sapar. (Orijinal metindeki tekrar hatası düzeltildi).",
+                "Boyut": "Tiefling'ler insanlarla aynı boyuttadır. Boyutunuz Orta'dır.",
+                "Hız": "Temel yürüme hızınız 30 fittir.",
                 "Irk Özellikleri": {
-                    "Karanlık Görüşü": "Cehennem mirasınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...[cite: 4]",
-                    "Cehennem Direnci": "Ateş hasarına karşı direnciniz vardır.[cite: 4]",
-                    "Cehennem Mirası": "Mucize (Thaumaturgy) büyücüğünü bilirsiniz. 3. seviyeye ulaştığınızda cehennem azarı büyüsünü bu özellikle 2. seviye bir büyü olarak bir kez yapabilir ve uzun bir dinlenmeyi bitirdiğinizde bu yeteneği geri kazanırsınız... Bu büyüler için büyü yapma yeteneğiniz Karizma'dır.[cite: 4]"
+                    "Karanlık Görüşü": "Cehennem mirasınız sayesinde karanlık ve loş ortamlarda üstün görüşe sahipsiniz...",
+                    "Cehennem Direnci": "Ateş hasarına karşı direnciniz vardır.",
+                    "Cehennem Mirası": "Mucize (Thaumaturgy) büyücüğünü bilirsiniz. 3. seviyeye ulaştığınızda cehennem azarı büyüsünü bu özellikle 2. seviye bir büyü olarak bir kez yapabilir ve uzun bir dinlenmeyi bitirdiğinizde bu yeteneği geri kazanırsınız... Bu büyüler için büyü yapma yeteneğiniz Karizma'dır."
                 },
-                "Diller": "Ortak dili ve Cehennem dilini konuşabilir, okuyabilir ve yazabilirsiniz.[cite: 4]"
+                "Diller": "Ortak dili ve Cehennem dilini konuşabilir, okuyabilir ve yazabilirsiniz."
             }
         }
     }

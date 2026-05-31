@@ -1,104 +1,77 @@
 {
     "Ekipman": {
         "Ekipman Kuralları": {
-            "Madeni Paralar ve Zenginlik": "Altın (gp) zenginliğin standart birimidir. 1 gp = 10 sp = 100 cp. Platin (pp) nadirdir ve 10 gp değerindedir.[cite: 2]",
-            "Zırh Yeterliliği": "Herkes zırh giyebilir ancak sadece yeterliliği olanlar onu nasıl etkili bir şekilde giyeceğini bilir. Yeterliliğiniz olmayan bir zırh giyerseniz, Güç veya Çeviklik içeren herhangi bir kontrol, kurtarma atışı veya saldırı zarında dezavantajınız olur ve büyü yapamazsınız.[cite: 2]",
-            "Zırh Sınıfı (ZS)": "Zırh, giyen kişiyi saldırılara karşı korur. Zırhınız temel ZS'nizi belirler.[cite: 2]",
-            "Silah Yeterliliği": "Sınıfınız, ırkınız ve ustalıklarınız size belirli silahlarla (Basit veya Askeri) yeterlilik kazandırır. Yeterlilik, saldırı zarına yeterlilik bonusunuzu eklemenizi sağlar.[cite: 2]",
-            "Silah Özellikleri": "Çoğu silahın, İnce (Güç yerine Çeviklik kullanın), Ağır (küçük yaratıklar için dezavantaj) veya Çok Yönlü (tek veya iki el ile kullanılabilir) gibi özel özellikleri vardır.[cite: 2]"
+            "Madeni Paralar ve Zenginlik": "Altın (gp) zenginliğin standart birimidir. 1 gp = 10 sp = 100 cp. Platin (pp) nadirdir ve 10 gp değerindedir.",
+            "Zırh Yeterliliği": "Herkes zırh giyebilir ancak sadece yeterliliği olanlar onu nasıl etkili bir şekilde giyeceğini bilir. Yeterliliğiniz olmayan bir zırh giyerseniz, Güç veya Çeviklik içeren herhangi bir kontrol, kurtarma atışı veya saldırı zarında dezavantajınız olur ve büyü yapamazsınız.",
+            "Zırh Sınıfı (ZS)": "Zırh, giyen kişiyi saldırılara karşı korur. Zırhınız temel ZS'nizi belirler.",
+            "Silah Yeterliliği": "Sınıfınız, ırkınız ve ustalıklarınız size belirli silahlarla (Basit veya Askeri) yeterlilik kazandırır. Yeterlilik, saldırı zarına yeterlilik bonusunuzu eklemenizi sağlar.",
+            "Silah Özellikleri": "Çoğu silahın, İnce (Güç yerine Çeviklik kullanın), Ağır (küçük yaratıklar için dezavantaj) veya Çok Yönlü (tek veya iki el ile kullanılabilir) gibi özel özellikleri vardır."
         },
         "Zenginlik ve Madeni Paralar": {
-            "açıklama": "Ortak madeni paralar, yapıldıkları metalin göreceli değerine dayalı olarak birkaç farklı değere sahiptir.[cite: 2]",
+            "açıklama": "Ortak madeni paralar, yapıldıkları metalin göreceli değerine dayalı olarak birkaç farklı değere sahiptir.",
             "Standart Döviz Kurları": {
                 "tablo": {
-                    "Para Birimi": ["Bakır (cp)[cite: 2]", "Gümüş (sp)[cite: 2]", "Elektrum (ep)[cite: 2]", "Altın (gp)[cite: 2]", "Platin (pp)[cite: 2]"],
-                    "CP": ["1[cite: 2]", "10[cite: 2]", "50[cite: 2]", "100[cite: 2]", "1.000[cite: 2]"],
-                    "GP": ["1/100[cite: 2]", "1/10[cite: 2]", "1/2[cite: 2]", "1[cite: 2]", "10[cite: 2]"]
+                    "Para Birimi": ["Bakır (cp)", "Gümüş (sp)", "Elektrum (ep)", "Altın (gp)", "Platin (pp)"],
+                    "CP": ["1", "10", "50", "100", "1.000"],
+                    "GP": ["1/100", "1/10", "1/2", "1", "10"]
                 }
             },
-            "Hazine Satmak": "Genel bir kural olarak, hasar görmemiş silahlar, zırhlar ve diğer ekipmanlar bir pazarda satıldığında maliyetlerinin yarısını getirir.[cite: 2]"
+            "Hazine Satmak": "Genel bir kural olarak, hasar görmemiş silahlar, zırhlar ve diğer ekipmanlar bir pazarda satıldığında maliyetlerinin yarısını getirir."
         },
         "Zırhlar ve Kalkanlar": {
-            "açıklama": "Zırh tablosu yaygın zırh türlerinin maliyetini, ağırlığını ve diğer özelliklerini gösterir.[cite: 2]",
+            "açıklama": "Zırh tablosu yaygın zırh türlerinin maliyetini, ağırlığını ve diğer özelliklerini gösterir.",
             "Hafif Zırh Listesi": {
                 "tablo": {
-                    "Zırh": ["Dolgulu[cite: 2]", "Deri[cite: 2]", "Çivili Deri[cite: 2]"],
-                    "Maliyet": ["5 gp[cite: 2]", "10 gp[cite: 2]", "45 gp[cite: 2]"],
-                    "ZS": ["11 + Çev[cite: 2]", "11 + Çev[cite: 2]", "12 + Çev[cite: 2]"],
-                    "Ağırlık": ["8 lb.[cite: 2]", "10 lb.[cite: 2]", "13 lb.[cite: 2]"]
+                    "Zırh": ["Dolgulu", "Deri", "Çivili Deri"],
+                    "Maliyet": ["5 gp", "10 gp", "45 gp"],
+                    "ZS": ["11 + Çev", "11 + Çev", "12 + Çev"],
+                    "Ağırlık": ["8 lb.", "10 lb.", "13 lb."]
                 }
             },
             "Orta Zırh Listesi": {
                 "tablo": {
-                    "Zırh": ["Hayvan Postu[cite: 2]", "Zincir Gömlek[cite: 2]", "Pul Zırh[cite: 2]", "Göğüslük[cite: 2]", "Yarım Plaka[cite: 2]"],
-                    "Maliyet": ["10 gp[cite: 2]", "50 gp[cite: 2]", "50 gp[cite: 2]", "400 gp[cite: 2]", "750 gp[cite: 2]"],
-                    "ZS": ["12 + Çev(maks 2)[cite: 2]", "13 + Çev(maks 2)[cite: 2]", "14 + Çev(maks 2)[cite: 2]", "14 + Çev(maks 2)[cite: 2]", "15 + Çev(maks 2)[cite: 2]"],
-                    "Ağırlık": ["12 lb.[cite: 2]", "20 lb.[cite: 2]", "45 lb.[cite: 2]", "20 lb.[cite: 2]", "40 lb.[cite: 2]"]
+                    "Zırh": ["Hayvan Postu", "Zincir Gömlek", "Pul Zırh", "Göğüslük", "Yarım Plaka"],
+                    "Maliyet": ["10 gp", "50 gp", "50 gp", "400 gp", "750 gp"],
+                    "ZS": ["12 + Çev(maks 2)", "13 + Çev(maks 2)", "14 + Çev(maks 2)", "14 + Çev(maks 2)", "15 + Çev(maks 2)"],
+                    "Ağırlık": ["12 lb.", "20 lb.", "45 lb.", "20 lb.", "40 lb."]
                 }
             },
             "Ağır Zırh Listesi": {
                 "tablo": {
-                    "Zırh": ["Halka Zırh[cite: 2]", "Zincir Zırh[cite: 2]", "Parçalı Zırh[cite: 2]", "Tam Plaka[cite: 2]"],
-                    "Maliyet": ["30 gp[cite: 2]", "75 gp[cite: 2]", "200 gp[cite: 2]", "1.500 gp[cite: 2]"],
-                    "ZS": ["14[cite: 2]", "16[cite: 2]", "17[cite: 2]", "18[cite: 2]"],
-                    "Ağırlık": ["40 lb.[cite: 2]", "55 lb.[cite: 2]", "60 lb.[cite: 2]", "65 lb.[cite: 2]"]
+                    "Zırh": ["Halka Zırh", "Zincir Zırh", "Parçalı Zırh", "Tam Plaka"],
+                    "Maliyet": ["30 gp", "75 gp", "200 gp", "1.500 gp"],
+                    "ZS": ["14", "16", "17", "18"],
+                    "Ağırlık": ["40 lb.", "55 lb.", "60 lb.", "65 lb."]
                 }
             },
             "Giyinme ve Çıkarma": {
                 "tablo": {
-                    "Kategori": ["Hafif Zırh[cite: 2]", "Orta Zırh[cite: 2]", "Ağır Zırh[cite: 2]", "Kalkan[cite: 2]"],
-                    "Giyinme": ["1 dakika[cite: 2]", "5 dakika[cite: 2]", "10 dakika[cite: 2]", "1 eylem[cite: 2]"],
-                    "Çıkarma": ["1 dakika[cite: 2]", "1 dakika[cite: 2]", "5 dakika[cite: 2]", "1 eylem[cite: 2]"]
+                    "Kategori": ["Hafif Zırh", "Orta Zırh", "Ağır Zırh", "Kalkan"],
+                    "Giyinme": ["1 dakika", "5 dakika", "10 dakika", "1 eylem"],
+                    "Çıkarma": ["1 dakika", "1 dakika", "5 dakika", "1 eylem"]
                 }
             }
         },
         "Silahlar": {
-            "açıklama": "Her silah yakın dövüş veya menzilli olarak sınıflandırılır.[cite: 2]",
+            "açıklama": "Her silah yakın dövüş veya menzilli olarak sınıflandırılır.",
             "Basit Yakın Dövüş": {
                 "tablo": {
-                    "İsim": ["Sopa[cite: 2]", "Hançer[cite: 2]", "El Baltası[cite: 2]", "Cirit[cite: 2]", "Gürz[cite: 2]", "Mızrak[cite: 2]"],
-                    "Hasar": ["1d4 Ezici[cite: 2]", "1d4 Delici[cite: 2]", "1d6 Kesici[cite: 2]", "1d6 Delici[cite: 2]", "1d6 Ezici[cite: 2]", "1d6 Delici[cite: 2]"],
-                    "Maliyet": ["1 sp[cite: 2]", "2 gp[cite: 2]", "5 gp[cite: 2]", "5 sp[cite: 2]", "5 gp[cite: 2]", "1 gp[cite: 2]"],
-                    "Ağırlık": ["2 lb.[cite: 2]", "1 lb.[cite: 2]", "2 lb.[cite: 2]", "2 lb.[cite: 2]", "4 lb.[cite: 2]", "3 lb.[cite: 2]"]
+                    "İsim": ["Sopa", "Hançer", "El Baltası", "Cirit", "Gürz", "Mızrak"],
+                    "Hasar": ["1d4 Ezici", "1d4 Delici", "1d6 Kesici", "1d6 Delici", "1d6 Ezici", "1d6 Delici"],
+                    "Maliyet": ["1 sp", "2 gp", "5 gp", "5 sp", "5 gp", "1 gp"],
+                    "Ağırlık": ["2 lb.", "1 lb.", "2 lb.", "2 lb.", "4 lb.", "3 lb."]
                 }
             },
             "Askeri Yakın Dövüş": {
                 "tablo": {
-                    "İsim": ["Savaş Baltası[cite: 2]", "Büyük Balta[cite: 2]", "Büyük Kılıç[cite: 2]", "Uzun Kılıç[cite: 2]", "Meç[cite: 2]", "Savaş Çekici[cite: 2]"],
-                    "Hasar": ["1d8 Kesici[cite: 2]", "1d12 Kesici[cite: 2]", "2d6 Kesici[cite: 2]", "1d8 Kesici[cite: 2]", "1d8 Delici[cite: 2]", "1d8 Ezici[cite: 2]"],
-                    "Maliyet": ["10 gp[cite: 2]", "30 gp[cite: 2]", "50 gp[cite: 2]", "15 gp[cite: 2]", "25 gp[cite: 2]", "15 gp[cite: 2]"],
-                    "Ağırlık": ["4 lb.[cite: 2]", "7 lb.[cite: 2]", "6 lb.[cite: 2]", "3 lb.[cite: 2]", "2 lb.[cite: 2]", "2 lb.[cite: 2]"]
+                    "İsim": ["Savaş Baltası", "Büyük Balta", "Büyük Kılıç", "Uzun Kılıç", "Meç", "Savaş Çekici"],
+                    "Hasar": ["1d8 Kesici", "1d12 Kesici", "2d6 Kesici", "1d8 Kesici", "1d8 Delici", "1d8 Ezici"],
+                    "Maliyet": ["10 gp", "30 gp", "50 gp", "15 gp", "25 gp", "15 gp"],
+                    "Ağırlık": ["4 lb.", "7 lb.", "6 lb.", "3 lb.", "2 lb.", "2 lb."]
                 }
             }
         },
         "Aletler": {
-            "açıklama": "Bir alet, normalde yapamayacağınız bir şeyi yapmanıza yardımcı olur.[cite: 2]",
-            "Alet Listesi": {
-                "tablo": {
-                    "Eşya": ["Simyacı malzemeleri[cite: 2]", "Bira üreticisi malzemeleri[cite: 2]", "Aşçı aletleri[cite: 2]", "Hırsız aletleri[cite: 2]", "Zar seti[cite: 2]", "Lavta[cite: 2]"],
-                    "Maliyet": ["50 gp[cite: 2]", "20 gp[cite: 2]", "1 gp[cite: 2]", "25 gp[cite: 2]", "1 sp[cite: 2]", "35 gp[cite: 2]"],
-                    "Ağırlık": ["8 lb.[cite: 2]", "9 lb.[cite: 2]", "8 lb.[cite: 2]", "1 lb.[cite: 2]", "—[cite: 2]", "2 lb.[cite: 2]"]
-                }
-            }
-        },
-        "Macera Teçhizatı": {
-            "açıklama": "Bu bölüm hayatta kalmak için gerekli çeşitli eşyaları içerir.[cite: 2]",
-            "Teçhizat Tablosu": {
-                "tablo": {
-                    "Eşya": ["Sırt Çantası[cite: 2]", "Uyku Tulumu[cite: 2]", "İp (50ft)[cite: 2]", "Meşale[cite: 2]", "Su Matarası[cite: 2]", "Erzak (1 günlük)[cite: 2]"],
-                    "Maliyet": ["2 gp[cite: 2]", "1 gp[cite: 2]", "1 gp[cite: 2]", "1 cp[cite: 2]", "2 sp[cite: 2]", "5 sp[cite: 2]"],
-                    "Ağırlık": ["5 lb.[cite: 2]", "7 lb.[cite: 2]", "10 lb.[cite: 2]", "1 lb.[cite: 2]", "5 lb.[cite: 2]", "2 lb.[cite: 2]"]
-                }
-            }
-        },
-        "Giderler ve Hizmetler": {
-            "açıklama": "Yaşam ve hizmetler için standart maliyetler.[cite: 2]",
-            "Yaşam Tarzları": {
-                "tablo": {
-                    "Yaşam Tarzı": ["Sefil[cite: 2]", "Fakir[cite: 2]", "Mütevazı[cite: 2]", "Rahat[cite: 2]", "Zengin[cite: 2]", "Aristokratik[cite: 2]"],
-                    "Fiyat/Gün": ["1 sp[cite: 2]", "2 sp[cite: 2]", "1 gp[cite: 2]", "2 gp[cite: 2]", "4 gp[cite: 2]", "10 gp min[cite: 2]"]
-                }
-            }
+            "açıklama": "Bir alet, normalde yap"}
         }
     }
-}
