@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 import 'package:ttrpg_manager/models/note_model.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -35,6 +36,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     final userRoleProvider = Provider.of<UserRoleProvider>(context);
     final notesProvider = Provider.of<NotesProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
 
     // EĞER VERİLER ÇEKİLİYORSA EKRANDA LOADING GÖSTER
     if (notesProvider.isLoading) {
@@ -48,7 +50,7 @@ class _NotesViewState extends State<NotesView> {
     final bool isGM = userRoleProvider.isGameMaster;
     final String username = userRoleProvider.username;
     final notes = isGM ? notesProvider.gmNotes : notesProvider.playerNotes;
-    final String appBarTitle = '$username\'s ${isGM ? 'GM' : 'Player'} Notes';
+    final String appBarTitle = '$username\'s ${isGM ? l10n.gmShort : l10n.player} ${l10n.notes}';
 
     return Scaffold(
       appBar: AppBar(
@@ -64,11 +66,11 @@ class _NotesViewState extends State<NotesView> {
             Icon(Icons.note_alt_outlined, size: 64, color: Colors.grey[600]),
             const SizedBox(height: 16),
             Text(
-              'No adventure notes yet.',
+              l10n.noAdventureNotes,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey),
             ),
             Text(
-              'Tap + to record your journey!',
+              l10n.tapToRecord,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
             ),
           ],
@@ -81,7 +83,7 @@ class _NotesViewState extends State<NotesView> {
           final note = notes[index];
 
           final String displayTag = note.tag != null
-              ? (note.subTag != null && note.subTag!.isNotEmpty ? '${note.tag} • ${note.subTag}' : note.tag!)
+              ? (note.subTag != null && note.subTag!.isNotEmpty ? '${_getLocalizedTag(context, note.tag!)} • ${note.subTag}' : _getLocalizedTag(context, note.tag!))
               : '';
 
           return Card(
@@ -116,7 +118,7 @@ class _NotesViewState extends State<NotesView> {
                             border: Border.all(color: _getTagColor(note.tag!)),
                           ),
                           child: Text(
-                            note.tag!,
+                            _getLocalizedTag(context, note.tag!),
                             style: TextStyle(
                               fontSize: 10,
                               color: _getTagColor(note.tag!),
@@ -182,12 +184,26 @@ class _NotesViewState extends State<NotesView> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToNoteForm(context, isGM: isGM),
         icon: const Icon(Icons.add),
-        label: const Text('New Note'),
+        label: Text(l10n.newNote),
       ),
     );
   }
 
+  String _getLocalizedTag(BuildContext context, String tag) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (tag) {
+      case 'NPC': return l10n.npc;
+      case 'Quest': return l10n.quest;
+      case 'Loot': return l10n.loot;
+      case 'Location': return l10n.location;
+      case 'Combat': return l10n.combat;
+      case 'Other': return l10n.other;
+      default: return tag;
+    }
+  }
+
   void _navigateToNoteForm(BuildContext context, {required bool isGM, Note? note}) {
+    final l10n = AppLocalizations.of(context)!;
     final bool isEditing = note != null;
     final titleController = TextEditingController(text: note?.title);
     final contentController = TextEditingController(text: note?.content);
@@ -214,7 +230,7 @@ class _NotesViewState extends State<NotesView> {
         builder: (context) => StatefulBuilder(
           builder: (context, setState) => Scaffold(
             appBar: AppBar(
-              title: Text(isEditing ? 'Edit Note' : (isGM ? 'New GM Entry' : 'New Player Log')),
+              title: Text(isEditing ? l10n.editNote : (isGM ? l10n.newGMEntry : l10n.newPlayerLog)),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.check),
@@ -253,10 +269,10 @@ class _NotesViewState extends State<NotesView> {
                   TextField(
                     controller: titleController,
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      hintText: 'e.g. The Mysterious Stranger',
-                      border: UnderlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: l10n.title,
+                      hintText: l10n.titleExample,
+                      border: const UnderlineInputBorder(),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -265,17 +281,17 @@ class _NotesViewState extends State<NotesView> {
                   DropdownButtonFormField<String>(
                     value: selectedTag,
                     isExpanded: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Category',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.category_outlined),
+                    decoration: InputDecoration(
+                      labelText: l10n.category,
+                      border: const OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.category_outlined),
                     ),
                     items: tags.map((t) => DropdownMenuItem(
                       value: t,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(t),
+                          Text(_getLocalizedTag(context, t)),
                           Icon(
                             _getTagIcon(t),
                             color: _getTagColor(t),
@@ -298,10 +314,10 @@ class _NotesViewState extends State<NotesView> {
                     DropdownButtonFormField<String>(
                       value: selectedSubTag,
                       isExpanded: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Sub-Category (Optional)',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.subdirectory_arrow_right),
+                      decoration: InputDecoration(
+                        labelText: l10n.subCategoryOptional,
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.subdirectory_arrow_right),
                       ),
                       items: subCategories[selectedTag]!.map((sub) => DropdownMenuItem(
                         value: sub,
@@ -314,10 +330,10 @@ class _NotesViewState extends State<NotesView> {
                   const SizedBox(height: 24),
                   TextField(
                     controller: contentController,
-                    decoration: const InputDecoration(
-                      labelText: 'Details',
-                      hintText: 'Write down what happened...',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: l10n.details,
+                      hintText: l10n.writeWhatHappened,
+                      border: const OutlineInputBorder(),
                       alignLabelWithHint: true,
                     ),
                     maxLines: 15,
@@ -354,19 +370,20 @@ class _NotesViewState extends State<NotesView> {
   }
 
   void _confirmDelete(BuildContext context, NotesProvider provider, int id) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Note?'),
-        content: const Text('Are you sure you want to delete this note?'),
+        title: Text(l10n.deleteNote),
+        content: Text(l10n.areYouSureDeleteNote),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancel)),
           TextButton(
             onPressed: () {
               provider.deleteNote(id);
               Navigator.pop(context);
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: Text(l10n.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -374,8 +391,9 @@ class _NotesViewState extends State<NotesView> {
   }
 
   void _showNoteDetails(BuildContext context, Note note, bool isGM) {
+    final l10n = AppLocalizations.of(context)!;
     final String displayTag = note.tag != null
-        ? (note.subTag != null ? '${note.tag} • ${note.subTag}' : note.tag!)
+        ? (note.subTag != null ? '${_getLocalizedTag(context, note.tag!)} • ${note.subTag}' : _getLocalizedTag(context, note.tag!))
         : '';
 
     showDialog(
@@ -398,7 +416,7 @@ class _NotesViewState extends State<NotesView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Back'),
+            child: Text(l10n.back),
           ),
           ElevatedButton.icon(
             onPressed: () {
@@ -406,7 +424,7 @@ class _NotesViewState extends State<NotesView> {
               _navigateToNoteForm(context, isGM: isGM, note: note);
             },
             icon: const Icon(Icons.edit, size: 18),
-            label: const Text('Edit'),
+            label: Text(l10n.edit),
           ),
         ],
       ),

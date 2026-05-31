@@ -1,3 +1,4 @@
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import 'equipment_view.dart';
 import 'package:flutter/material.dart';
 import 'races_view.dart';
@@ -10,47 +11,47 @@ class RuleBooksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rule Books'),
+        title: Text(l10n.ruleBooks),
         centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(12.0),
         children: [
-
           _buildMenuCard(
             context,
-            title: 'Races',
-            subtitle: 'Explore the diverse peoples of the world',
+            title: l10n.races,
+            subtitle: l10n.racesSubtitle,
             icon: Icons.groups_outlined,
             destination: const RacesView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Classes',
-            subtitle: 'Choose your path and abilities',
+            title: l10n.classes,
+            subtitle: l10n.classesSubtitle,
             icon: Icons.shield_outlined,
             destination: const ClassesView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Equipment',
-            subtitle: 'Weapons, armor, tools, and adventuring gear',
-            icon: Icons.shopping_bag_outlined, // Ekipmanlar için güzel bir çanta ikonu
+            title: l10n.equipment,
+            subtitle: l10n.equipmentSubtitle,
+            icon: Icons.shopping_bag_outlined,
             destination: const EquipmentView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Monsters',
-            subtitle: 'Creatures, stats, legendary actions, and beasts',
-            icon: Icons.adb_rounded, // Veya Icons.pets olabilir
+            title: l10n.monsters,
+            subtitle: l10n.monstersSubtitle,
+            icon: Icons.adb_rounded,
             destination: const MonstersView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Spells',
-            subtitle: 'Master the arcane and divine arts',
+            title: l10n.spells,
+            subtitle: l10n.spellsSubtitle,
             icon: Icons.auto_awesome_outlined,
             destination: const SpellsView(),
           ),

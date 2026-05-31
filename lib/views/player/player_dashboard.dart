@@ -4,6 +4,7 @@ import '../../providers/user_role_provider.dart';
 import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/characters_provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import 'player_game_details_view.dart';
 
 class PlayerDashboard extends StatefulWidget {
@@ -97,6 +98,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final notesProvider = context.watch<NotesProvider>();
     final allPlayerNotes = notesProvider.playerNotes.reversed.toList();
     final displayNotes = allPlayerNotes.take(5).toList();
@@ -123,7 +125,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Games"),
+              _buildSectionHeader(l10n.games),
               const SizedBox(height: 8),
 
               gamesProvider.isLoading
@@ -131,10 +133,10 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   : SizedBox(
                 height: 110,
                 child: allPlayerGames.isEmpty
-                    ? const Center(
+                    ? Center(
                   child: Text(
-                    "You have not joined any games yet.",
-                    style: TextStyle(color: Colors.grey),
+                    l10n.noGamesJoined,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 )
                     : ListView.builder(
@@ -187,7 +189,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
+                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} ${l10n.players}",
                                   style: TextStyle(fontSize: 11, color: Colors.grey[400])
                               ),
                             ],
@@ -201,7 +203,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Characters"),
+              _buildSectionHeader(l10n.characters),
               const SizedBox(height: 8),
               charactersProvider.isLoading
                   ? const SizedBox(
@@ -211,10 +213,10 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   : SizedBox(
                 height: 100,
                 child: allCharacters.isEmpty
-                    ? const Center(
+                    ? Center(
                   child: Text(
-                    "No characters have been created yet.",
-                    style: TextStyle(color: Colors.grey),
+                    l10n.noCharactersCreated,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 )
                     : ListView.builder(
@@ -285,13 +287,13 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Notes"),
+              _buildSectionHeader(l10n.notes),
               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes have been created yet.", style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text(l10n.noNotesAdded, style: const TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -338,7 +340,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   child: TextButton.icon(
                     onPressed: () => Navigator.pushNamed(context, "/notes"),
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: Text(l10n.seeAllNotes),
                   ),
                 ),
               ),
@@ -349,3 +351,4 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     );
   }
 }
+

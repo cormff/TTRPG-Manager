@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/primary_button.dart';
@@ -30,10 +31,11 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: Text(l10n.register),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -43,49 +45,46 @@ class _RegisterViewState extends State<RegisterView> {
             const SizedBox(height: 40),
             CustomTextField(
               controller: _usernameController,
-              labelText: 'Username',
+              labelText: l10n.username,
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _emailController,
-              labelText: 'Email',
+              labelText: l10n.email,
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _passwordController,
-              labelText: 'Password',
+              labelText: l10n.password,
               obscureText: true,
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _confirmPasswordController,
-              labelText: 'Confirm Password',
+              labelText: l10n.confirmPassword,
               obscureText: true,
             ),
             const SizedBox(height: 24.0),
 
             authProvider.isLoading
-                ? const CircularProgressIndicator(color: Colors.deepPurple) // Yükleniyorsa simge çıkar
+                ? const CircularProgressIndicator(color: Colors.deepPurple)
                 : PrimaryButton(
               onPressed: () {
-                // Şifre kontrolü (confirm password)
                 if (_passwordController.text != _confirmPasswordController.text) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Passwords do not match!")),
+                    SnackBar(content: Text(l10n.passwordsDoNotMatch)),
                   );
                   return;
                 }
 
-                // Boş alan kontrolü
                 if (_usernameController.text.isEmpty || _emailController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please fill all fields")),
+                    SnackBar(content: Text(l10n.pleaseFillAllFields)),
                   );
                   return;
                 }
 
-                // Provider üzerinden API'ye gönderiyoruz
                 context.read<AuthProvider>().register(
                   _usernameController.text,
                   _emailController.text,
@@ -93,7 +92,7 @@ class _RegisterViewState extends State<RegisterView> {
                   context,
                 );
               },
-              text: 'Register',
+              text: l10n.register,
             ),
 
             const SizedBox(height: 16),
@@ -103,9 +102,9 @@ class _RegisterViewState extends State<RegisterView> {
                   MaterialPageRoute(builder: (context) => const LoginView()),
                 );
               },
-              child: const Text(
-                "Already registered? Log in",
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+              child: Text(
+                l10n.alreadyRegisteredLogin,
+                style: const TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -114,3 +113,4 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 }
+

@@ -6,9 +6,10 @@ class MonstersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DynamicRuleList(
-      title: 'Monsters', // JSON'daki anahtar kelime ile aynı olmalı
-      jsonPath: 'assets/data/monsters.json',
+    final isTr = Localizations.localeOf(context).languageCode == 'tr';
+    return DynamicRuleList(
+      title: isTr ? 'Canavarlar' : 'Monsters', // JSON'daki anahtar kelime ile aynı olmalı
+      jsonPath: isTr ? 'assets/data/monsters_tr.json' : 'assets/data/monsters_en.json',
     );
   }
 }

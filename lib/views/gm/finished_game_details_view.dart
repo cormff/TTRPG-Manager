@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../models/game_model.dart';
 import '../../services/game_service.dart';
 import '../../providers/maps_provider.dart';
@@ -50,12 +51,13 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Game Archive'),
+        title: Text(l10n.gameArchive),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -98,7 +100,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    widget.game.description.isEmpty ? "Story has not been told..." : widget.game.description,
+                    widget.game.description.isEmpty ? l10n.storyNotTold : widget.game.description,
                     style: const TextStyle(fontSize: 16, color: Colors.grey, height: 1.5),
                   ),
                 ],
@@ -108,16 +110,16 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 2. OYUNCULAR (İSİMLERİYLE BERABER) ---
-            Text("Adventurers", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.adventurers, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (widget.game.joinedPlayerIds.isEmpty)
-              const Text("No players have joined this game.", style: TextStyle(color: Colors.grey))
+              Text(l10n.noPlayersJoined, style: const TextStyle(color: Colors.grey))
             else
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: widget.game.joinedPlayerIds.map((id) {
-                  final playerName = _playerNames[id] ?? "Unkown Hero";
+                  final playerName = _playerNames[id] ?? l10n.unknownHero;
                   return Chip(
                     avatar: const CircleAvatar(backgroundColor: Colors.amber, child: Icon(Icons.person, color: Colors.black, size: 16)),
                     label: Text(playerName, style: const TextStyle(color: Colors.white)),
@@ -130,12 +132,12 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 3. HARİTALAR ---
-            Text("Discovered Realms", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.discoveredRealms, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             Consumer<MapsProvider>(
               builder: (context, mapsProvider, child) {
                 if (mapsProvider.currentGameMaps.isEmpty) {
-                  return const Text("No maps have been added for this game.", style: TextStyle(color: Colors.grey));
+                  return Text(l10n.noMapsAddedForGame, style: const TextStyle(color: Colors.grey));
                 }
                 return SizedBox(
                   height: 120,
@@ -170,10 +172,10 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 4. OYUN NOTLARI ---
-            Text("Game Records & Notes", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.gameRecordsNotes, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (_gameNotes.isEmpty)
-              const Text("No note added for this campaign!", style: TextStyle(color: Colors.grey))
+              Text(l10n.noNoteAddedForCampaign, style: const TextStyle(color: Colors.grey))
             else
               ListView.builder(
                 shrinkWrap: true,
@@ -186,7 +188,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     child: ListTile(
                       leading: const Icon(Icons.bookmark, color: Colors.amber),
-                      title: Text(note['title'] ?? 'Nameless Note', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      title: Text(note['title'] ?? l10n.namelessNote, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                       subtitle: Text(note['content'] ?? '', maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white70)),
                     ),
                   );

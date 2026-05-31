@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 
 import '../../models/character_model.dart';
 import '../../providers/characters_provider.dart';
@@ -46,6 +47,7 @@ class _CharactersViewState extends State<CharactersView> {
   // ==================== KARAKTER EKLEME FORMU ====================
 
   Future<void> _showAddCharacterDialog(bool isGM) async {
+    final l10n = AppLocalizations.of(context)!;
     final nameController = TextEditingController();
     final backstoryController = TextEditingController();
     final hpController = TextEditingController(text: '10');
@@ -146,7 +148,7 @@ class _CharactersViewState extends State<CharactersView> {
             }
 
             return AlertDialog(
-              title: Text(isGM ? 'NPC Ekle' : 'Karakter Ekle'),
+              title: Text(isGM ? l10n.addNpc : l10n.addCharacter),
               content: SizedBox(
                 width: double.maxFinite,
                 child: SingleChildScrollView(
@@ -155,9 +157,9 @@ class _CharactersViewState extends State<CharactersView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // ─── AVATAR SEÇİMİ ───
-                      const Text(
-                        'Karakter Resmi (Opsiyonel)',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Text(
+                        l10n.characterImageOptional,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       SizedBox(
@@ -196,10 +198,10 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── İSİM ───
                       TextField(
                         controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'İsim *',
-                          hintText: 'Örn: Gandalf, Aragorn',
-                          prefixIcon: Icon(Icons.badge_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.nameWithAsterisk,
+                          hintText: l10n.nameExample,
+                          prefixIcon: const Icon(Icons.badge_outlined),
                         ),
                       ),
                       const SizedBox(height: 14),
@@ -207,9 +209,9 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── IRK (RACE) ───
                       DropdownButtonFormField<String>(
                         value: selectedRace,
-                        decoration: const InputDecoration(
-                          labelText: 'Irk (Race) *',
-                          prefixIcon: Icon(Icons.groups_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.raceWithAsterisk,
+                          prefixIcon: const Icon(Icons.groups_outlined),
                         ),
                         items: DndRaces.all
                             .map((r) => DropdownMenuItem(
@@ -225,9 +227,9 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── SINIF (CLASS) ───
                       DropdownButtonFormField<String>(
                         value: selectedClass,
-                        decoration: const InputDecoration(
-                          labelText: 'Sınıf (Class) *',
-                          prefixIcon: Icon(Icons.shield_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.classWithAsterisk,
+                          prefixIcon: const Icon(Icons.shield_outlined),
                         ),
                         items: DndClasses.all
                             .map((c) => DropdownMenuItem(
@@ -246,7 +248,7 @@ class _CharactersViewState extends State<CharactersView> {
                           const Icon(Icons.trending_up, size: 20),
                           const SizedBox(width: 8),
                           Text(
-                            'Seviye: $selectedLevel',
+                            l10n.levelLabel(selectedLevel),
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -266,9 +268,9 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── BACKGROUND ───
                       DropdownButtonFormField<String>(
                         value: selectedBackground,
-                        decoration: const InputDecoration(
-                          labelText: 'Background',
-                          prefixIcon: Icon(Icons.history_edu_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.background,
+                          prefixIcon: const Icon(Icons.history_edu_outlined),
                         ),
                         items: DndBackgrounds.all
                             .map((b) => DropdownMenuItem(
@@ -284,9 +286,9 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── ALIGNMENT ───
                       DropdownButtonFormField<CharacterAlignment>(
                         value: selectedAlignment,
-                        decoration: const InputDecoration(
-                          labelText: 'Alignment',
-                          prefixIcon: Icon(Icons.balance_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.alignment,
+                          prefixIcon: const Icon(Icons.balance_outlined),
                         ),
                         items: DndAlignments.labels.entries
                             .map(
@@ -307,14 +309,14 @@ class _CharactersViewState extends State<CharactersView> {
                       // ─── OYUN SEÇİMİ ───
                       DropdownButtonFormField<int?>(
                         value: selectedGameId,
-                        decoration: const InputDecoration(
-                          labelText: 'Oyun (opsiyonel)',
-                          prefixIcon: Icon(Icons.casino_outlined),
+                        decoration: InputDecoration(
+                          labelText: l10n.gameOptional,
+                          prefixIcon: const Icon(Icons.casino_outlined),
                         ),
                         items: [
-                          const DropdownMenuItem<int?>(
+                          DropdownMenuItem<int?>(
                             value: null,
-                            child: Text('Oyuna bağlama'),
+                            child: Text(l10n.noGameLink),
                           ),
                           ...games.map((g) => DropdownMenuItem<int?>(
                                 value: g.id,
@@ -329,16 +331,16 @@ class _CharactersViewState extends State<CharactersView> {
                       const Divider(),
 
                       // ─── ABILITY SCORES ───
-                      const Text(
-                        '⚔️ Ability Scores',
-                        style: TextStyle(
+                      Text(
+                        '⚔️ ${l10n.abilityScores}',
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Standart: 10 | Modifier otomatik hesaplanır',
+                        l10n.abilityScoresNote,
                         style: TextStyle(
                           fontSize: 11,
                           color: Colors.grey[500],
@@ -362,9 +364,9 @@ class _CharactersViewState extends State<CharactersView> {
                       const Divider(),
 
                       // ─── COMBAT STATS ───
-                      const Text(
-                        '🛡️ Combat Stats',
-                        style: TextStyle(
+                      Text(
+                        '🛡️ ${l10n.combatStats}',
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -400,7 +402,7 @@ class _CharactersViewState extends State<CharactersView> {
                         children: [
                           const Icon(Icons.speed, size: 20),
                           const SizedBox(width: 8),
-                          Text('Speed: $selectedSpeed ft'),
+                          Text(l10n.speedLabel(selectedSpeed)),
                         ],
                       ),
                       Slider(
@@ -421,11 +423,11 @@ class _CharactersViewState extends State<CharactersView> {
                       TextField(
                         controller: backstoryController,
                         maxLines: 4,
-                        decoration: const InputDecoration(
-                          labelText: 'Backstory (hikaye)',
-                          hintText: 'Karakterin geçmişi, motivasyonu...',
+                        decoration: InputDecoration(
+                          labelText: l10n.backstory,
+                          hintText: l10n.backstoryHint,
                           alignLabelWithHint: true,
-                          prefixIcon: Padding(
+                          prefixIcon: const Padding(
                             padding: EdgeInsets.only(bottom: 60),
                             child: Icon(Icons.auto_stories_outlined),
                           ),
@@ -438,7 +440,7 @@ class _CharactersViewState extends State<CharactersView> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(dialogContext),
-                  child: const Text('Vazgeç'),
+                  child: Text(l10n.cancelAction),
                 ),
                 FilledButton(
                   onPressed: () async {
@@ -447,9 +449,9 @@ class _CharactersViewState extends State<CharactersView> {
                         selectedRace == null ||
                         selectedClass == null) {
                       ScaffoldMessenger.of(this.context).showSnackBar(
-                        const SnackBar(
+                        SnackBar(
                           content:
-                              Text('İsim, Irk ve Sınıf alanları zorunludur.'),
+                              Text(l10n.nameRaceClassRequired),
                         ),
                       );
                       return;
@@ -459,7 +461,7 @@ class _CharactersViewState extends State<CharactersView> {
                         this.context.read<UserRoleProvider>().userId;
                     if (currentUserId == null) return;
 
-                    final provider = this.context.read<CharactersProvider>();
+                    final provider = context.read<CharactersProvider>();
                     final hp = int.tryParse(hpController.text.trim()) ?? 10;
                     final ac = int.tryParse(acController.text.trim()) ?? 10;
 
@@ -508,20 +510,20 @@ class _CharactersViewState extends State<CharactersView> {
                           );
 
                     if (!mounted) return;
-                    Navigator.of(this.context).pop();
-                    ScaffoldMessenger.of(this.context).showSnackBar(
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
                           success
-                              ? (isGM ? 'NPC eklendi!' : 'Karakter eklendi!')
-                              : 'Kayıt sırasında hata oluştu.',
+                              ? (isGM ? l10n.npcAdded : l10n.characterAdded)
+                              : l10n.errorDuringSave,
                         ),
                         backgroundColor:
                             success ? Colors.green : Colors.redAccent,
                       ),
                     );
                   },
-                  child: const Text('Kaydet'),
+                  child: Text(l10n.save),
                 ),
               ],
             );
@@ -540,68 +542,69 @@ class _CharactersViewState extends State<CharactersView> {
   // ==================== KARAKTER LİSTESİ ====================
 
   @override
-  Widget build(BuildContext context) {
-    final roleProvider = context.watch<UserRoleProvider>();
-    final charactersProvider = context.watch<CharactersProvider>();
-    final isGM = roleProvider.isGameMaster;
-    final characters = isGM
-        ? charactersProvider.npcCharacters.reversed.toList()
-        : charactersProvider.playerCharacters.reversed.toList();
+    Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+      final roleProvider = context.watch<UserRoleProvider>();
+      final charactersProvider = context.watch<CharactersProvider>();
+      final isGM = roleProvider.isGameMaster;
+      final characters = isGM
+          ? charactersProvider.npcCharacters.reversed.toList()
+          : charactersProvider.playerCharacters.reversed.toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(isGM ? "NPC'ler" : 'Karakterlerim'),
-        actions: [
-          IconButton(
-            onPressed: _fetchCharacters,
-            icon: const Icon(Icons.refresh),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddCharacterDialog(isGM),
-        child: const Icon(Icons.add),
-      ),
-      body: charactersProvider.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : characters.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        isGM ? Icons.smart_toy_outlined : Icons.person_outline,
-                        size: 64,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        isGM
-                            ? 'Henüz NPC eklenmemiş.'
-                            : 'Henüz karakter eklenmemiş.',
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '+ butonuna basarak oluşturabilirsin!',
-                        style: TextStyle(
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(isGM ? l10n.npcs : l10n.myCharacters),
+          actions: [
+            IconButton(
+              onPressed: _fetchCharacters,
+              icon: const Icon(Icons.refresh),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _showAddCharacterDialog(isGM),
+          child: const Icon(Icons.add),
+        ),
+        body: charactersProvider.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : characters.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          isGM ? Icons.smart_toy_outlined : Icons.person_outline,
+                          size: 64,
                           color: Colors.grey[600],
-                          fontSize: 13,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        Text(
+                          isGM
+                              ? l10n.noNpcAddedYet
+                              : l10n.noCharactersAddedYet,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n.tapPlusToCreate,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: characters.length,
+                    itemBuilder: (context, index) {
+                      final character = characters[index];
+                      return _buildCharacterCard(character, isGM);
+                    },
                   ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: characters.length,
-                  itemBuilder: (context, index) {
-                    final character = characters[index];
-                    return _buildCharacterCard(character, isGM);
-                  },
-                ),
-    );
-  }
+      );
+    }
 
   // ==================== KARAKTER KART GÖRÜNÜMÜ ====================
 
@@ -651,7 +654,7 @@ class _CharactersViewState extends State<CharactersView> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.2),
+                      color: Theme.of(context).primaryColor.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -707,7 +710,7 @@ class _CharactersViewState extends State<CharactersView> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -731,6 +734,7 @@ class _CharactersViewState extends State<CharactersView> {
   // ==================== KARAKTER DETAY POPUP ====================
 
   void _showCharacterDetails(CharacterModel character, bool isGM) {
+    final l10n = AppLocalizations.of(context)!;
     final alignmentText =
         DndAlignments.labels[character.alignment] ?? 'True Neutral';
 
@@ -758,16 +762,16 @@ class _CharactersViewState extends State<CharactersView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildDetailRow('Irk', character.race),
-              _buildDetailRow('Sınıf', character.charClass),
-              _buildDetailRow('Seviye', '${character.level}'),
-              _buildDetailRow('Alignment', alignmentText),
+              _buildDetailRow(l10n.race, character.race),
+              _buildDetailRow(l10n.charClass, character.charClass),
+              _buildDetailRow(l10n.level, '${character.level}'),
+              _buildDetailRow(l10n.alignment, alignmentText),
               if (character.background.isNotEmpty)
-                _buildDetailRow('Background', character.background),
+                _buildDetailRow(l10n.background, character.background),
               const Divider(),
-              const Text(
-                'Ability Scores',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              Text(
+                l10n.abilityScores,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -802,9 +806,9 @@ class _CharactersViewState extends State<CharactersView> {
               if (character.backstory.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 const Divider(),
-                const Text(
-                  'Backstory',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                Text(
+                  l10n.backstory,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -818,7 +822,7 @@ class _CharactersViewState extends State<CharactersView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Kapat'),
+            child: Text(l10n.close),
           ),
         ],
       ),
@@ -857,7 +861,7 @@ class _CharactersViewState extends State<CharactersView> {
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).primaryColor.withOpacity(0.4),
+          color: Theme.of(context).primaryColor.withValues(alpha: 0.4),
         ),
       ),
       child: Column(
@@ -900,3 +904,4 @@ class _CharactersViewState extends State<CharactersView> {
     );
   }
 }
+

@@ -1,6 +1,7 @@
 // lib/views/player/my_games_player_view.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/user_role_provider.dart';
 import 'player_game_details_view.dart';
@@ -27,6 +28,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final gamesProvider = context.watch<GamesProvider>();
     final myGames = gamesProvider.playerGames.reversed.toList();
     final theme = Theme.of(context);
@@ -34,17 +36,17 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Joined Games'),
+        title: Text(l10n.myJoinedGames),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: gamesProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : myGames.isEmpty
-          ? const Center(
+          ? Center(
         child: Text(
-          'You have not joined any games yet.',
-          style: TextStyle(color: Colors.grey, fontSize: 16),
+          l10n.noGamesJoined,
+          style: const TextStyle(color: Colors.grey, fontSize: 16),
         ),
       )
           : ListView.builder(
@@ -72,7 +74,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               subtitle: Text(
-                "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
+                l10n.playersJoinedLabel(game.joinedPlayerIds.length, game.maxPlayers),
                 style: const TextStyle(color: Colors.white70),
               ),
               trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16),

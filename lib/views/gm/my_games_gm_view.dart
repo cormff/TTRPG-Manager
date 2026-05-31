@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../models/game_model.dart';
@@ -28,6 +29,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     // Provider'ı dinliyoruz
     final gamesProvider = context.watch<GamesProvider>();
@@ -40,18 +42,18 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('My Games'),
+        title: Text(l10n.myGames),
       ),
       body: gamesProvider.isLoading
           ? Center(child: CircularProgressIndicator(color: theme.primaryColor))
           : games.isEmpty
-          ? _buildEmptyState(theme)
+          ? _buildEmptyState(theme, l10n)
           : ListView.builder(
         itemCount: games.length,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         itemBuilder: (context, index) {
           final game = games[index];
-          return _buildGameTile(game, theme);
+          return _buildGameTile(game, theme, l10n);
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -66,7 +68,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
   }
 
   // Artık dynamic yerine oluşturduğumuz Game modelini bekliyoruz
-  Widget _buildGameTile(Game game, ThemeData theme) {
+  Widget _buildGameTile(Game game, ThemeData theme, AppLocalizations l10n) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -91,7 +93,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                game.description.isEmpty ? 'No description...' : game.description,
+                game.description.isEmpty ? l10n.noDescription : game.description,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium,
@@ -102,7 +104,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   Icon(Icons.people, size: 14, color: theme.textTheme.bodyMedium?.color),
                   const SizedBox(width: 4),
                   Text(
-                    "${game.maxPlayers} Players",
+                    l10n.playersCountLabel(game.maxPlayers),
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                   const SizedBox(width: 12),
@@ -113,7 +115,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    game.isPublic ? 'Public' : 'Private',
+                    game.isPublic ? l10n.public : l10n.private,
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                 ],
@@ -138,7 +140,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
     );
   }
 
-  Widget _buildEmptyState(ThemeData theme) {
+  Widget _buildEmptyState(ThemeData theme, AppLocalizations l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -146,7 +148,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           Icon(Icons.map_outlined, size: 80, color: theme.hintColor),
           const SizedBox(height: 16),
           Text(
-            "No games have been created yet.",
+            l10n.noGamesCreatedYet,
             style: theme.textTheme.bodyLarge,
           ),
         ],

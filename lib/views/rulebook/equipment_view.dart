@@ -5,9 +5,10 @@ class EquipmentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DynamicRuleList(
-      title: 'Equipment', // Buradaki isim JSON'daki en üstteki key ile aynı olmalı
-      jsonPath: 'assets/data/equipment.json',
+    final isTr = Localizations.localeOf(context).languageCode == 'tr';
+    return DynamicRuleList(
+      title: isTr ? 'Ekipman' : 'Equipment', // Buradaki isim JSON'daki en üstteki key ile aynı olmalı
+      jsonPath: isTr ? 'assets/data/equipment_tr.json' : 'assets/data/equipment_en.json',
     );
   }
 }

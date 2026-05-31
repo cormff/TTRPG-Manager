@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth_provider.dart'; // Bu importu ekle
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/primary_button.dart';
 import 'register_view.dart';
-// En üste bu importu eklemeyi unutma:
 import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/maps_provider.dart';
@@ -25,6 +25,7 @@ class _LoginViewState extends State<LoginView> {
   Future<void> _login() async {
     final authProvider = context.read<AuthProvider>();
     final userRoleProvider = context.read<UserRoleProvider>();
+    final l10n = AppLocalizations.of(context)!;
 
     final userData = await authProvider.login(
       _emailController.text,
@@ -32,36 +33,28 @@ class _LoginViewState extends State<LoginView> {
     );
 
     if (userData != null) {
-      final int newUserId = userData['id']; // Yeni kullanıcının ID'sini alıyoruz
+      final int newUserId = userData['id'];
 
       userRoleProvider.setUserData(newUserId, userData['username'], _selectedRole);
 
       if (mounted) {
-        // ÇÖZÜM BURASI: Yeni hesaba geçer geçmez TÜM verileri çekiyoruz!
-
-        // 1. Notları Çek
         Provider.of<NotesProvider>(context, listen: false).fetchAllNotes(newUserId);
 
-        // 2. Rolüne göre Oyunları ve Haritaları Çek
         final gamesProvider = Provider.of<GamesProvider>(context, listen: false);
         if (_selectedRole == UserRole.gameMaster) {
-          // GM ise kendi oyunlarını ve haritalarını getir
           gamesProvider.fetchGMGames(newUserId);
           Provider.of<MapsProvider>(context, listen: false).fetchAllMaps();
         } else {
-          // Oyuncu ise katıldığı oyunları getir
-          // Not: Kendi provider'ındaki metoda göre ismi fetchJoinedGames veya fetchPlayerGames olabilir
           gamesProvider.fetchPlayerGames(newUserId);
         }
 
         Navigator.of(context).pushReplacementNamed('/main_scaffold');
       }
     } else {
-      // Giriş başarısız durumu
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Hatalı email veya şifre!'),
+          SnackBar(
+            content: Text(l10n.language == 'Dil' ? 'Hatalı email veya şifre!' : 'Invalid email or password!'),
             backgroundColor: Colors.red,
           ),
         );
@@ -72,34 +65,34 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     final isLoading = context.watch<AuthProvider>().isLoading;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      // ÇÖZÜM BURADA BAŞLIYOR: Center ve SingleChildScrollView eklendi
+      appBar: AppBar(title: Text(l10n.login)),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0), // Padding'i direkt buraya verdik
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTextField(
                 controller: _emailController,
-                labelText: 'Email',
+                labelText: l10n.email,
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16.0),
               CustomTextField(
                 controller: _passwordController,
-                labelText: 'Password',
+                labelText: l10n.password,
                 obscureText: true,
               ),
               const SizedBox(height: 16.0),
               DropdownButtonFormField<UserRole>(
                 value: _selectedRole,
-                decoration: const InputDecoration(labelText: 'Select Role'),
-                items: const [
-                  DropdownMenuItem(value: UserRole.gameMaster, child: Text('Game Master')),
-                  DropdownMenuItem(value: UserRole.player, child: Text('Player')),
+                decoration: InputDecoration(labelText: l10n.language == 'Dil' ? 'Rol Seçin' : 'Select Role'),
+                items: [
+                  DropdownMenuItem(value: UserRole.gameMaster, child: Text(l10n.gameMaster)),
+                  DropdownMenuItem(value: UserRole.player, child: Text(l10n.player)),
                 ],
                 onChanged: (UserRole? newValue) {
                   if (newValue != null) setState(() => _selectedRole = newValue);
@@ -111,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
                   ? const CircularProgressIndicator()
                   : PrimaryButton(
                 onPressed: _login,
-                text: 'Login',
+                text: l10n.login,
               ),
 
               TextButton(
@@ -121,9 +114,9 @@ class _LoginViewState extends State<LoginView> {
                     MaterialPageRoute(builder: (context) => const RegisterView()),
                   );
                 },
-                child: const Text(
-                  "Don't have an account? Register",
-                  style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                child: Text(
+                  l10n.language == 'Dil' ? "Hesabınız yok mu? Kayıt Ol" : "Don't have an account? Register",
+                  style: const TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -133,3 +126,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+

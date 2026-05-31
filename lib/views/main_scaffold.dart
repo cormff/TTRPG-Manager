@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../providers/user_role_provider.dart';
 import '../widgets/custom_drawer.dart';
 
@@ -31,25 +32,13 @@ class _MainScaffoldState extends State<MainScaffold> {
   Widget build(BuildContext context) {
     final userRoleProvider = context.watch<UserRoleProvider>();
     final isGM = userRoleProvider.isGameMaster;
+    final l10n = AppLocalizations.of(context)!;
 
-
-    final List<Widget> gmScreens = [
-      const GMDashboard(),
-      const MyGamesGMView(),
-    ];
-
-
-    final List<Widget> playerScreens = [
-      const PlayerDashboard(),
-      const MyGamesPlayerView(),
-    ];
-
-
-    final String username = Provider.of<UserRoleProvider>(context).username;
+    final String username = userRoleProvider.username;
 
     final String appBarTitle = _selectedIndex == 0
-        ? (isGM ? '$username - GM' : '$username - Player')
-        : 'My Games';
+        ? (isGM ? '$username - ${l10n.gmShort}' : '$username - ${l10n.player}')
+        : l10n.myGames;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,9 +46,8 @@ class _MainScaffoldState extends State<MainScaffold> {
         backgroundColor: Colors.deepPurple,
       ),
       drawer: const CustomDrawer(),
-
       body: isGM ? const GMDashboard() : const PlayerDashboard(),
-
     );
   }
 }
+

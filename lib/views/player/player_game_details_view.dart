@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../models/game_model.dart';
 
 class PlayerGameDetailsView extends StatelessWidget {
@@ -9,6 +10,7 @@ class PlayerGameDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
     // Eğer oyuna bağlı bir harita varsa ilkini alalım
@@ -20,7 +22,7 @@ class PlayerGameDetailsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Game Details'),
+        title: Text(l10n.gameDetails),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -47,7 +49,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    game.description.isEmpty ? "GM has not added a description yet..." : game.description,
+                    game.description.isEmpty ? l10n.noDescriptionYet : game.description,
                     style: const TextStyle(fontSize: 16, color: Colors.grey, height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -56,7 +58,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                       Icon(Icons.people, color: theme.primaryColorLight, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players Joined",
+                        l10n.playersJoinedLabel(game.joinedPlayerIds.length, game.maxPlayers),
                         style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -68,9 +70,9 @@ class PlayerGameDetailsView extends StatelessWidget {
             const SizedBox(height: 24),
 
             // --- AKTİF HARİTA KISMI ---
-            const Text(
-              "Active Map",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            Text(
+              l10n.activeMap,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 12),
 
@@ -121,7 +123,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
                       ),
                       child: Text(
-                        mapName ?? "Nameless Map",
+                        mapName ?? l10n.namelessMap,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       ),
@@ -138,11 +140,11 @@ class PlayerGameDetailsView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.grey.withOpacity(0.3), style: BorderStyle.solid),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
-                    Icon(Icons.map_outlined, size: 48, color: Colors.grey),
-                    SizedBox(height: 12),
-                    Text("GM has not added a map to this game yet.", style: TextStyle(color: Colors.grey)),
+                    const Icon(Icons.map_outlined, size: 48, color: Colors.grey),
+                    const SizedBox(height: 12),
+                    Text(l10n.noMapYet, style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),

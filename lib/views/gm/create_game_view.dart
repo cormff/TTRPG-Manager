@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/user_role_provider.dart';
 
@@ -18,6 +19,7 @@ class _CreateGameViewState extends State<CreateGameView> {
   bool _isLoading = false;
 
   void _submitForm() async {
+    final l10n = AppLocalizations.of(context)!;
     final currentUserId = Provider.of<UserRoleProvider>(context, listen: false).userId;
     if (currentUserId == null) return;
 
@@ -35,34 +37,35 @@ class _CreateGameViewState extends State<CreateGameView> {
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Oyun Başarıyla Oluşturuldu!")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.gameCreatedSuccess)));
       Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Create New Campaign')),
+      appBar: AppBar(title: Text(l10n.createNewCampaign)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Campaign Title', border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: l10n.campaignTitle, border: const OutlineInputBorder()),
             ),
             const SizedBox(height: 20),
             TextField(
               controller: _descController,
               maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: l10n.description, border: const OutlineInputBorder()),
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Max Players:"),
+                Text(l10n.maxPlayersLabel),
                 DropdownButton<int>(
                   value: _maxPlayers,
                   items: [2, 3, 4, 5, 6, 8].map((e) => DropdownMenuItem(value: e, child: Text(e.toString()))).toList(),
@@ -71,8 +74,8 @@ class _CreateGameViewState extends State<CreateGameView> {
               ],
             ),
             SwitchListTile(
-              title: const Text("Public Game"),
-              subtitle: const Text("Visible to everyone in search results"),
+              title: Text(l10n.publicGame),
+              subtitle: Text(l10n.visibleToEveryone),
               value: _isPublic,
               onChanged: (val) => setState(() => _isPublic = val),
             ),
@@ -82,7 +85,7 @@ class _CreateGameViewState extends State<CreateGameView> {
                 : ElevatedButton(
               onPressed: _submitForm,
               style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
-              child: const Text("Create Campaign"),
+              child: Text(l10n.createCampaign),
             ),
           ],
         ),

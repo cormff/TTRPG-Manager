@@ -8,7 +8,8 @@ import '../../providers/games_provider.dart';
 import '../game/game_details_view.dart';
 import '../../providers/maps_provider.dart';
 import '../../providers/characters_provider.dart';
-import '../../views/gm/my_maps_view.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
+import 'my_maps_view.dart';
 
 class GMDashboard extends StatefulWidget {
   const GMDashboard({super.key});
@@ -113,6 +114,7 @@ class _GMDashboardState extends State<GMDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final notesProvider = context.watch<NotesProvider>();
     final allGmNotes = notesProvider.gmNotes.reversed.toList();
     final displayNotes = allGmNotes.take(5).toList();
@@ -136,7 +138,7 @@ class _GMDashboardState extends State<GMDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Games"),
+              _buildSectionHeader(l10n.games),
               const SizedBox(height: 8),
               gamesProvider.isLoading
                   ? const SizedBox(
@@ -197,7 +199,7 @@ class _GMDashboardState extends State<GMDashboard> {
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               ),
                               const SizedBox(height: 4),
-                              Text("${game.maxPlayers} Players", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
+                              Text("${game.maxPlayers} ${l10n.players}", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
                             ],
                           ),
                         ),
@@ -210,7 +212,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 2. KARAKTERLER KISMI ---
-              _buildSectionHeader("NPC's"),
+              _buildSectionHeader(l10n.npcs),
               const SizedBox(height: 8),
               charactersProvider.isLoading
                   ? const SizedBox(
@@ -286,7 +288,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 3. HARİTALAR KISMI ---
-              _buildSectionHeader("Maps"), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
+              _buildSectionHeader(l10n.maps), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
               const SizedBox(height: 8),
 
               SizedBox(
@@ -298,7 +300,7 @@ class _GMDashboardState extends State<GMDashboard> {
                     }
 
                     if (mapsProvider.allMaps.isEmpty) {
-                      return const Text("No maps has been added yet.", style: TextStyle(color: Colors.grey));
+                      return Text(l10n.noMapsAdded, style: const TextStyle(color: Colors.grey));
                     }
 
                     return ListView.builder(
@@ -395,13 +397,13 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 4. NOTLAR KISMI ---
-              _buildSectionHeader("Notes"),
+              _buildSectionHeader(l10n.notes),
               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes has been added yet.", style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text(l10n.noNotesAdded, style: const TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -452,7 +454,7 @@ class _GMDashboardState extends State<GMDashboard> {
                       Navigator.pushNamed(context, "/notes");
                     },
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: Text(l10n.seeAllNotes),
                   ),
                 ),
               ),
@@ -463,3 +465,4 @@ class _GMDashboardState extends State<GMDashboard> {
     );
   }
 }
+
