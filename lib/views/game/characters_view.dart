@@ -6,14 +6,14 @@ import '../../providers/characters_provider.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/games_provider.dart';
 
+import 'package:ttrpg_manager/providers/language_manager.dart';
+
 class CharactersView extends StatefulWidget {
   const CharactersView({super.key});
 
   @override
   State<CharactersView> createState() => _CharactersViewState();
 }
-
-
 
 class _CharactersViewState extends State<CharactersView> {
   static const List<String> availableAvatars = [
@@ -60,10 +60,8 @@ class _CharactersViewState extends State<CharactersView> {
     int selectedSpeed = 30;
     CharacterAlignment selectedAlignment = CharacterAlignment.trueNeutral;
 
-    // Ability Scores
     int str = 10, dex = 10, con = 10, intl = 10, wis = 10, cha = 10;
 
-    // Kullanıcının oyunlarını çek (Game ID dropdown için)
     final gamesProvider = context.read<GamesProvider>();
     final userRoleProvider = context.read<UserRoleProvider>();
     final userId = userRoleProvider.userId;
@@ -80,65 +78,37 @@ class _CharactersViewState extends State<CharactersView> {
       builder: (dialogContext) {
         return StatefulBuilder(
           builder: (dialogContext, setDialogState) {
-            final games = isGM
-                ? gamesProvider.gmGames
-                : gamesProvider.playerGames;
+            final games = isGM ? gamesProvider.gmGames : gamesProvider.playerGames;
 
-            // Ability score satırı oluşturan yardımcı widget
-            Widget buildAbilityRow(
-              String label,
-              int value,
-              ValueChanged<int> onChanged,
-            ) {
+            Widget buildAbilityRow(String label, int value, ValueChanged<int> onChanged) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Row(
                   children: [
                     SizedBox(
                       width: 40,
-                      child: Text(
-                        label,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
+                      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                     ),
                     IconButton(
                       icon: const Icon(Icons.remove_circle_outline, size: 20),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
-                      onPressed: value > 1
-                          ? () => onChanged(value - 1)
-                          : null,
+                      onPressed: value > 1 ? () => onChanged(value - 1) : null,
                     ),
                     SizedBox(
                       width: 30,
-                      child: Text(
-                        '$value',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: Text('$value', textAlign: TextAlign.center, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
                     IconButton(
                       icon: const Icon(Icons.add_circle_outline, size: 20),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
-                      onPressed: value < 20
-                          ? () => onChanged(value + 1)
-                          : null,
+                      onPressed: value < 20 ? () => onChanged(value + 1) : null,
                     ),
                     const SizedBox(width: 8),
-                    // Modifier gösterimi
                     Text(
                       _getModifier(value),
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey[400],
-                      ),
+                      style: TextStyle(fontSize: 12, color: Theme.of(dialogContext).colorScheme.onSurface.withOpacity(0.5)),
                     ),
                   ],
                 ),
@@ -146,7 +116,7 @@ class _CharactersViewState extends State<CharactersView> {
             }
 
             return AlertDialog(
-              title: Text(isGM ? 'NPC Ekle' : 'Karakter Ekle'),
+              title: Text(context.tr(isGM ? 'NPC Ekle' : 'Karakter Ekle')),
               content: SizedBox(
                 width: double.maxFinite,
                 child: SingleChildScrollView(
@@ -154,11 +124,7 @@ class _CharactersViewState extends State<CharactersView> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // ─── AVATAR SEÇİMİ ───
-                      const Text(
-                        'Karakter Resmi (Opsiyonel)',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                      Text(context.tr('Karakter Resmi (Opsiyonel)'), style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
                       SizedBox(
                         height: 70,
@@ -169,23 +135,17 @@ class _CharactersViewState extends State<CharactersView> {
                             final avatarPath = availableAvatars[index];
                             final isSelected = selectedAvatarUrl == avatarPath;
                             return GestureDetector(
-                              onTap: () => setDialogState(
-                                  () => selectedAvatarUrl = avatarPath),
+                              onTap: () => setDialogState(() => selectedAvatarUrl = avatarPath),
                               child: Container(
                                 margin: const EdgeInsets.only(right: 12),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: isSelected
-                                        ? Theme.of(dialogContext).primaryColor
-                                        : Colors.transparent,
+                                    color: isSelected ? Theme.of(dialogContext).primaryColor : Colors.transparent,
                                     width: 3,
                                   ),
                                 ),
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: AssetImage(avatarPath),
-                                ),
+                                child: CircleAvatar(radius: 30, backgroundImage: AssetImage(avatarPath)),
                               ),
                             );
                           },
@@ -193,181 +153,117 @@ class _CharactersViewState extends State<CharactersView> {
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── İSİM ───
                       TextField(
                         controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'İsim *',
-                          hintText: 'Örn: Gandalf, Aragorn',
-                          prefixIcon: Icon(Icons.badge_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('İsim *'),
+                          hintText: context.tr('Örn: Gandalf, Aragorn'),
+                          prefixIcon: const Icon(Icons.badge_outlined),
                         ),
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── IRK (RACE) ───
                       DropdownButtonFormField<String>(
                         value: selectedRace,
-                        decoration: const InputDecoration(
-                          labelText: 'Irk (Race) *',
-                          prefixIcon: Icon(Icons.groups_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('Irk (Race) *'),
+                          prefixIcon: const Icon(Icons.groups_outlined),
                         ),
-                        items: DndRaces.all
-                            .map((r) => DropdownMenuItem(
-                                  value: r,
-                                  child: Text(r),
-                                ))
-                            .toList(),
-                        onChanged: (val) =>
-                            setDialogState(() => selectedRace = val),
+                        items: DndRaces.all.map((r) => DropdownMenuItem(value: r, child: Text(r))).toList(),
+                        onChanged: (val) => setDialogState(() => selectedRace = val),
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── SINIF (CLASS) ───
                       DropdownButtonFormField<String>(
                         value: selectedClass,
-                        decoration: const InputDecoration(
-                          labelText: 'Sınıf (Class) *',
-                          prefixIcon: Icon(Icons.shield_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('Sınıf (Class) *'),
+                          prefixIcon: const Icon(Icons.shield_outlined),
                         ),
-                        items: DndClasses.all
-                            .map((c) => DropdownMenuItem(
-                                  value: c,
-                                  child: Text(c),
-                                ))
-                            .toList(),
-                        onChanged: (val) =>
-                            setDialogState(() => selectedClass = val),
+                        items: DndClasses.all.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
+                        onChanged: (val) => setDialogState(() => selectedClass = val),
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── SEVİYE (LEVEL) — Slider ───
                       Row(
                         children: [
                           const Icon(Icons.trending_up, size: 20),
                           const SizedBox(width: 8),
-                          Text(
-                            'Seviye: $selectedLevel',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text('${context.tr('Seviye:')} $selectedLevel', style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       ),
                       Slider(
                         value: selectedLevel.toDouble(),
-                        min: 1,
-                        max: 20,
-                        divisions: 19,
+                        min: 1, max: 20, divisions: 19,
                         label: selectedLevel.toString(),
                         activeColor: Theme.of(dialogContext).primaryColor,
-                        onChanged: (val) =>
-                            setDialogState(() => selectedLevel = val.round()),
+                        onChanged: (val) => setDialogState(() => selectedLevel = val.round()),
                       ),
                       const SizedBox(height: 6),
 
-                      // ─── BACKGROUND ───
                       DropdownButtonFormField<String>(
                         value: selectedBackground,
-                        decoration: const InputDecoration(
-                          labelText: 'Background',
-                          prefixIcon: Icon(Icons.history_edu_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('Background'),
+                          prefixIcon: const Icon(Icons.history_edu_outlined),
                         ),
-                        items: DndBackgrounds.all
-                            .map((b) => DropdownMenuItem(
-                                  value: b,
-                                  child: Text(b),
-                                ))
-                            .toList(),
-                        onChanged: (val) =>
-                            setDialogState(() => selectedBackground = val),
+                        items: DndBackgrounds.all.map((b) => DropdownMenuItem(value: b, child: Text(b))).toList(),
+                        onChanged: (val) => setDialogState(() => selectedBackground = val),
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── ALIGNMENT ───
                       DropdownButtonFormField<CharacterAlignment>(
                         value: selectedAlignment,
-                        decoration: const InputDecoration(
-                          labelText: 'Alignment',
-                          prefixIcon: Icon(Icons.balance_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('Alignment'),
+                          prefixIcon: const Icon(Icons.balance_outlined),
                         ),
-                        items: DndAlignments.labels.entries
-                            .map(
-                              (item) => DropdownMenuItem(
-                                value: item.key,
-                                child: Text(item.value),
-                              ),
-                            )
-                            .toList(),
+                        items: DndAlignments.labels.entries.map((item) => DropdownMenuItem(value: item.key, child: Text(item.value))).toList(),
                         onChanged: (value) {
-                          if (value != null) {
-                            setDialogState(() => selectedAlignment = value);
-                          }
+                          if (value != null) setDialogState(() => selectedAlignment = value);
                         },
                       ),
                       const SizedBox(height: 14),
 
-                      // ─── OYUN SEÇİMİ ───
                       DropdownButtonFormField<int?>(
                         value: selectedGameId,
-                        decoration: const InputDecoration(
-                          labelText: 'Oyun (opsiyonel)',
-                          prefixIcon: Icon(Icons.casino_outlined),
+                        decoration: InputDecoration(
+                          labelText: context.tr('Oyun (opsiyonel)'),
+                          prefixIcon: const Icon(Icons.casino_outlined),
                         ),
                         items: [
-                          const DropdownMenuItem<int?>(
-                            value: null,
-                            child: Text('Oyuna bağlama'),
-                          ),
-                          ...games.map((g) => DropdownMenuItem<int?>(
-                                value: g.id,
-                                child: Text(g.title),
-                              )),
+                          DropdownMenuItem<int?>(value: null, child: Text(context.tr('Oyuna bağlama'))),
+                          ...games.map((g) => DropdownMenuItem<int?>(value: g.id, child: Text(g.title))),
                         ],
-                        onChanged: (val) =>
-                            setDialogState(() => selectedGameId = val),
+                        onChanged: (val) => setDialogState(() => selectedGameId = val),
                       ),
 
                       const SizedBox(height: 20),
                       const Divider(),
 
-                      // ─── ABILITY SCORES ───
-                      const Text(
-                        '⚔️ Ability Scores',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Text(
+                        '⚔️ ${context.tr('Ability Scores')}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Standart: 10 | Modifier otomatik hesaplanır',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey[500],
-                        ),
+                        context.tr('Standart: 10 | Modifier otomatik hesaplanır'),
+                        style: TextStyle(fontSize: 11, color: Theme.of(dialogContext).colorScheme.onSurface.withOpacity(0.6)),
                       ),
                       const SizedBox(height: 8),
-                      buildAbilityRow(
-                          'STR', str, (v) => setDialogState(() => str = v)),
-                      buildAbilityRow(
-                          'DEX', dex, (v) => setDialogState(() => dex = v)),
-                      buildAbilityRow(
-                          'CON', con, (v) => setDialogState(() => con = v)),
-                      buildAbilityRow(
-                          'INT', intl, (v) => setDialogState(() => intl = v)),
-                      buildAbilityRow(
-                          'WIS', wis, (v) => setDialogState(() => wis = v)),
-                      buildAbilityRow(
-                          'CHA', cha, (v) => setDialogState(() => cha = v)),
+                      buildAbilityRow('STR', str, (v) => setDialogState(() => str = v)),
+                      buildAbilityRow('DEX', dex, (v) => setDialogState(() => dex = v)),
+                      buildAbilityRow('CON', con, (v) => setDialogState(() => con = v)),
+                      buildAbilityRow('INT', intl, (v) => setDialogState(() => intl = v)),
+                      buildAbilityRow('WIS', wis, (v) => setDialogState(() => wis = v)),
+                      buildAbilityRow('CHA', cha, (v) => setDialogState(() => cha = v)),
 
                       const SizedBox(height: 16),
                       const Divider(),
 
-                      // ─── COMBAT STATS ───
-                      const Text(
-                        '🛡️ Combat Stats',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Text(
+                        '🛡️ ${context.tr('Combat Stats')}',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -376,10 +272,7 @@ class _CharactersViewState extends State<CharactersView> {
                             child: TextField(
                               controller: hpController,
                               keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: 'HP',
-                                prefixIcon: Icon(Icons.favorite_outline),
-                              ),
+                              decoration: const InputDecoration(labelText: 'HP', prefixIcon: Icon(Icons.favorite_outline)),
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -387,10 +280,7 @@ class _CharactersViewState extends State<CharactersView> {
                             child: TextField(
                               controller: acController,
                               keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: 'AC',
-                                prefixIcon: Icon(Icons.shield),
-                              ),
+                              decoration: const InputDecoration(labelText: 'AC', prefixIcon: Icon(Icons.shield)),
                             ),
                           ),
                         ],
@@ -400,32 +290,28 @@ class _CharactersViewState extends State<CharactersView> {
                         children: [
                           const Icon(Icons.speed, size: 20),
                           const SizedBox(width: 8),
-                          Text('Speed: $selectedSpeed ft'),
+                          Text('${context.tr('Speed:')} $selectedSpeed ft'),
                         ],
                       ),
                       Slider(
                         value: selectedSpeed.toDouble(),
-                        min: 20,
-                        max: 50,
-                        divisions: 6,
+                        min: 20, max: 50, divisions: 6,
                         label: '$selectedSpeed ft',
                         activeColor: Colors.teal,
-                        onChanged: (val) =>
-                            setDialogState(() => selectedSpeed = val.round()),
+                        onChanged: (val) => setDialogState(() => selectedSpeed = val.round()),
                       ),
 
                       const SizedBox(height: 16),
                       const Divider(),
 
-                      // ─── BACKSTORY ───
                       TextField(
                         controller: backstoryController,
                         maxLines: 4,
-                        decoration: const InputDecoration(
-                          labelText: 'Backstory (hikaye)',
-                          hintText: 'Karakterin geçmişi, motivasyonu...',
+                        decoration: InputDecoration(
+                          labelText: context.tr('Backstory (hikaye)'),
+                          hintText: context.tr('Karakterin geçmişi, motivasyonu...'),
                           alignLabelWithHint: true,
-                          prefixIcon: Padding(
+                          prefixIcon: const Padding(
                             padding: EdgeInsets.only(bottom: 60),
                             child: Icon(Icons.auto_stories_outlined),
                           ),
@@ -438,25 +324,18 @@ class _CharactersViewState extends State<CharactersView> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(dialogContext),
-                  child: const Text('Vazgeç'),
+                  child: Text(context.tr('Vazgeç')),
                 ),
                 FilledButton(
                   onPressed: () async {
-                    // Validasyon
-                    if (nameController.text.trim().isEmpty ||
-                        selectedRace == null ||
-                        selectedClass == null) {
+                    if (nameController.text.trim().isEmpty || selectedRace == null || selectedClass == null) {
                       ScaffoldMessenger.of(this.context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('İsim, Irk ve Sınıf alanları zorunludur.'),
-                        ),
+                        SnackBar(content: Text(context.tr('İsim, Irk ve Sınıf alanları zorunludur.'))),
                       );
                       return;
                     }
 
-                    final currentUserId =
-                        this.context.read<UserRoleProvider>().userId;
+                    final currentUserId = this.context.read<UserRoleProvider>().userId;
                     if (currentUserId == null) return;
 
                     final provider = this.context.read<CharactersProvider>();
@@ -465,63 +344,26 @@ class _CharactersViewState extends State<CharactersView> {
 
                     final success = isGM
                         ? await provider.addNpcCharacter(
-                            gmId: currentUserId,
-                            name: nameController.text.trim(),
-                            race: selectedRace!,
-                            charClass: selectedClass!,
-                            level: selectedLevel,
-                            background: selectedBackground ?? '',
-                            alignment: selectedAlignment,
-                            gameId: selectedGameId,
-                            strength: str,
-                            dexterity: dex,
-                            constitution: con,
-                            intelligence: intl,
-                            wisdom: wis,
-                            charisma: cha,
-                            hitPoints: hp,
-                            armorClass: ac,
-                            speed: selectedSpeed,
-                            backstory: backstoryController.text.trim(),
-                            avatarUrl: selectedAvatarUrl ?? '',
-                          )
+                        gmId: currentUserId, name: nameController.text.trim(), race: selectedRace!, charClass: selectedClass!, level: selectedLevel,
+                        background: selectedBackground ?? '', alignment: selectedAlignment, gameId: selectedGameId, strength: str, dexterity: dex,
+                        constitution: con, intelligence: intl, wisdom: wis, charisma: cha, hitPoints: hp, armorClass: ac, speed: selectedSpeed,
+                        backstory: backstoryController.text.trim(), avatarUrl: selectedAvatarUrl ?? '')
                         : await provider.addPlayerCharacter(
-                            userId: currentUserId,
-                            name: nameController.text.trim(),
-                            race: selectedRace!,
-                            charClass: selectedClass!,
-                            level: selectedLevel,
-                            background: selectedBackground ?? '',
-                            alignment: selectedAlignment,
-                            gameId: selectedGameId,
-                            strength: str,
-                            dexterity: dex,
-                            constitution: con,
-                            intelligence: intl,
-                            wisdom: wis,
-                            charisma: cha,
-                            hitPoints: hp,
-                            armorClass: ac,
-                            speed: selectedSpeed,
-                            backstory: backstoryController.text.trim(),
-                            avatarUrl: selectedAvatarUrl ?? '',
-                          );
+                        userId: currentUserId, name: nameController.text.trim(), race: selectedRace!, charClass: selectedClass!, level: selectedLevel,
+                        background: selectedBackground ?? '', alignment: selectedAlignment, gameId: selectedGameId, strength: str, dexterity: dex,
+                        constitution: con, intelligence: intl, wisdom: wis, charisma: cha, hitPoints: hp, armorClass: ac, speed: selectedSpeed,
+                        backstory: backstoryController.text.trim(), avatarUrl: selectedAvatarUrl ?? '');
 
                     if (!mounted) return;
                     Navigator.of(this.context).pop();
                     ScaffoldMessenger.of(this.context).showSnackBar(
                       SnackBar(
-                        content: Text(
-                          success
-                              ? (isGM ? 'NPC eklendi!' : 'Karakter eklendi!')
-                              : 'Kayıt sırasında hata oluştu.',
-                        ),
-                        backgroundColor:
-                            success ? Colors.green : Colors.redAccent,
+                        content: Text(success ? (isGM ? context.tr('NPC eklendi!') : context.tr('Karakter eklendi!')) : context.tr('Kayıt sırasında hata oluştu.')),
+                        backgroundColor: success ? Colors.green : Colors.redAccent,
                       ),
                     );
                   },
-                  child: const Text('Kaydet'),
+                  child: Text(context.tr('Kaydet')),
                 ),
               ],
             );
@@ -531,7 +373,6 @@ class _CharactersViewState extends State<CharactersView> {
     );
   }
 
-  // D&D 5e ability modifier hesaplama
   String _getModifier(int score) {
     final mod = ((score - 10) / 2).floor();
     return mod >= 0 ? '(+$mod)' : '($mod)';
@@ -544,18 +385,13 @@ class _CharactersViewState extends State<CharactersView> {
     final roleProvider = context.watch<UserRoleProvider>();
     final charactersProvider = context.watch<CharactersProvider>();
     final isGM = roleProvider.isGameMaster;
-    final characters = isGM
-        ? charactersProvider.npcCharacters.reversed.toList()
-        : charactersProvider.playerCharacters.reversed.toList();
+    final characters = isGM ? charactersProvider.npcCharacters.reversed.toList() : charactersProvider.playerCharacters.reversed.toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isGM ? "NPC'ler" : 'Karakterlerim'),
+        title: Text(isGM ? context.tr("NPC'ler") : context.tr('Karakterlerim')),
         actions: [
-          IconButton(
-            onPressed: _fetchCharacters,
-            icon: const Icon(Icons.refresh),
-          ),
+          IconButton(onPressed: _fetchCharacters, icon: const Icon(Icons.refresh)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -565,49 +401,39 @@ class _CharactersViewState extends State<CharactersView> {
       body: charactersProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : characters.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        isGM ? Icons.smart_toy_outlined : Icons.person_outline,
-                        size: 64,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        isGM
-                            ? 'Henüz NPC eklenmemiş.'
-                            : 'Henüz karakter eklenmemiş.',
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '+ butonuna basarak oluşturabilirsin!',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: characters.length,
-                  itemBuilder: (context, index) {
-                    final character = characters[index];
-                    return _buildCharacterCard(character, isGM);
-                  },
-                ),
+          ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(isGM ? Icons.smart_toy_outlined : Icons.person_outline, size: 64, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4)),
+            const SizedBox(height: 16),
+            Text(
+              isGM ? context.tr('Henüz NPC eklenmemiş.') : context.tr('Henüz karakter eklenmemiş.'),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              context.tr('+ butonuna basarak oluşturabilirsin!'),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5), fontSize: 13),
+            ),
+          ],
+        ),
+      )
+          : ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: characters.length,
+        itemBuilder: (context, index) {
+          final character = characters[index];
+          return _buildCharacterCard(character, isGM);
+        },
+      ),
     );
   }
 
   // ==================== KARAKTER KART GÖRÜNÜMÜ ====================
 
   Widget _buildCharacterCard(CharacterModel character, bool isGM) {
-    final alignmentText =
-        DndAlignments.labels[character.alignment] ?? 'True Neutral';
+    final alignmentText = DndAlignments.labels[character.alignment] ?? 'True Neutral';
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -621,79 +447,44 @@ class _CharactersViewState extends State<CharactersView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Üst satır: İsim + Level
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
                       if (character.avatarUrl.isNotEmpty)
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundImage: AssetImage(character.avatarUrl),
-                        )
+                        CircleAvatar(radius: 14, backgroundImage: AssetImage(character.avatarUrl))
                       else
-                        Icon(
-                          isGM ? Icons.smart_toy : Icons.person_outline,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                        Icon(isGM ? Icons.smart_toy : Icons.person_outline, color: Theme.of(context).primaryColor),
                       const SizedBox(width: 8),
-                      Text(
-                        character.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
+                      Text(character.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     ],
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      'Lv.${character.level}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 13,
-                      ),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(color: Theme.of(context).primaryColor.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
+                    child: Text('Lv.${character.level}', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor, fontSize: 13)),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-
-              // Orta satır: Race • Class • Alignment
               Text(
                 '${character.race} • ${character.charClass}',
-                style: TextStyle(color: Colors.grey[400], fontSize: 14),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontSize: 14),
               ),
               const SizedBox(height: 2),
               Text(
                 alignmentText,
-                style: TextStyle(
-                  color: Theme.of(context).primaryColorLight,
-                  fontSize: 12,
-                  fontStyle: FontStyle.italic,
-                ),
+                style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 12, fontStyle: FontStyle.italic),
               ),
               const SizedBox(height: 8),
-
-              // Alt satır: HP / AC / Speed chip'leri
               Row(
                 children: [
-                  _buildStatChip(
-                      Icons.favorite, '${character.hitPoints}', Colors.red),
+                  _buildStatChip(Icons.favorite, '${character.hitPoints}', Colors.red),
                   const SizedBox(width: 8),
-                  _buildStatChip(
-                      Icons.shield, '${character.armorClass}', Colors.blue),
+                  _buildStatChip(Icons.shield, '${character.armorClass}', Colors.blue),
                   const SizedBox(width: 8),
-                  _buildStatChip(
-                      Icons.speed, '${character.speed} ft', Colors.teal),
+                  _buildStatChip(Icons.speed, '${character.speed} ft', Colors.teal),
                 ],
               ),
             ],
@@ -706,23 +497,13 @@ class _CharactersViewState extends State<CharactersView> {
   Widget _buildStatChip(IconData icon, String value, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: BoxDecoration(color: color.withOpacity(0.15), borderRadius: BorderRadius.circular(8)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 14, color: color),
           const SizedBox(width: 4),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
+          Text(value, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color)),
         ],
       ),
     );
@@ -731,8 +512,7 @@ class _CharactersViewState extends State<CharactersView> {
   // ==================== KARAKTER DETAY POPUP ====================
 
   void _showCharacterDetails(CharacterModel character, bool isGM) {
-    final alignmentText =
-        DndAlignments.labels[character.alignment] ?? 'True Neutral';
+    final alignmentText = DndAlignments.labels[character.alignment] ?? 'True Neutral';
 
     showDialog(
       context: context,
@@ -740,15 +520,9 @@ class _CharactersViewState extends State<CharactersView> {
         title: Row(
           children: [
             if (character.avatarUrl.isNotEmpty)
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage(character.avatarUrl),
-              )
+              CircleAvatar(radius: 18, backgroundImage: AssetImage(character.avatarUrl))
             else
-              Icon(
-                isGM ? Icons.smart_toy : Icons.person_outline,
-                color: Theme.of(context).primaryColor,
-              ),
+              Icon(isGM ? Icons.smart_toy : Icons.person_outline, color: Theme.of(context).primaryColor),
             const SizedBox(width: 8),
             Expanded(child: Text(character.name)),
           ],
@@ -758,34 +532,23 @@ class _CharactersViewState extends State<CharactersView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildDetailRow('Irk', character.race),
-              _buildDetailRow('Sınıf', character.charClass),
-              _buildDetailRow('Seviye', '${character.level}'),
-              _buildDetailRow('Alignment', alignmentText),
-              if (character.background.isNotEmpty)
-                _buildDetailRow('Background', character.background),
+              _buildDetailRow(context.tr('Irk'), character.race),
+              _buildDetailRow(context.tr('Sınıf'), character.charClass),
+              _buildDetailRow(context.tr('Seviye'), '${character.level}'),
+              _buildDetailRow(context.tr('Alignment'), alignmentText),
+              if (character.background.isNotEmpty) _buildDetailRow(context.tr('Background'), character.background),
               const Divider(),
-              const Text(
-                'Ability Scores',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
+              Text(context.tr('Ability Scores'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
               const SizedBox(height: 8),
               Wrap(
-                spacing: 12,
-                runSpacing: 8,
+                spacing: 12, runSpacing: 8,
                 children: [
-                  _buildAbilityChip(
-                      'STR', character.strength),
-                  _buildAbilityChip(
-                      'DEX', character.dexterity),
-                  _buildAbilityChip(
-                      'CON', character.constitution),
-                  _buildAbilityChip(
-                      'INT', character.intelligence),
-                  _buildAbilityChip(
-                      'WIS', character.wisdom),
-                  _buildAbilityChip(
-                      'CHA', character.charisma),
+                  _buildAbilityChip('STR', character.strength),
+                  _buildAbilityChip('DEX', character.dexterity),
+                  _buildAbilityChip('CON', character.constitution),
+                  _buildAbilityChip('INT', character.intelligence),
+                  _buildAbilityChip('WIS', character.wisdom),
+                  _buildAbilityChip('CHA', character.charisma),
                 ],
               ),
               const SizedBox(height: 12),
@@ -795,31 +558,21 @@ class _CharactersViewState extends State<CharactersView> {
                 children: [
                   _buildCombatStat('HP', '${character.hitPoints}', Colors.red),
                   _buildCombatStat('AC', '${character.armorClass}', Colors.blue),
-                  _buildCombatStat(
-                      'SPD', '${character.speed}ft', Colors.teal),
+                  _buildCombatStat('SPD', '${character.speed}ft', Colors.teal),
                 ],
               ),
               if (character.backstory.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 const Divider(),
-                const Text(
-                  'Backstory',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
+                Text(context.tr('Backstory'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 const SizedBox(height: 4),
-                Text(
-                  character.backstory,
-                  style: TextStyle(color: Colors.grey[400], height: 1.5),
-                ),
+                Text(character.backstory, style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7), height: 1.5)),
               ],
             ],
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Kapat'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.tr('Kapat'))),
         ],
       ),
     );
@@ -833,13 +586,7 @@ class _CharactersViewState extends State<CharactersView> {
         children: [
           SizedBox(
             width: 90,
-            child: Text(
-              '$label:',
-              style: TextStyle(
-                color: Colors.grey[500],
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: Text('$label:', style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontWeight: FontWeight.bold)),
           ),
           Expanded(child: Text(value)),
         ],
@@ -856,27 +603,13 @@ class _CharactersViewState extends State<CharactersView> {
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: Theme.of(context).primaryColor.withOpacity(0.4),
-        ),
+        border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.4)),
       ),
       child: Column(
         children: [
-          Text(
-            label,
-            style: TextStyle(fontSize: 11, color: Colors.grey[500]),
-          ),
-          Text(
-            '$score',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          Text(
-            modStr,
-            style: TextStyle(
-              fontSize: 11,
-              color: mod >= 0 ? Colors.greenAccent : Colors.redAccent,
-            ),
-          ),
+          Text(label, style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6))),
+          Text('$score', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(modStr, style: TextStyle(fontSize: 11, color: mod >= 0 ? Colors.greenAccent : Colors.redAccent)),
         ],
       ),
     );
@@ -885,17 +618,9 @@ class _CharactersViewState extends State<CharactersView> {
   Widget _buildCombatStat(String label, String value, Color color) {
     return Column(
       children: [
-        Text(label,
-            style: TextStyle(fontSize: 12, color: Colors.grey[500])),
+        Text(label, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6))),
         const SizedBox(height: 4),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
+        Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
       ],
     );
   }

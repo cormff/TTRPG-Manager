@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../models/game_model.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class PlayerGameDetailsView extends StatelessWidget {
   final Game game;
@@ -20,7 +21,7 @@ class PlayerGameDetailsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Game Details'),
+        title: Text(context.tr('Game Details')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -138,11 +139,11 @@ class PlayerGameDetailsView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.grey.withOpacity(0.3), style: BorderStyle.solid),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Icon(Icons.map_outlined, size: 48, color: Colors.grey),
                     SizedBox(height: 12),
-                    Text("GM has not added a map to this game yet.", style: TextStyle(color: Colors.grey)),
+                    Text(context.tr('GM has not added a map to this game yet.'), style: TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),

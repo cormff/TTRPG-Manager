@@ -9,6 +9,7 @@ import '../game/game_details_view.dart';
 import '../../providers/maps_provider.dart';
 import '../../providers/characters_provider.dart';
 import '../../views/gm/my_maps_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class GMDashboard extends StatefulWidget {
   const GMDashboard({super.key});
@@ -136,7 +137,7 @@ class _GMDashboardState extends State<GMDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Games"),
+              _buildSectionHeader(context.tr('Games')),
               const SizedBox(height: 8),
               gamesProvider.isLoading
                   ? const SizedBox(
@@ -197,7 +198,7 @@ class _GMDashboardState extends State<GMDashboard> {
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               ),
                               const SizedBox(height: 4),
-                              Text("${game.maxPlayers} Players", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
+                              Text("${game.maxPlayers} ${context.tr('Oyuncu')}", style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6))),
                             ],
                           ),
                         ),
@@ -210,7 +211,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 2. KARAKTERLER KISMI ---
-              _buildSectionHeader("NPC's"),
+              _buildSectionHeader(context.tr('NPCs')),
               const SizedBox(height: 8),
               charactersProvider.isLoading
                   ? const SizedBox(
@@ -270,10 +271,11 @@ class _GMDashboardState extends State<GMDashboard> {
                             ),
                           ),
                           Text(
-                            'Lv.${npc.level}',
+                            '${context.tr('Lv.')}${npc.level}',
                             style: TextStyle(
                               fontSize: 11,
-                              color: Colors.grey[400],
+                              // ÇÖZÜM: Aydınlık/Karanlık temaya göre otomatik renklenen dinamik gri
+                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                             ),
                           ),
                         ],
@@ -286,7 +288,7 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 3. HARİTALAR KISMI ---
-              _buildSectionHeader("Maps"), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
+              _buildSectionHeader(context.tr('Maps')), // YENİ: Başlık diğerleriyle tam aynı hizaya alındı
               const SizedBox(height: 8),
 
               SizedBox(
@@ -298,7 +300,7 @@ class _GMDashboardState extends State<GMDashboard> {
                     }
 
                     if (mapsProvider.allMaps.isEmpty) {
-                      return const Text("No maps has been added yet.", style: TextStyle(color: Colors.grey));
+                      return Text(context.tr('No maps has been added yet.'), style: TextStyle(color: Colors.grey));
                     }
 
                     return ListView.builder(
@@ -395,13 +397,13 @@ class _GMDashboardState extends State<GMDashboard> {
               const SizedBox(height: 24),
 
               // --- 4. NOTLAR KISMI ---
-              _buildSectionHeader("Notes"),
+              _buildSectionHeader(context.tr('Notes')),
               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes has been added yet.", style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text(context.tr('No notes has been added yet.'), style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -432,10 +434,12 @@ class _GMDashboardState extends State<GMDashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 2),
-                          Text(note.content, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.grey[400], fontSize: 13)),
+                          // ÇÖZÜM: Dinamik gri renk yapıldı
+                          Text(note.content, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontSize: 13)),
                           if (displayTag.isNotEmpty) ...[
                             const SizedBox(height: 4),
-                            Text(displayTag, style: TextStyle(fontSize: 10, color: Theme.of(context).primaryColorLight, fontWeight: FontWeight.bold)),
+                            // ÇÖZÜM: Light yerine ana primaryColor kullanıldı (iki temada da okunur)
+                            Text(displayTag, style: TextStyle(fontSize: 10, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
                           ]
                         ],
                       ),
@@ -452,7 +456,7 @@ class _GMDashboardState extends State<GMDashboard> {
                       Navigator.pushNamed(context, "/notes");
                     },
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: Text(context.tr('See all notes')),
                   ),
                 ),
               ),

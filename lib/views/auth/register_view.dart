@@ -4,6 +4,7 @@ import '../../providers/auth_provider.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/primary_button.dart';
 import 'login_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -33,7 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: Text(context.tr('Register')),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -72,7 +73,7 @@ class _RegisterViewState extends State<RegisterView> {
                 // Şifre kontrolü (confirm password)
                 if (_passwordController.text != _confirmPasswordController.text) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Passwords do not match!")),
+                    SnackBar(content: Text(context.tr('Passwords do not match!'))),
                   );
                   return;
                 }
@@ -80,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                 // Boş alan kontrolü
                 if (_usernameController.text.isEmpty || _emailController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please fill all fields")),
+                    SnackBar(content: Text(context.tr('Please fill all fields'))),
                   );
                   return;
                 }

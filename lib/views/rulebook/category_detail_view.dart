@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/rule_models.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class CategoryDetailView extends StatelessWidget {
   final RuleCategory category;
@@ -45,10 +46,10 @@ class CategoryDetailView extends StatelessWidget {
             ),
           ),
           if (coreItems.isNotEmpty) ...[
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-                child: Text("CORE FEATURES", style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
+                child: Text(context.tr('CORE FEATURES'), style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
               ),
             ),
             SliverPadding(
@@ -62,10 +63,10 @@ class CategoryDetailView extends StatelessWidget {
             ),
           ],
           if (levelItems.isNotEmpty) ...[
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-                child: Text("CLASS PROGRESSION", style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
+                child: Text(context.tr('CLASS PROGRESSION'), style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
               ),
             ),
             SliverPadding(

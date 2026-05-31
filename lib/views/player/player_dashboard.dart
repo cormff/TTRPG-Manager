@@ -5,6 +5,7 @@ import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/characters_provider.dart';
 import 'player_game_details_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class PlayerDashboard extends StatefulWidget {
   const PlayerDashboard({super.key});
@@ -123,7 +124,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. OYUNLAR KISMI ---
-              _buildSectionHeader("Games"),
+              _buildSectionHeader(context.tr('Games')),
               const SizedBox(height: 8),
 
               gamesProvider.isLoading
@@ -186,10 +187,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                  "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
-                                  style: TextStyle(fontSize: 11, color: Colors.grey[400])
-                              ),
+                              Text("${game.maxPlayers} ${context.tr('Oyuncu')}", style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6))),
                             ],
                           ),
                         ),
@@ -201,7 +199,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Characters"),
+              _buildSectionHeader(context.tr('Characters')),
               const SizedBox(height: 8),
               charactersProvider.isLoading
                   ? const SizedBox(
@@ -285,13 +283,13 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
 
               const SizedBox(height: 24),
 
-              _buildSectionHeader("Notes"),
-              const SizedBox(height: 8),
+              _buildSectionHeader(context.tr('Notes')),
+               const SizedBox(height: 8),
 
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes have been created yet.", style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text(context.tr('No notes have been created yet.'), style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -319,11 +317,13 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 2), // Başlık ile metin arası
-                          Text(note.content, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.grey[400], fontSize: 13)),
+                          const SizedBox(height: 2),
+                          // ÇÖZÜM: Dinamik gri renk yapıldı
+                          Text(note.content, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), fontSize: 13)),
                           if (displayTag.isNotEmpty) ...[
-                            const SizedBox(height: 4), // Metin ile tag arası
-                            Text(displayTag, style: TextStyle(fontSize: 10, color: Theme.of(context).primaryColorLight, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 4),
+                            // ÇÖZÜM: Light yerine ana primaryColor kullanıldı (iki temada da okunur)
+                            Text(displayTag, style: TextStyle(fontSize: 10, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
                           ]
                         ],
                       ),
@@ -338,7 +338,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   child: TextButton.icon(
                     onPressed: () => Navigator.pushNamed(context, "/notes"),
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: Text(context.tr('See all notes')),
                   ),
                 ),
               ),

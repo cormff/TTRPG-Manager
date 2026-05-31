@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/providers/characters_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart'; // YENİ: Dil yöneticisi eklendi
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -17,7 +18,7 @@ class CustomDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: <Widget>[
               SafeArea(
-                bottom: false, // Alt tarafta güvenli alan bırakma
+                bottom: false,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -25,7 +26,6 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      // Role göre değişen şık bir ikon
                       Icon(
                         isGameMaster
                             ? Icons.auto_awesome
@@ -35,13 +35,14 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        isGameMaster ? 'Game Master' : 'Player',
+                        // YENİ: Başlıklar çeviriye bağlandı
+                        isGameMaster ? context.tr('Game Master') : context.tr('Player'),
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              letterSpacing: 1.2,
-                            ),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 1.2,
+                        ),
                       ),
                     ],
                   ),
@@ -53,22 +54,24 @@ class CustomDrawer extends StatelessWidget {
               else
                 ..._buildPlayerMenuItems(context, userRoleProvider),
               const Divider(),
+
+              _buildDrawerItem(
+                context: context,
+                icon: Icons.settings,
+                text: context.tr('Settings'), // YENİ: Çeviri
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/settings');
+                },
+              ),
+
               _buildDrawerItem(
                 context: context,
                 icon: Icons.logout,
-                text: 'Logout',
+                text: context.tr('Logout'), // YENİ: Çeviri
                 onTap: () {
-                  // 1. Önce eski kullanıcının notlarını RAM'den (hafızadan) temizliyoruz
-                  Provider.of<NotesProvider>(
-                    context,
-                    listen: false,
-                  ).clearData();
-                  Provider.of<CharactersProvider>(
-                    context,
-                    listen: false,
-                  ).clearData();
-
-                  // 2. Rolü sıfırlayıp Login sayfasına geri dönüyoruz
+                  Provider.of<NotesProvider>(context, listen: false).clearData();
+                  Provider.of<CharactersProvider>(context, listen: false).clearData();
                   userRoleProvider.setUserRole(UserRole.player);
                   Navigator.of(context).pushReplacementNamed('/login');
                 },
@@ -81,14 +84,14 @@ class CustomDrawer extends StatelessWidget {
   }
 
   List<Widget> _buildGMMenuItems(
-    BuildContext context,
-    UserRoleProvider userRoleProvider,
-  ) {
+      BuildContext context,
+      UserRoleProvider userRoleProvider,
+      ) {
     return [
       _buildDrawerItem(
         context: context,
         icon: Icons.gamepad,
-        text: 'My Games',
+        text: context.tr('My Games'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_games_gm_view');
@@ -97,7 +100,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.add_box,
-        text: 'Create Game',
+        text: context.tr('Create Game'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/create_game');
@@ -106,7 +109,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.map,
-        text: 'My Maps',
+        text: context.tr('My Maps'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_maps');
@@ -115,7 +118,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.groups_2,
-        text: "NPC'ler",
+        text: context.tr("NPCs"), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/characters');
@@ -124,7 +127,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.note,
-        text: 'Notes',
+        text: context.tr('Notes'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/notes');
@@ -133,7 +136,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.book,
-        text: 'Rule Books',
+        text: context.tr('Rule Books'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/rule_books');
@@ -142,7 +145,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
-        text: 'Change to Player View',
+        text: context.tr('Change to Player View'), // YENİ: Çeviri
         onTap: () {
           userRoleProvider.setUserRole(UserRole.player);
           Navigator.pop(context);
@@ -152,14 +155,14 @@ class CustomDrawer extends StatelessWidget {
   }
 
   List<Widget> _buildPlayerMenuItems(
-    BuildContext context,
-    UserRoleProvider userRoleProvider,
-  ) {
+      BuildContext context,
+      UserRoleProvider userRoleProvider,
+      ) {
     return [
       _buildDrawerItem(
         context: context,
         icon: Icons.group_add,
-        text: 'Join Game',
+        text: context.tr('Join Game'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/join_game');
@@ -168,7 +171,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.gamepad,
-        text: 'My Games',
+        text: context.tr('My Games'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_games_player_view');
@@ -177,7 +180,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.groups,
-        text: 'Characters',
+        text: context.tr('Characters'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/characters');
@@ -186,7 +189,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.note,
-        text: 'Notes',
+        text: context.tr('Notes'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/notes');
@@ -195,7 +198,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.book,
-        text: 'Rule Books',
+        text: context.tr('Rule Books'), // YENİ: Çeviri
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/rule_books');
@@ -204,7 +207,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
-        text: 'Change to GM View',
+        text: context.tr('Change to GM View'), // YENİ: Çeviri
         onTap: () {
           userRoleProvider.setUserRole(UserRole.gameMaster);
           Navigator.pop(context);
@@ -213,7 +216,6 @@ class CustomDrawer extends StatelessWidget {
     ];
   }
 
-  // DÜZELTİLEN METOT: BuildContext parametre olarak eklendi
   Widget _buildDrawerItem({
     required BuildContext context,
     required IconData icon,

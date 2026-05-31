@@ -5,6 +5,7 @@ import '../../providers/games_provider.dart';
 import '../../models/game_model.dart';
 import '../../views/game/game_details_view.dart';
 import '../../views/gm/finished_game_details_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class MyGamesGMView extends StatefulWidget {
   const MyGamesGMView({super.key});
@@ -40,18 +41,18 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('My Games'),
+        title: Text(context.tr('My Games')),
       ),
       body: gamesProvider.isLoading
           ? Center(child: CircularProgressIndicator(color: theme.primaryColor))
           : games.isEmpty
-          ? _buildEmptyState(theme)
+          ? _buildEmptyState(context, theme) // Context eklendi
           : ListView.builder(
         itemCount: games.length,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         itemBuilder: (context, index) {
           final game = games[index];
-          return _buildGameTile(game, theme);
+          return _buildGameTile(context, game, theme); // Context eklendi
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -65,8 +66,10 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
     );
   }
 
-  // Artık dynamic yerine oluşturduğumuz Game modelini bekliyoruz
-  Widget _buildGameTile(Game game, ThemeData theme) {
+  // Context parametresi eklendi
+  Widget _buildGameTile(BuildContext context, Game game, ThemeData theme) {
+    final textColor = theme.colorScheme.onSurface;
+
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -82,7 +85,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           child: Icon(Icons.casino, color: theme.primaryColor, size: 30),
         ),
         title: Text(
-          game.title, // game['title'] yerine game.title
+          game.title,
           style: theme.textTheme.titleLarge,
         ),
         subtitle: Padding(
@@ -91,30 +94,30 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                game.description.isEmpty ? 'No description...' : game.description,
+                game.description.isEmpty ? context.tr('No description...') : game.description,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium?.copyWith(color: textColor.withOpacity(0.7)),
               ),
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.people, size: 14, color: theme.textTheme.bodyMedium?.color),
+                  Icon(Icons.people, size: 14, color: textColor.withOpacity(0.6)),
                   const SizedBox(width: 4),
                   Text(
-                    "${game.maxPlayers} Players",
-                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
+                    "${game.maxPlayers} ${context.tr('Players')}",
+                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12, color: textColor.withOpacity(0.6)),
                   ),
                   const SizedBox(width: 12),
                   Icon(
                     game.isPublic ? Icons.public : Icons.lock,
                     size: 14,
-                    color: theme.textTheme.bodyMedium?.color,
+                    color: textColor.withOpacity(0.6),
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    game.isPublic ? 'Public' : 'Private',
-                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
+                    game.isPublic ? context.tr('Public') : context.tr('Private'),
+                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12, color: textColor.withOpacity(0.6)),
                   ),
                 ],
               ),
@@ -126,28 +129,29 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           if (game.isFinished) {
             Navigator.push(context, MaterialPageRoute(builder: (context) => FinishedGameDetailsView(game: game)));
           } else {
-          // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GameDetailsView(game: game),
-            ),
-          ); }
+            // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameDetailsView(game: game),
+              ),
+            ); }
         },
       ),
     );
   }
 
-  Widget _buildEmptyState(ThemeData theme) {
+  // Context parametresi eklendi
+  Widget _buildEmptyState(BuildContext context, ThemeData theme) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.map_outlined, size: 80, color: theme.hintColor),
+          Icon(Icons.map_outlined, size: 80, color: theme.colorScheme.onSurface.withOpacity(0.4)),
           const SizedBox(height: 16),
           Text(
-            "No games have been created yet.",
-            style: theme.textTheme.bodyLarge,
+            context.tr('No games have been created yet.'),
+            style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6)),
           ),
         ],
       ),

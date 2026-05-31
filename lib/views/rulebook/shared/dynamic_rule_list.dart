@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../models/rule_models.dart';
 import '../category_detail_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class DynamicRuleList extends StatefulWidget {
   final String title;
@@ -294,7 +295,7 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
         future: _futureRuleData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
-          if (!snapshot.hasData || snapshot.data!.isEmpty) return const Center(child: Text("No data found."));
+          if (!snapshot.hasData || snapshot.data!.isEmpty) return Center(child: Text(context.tr('No data found.')));
 
           final ruleData = snapshot.data!;
           final generalItems = ruleData.where((c) => c.isGeneralInfo).toList();
@@ -384,7 +385,7 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
-                        child: const Text("CORE RULES & GUIDES", style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                        child: Text(context.tr('CORE RULES & GUIDES'), style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
                       ),
                       const SizedBox(height: 8),
                       Text(category.title, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/user_role_provider.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class JoinGameView extends StatefulWidget {
   const JoinGameView({super.key});
@@ -49,7 +50,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
+        SnackBar(content: Text(context.tr('You have successfully joined the game!')), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -59,8 +60,7 @@ class _JoinGameViewState extends State<JoinGameView> {
     }
   }
 
-  // Kutuya girilen ID ile katılma
-// Kutuya girilen Davet Kodu (Invite Code) ile katılma
+  // Kutuya girilen Davet Kodu (Invite Code) ile katılma
   void _joinByCode() async {
     final code = _codeController.text.trim();
     if (code.isEmpty) return;
@@ -82,7 +82,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
+        SnackBar(content: Text(context.tr('You have successfully joined the game!')), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -102,7 +102,7 @@ class _JoinGameViewState extends State<JoinGameView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Find Games'),
+        title: Text(context.tr('Find Games')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -112,9 +112,9 @@ class _JoinGameViewState extends State<JoinGameView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // --- 1. DAVET KODU KISMI (PRIVATE OYUNLAR İÇİN) ---
-            const Text(
-              "Join to a Private Game",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            Text(
+              context.tr('Join to a Private Game'),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 8),
             Row(
@@ -125,7 +125,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                     keyboardType: TextInputType.text, // YENİ: Artık harf de girebilirler
                     textCapitalization: TextCapitalization.characters, // Otomatik büyük harf
                     decoration: InputDecoration(
-                      hintText: "Ex: A7X9BQ",
+                      hintText: context.tr('Ex: A7X9BQ'),
                       filled: true,
                       fillColor: theme.cardColor,
                       border: OutlineInputBorder(
@@ -144,7 +144,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text("Join", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                  child: Text(context.tr('Join'), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
               ],
             ),
@@ -152,9 +152,9 @@ class _JoinGameViewState extends State<JoinGameView> {
             const SizedBox(height: 32),
 
             // --- 2. HALKA AÇIK OYUNLAR LİSTESİ ---
-            const Text(
-              "Public Games",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            Text(
+              context.tr('Public Games'),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 12),
 
@@ -162,7 +162,7 @@ class _JoinGameViewState extends State<JoinGameView> {
               child: gamesProvider.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : publicGames.isEmpty
-                  ? const Center(child: Text("No public games have been created yet.", style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text(context.tr('No public games have been created yet.'), style: const TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 itemCount: publicGames.length,
                 itemBuilder: (context, index) {
@@ -201,7 +201,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            game.description.isEmpty ? "No description..." : game.description,
+                            game.description.isEmpty ? context.tr('No description...') : game.description,
                             style: const TextStyle(color: Colors.grey, fontSize: 13),
                           ),
                           const SizedBox(height: 12),
@@ -226,9 +226,9 @@ class _JoinGameViewState extends State<JoinGameView> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
                               child: Text(
-                                isMyCreatedGame ? "Your Game" :
-                                isAlreadyJoined ? "Already Joined" :
-                                isFull ? "World is full" : "Join Game",
+                                isMyCreatedGame ? context.tr('Your Game') :
+                                isAlreadyJoined ? context.tr('Already Joined') :
+                                isFull ? context.tr('World is full') : context.tr('Join Game'),
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),

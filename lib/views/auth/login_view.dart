@@ -9,6 +9,7 @@ import 'register_view.dart';
 import '../../providers/notes_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/maps_provider.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -60,8 +61,8 @@ class _LoginViewState extends State<LoginView> {
       // Giriş başarısız durumu
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Hatalı email veya şifre!'),
+          SnackBar(
+            content: Text(context.tr('Hatalı email veya şifre!')),
             backgroundColor: Colors.red,
           ),
         );
@@ -74,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
     final isLoading = context.watch<AuthProvider>().isLoading;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: Text(context.tr('Login'))),
       // ÇÖZÜM BURADA BAŞLIYOR: Center ve SingleChildScrollView eklendi
       body: Center(
         child: SingleChildScrollView(
@@ -97,9 +98,9 @@ class _LoginViewState extends State<LoginView> {
               DropdownButtonFormField<UserRole>(
                 value: _selectedRole,
                 decoration: const InputDecoration(labelText: 'Select Role'),
-                items: const [
-                  DropdownMenuItem(value: UserRole.gameMaster, child: Text('Game Master')),
-                  DropdownMenuItem(value: UserRole.player, child: Text('Player')),
+                items: [
+                  DropdownMenuItem(value: UserRole.gameMaster, child: Text(context.tr('Game Master'))),
+                  DropdownMenuItem(value: UserRole.player, child: Text(context.tr('Player'))),
                 ],
                 onChanged: (UserRole? newValue) {
                   if (newValue != null) setState(() => _selectedRole = newValue);

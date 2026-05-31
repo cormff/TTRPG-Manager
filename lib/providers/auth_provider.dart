@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -22,11 +23,11 @@ class AuthProvider with ChangeNotifier {
 
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarılı!")),
+        SnackBar(content: Text(context.tr('Kayıt Başarılı!'))),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarısız! Sunucuyu kontrol edin.")),
+        SnackBar(content: Text(context.tr('Kayıt Başarısız! Sunucuyu kontrol edin.'))),
       );
     }
   }

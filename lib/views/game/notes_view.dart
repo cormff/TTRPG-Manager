@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 import 'package:ttrpg_manager/models/note_model.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -16,17 +17,14 @@ class _NotesViewState extends State<NotesView> {
   @override
   void initState() {
     super.initState();
-    // Sayfa ilk oluşturulduğunda (Kullanıcı Notes sekmesine tıkladığında) notları çek
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final notesProvider = context.read<NotesProvider>();
       final userRoleProvider = context.read<UserRoleProvider>();
 
-      // 1. Güncel kullanıcının ID'sini alıyoruz
       final userId = userRoleProvider.userId;
 
-      // 2. ID null değilse ve listeler boşsa veritabanından çekme işlemini başlatıyoruz
       if (userId != null && notesProvider.gmNotes.isEmpty && notesProvider.playerNotes.isEmpty) {
-        notesProvider.fetchAllNotes(userId); // <--- Eksik olan parametreyi verdik
+        notesProvider.fetchAllNotes(userId);
       }
     });
   }
@@ -36,7 +34,6 @@ class _NotesViewState extends State<NotesView> {
     final userRoleProvider = Provider.of<UserRoleProvider>(context);
     final notesProvider = Provider.of<NotesProvider>(context);
 
-    // EĞER VERİLER ÇEKİLİYORSA EKRANDA LOADING GÖSTER
     if (notesProvider.isLoading) {
       return const Scaffold(
         body: Center(
@@ -48,7 +45,9 @@ class _NotesViewState extends State<NotesView> {
     final bool isGM = userRoleProvider.isGameMaster;
     final String username = userRoleProvider.username;
     final notes = isGM ? notesProvider.gmNotes : notesProvider.playerNotes;
-    final String appBarTitle = '$username\'s ${isGM ? 'GM' : 'Player'} Notes';
+
+    // ÇÖZÜM: İsim ve Notlar kısmı dinamik çeviriye bağlandı
+    final String appBarTitle = '$username - ${isGM ? context.tr('GM Notes') : context.tr('Player Notes')}';
 
     return Scaffold(
       appBar: AppBar(
@@ -61,15 +60,15 @@ class _NotesViewState extends State<NotesView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.note_alt_outlined, size: 64, color: Colors.grey[600]),
+            Icon(Icons.note_alt_outlined, size: 64, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)),
             const SizedBox(height: 16),
             Text(
-              'No adventure notes yet.',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey),
+              context.tr('No adventure notes yet.'),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
             ),
             Text(
-              'Tap + to record your journey!',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+              context.tr('Tap + to record your journey!'),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)),
             ),
           ],
         ),
@@ -80,10 +79,6 @@ class _NotesViewState extends State<NotesView> {
         itemBuilder: (context, index) {
           final note = notes[index];
 
-          final String displayTag = note.tag != null
-              ? (note.subTag != null && note.subTag!.isNotEmpty ? '${note.tag} • ${note.subTag}' : note.tag!)
-              : '';
-
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -91,11 +86,11 @@ class _NotesViewState extends State<NotesView> {
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               title: Row(
-                crossAxisAlignment: CrossAxisAlignment.start, // Uzun başlıklarda kutuların yukarıda kalmasını sağlar
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0), // Metin ile kutular arasına nefes payı
+                      padding: const EdgeInsets.only(right: 8.0),
                       child: Text(
                         note.title,
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -105,9 +100,8 @@ class _NotesViewState extends State<NotesView> {
                   if (note.tag != null)
                     Column(
                       mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end, // Kutuları sağa yaslar
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        // 1. ANA KATEGORİ KUTUCUĞU
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
@@ -116,7 +110,7 @@ class _NotesViewState extends State<NotesView> {
                             border: Border.all(color: _getTagColor(note.tag!)),
                           ),
                           child: Text(
-                            note.tag!,
+                            context.tr(note.tag!), // Kategori ismi çevirildi
                             style: TextStyle(
                               fontSize: 10,
                               color: _getTagColor(note.tag!),
@@ -125,19 +119,18 @@ class _NotesViewState extends State<NotesView> {
                           ),
                         ),
 
-                        // 2. ALT KATEGORİ KUTUCUĞU (Eğer varsa gösterilir)
                         if (note.subTag != null && note.subTag!.isNotEmpty)
                           Padding(
-                            padding: const EdgeInsets.only(top: 4.0), // İki kutu arasına boşluk
+                            padding: const EdgeInsets.only(top: 4.0),
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
-                                color: Colors.transparent, // Ana kategoriyle karışmaması için şeffaf arka plan
+                                color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: _getTagColor(note.tag!).withOpacity(0.6)),
                               ),
                               child: Text(
-                                note.subTag!,
+                                context.tr(note.subTag!), // Alt kategori ismi çevirildi
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: _getTagColor(note.tag!).withOpacity(0.9),
@@ -156,7 +149,7 @@ class _NotesViewState extends State<NotesView> {
                   note.content,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.grey[400]),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)), // Tema ile dinamik renk
                 ),
               ),
               trailing: Row(
@@ -182,7 +175,7 @@ class _NotesViewState extends State<NotesView> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToNoteForm(context, isGM: isGM),
         icon: const Icon(Icons.add),
-        label: const Text('New Note'),
+        label: Text(context.tr('New Note')),
       ),
     );
   }
@@ -193,11 +186,10 @@ class _NotesViewState extends State<NotesView> {
     final contentController = TextEditingController(text: note?.content);
 
     String? selectedTag = note?.tag;
-    String? selectedSubTag = note?.subTag; // Yeni eklenen subTag
+    String? selectedSubTag = note?.subTag;
 
     final List<String> tags = ['NPC', 'Quest', 'Loot', 'Location', 'Combat', 'Other'];
 
-    // Alt kategorilerin haritası (Map)
     final Map<String, List<String>> subCategories = {
       'NPC': ['Villager', 'Merchant', 'Guard', 'Noble', 'Wizard', 'Monster'],
       'Quest': ['Main Story', 'Side Quest', 'Bounty', 'Escort', 'Gathering'],
@@ -214,7 +206,7 @@ class _NotesViewState extends State<NotesView> {
         builder: (context) => StatefulBuilder(
           builder: (context, setState) => Scaffold(
             appBar: AppBar(
-              title: Text(isEditing ? 'Edit Note' : (isGM ? 'New GM Entry' : 'New Player Log')),
+              title: Text(isEditing ? context.tr('Edit Note') : (isGM ? context.tr('New GM Entry') : context.tr('New Player Log'))),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.check),
@@ -228,7 +220,7 @@ class _NotesViewState extends State<NotesView> {
                           titleController.text,
                           contentController.text,
                           tag: selectedTag,
-                          subTag: selectedSubTag, // Provider'a subTag gönderiliyor
+                          subTag: selectedSubTag,
                         );
                       } else {
                         provider.addNote(
@@ -237,7 +229,7 @@ class _NotesViewState extends State<NotesView> {
                           isGM ? NoteType.gm : NoteType.player,
                           currentUserId!,
                           tag: selectedTag,
-                          subTag: selectedSubTag, // Provider'a subTag gönderiliyor
+                          subTag: selectedSubTag,
                         );
                       }
                       Navigator.pop(context);
@@ -253,29 +245,28 @@ class _NotesViewState extends State<NotesView> {
                   TextField(
                     controller: titleController,
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      hintText: 'e.g. The Mysterious Stranger',
-                      border: UnderlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: context.tr('Title'),
+                      hintText: context.tr('e.g. The Mysterious Stranger'),
+                      border: const UnderlineInputBorder(),
                     ),
                   ),
                   const SizedBox(height: 24),
 
-                  // ANA KATEGORİ
                   DropdownButtonFormField<String>(
                     value: selectedTag,
                     isExpanded: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Category',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.category_outlined),
+                    decoration: InputDecoration(
+                      labelText: context.tr('Category'),
+                      border: const OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.category_outlined),
                     ),
                     items: tags.map((t) => DropdownMenuItem(
-                      value: t,
+                      value: t, // Value İngilizce kalıyor (DB için)
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(t),
+                          Text(context.tr(t)), // Ekranda Çevirisi görünüyor
                           Icon(
                             _getTagIcon(t),
                             color: _getTagColor(t),
@@ -287,25 +278,24 @@ class _NotesViewState extends State<NotesView> {
                     onChanged: (val) {
                       setState(() {
                         selectedTag = val;
-                        selectedSubTag = null; // Ana kategori değiştiğinde alt kategoriyi sıfırla!
+                        selectedSubTag = null;
                       });
                     },
                   ),
 
-                  // ALT KATEGORİ (Sadece ana kategori seçiliyse ve alt kategorisi varsa görünür)
                   if (selectedTag != null && subCategories[selectedTag]!.isNotEmpty) ...[
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
                       value: selectedSubTag,
                       isExpanded: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Sub-Category (Optional)',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.subdirectory_arrow_right),
+                      decoration: InputDecoration(
+                        labelText: context.tr('Sub-Category (Optional)'),
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.subdirectory_arrow_right),
                       ),
                       items: subCategories[selectedTag]!.map((sub) => DropdownMenuItem(
-                        value: sub,
-                        child: Text(sub),
+                        value: sub, // DB için İngilizce kalıyor
+                        child: Text(context.tr(sub)), // Ekranda çevirisi görünüyor
                       )).toList(),
                       onChanged: (val) => setState(() => selectedSubTag = val),
                     ),
@@ -314,10 +304,10 @@ class _NotesViewState extends State<NotesView> {
                   const SizedBox(height: 24),
                   TextField(
                     controller: contentController,
-                    decoration: const InputDecoration(
-                      labelText: 'Details',
-                      hintText: 'Write down what happened...',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      labelText: context.tr('Details'),
+                      hintText: context.tr('Write down what happened...'),
+                      border: const OutlineInputBorder(),
                       alignLabelWithHint: true,
                     ),
                     maxLines: 15,
@@ -357,16 +347,16 @@ class _NotesViewState extends State<NotesView> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Note?'),
-        content: const Text('Are you sure you want to delete this note?'),
+        title: Text(context.tr('Delete Note?')),
+        content: Text(context.tr('Are you sure you want to delete this note?')),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(context.tr('Cancel'))),
           TextButton(
             onPressed: () {
               provider.deleteNote(id);
               Navigator.pop(context);
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: Text(context.tr('Delete'), style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -374,10 +364,6 @@ class _NotesViewState extends State<NotesView> {
   }
 
   void _showNoteDetails(BuildContext context, Note note, bool isGM) {
-    final String displayTag = note.tag != null
-        ? (note.subTag != null ? '${note.tag} • ${note.subTag}' : note.tag!)
-        : '';
-
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -386,7 +372,8 @@ class _NotesViewState extends State<NotesView> {
           children: [
             if (note.tag != null)
               Chip(
-                label: Text(displayTag, style: const TextStyle(fontSize: 12)),
+                // Detay popup'ında da çevrilmiş halleri görünür
+                label: Text(note.subTag != null ? '${context.tr(note.tag!)} • ${context.tr(note.subTag!)}' : context.tr(note.tag!), style: const TextStyle(fontSize: 12)),
                 backgroundColor: _getTagColor(note.tag!).withOpacity(0.2),
               ),
             Text(note.title),
@@ -398,7 +385,7 @@ class _NotesViewState extends State<NotesView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Back'),
+            child: Text(context.tr('Back')),
           ),
           ElevatedButton.icon(
             onPressed: () {
@@ -406,7 +393,7 @@ class _NotesViewState extends State<NotesView> {
               _navigateToNoteForm(context, isGM: isGM, note: note);
             },
             icon: const Icon(Icons.edit, size: 18),
-            label: const Text('Edit'),
+            label: Text(context.tr('Edit')),
           ),
         ],
       ),

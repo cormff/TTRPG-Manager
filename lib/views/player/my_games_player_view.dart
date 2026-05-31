@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/user_role_provider.dart';
 import 'player_game_details_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class MyGamesPlayerView extends StatefulWidget {
   const MyGamesPlayerView({super.key});
@@ -34,7 +35,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Joined Games'),
+        title: Text(context.tr('My Joined Games')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

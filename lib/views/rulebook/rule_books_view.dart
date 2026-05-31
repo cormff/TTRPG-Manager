@@ -4,6 +4,7 @@ import 'races_view.dart';
 import 'classes_view.dart';
 import 'spells_view.dart';
 import 'monsters_view.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 class RuleBooksView extends StatelessWidget {
   const RuleBooksView({super.key});
@@ -12,7 +13,7 @@ class RuleBooksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rule Books'),
+        title: Text(context.tr('Rule Books')),
         centerTitle: true,
       ),
       body: ListView(
