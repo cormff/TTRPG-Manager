@@ -21,7 +21,7 @@ class GameService {
           "title": title,
           "description": description,
           "maxPlayers": maxPlayers,
-          "isPublic": isPublic,
+          "publicGame": isPublic,
           "gmId": gmId, // <--- BURAYI DA JSON'A EKLEDİK
         }),
       );

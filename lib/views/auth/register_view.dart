@@ -33,7 +33,7 @@ class _RegisterViewState extends State<RegisterView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text(context.tr('Register')),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -72,7 +72,7 @@ class _RegisterViewState extends State<RegisterView> {
                 // Şifre kontrolü (confirm password)
                 if (_passwordController.text != _confirmPasswordController.text) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Passwords do not match!")),
+                    const SnackBar(content: Text(context.tr('Passwords do not match!'))),
                   );
                   return;
                 }
@@ -80,7 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                 // Boş alan kontrolü
                 if (_usernameController.text.isEmpty || _emailController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please fill all fields")),
+                    const SnackBar(content: Text(context.tr('Please fill all fields'))),
                   );
                   return;
                 }

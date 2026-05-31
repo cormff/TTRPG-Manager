@@ -98,14 +98,14 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Game successfully updated!"), backgroundColor: Colors.green),
+          const SnackBar(content: Text(context.tr('Game successfully updated!')), backgroundColor: Colors.green),
         );
         setState(() => _isEditing = false);
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Update failed. Try again later."), backgroundColor: Colors.red),
+          const SnackBar(content: Text(context.tr('Update failed. Try again later.')), backgroundColor: Colors.red),
         );
       }
     }
@@ -117,7 +117,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
       Clipboard.setData(ClipboardData(text: widget.game.inviteCode!));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Invitation code copied: ${widget.game.inviteCode}"),
+          content: Text(context.tr('Invitation code copied: ${widget.game.inviteCode}')),
           backgroundColor: Theme.of(context).primaryColor,
           duration: const Duration(seconds: 2),
         ),
@@ -172,7 +172,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Game invitation code", style: TextStyle(color: Colors.grey[400], fontSize: 12)),
+                        Text(context.tr('Game invitation code'), style: TextStyle(color: Colors.grey[400], fontSize: 12)),
                         const SizedBox(height: 4),
                         SelectableText(
                           widget.game.inviteCode!,
@@ -236,7 +236,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Max Player:", style: TextStyle(color: primaryLight, fontSize: 16)),
+                          Text(context.tr('Max Player:'), style: TextStyle(color: primaryLight, fontSize: 16)),
                           _isEditing
                               ? DropdownButton<int>(
                             value: _maxPlayers,
@@ -244,7 +244,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                             items: [2, 3, 4, 5, 6, 8].map((e) => DropdownMenuItem(value: e, child: Text(e.toString(), style: const TextStyle(color: Colors.white)))).toList(),
                             onChanged: (val) => setState(() => _maxPlayers = val!),
                           )
-                              : Text("$_maxPlayers", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
+                              : Text(context.tr('$_maxPlayers'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
                         ],
                       ),
                     ),
@@ -252,7 +252,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text("Public Game", style: TextStyle(color: primaryLight, fontSize: 16)),
+                      title: Text(context.tr('Public Game'), style: TextStyle(color: primaryLight, fontSize: 16)),
                       activeColor: Colors.white,
                       activeTrackColor: primaryColor,
                       inactiveThumbColor: Colors.grey,
@@ -273,7 +273,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                 child: ElevatedButton.icon(
                   onPressed: _saveChanges,
                   icon: const Icon(Icons.save),
-                  label: const Text("Save Changes"),
+                  label: const Text(context.tr('Save Changes')),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: primaryColor,
@@ -295,14 +295,14 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         context: context,
                         builder: (context) => AlertDialog(
                           backgroundColor: theme.cardColor,
-                          title: const Text("Finish Campaing", style: TextStyle(color: Colors.white)),
-                          content: const Text("Are you sure you want to finish this campaign? This action cannot be undone!", style: TextStyle(color: Colors.white70)),
+                          title: const Text(context.tr('Finish Campaing'), style: TextStyle(color: Colors.white)),
+                          content: const Text(context.tr('Are you sure you want to finish this campaign? This action cannot be undone!'), style: TextStyle(color: Colors.white70)),
                           actions: [
-                            TextButton(onPressed: () => Navigator.pop(context, false), child: const Text("İptal", style: TextStyle(color: Colors.grey))),
+                            TextButton(onPressed: () => Navigator.pop(context, false), child: const Text(context.tr('İptal'), style: TextStyle(color: Colors.grey))),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                               onPressed: () => Navigator.pop(context, true),
-                              child: const Text("Yes, end the game", style: TextStyle(color: Colors.white)),
+                              child: const Text(context.tr('Yes, end the game'), style: TextStyle(color: Colors.white)),
                             ),
                           ],
                         ),
@@ -313,12 +313,12 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         final success = await context.read<GamesProvider>().finishGame(widget.game.id!, widget.game.gmId);
                         if (success && context.mounted) {
                           Navigator.pop(context); // Detay sayfasını kapatıp listeye dön
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Game successfully finished!"), backgroundColor: Colors.green));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(context.tr('Game successfully finished!')), backgroundColor: Colors.green));
                         }
                       }
                     },
                     icon: const Icon(Icons.archive, color: Colors.redAccent),
-                    label: const Text("End Campaing", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                    label: const Text(context.tr('End Campaing'), style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       side: const BorderSide(color: Colors.redAccent, width: 1.5),
@@ -333,7 +333,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Linked Maps", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
+                  Text(context.tr('Linked Maps'), style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
                   IconButton(
                     icon: Icon(Icons.add_box, color: primaryColor, size: 28),
                     onPressed: () {
@@ -341,7 +341,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                       if (allMaps.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Firstly a map has to be added to map pool!")),
+                          const SnackBar(content: Text(context.tr('Firstly a map has to be added to map pool!'))),
                         );
                         return;
                       }
@@ -386,7 +386,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                                             if (success && context.mounted) {
                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                const SnackBar(content: Text("Map linked!"), backgroundColor: Colors.green),
+                                                const SnackBar(content: Text(context.tr('Map linked!')), backgroundColor: Colors.green),
                                               );
                                             }
                                           },
@@ -447,7 +447,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         children: [
                           Icon(Icons.map, size: 40, color: primaryColor.withOpacity(0.7)),
                           const SizedBox(height: 8),
-                          Text("No maps has been linked to this game.", style: TextStyle(color: Colors.grey[400])),
+                          Text(context.tr('No maps has been linked to this game.'), style: TextStyle(color: Colors.grey[400])),
                         ],
                       ),
                     );
@@ -502,7 +502,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Game records & Notes", style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
+                  Text(context.tr('Game records & Notes'), style: theme.textTheme.titleLarge?.copyWith(color: primaryLight)),
                   IconButton(
                     icon: Icon(Icons.add_box, color: primaryColor, size: 28),
                     onPressed: () {
@@ -511,7 +511,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                       if (allNotes.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Firstly a note has to be added to note pool!")),
+                          const SnackBar(content: Text(context.tr('Firstly a note has to be added to note pool!'))),
                         );
                         return;
                       }
@@ -562,11 +562,11 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                                               if (success && context.mounted) {
                                                 ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(content: Text("Added"), backgroundColor: Colors.green),
+                                                  const SnackBar(content: Text(context.tr('Added')), backgroundColor: Colors.green),
                                                 );
                                               } else if (context.mounted) {
                                                 ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(content: Text("Error occured while adding the note."), backgroundColor: Colors.red),
+                                                  const SnackBar(content: Text(context.tr('Error occured while adding the note.')), backgroundColor: Colors.red),
                                                 );
                                               }
                                             },
@@ -607,7 +607,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         children: [
                           Icon(Icons.notes, size: 40, color: primaryColor.withOpacity(0.7)),
                           const SizedBox(height: 8),
-                          Text("No notes has been added yet to this game.", style: TextStyle(color: Colors.grey[400])),
+                          Text(context.tr('No notes has been added yet to this game.'), style: TextStyle(color: Colors.grey[400])),
                         ],
                       ),
                     );

@@ -22,11 +22,11 @@ class AuthProvider with ChangeNotifier {
 
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarılı!")),
+        const SnackBar(content: Text(context.tr('Kayıt Başarılı!'))),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarısız! Sunucuyu kontrol edin.")),
+        const SnackBar(content: Text(context.tr('Kayıt Başarısız! Sunucuyu kontrol edin.'))),
       );
     }
   }

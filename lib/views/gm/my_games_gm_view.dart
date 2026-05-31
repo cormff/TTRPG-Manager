@@ -40,7 +40,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('My Games'),
+        title: const Text(context.tr('My Games')),
       ),
       body: gamesProvider.isLoading
           ? Center(child: CircularProgressIndicator(color: theme.primaryColor))

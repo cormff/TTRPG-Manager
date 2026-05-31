@@ -197,7 +197,7 @@ class _GMDashboardState extends State<GMDashboard> {
                                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               ),
                               const SizedBox(height: 4),
-                              Text("${game.maxPlayers} Players", style: TextStyle(fontSize: 11, color: Colors.grey[400])),
+                              Text(context.tr('${game.maxPlayers} Players'), style: TextStyle(fontSize: 11, color: Colors.grey[400])),
                             ],
                           ),
                         ),
@@ -298,7 +298,7 @@ class _GMDashboardState extends State<GMDashboard> {
                     }
 
                     if (mapsProvider.allMaps.isEmpty) {
-                      return const Text("No maps has been added yet.", style: TextStyle(color: Colors.grey));
+                      return const Text(context.tr('No maps has been added yet.'), style: TextStyle(color: Colors.grey));
                     }
 
                     return ListView.builder(
@@ -401,7 +401,7 @@ class _GMDashboardState extends State<GMDashboard> {
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes has been added yet.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text(context.tr('No notes has been added yet.'), style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -452,7 +452,7 @@ class _GMDashboardState extends State<GMDashboard> {
                       Navigator.pushNamed(context, "/notes");
                     },
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: const Text(context.tr('See all notes')),
                   ),
                 ),
               ),

@@ -34,7 +34,7 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Joined Games'),
+        title: const Text(context.tr('My Joined Games')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

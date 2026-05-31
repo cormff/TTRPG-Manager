@@ -55,7 +55,7 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Game Archive'),
+        title: const Text(context.tr('Game Archive')),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -108,10 +108,10 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 2. OYUNCULAR (İSİMLERİYLE BERABER) ---
-            Text("Adventurers", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(context.tr('Adventurers'), style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (widget.game.joinedPlayerIds.isEmpty)
-              const Text("No players have joined this game.", style: TextStyle(color: Colors.grey))
+              const Text(context.tr('No players have joined this game.'), style: TextStyle(color: Colors.grey))
             else
               Wrap(
                 spacing: 12,
@@ -130,12 +130,12 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 3. HARİTALAR ---
-            Text("Discovered Realms", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(context.tr('Discovered Realms'), style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             Consumer<MapsProvider>(
               builder: (context, mapsProvider, child) {
                 if (mapsProvider.currentGameMaps.isEmpty) {
-                  return const Text("No maps have been added for this game.", style: TextStyle(color: Colors.grey));
+                  return const Text(context.tr('No maps have been added for this game.'), style: TextStyle(color: Colors.grey));
                 }
                 return SizedBox(
                   height: 120,
@@ -170,10 +170,10 @@ class _FinishedGameDetailsViewState extends State<FinishedGameDetailsView> {
             const SizedBox(height: 24),
 
             // --- 4. OYUN NOTLARI ---
-            Text("Game Records & Notes", style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(context.tr('Game Records & Notes'), style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 12),
             if (_gameNotes.isEmpty)
-              const Text("No note added for this campaign!", style: TextStyle(color: Colors.grey))
+              const Text(context.tr('No note added for this campaign!'), style: TextStyle(color: Colors.grey))
             else
               ListView.builder(
                 shrinkWrap: true,

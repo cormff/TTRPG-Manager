@@ -182,7 +182,7 @@ class _NotesViewState extends State<NotesView> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _navigateToNoteForm(context, isGM: isGM),
         icon: const Icon(Icons.add),
-        label: const Text('New Note'),
+        label: const Text(context.tr('New Note')),
       ),
     );
   }
@@ -357,16 +357,16 @@ class _NotesViewState extends State<NotesView> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Note?'),
-        content: const Text('Are you sure you want to delete this note?'),
+        title: const Text(context.tr('Delete Note?')),
+        content: const Text(context.tr('Are you sure you want to delete this note?')),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text(context.tr('Cancel'))),
           TextButton(
             onPressed: () {
               provider.deleteNote(id);
               Navigator.pop(context);
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: const Text(context.tr('Delete'), style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -398,7 +398,7 @@ class _NotesViewState extends State<NotesView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Back'),
+            child: const Text(context.tr('Back')),
           ),
           ElevatedButton.icon(
             onPressed: () {
@@ -406,7 +406,7 @@ class _NotesViewState extends State<NotesView> {
               _navigateToNoteForm(context, isGM: isGM, note: note);
             },
             icon: const Icon(Icons.edit, size: 18),
-            label: const Text('Edit'),
+            label: const Text(context.tr('Edit')),
           ),
         ],
       ),

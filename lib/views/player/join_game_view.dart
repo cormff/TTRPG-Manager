@@ -49,7 +49,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
+        const SnackBar(content: Text(context.tr('You have successfully joined the game!')), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -82,7 +82,7 @@ class _JoinGameViewState extends State<JoinGameView> {
 
     if (errorMsg == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You have successfully joined the game!"), backgroundColor: Colors.green),
+        const SnackBar(content: Text(context.tr('You have successfully joined the game!')), backgroundColor: Colors.green),
       );
       _codeController.clear();
     } else {
@@ -102,7 +102,7 @@ class _JoinGameViewState extends State<JoinGameView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Find Games'),
+        title: const Text(context.tr('Find Games')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -144,7 +144,7 @@ class _JoinGameViewState extends State<JoinGameView> {
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text("Join", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                  child: const Text(context.tr('Join'), style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
               ],
             ),
@@ -162,7 +162,7 @@ class _JoinGameViewState extends State<JoinGameView> {
               child: gamesProvider.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : publicGames.isEmpty
-                  ? const Center(child: Text("No public games have been created yet.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text(context.tr('No public games have been created yet.'), style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 itemCount: publicGames.length,
                 itemBuilder: (context, index) {

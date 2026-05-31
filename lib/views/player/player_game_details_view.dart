@@ -20,7 +20,7 @@ class PlayerGameDetailsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Game Details'),
+        title: const Text(context.tr('Game Details')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -142,7 +142,7 @@ class PlayerGameDetailsView extends StatelessWidget {
                   children: [
                     Icon(Icons.map_outlined, size: 48, color: Colors.grey),
                     SizedBox(height: 12),
-                    Text("GM has not added a map to this game yet.", style: TextStyle(color: Colors.grey)),
+                    Text(context.tr('GM has not added a map to this game yet.'), style: TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),

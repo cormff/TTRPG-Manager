@@ -35,7 +35,7 @@ class _CreateGameViewState extends State<CreateGameView> {
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Oyun Başarıyla Oluşturuldu!")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(context.tr('Oyun Başarıyla Oluşturuldu!'))));
       Navigator.pop(context);
     }
   }
@@ -43,7 +43,7 @@ class _CreateGameViewState extends State<CreateGameView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Create New Campaign')),
+      appBar: AppBar(title: const Text(context.tr('Create New Campaign'))),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -62,7 +62,7 @@ class _CreateGameViewState extends State<CreateGameView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Max Players:"),
+                const Text(context.tr('Max Players:')),
                 DropdownButton<int>(
                   value: _maxPlayers,
                   items: [2, 3, 4, 5, 6, 8].map((e) => DropdownMenuItem(value: e, child: Text(e.toString()))).toList(),
@@ -71,8 +71,8 @@ class _CreateGameViewState extends State<CreateGameView> {
               ],
             ),
             SwitchListTile(
-              title: const Text("Public Game"),
-              subtitle: const Text("Visible to everyone in search results"),
+              title: const Text(context.tr('Public Game')),
+              subtitle: const Text(context.tr('Visible to everyone in search results')),
               value: _isPublic,
               onChanged: (val) => setState(() => _isPublic = val),
             ),
@@ -82,7 +82,7 @@ class _CreateGameViewState extends State<CreateGameView> {
                 : ElevatedButton(
               onPressed: _submitForm,
               style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
-              child: const Text("Create Campaign"),
+              child: const Text(context.tr('Create Campaign')),
             ),
           ],
         ),

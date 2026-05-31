@@ -53,6 +53,21 @@ class CustomDrawer extends StatelessWidget {
               else
                 ..._buildPlayerMenuItems(context, userRoleProvider),
               const Divider(),
+
+              // ==========================================
+              // YENİ EKLENEN: Ayarlar Butonu
+              // ==========================================
+              _buildDrawerItem(
+                context: context,
+                icon: Icons.settings,
+                text: 'Settings',
+                onTap: () {
+                  Navigator.pop(context); // Önce çekmeceyi (drawer) kapat
+                  Navigator.pushNamed(context, '/settings'); // Sonra Ayarlar sayfasına yönlendir
+                },
+              ),
+
+
               _buildDrawerItem(
                 context: context,
                 icon: Icons.logout,
@@ -115,7 +130,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.groups_2,
-        text: "NPC'ler",
+        text: "NPC's",
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/characters');

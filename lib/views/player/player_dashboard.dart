@@ -291,7 +291,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
               notesProvider.isLoading
                   ? Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor))
                   : displayNotes.isEmpty
-                  ? const Center(child: Text("No notes have been created yet.", style: TextStyle(color: Colors.grey)))
+                  ? const Center(child: Text(context.tr('No notes have been created yet.'), style: TextStyle(color: Colors.grey)))
                   : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -338,7 +338,7 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   child: TextButton.icon(
                     onPressed: () => Navigator.pushNamed(context, "/notes"),
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                    label: const Text("See all notes"),
+                    label: const Text(context.tr('See all notes')),
                   ),
                 ),
               ),

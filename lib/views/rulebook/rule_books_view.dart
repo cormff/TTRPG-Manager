@@ -12,7 +12,7 @@ class RuleBooksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rule Books'),
+        title: const Text(context.tr('Rule Books')),
         centerTitle: true,
       ),
       body: ListView(

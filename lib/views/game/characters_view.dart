@@ -314,7 +314,7 @@ class _CharactersViewState extends State<CharactersView> {
                         items: [
                           const DropdownMenuItem<int?>(
                             value: null,
-                            child: Text('Oyuna bağlama'),
+                            child: Text(context.tr('Oyuna bağlama')),
                           ),
                           ...games.map((g) => DropdownMenuItem<int?>(
                                 value: g.id,
@@ -400,7 +400,7 @@ class _CharactersViewState extends State<CharactersView> {
                         children: [
                           const Icon(Icons.speed, size: 20),
                           const SizedBox(width: 8),
-                          Text('Speed: $selectedSpeed ft'),
+                          Text(context.tr('Speed: $selectedSpeed ft')),
                         ],
                       ),
                       Slider(
@@ -438,7 +438,7 @@ class _CharactersViewState extends State<CharactersView> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(dialogContext),
-                  child: const Text('Vazgeç'),
+                  child: const Text(context.tr('Vazgeç')),
                 ),
                 FilledButton(
                   onPressed: () async {
@@ -449,7 +449,7 @@ class _CharactersViewState extends State<CharactersView> {
                       ScaffoldMessenger.of(this.context).showSnackBar(
                         const SnackBar(
                           content:
-                              Text('İsim, Irk ve Sınıf alanları zorunludur.'),
+                              Text(context.tr('İsim, Irk ve Sınıf alanları zorunludur.')),
                         ),
                       );
                       return;
@@ -521,7 +521,7 @@ class _CharactersViewState extends State<CharactersView> {
                       ),
                     );
                   },
-                  child: const Text('Kaydet'),
+                  child: const Text(context.tr('Kaydet')),
                 ),
               ],
             );
@@ -818,7 +818,7 @@ class _CharactersViewState extends State<CharactersView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Kapat'),
+            child: const Text(context.tr('Kapat')),
           ),
         ],
       ),

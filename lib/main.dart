@@ -14,11 +14,13 @@ import 'package:ttrpg_manager/views/player/join_game_view.dart';
 import 'package:ttrpg_manager/views/game/notes_view.dart';
 import 'package:ttrpg_manager/views/rulebook/rule_books_view.dart';
 import 'package:ttrpg_manager/views/game/characters_view.dart';
+import 'package:ttrpg_manager/widgets/settings_view.dart';
 
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 import 'package:ttrpg_manager/providers/games_provider.dart';
 import 'package:ttrpg_manager/providers/maps_provider.dart';
 import 'package:ttrpg_manager/providers/characters_provider.dart';
+import 'package:ttrpg_manager/providers/language_manager.dart';
 
 void main() {
   runApp(
@@ -30,6 +32,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => NotesProvider()),
         ChangeNotifierProvider(create: (_) => MapsProvider()),
         ChangeNotifierProvider(create: (_) => CharactersProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageManager()..loadLanguage()),
       ],
       child: const MyApp(),
     ),
@@ -58,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/rule_books': (context) => const RuleBooksView(),
         '/join_game': (context) => const JoinGameView(),
         '/characters': (context) => const CharactersView(),
+        '/settings': (context) => const SettingsView(), // Yeni eklenen sayfa
       },
     );
   }
