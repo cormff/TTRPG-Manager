@@ -1,5 +1,6 @@
 import 'equipment_view.dart';
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import 'races_view.dart';
 import 'classes_view.dart';
 import 'spells_view.dart';
@@ -11,46 +12,43 @@ class RuleBooksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rule Books'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(context.tr('ruleBooks')), centerTitle: true),
       body: ListView(
         padding: const EdgeInsets.all(12.0),
         children: [
-
           _buildMenuCard(
             context,
-            title: 'Races',
-            subtitle: 'Explore the diverse peoples of the world',
+            title: context.tr('rulebook.races'),
+            subtitle: context.tr('rulebook.races.subtitle'),
             icon: Icons.groups_outlined,
             destination: const RacesView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Classes',
-            subtitle: 'Choose your path and abilities',
+            title: context.tr('rulebook.classes'),
+            subtitle: context.tr('rulebook.classes.subtitle'),
             icon: Icons.shield_outlined,
             destination: const ClassesView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Equipment',
-            subtitle: 'Weapons, armor, tools, and adventuring gear',
-            icon: Icons.shopping_bag_outlined, // Ekipmanlar için güzel bir çanta ikonu
+            title: context.tr('rulebook.equipment'),
+            subtitle: context.tr('rulebook.equipment.subtitle'),
+            icon: Icons
+                .shopping_bag_outlined, // Ekipmanlar için güzel bir çanta ikonu
             destination: const EquipmentView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Monsters',
-            subtitle: 'Creatures, stats, legendary actions, and beasts',
+            title: context.tr('rulebook.monsters'),
+            subtitle: context.tr('rulebook.monsters.subtitle'),
             icon: Icons.adb_rounded, // Veya Icons.pets olabilir
             destination: const MonstersView(),
           ),
           _buildMenuCard(
             context,
-            title: 'Spells',
-            subtitle: 'Master the arcane and divine arts',
+            title: context.tr('rulebook.spells'),
+            subtitle: context.tr('rulebook.spells.subtitle'),
             icon: Icons.auto_awesome_outlined,
             destination: const SpellsView(),
           ),
@@ -59,7 +57,13 @@ class RuleBooksView extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuCard(BuildContext context, {required String title, required String subtitle, required IconData icon, required Widget destination}) {
+  Widget _buildMenuCard(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Widget destination,
+  }) {
     return Card(
       elevation: 4,
       margin: const EdgeInsets.only(bottom: 16.0),
@@ -83,15 +87,28 @@ class RuleBooksView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
+                child: Icon(
+                  icon,
+                  size: 32,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                    Text(subtitle, style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      subtitle,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                    ),
                   ],
                 ),
               ),

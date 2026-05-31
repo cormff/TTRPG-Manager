@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
 import 'package:ttrpg_manager/providers/auth_provider.dart';
+import 'package:ttrpg_manager/providers/locale_provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/views/auth/login_view.dart';
 import 'package:ttrpg_manager/views/auth/register_view.dart';
@@ -30,6 +33,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => NotesProvider()),
         ChangeNotifierProvider(create: (_) => MapsProvider()),
         ChangeNotifierProvider(create: (_) => CharactersProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
       ],
       child: const MyApp(),
     ),
@@ -41,10 +45,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LocaleProvider>().locale;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'TTRPG Manager',
+      onGenerateTitle: (context) => context.tr('app.title'),
       theme: AppTheme.darkTheme,
+      locale: locale,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginView(),

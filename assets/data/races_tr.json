@@ -1,0 +1,213 @@
+{
+	"Races": {
+		"Racial Traits": {
+			"description": "Her ırkın açıklaması, o ırka mensup üyelerin ortak özelliklerini içerir. Çoğu ırkın özellikleri arasında aşağıdaki maddeler yer alır.",
+			"Yetenek Puanı Artışı": "Her ırk, karakterin bir veya daha fazla yetenek puanını artırır.",
+			"Yaş": "Yaş maddesi, ırk üyesinin ne zaman yetişkin sayıldığını ve ırkın beklenen ömrünü belirtir. Bu bilgi, karakterinizin oyun başındaki yaşına karar vermenize yardımcı olabilir.",
+			"Hizalama": "Çoğu ırkın belirli hizalamalara yönelik eğilimleri vardır. Bunlar oyuncu karakterler için bağlayıcı değildir, ancak örneğin bir cücenin neden düzensiz olduğunu düşünmek karakterinizi daha iyi tanımlamanıza yardımcı olabilir.",
+			"Boyut": "Çoğu ırktaki karakterler Orta boyuttadır; bu kategori kabaca 1,2 ila 2,4 metre boyundaki yaratıkları kapsar. Bazı ırklar Küçük boyuttadır (0,6 ila 1,2 metre arası).",
+			"Hız": "Hızınız, seyahat ederken ve savaşırken ne kadar uzağa hareket edebileceğinizi belirler.",
+			"Diller": "Irkınız sayesinde karakteriniz belirli dilleri konuşabilir, okuyabilir ve yazabilir.",
+			"Alt Irklar": "Bazı ırkların alt ırkları vardır. Bir alt ırka mensup üyeler, ana ırkın özelliklerine ek olarak alt ırk için belirtilen özelliklere de sahiptir."
+		},
+		"Cüce": {
+			"Dwarf Traits": {
+				"description": "Cüce karakteriniz, cüce doğasının bir parçası olan çeşitli doğuştan yeteneklere sahiptir.",
+				"Yetenek Puanı Artışı": "Dayanıklılık puanınız 2 artar.",
+				"Yaş": "Cüceler insanlarla aynı hızda olgunlaşır, ancak 50 yaşına ulaşana kadar genç sayılırlar. Ortalama 350 yıl yaşarlar.",
+				"Hizalama": "Çoğu cüce kurallıdır ve düzenli bir toplumun faydalarına sıkı sıkıya inanır. İyi yönelimlidirler, adalet duygusu güçlüdür.",
+				"Boyut": "Cüceler 1,2 ile 1,5 metre boyunda olup ortalama 70 kilo ağırlığındadır. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 7,5 metredir. Ağır zırh giymek hızınızı düşürmez.",
+				"Race Traits": {
+					"Karanlık Görüş": "Yeraltı yaşamına alışmış olarak, karanlık ve loş koşullarda üstün görüşe sahipsiniz. 18 metre içinde loş ışığı parlak ışıkmış gibi, karanlığı ise loş ışıkmış gibi görebilirsiniz.",
+					"Cüce Dayanıklılığı": "Zehire karşı kurtulma atışlarında avantajınız vardır ve zehir hasarına karşı direnciniz vardır.",
+					"Cüce Savaş Eğitimi": "Savaş baltası, el baltası, hafif çekiç ve savaş çekici kullanma yeterliliğiniz vardır.",
+					"Alet Yeterliliği": "Seçtiğiniz zanaatkar aletlerinden birinde yeterlilik kazanırsınız: demirci aletleri, biracı malzemeleri veya duvarcı aletleri.",
+					"Taş Bilgisi": "Taş işçiliğinin kökeniyle ilgili bir Zekâ (Tarih) kontrolü yaptığınızda, Tarih becerisinde yeterli sayılır ve normal yeterlilik bonusunuz yerine çift yeterlilik bonusunuz eklenir."
+				},
+				"Diller": "Ortak Dil ve Cücece konuşabilir, okuyabilir ve yazabilirsiniz. Cücece sert ünsüzler ve gırtlak sesleriyle doludur.",
+				"Alt Irklar": {
+					"Tepe Cücesi": {
+						"description": "Bir tepe cücesi olarak keskin duyulara, derin sezgiye ve olağanüstü dayanıklılığa sahipsiniz.",
+						"Yetenek Puanı Artışı": "Bilgelik puanınız 1 artar.",
+						"Race Traits": {
+							"Cüce Sağlamlığı": "Maksimum can puanınız 1 artar ve her seviye atladığınızda 1 daha artar."
+						}
+					}
+				}
+			}
+		},
+		"Elf": {
+			"Elf Traits": {
+				"description": "Elf karakteriniz, binlerce yıllık elf gelişiminin sonucu olan çeşitli doğal yeteneklere sahiptir.",
+				"Yetenek Puanı Artışı": "Çeviklik puanınız 2 artar.",
+				"Yaş": "Elfler fiziksel olgunluğa insanlarla aynı yaşta ulaşsa da, elflerin yetişkinlik anlayışı fiziksel büyümenin ötesindedir. Bir elf genellikle 100 yaşında yetişkinliğini ilan eder ve 750 yıla kadar yaşayabilir.",
+				"Hizalama": "Elfler özgürlüğü, çeşitliliği ve kendini ifade etmeyi severler. Kaotik yönelime eğilimlidirler. İyi olmaya meyillidirler.",
+				"Boyut": "Elfler 1,5 ile 1,8 metreden uzundur ve ince yapılıdır. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Race Traits": {
+					"Karanlık Görüş": "Alacakaranlık ormanlarına ve gece gökyüzüne alışmış olarak, karanlık ve loş koşullarda üstün görüşe sahipsiniz.",
+					"Keskin Duyular": "Algı becerisinde yeterliliğiniz vardır.",
+					"Peri Soyu": "Büyülenmeye karşı kurtulma atışlarında avantajınız vardır ve büyü sizi uyutamaz.",
+					"Trans": "Elfler uyumaya ihtiyaç duymazlar. Bunun yerine günde 4 saat derin meditasyon yaparlar. Bu şekilde dinlendikten sonra, bir insanın 8 saatlik uykusundan elde ettiği faydayı elde edersiniz."
+				},
+				"Diller": "Ortak Dil ve Elfçe konuşabilir, okuyabilir ve yazabilirsiniz. Elfçe akıcıdır, ince tonlamalar ve karmaşık dilbilgisiyle doludur.",
+				"Alt Irklar": {
+					"Yüksek Elf": {
+						"description": "Bir yüksek elf olarak keskin bir zekâya ve en azından büyünün temellerine hâkimsiniz.",
+						"Yetenek Puanı Artışı": "Zekâ puanınız 1 artar.",
+						"Race Traits": {
+							"Elf Silah Eğitimi": "Uzun kılıç, kısa kılıç, kısa yay ve uzun yay kullanma yeterliliğiniz vardır.",
+							"Sihir Hilesi": "Büyücü büyü listesinden seçtiğiniz bir sihir hilesini bilirsiniz. Zekâ, bunun için büyü yeteneğinizdir.",
+							"Ekstra Dil": "Seçtiğiniz bir ek dili konuşabilir, okuyabilir ve yazabilirsiniz."
+						}
+					}
+				}
+			}
+		},
+		"Buçukluk": {
+			"Halfling Traits": {
+				"description": "Buçukluk karakteriniz, diğer tüm buçukluklarla ortaklaşa birçok özelliğe sahiptir.",
+				"Yetenek Puanı Artışı": "Çeviklik puanınız 2 artar.",
+				"Yaş": "Bir buçukluk 20 yaşında yetişkinliğe ulaşır ve genellikle ikinci yüzyılının ortasına kadar yaşar.",
+				"Hizalama": "Çoğu buçukluk kurallı iyidir. İyi kalpli ve naziktirler, başkalarını acı içinde görmeye tahammül edemezler.",
+				"Boyut": "Buçukluklar ortalama 90 cm boyunda ve yaklaşık 18 kilo ağırlığındadır. Boyutunuz Küçük'tür.",
+				"Hız": "Temel yürüme hızınız 7,5 metredir.",
+				"Race Traits": {
+					"Şanslı": "Saldırı atışı, yetenek kontrolü veya kurtulma atışı için d20'de 1 attığınızda, zarı yeniden atabilirsiniz ve yeni sonucu kullanmak zorundasınız.",
+					"Cesur": "Korkuya karşı kurtulma atışlarında avantajınız vardır.",
+					"Buçukluk Çevikliği": "Sizden büyük boyuttaki herhangi bir yaratığın alanından geçebilirsiniz."
+				},
+				"Diller": "Ortak Dil ve Buçuklukça konuşabilir, okuyabilir ve yazabilirsiniz.",
+				"Alt Irklar": {
+					"Hafif Ayak": {
+						"description": "Hafif ayak buçukluk olarak, diğer insanları kalkan olarak kullanarak bile kolayca gizlenebilirsiniz.",
+						"Yetenek Puanı Artışı": "Karizma puanınız 1 artar.",
+						"Race Traits": {
+							"Doğal Gizlilik": "Sadece sizden en az bir boyut büyük bir yaratık tarafından gizlendiğinizde bile saklanmayı deneyebilirsiniz."
+						}
+					}
+				}
+			}
+		},
+		"İnsan": {
+			"Human Traits": {
+				"description": "İnsanlar hakkında genelleme yapmak zordur, ama insan karakteriniz şu özelliklere sahiptir.",
+				"Yetenek Puanı Artışı": "Tüm yetenek puanlarınız 1 artar.",
+				"Yaş": "İnsanlar gençliklerinin sonlarında yetişkinliğe ulaşır ve bir asırdan az yaşarlar.",
+				"Hizalama": "İnsanlar belirli bir hizalamaya yönelik eğilim göstermezler. En iyileri ve en kötüleri aralarında bulunur.",
+				"Boyut": "İnsanlar boy ve yapı bakımından büyük farklılıklar gösterir, 1,5 metreden 1,8 metrenin üzerine kadar değişir. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Diller": "Ortak Dil ve seçtiğiniz bir ek dili konuşabilir, okuyabilir ve yazabilirsiniz."
+			}
+		},
+		"Ejderdoğan": {
+			"Dragonborn Traits": {
+				"description": "Ejderha mirasınız, diğer ejderdoğanlarla paylaştığınız çeşitli özelliklerle kendini gösterir.",
+				"Yetenek Puanı Artışı": "Güç puanınız 2, Karizma puanınız 1 artar.",
+				"Yaş": "Genç ejderdoğanlar hızla büyür. Yumurtadan çıktıktan saatler sonra yürürler, 3 yaşında 10 yaşındaki insan çocuğunun boyutuna ulaşırlar ve 15 yaşında yetişkinliğe ererler. Yaklaşık 80 yıl yaşarlar.",
+				"Hizalama": "Ejderdoğanlar aşırılıklara yönelir, iyi ile kötü arasındaki kozmik savaşta bilinçli bir tercih yapar.",
+				"Boyut": "Ejderdoğanlar insanlardan uzun ve ağırdır, 1,8 metreden fazla boyunda ve ortalama 115 kilo ağırlığındadır. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Race Traits": {
+					"Ejderha Soyu": {
+						"table": {
+							"Ejderha": ["Siyah", "Mavi", "Pirinç", "Bronz", "Bakır", "Altın", "Yeşil", "Kırmızı", "Gümüş", "Beyaz"],
+							"Hasar Türü": ["Asit", "Yıldırım", "Ateş", "Yıldırım", "Asit", "Ateş", "Zehir", "Ateş", "Soğuk", "Soğuk"],
+							"Nefes Silahı": [
+								"1,5x9 m çizgi (Çev. krt.)",
+								"1,5x9 m çizgi (Çev. krt.)",
+								"1,5x9 m çizgi (Çev. krt.)",
+								"1,5x9 m çizgi (Çev. krt.)",
+								"1,5x9 m çizgi (Çev. krt.)",
+								"4,5 m koni (Çev. krt.)",
+								"4,5 m koni (Day. krt.)",
+								"4,5 m koni (Çev. krt.)",
+								"4,5 m koni (Day. krt.)",
+								"4,5 m koni (Day. krt.)"
+							]
+						},
+						"description": "Ejderha soyunuz var. Ejderha Soyu tablosundan bir ejderha türü seçin. Nefes silahınız ve hasar direnci, tabloda gösterildiği gibi ejderha türüne göre belirlenir."
+					},
+					"Nefes Silahı": "Yıkıcı enerji solumak için aksiyonunuzu kullanabilirsiniz. Ejderha soyunuz soluma alanının boyutunu, şeklini ve hasar türünü belirler. Hasar 2d6'dır ve 6. seviyede 3d6, 11. seviyede 4d6, 16. seviyede 5d6'ya yükselir.",
+					"Hasar Direnci": "Ejderha soyunuzla ilişkili hasar türüne karşı direnciniz vardır."
+				},
+				"Diller": "Ortak Dil ve Ejderce konuşabilir, okuyabilir ve yazabilirsiniz. Ejderce en eski dillerden biri olarak kabul edilir."
+			}
+		},
+		"Gnom": {
+			"Gnome Traits": {
+				"description": "Gnom karakteriniz, diğer tüm gnomlarla ortak belirli özelliklere sahiptir.",
+				"Yetenek Puanı Artışı": "Zekâ puanınız 2 artar.",
+				"Yaş": "Gnomlar insanlarla aynı hızda olgunlaşır ve çoğunun 40 yaşında yerleşik bir yetişkin hayatına başlaması beklenir. 350 ila 500 yıl yaşayabilirler.",
+				"Hizalama": "Gnomlar çoğunlukla iyidir. Kurallara yönelenler bilgeler, mühendisler ve araştırmacılardır.",
+				"Boyut": "Gnomlar 90 cm ile 1,2 metre arasındadır ve ortalama 18 kilo ağırlığındadır. Boyutunuz Küçük'tür.",
+				"Hız": "Temel yürüme hızınız 7,5 metredir.",
+				"Race Traits": {
+					"Karanlık Görüş": "Yeraltı yaşamına alışmış olarak, karanlık ve loş koşullarda üstün görüşe sahipsiniz.",
+					"Gnom Kurnazlığı": "Büyüye karşı tüm Zekâ, Bilgelik ve Karizma kurtulma atışlarında avantajınız vardır."
+				},
+				"Diller": "Ortak Dil ve Gnomca konuşabilir, okuyabilir ve yazabilirsiniz.",
+				"Alt Irklar": {
+					"Kaya Gnomu": {
+						"description": "Bir kaya gnomu olarak, diğer gnomların ötesinde doğal bir icat yeteneğine ve sağlamlığa sahipsiniz.",
+						"Yetenek Puanı Artışı": "Dayanıklılık puanınız 1 artar.",
+						"Race Traits": {
+							"Zanaatkâr Bilgisi": "Büyülü eşyalar, simyasal nesneler veya teknolojik cihazlarla ilgili bir Zekâ (Tarih) kontrolü yaptığınızda, normalde uyguladığınız yeterlilik bonusu yerine çift yeterlilik bonusunuzu ekleyebilirsiniz.",
+							"Tamirci": "Zanaatkar aletleri (tamirci aletleri) kullanma yeterliliğiniz vardır. Bu aletleri kullanarak 1 saat ve 10 altın değerinde malzeme harcayarak Minik bir mekanik cihaz oluşturabilirsiniz."
+						}
+					}
+				}
+			}
+		},
+		"Yarı-Elf": {
+			"Half-Elf Traits": {
+				"description": "Yarı-elf karakteriniz, elflerle ortak bazı niteliklere ve yarı-elflere özgü bazı niteliklere sahiptir.",
+				"Yetenek Puanı Artışı": "Karizma puanınız 2 artar ve seçtiğiniz iki yetenek puanı 1 artar.",
+				"Yaş": "Yarı-elfler insanlarla aynı hızda olgunlaşır ve 20 yaşında yetişkinliğe ulaşır. İnsanlardan çok daha uzun yaşarlar, genellikle 180 yılı aşarlar.",
+				"Hizalama": "Yarı-elfler, elf miraslarının kaotik eğilimini paylaşırlar. Kişisel özgürlük ve yaratıcı ifadeye değer verirler.",
+				"Boyut": "Yarı-elfler insanlarla yaklaşık aynı boyuttadır, 1,5 ile 1,8 metre arasında. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Race Traits": {
+					"Karanlık Görüş": "Elf kanınız sayesinde karanlık ve loş koşullarda üstün görüşe sahipsiniz.",
+					"Peri Soyu": "Büyülenmeye karşı kurtulma atışlarında avantajınız vardır ve büyü sizi uyutamaz.",
+					"Beceri Çok Yönlülüğü": "Seçtiğiniz iki beceride yeterlilik kazanırsınız."
+				},
+				"Diller": "Ortak Dil, Elfçe ve seçtiğiniz bir ek dili konuşabilir, okuyabilir ve yazabilirsiniz."
+			}
+		},
+		"Yarı-Ork": {
+			"Half-Orc Traits": {
+				"description": "Yarı-ork karakteriniz, ork soyunuzdan gelen belirli özelliklere sahiptir.",
+				"Yetenek Puanı Artışı": "Güç puanınız 2, Dayanıklılık puanınız 1 artar.",
+				"Yaş": "Yarı-orklar insanlardan biraz daha hızlı olgunlaşır, 14 yaşında yetişkinliğe ulaşır. Gözle görülür şekilde daha hızlı yaşlanır ve nadiren 75 yıldan fazla yaşarlar.",
+				"Hizalama": "Yarı-orklar ork ebeveynlerinden kaosa doğru bir eğilim miras alır ve güçlü bir şekilde iyiye yönelmezler.",
+				"Boyut": "Yarı-orklar insanlardan biraz daha büyük ve iri yapılıdır, 1,5 ile 1,8 metrenin üzerinde boyundadır. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Race Traits": {
+					"Karanlık Görüş": "Ork kanınız sayesinde karanlık ve loş koşullarda üstün görüşe sahipsiniz.",
+					"Korkutucu": "Sindirme becerisinde yeterlilik kazanırsınız.",
+					"Amansız Dayanıklılık": "0 can puanına düşürüldüğünüzde ama anında öldürülmediğinizde, bunun yerine 1 can puanına düşebilirsiniz. Uzun dinlenme tamamlayana kadar bu özelliği tekrar kullanamazsınız.",
+					"Vahşi Saldırılar": "Yakın dövüş silahı saldırısıyla kritik vuruş yaptığınızda, silahın hasar zarlarından birini ek olarak atabilir ve kritik vuruşun ekstra hasarına ekleyebilirsiniz."
+				},
+				"Diller": "Ortak Dil ve Orkça konuşabilir, okuyabilir ve yazabilirsiniz."
+			}
+		},
+		"Tiefling": {
+			"Tiefling Traits": {
+				"description": "Tieflingler, cehennemî soyları nedeniyle belirli ırk özelliklerini paylaşırlar.",
+				"Yetenek Puanı Artışı": "Zekâ puanınız 1, Karizma puanınız 2 artar.",
+				"Yaş": "Tieflingler insanlarla aynı hızda olgunlaşır ama birkaç yıl daha uzun yaşarlar.",
+				"Hizalama": "Tieflingler belirli bir hizalamaya yönelmezler, ancak toplum dışı kalmaya zorlanabilirler.",
+				"Boyut": "Tieflingler insanlarla benzer boyut ve yapıdadır. Boyutunuz Orta'dır.",
+				"Hız": "Temel yürüme hızınız 9 metredir.",
+				"Race Traits": {
+					"Karanlık Görüş": "Cehennemî mirasınız sayesinde karanlık ve loş koşullarda üstün görüşe sahipsiniz.",
+					"Cehennem Direnci": "Ateş hasarına karşı direnciniz vardır.",
+					"Cehennemî Miras": "Taumaturji sihir hilesini bilirsiniz. 3. seviyeye ulaştığınızda cehennem azarı büyüsünü 2. seviye büyü olarak kullanabilirsiniz. 5. seviyeye ulaştığınızda karanlık büyüsünü kullanabilirsiniz. Karizma, bu büyüler için büyü yeteneğinizdir."
+				},
+				"Diller": "Ortak Dil ve Cehennemce konuşabilir, okuyabilir ve yazabilirsiniz."
+			}
+		}
+	}
+}

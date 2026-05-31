@@ -8,7 +8,8 @@ class SpellsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DynamicRuleList(
       title: 'Spells',
-      jsonPath: 'assets/data/spell.json',
+      jsonPathEn: 'assets/data/spell.json',
+      jsonPathTr: 'assets/data/spell_tr.json',
     );
   }
 }

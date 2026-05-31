@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/primary_button.dart';
@@ -16,7 +17,8 @@ class _RegisterViewState extends State<RegisterView> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -32,9 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
     final authProvider = context.watch<AuthProvider>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Register'),
-      ),
+      appBar: AppBar(title: Text(context.tr('register'))),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -43,58 +43,66 @@ class _RegisterViewState extends State<RegisterView> {
             const SizedBox(height: 40),
             CustomTextField(
               controller: _usernameController,
-              labelText: 'Username',
+              labelText: context.tr('username'),
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _emailController,
-              labelText: 'Email',
+              labelText: context.tr('email'),
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _passwordController,
-              labelText: 'Password',
+              labelText: context.tr('password'),
               obscureText: true,
             ),
             const SizedBox(height: 16.0),
             CustomTextField(
               controller: _confirmPasswordController,
-              labelText: 'Confirm Password',
+              labelText: context.tr('confirmPassword'),
               obscureText: true,
             ),
             const SizedBox(height: 24.0),
 
             authProvider.isLoading
-                ? const CircularProgressIndicator(color: Colors.deepPurple) // Yükleniyorsa simge çıkar
+                ? const CircularProgressIndicator(
+                    color: Colors.deepPurple,
+                  ) // Yükleniyorsa simge çıkar
                 : PrimaryButton(
-              onPressed: () {
-                // Şifre kontrolü (confirm password)
-                if (_passwordController.text != _confirmPasswordController.text) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Passwords do not match!")),
-                  );
-                  return;
-                }
+                    onPressed: () {
+                      // Şifre kontrolü (confirm password)
+                      if (_passwordController.text !=
+                          _confirmPasswordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(context.tr('passwordsDoNotMatch')),
+                          ),
+                        );
+                        return;
+                      }
 
-                // Boş alan kontrolü
-                if (_usernameController.text.isEmpty || _emailController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please fill all fields")),
-                  );
-                  return;
-                }
+                      // Boş alan kontrolü
+                      if (_usernameController.text.isEmpty ||
+                          _emailController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(context.tr('pleaseFillAllFields')),
+                          ),
+                        );
+                        return;
+                      }
 
-                // Provider üzerinden API'ye gönderiyoruz
-                context.read<AuthProvider>().register(
-                  _usernameController.text,
-                  _emailController.text,
-                  _passwordController.text,
-                  context,
-                );
-              },
-              text: 'Register',
-            ),
+                      // Provider üzerinden API'ye gönderiyoruz
+                      context.read<AuthProvider>().register(
+                        _usernameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                        context,
+                      );
+                    },
+                    text: context.tr('register'),
+                  ),
 
             const SizedBox(height: 16),
             TextButton(
@@ -103,9 +111,12 @@ class _RegisterViewState extends State<RegisterView> {
                   MaterialPageRoute(builder: (context) => const LoginView()),
                 );
               },
-              child: const Text(
-                "Already registered? Log in",
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+              child: Text(
+                context.tr('alreadyRegisteredLogin'),
+                style: const TextStyle(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

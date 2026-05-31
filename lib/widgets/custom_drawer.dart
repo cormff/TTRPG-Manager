@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ttrpg_manager/l10n/app_localizations.dart';
+import 'package:ttrpg_manager/providers/locale_provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/providers/characters_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
@@ -35,7 +37,9 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        isGameMaster ? 'Game Master' : 'Player',
+                        isGameMaster
+                            ? context.tr('gameMaster')
+                            : context.tr('player'),
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -53,10 +57,11 @@ class CustomDrawer extends StatelessWidget {
               else
                 ..._buildPlayerMenuItems(context, userRoleProvider),
               const Divider(),
+              _buildLanguageSelector(context),
               _buildDrawerItem(
                 context: context,
                 icon: Icons.logout,
-                text: 'Logout',
+                text: context.tr('logout'),
                 onTap: () {
                   // 1. Önce eski kullanıcının notlarını RAM'den (hafızadan) temizliyoruz
                   Provider.of<NotesProvider>(
@@ -88,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.gamepad,
-        text: 'My Games',
+        text: context.tr('myGames'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_games_gm_view');
@@ -97,7 +102,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.add_box,
-        text: 'Create Game',
+        text: context.tr('createGame'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/create_game');
@@ -106,7 +111,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.map,
-        text: 'My Maps',
+        text: context.tr('myMaps'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_maps');
@@ -115,7 +120,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.groups_2,
-        text: "NPC'ler",
+        text: context.tr('npcs'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/characters');
@@ -124,7 +129,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.note,
-        text: 'Notes',
+        text: context.tr('notes'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/notes');
@@ -133,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.book,
-        text: 'Rule Books',
+        text: context.tr('ruleBooks'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/rule_books');
@@ -142,7 +147,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
-        text: 'Change to Player View',
+        text: context.tr('changeToPlayerView'),
         onTap: () {
           userRoleProvider.setUserRole(UserRole.player);
           Navigator.pop(context);
@@ -159,7 +164,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.group_add,
-        text: 'Join Game',
+        text: context.tr('joinGame'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/join_game');
@@ -168,7 +173,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.gamepad,
-        text: 'My Games',
+        text: context.tr('myGames'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/my_games_player_view');
@@ -177,7 +182,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.groups,
-        text: 'Characters',
+        text: context.tr('characters'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/characters');
@@ -186,7 +191,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.note,
-        text: 'Notes',
+        text: context.tr('notes'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/notes');
@@ -195,7 +200,7 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.book,
-        text: 'Rule Books',
+        text: context.tr('ruleBooks'),
         onTap: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, '/rule_books');
@@ -204,13 +209,48 @@ class CustomDrawer extends StatelessWidget {
       _buildDrawerItem(
         context: context,
         icon: Icons.switch_account,
-        text: 'Change to GM View',
+        text: context.tr('changeToGmView'),
         onTap: () {
           userRoleProvider.setUserRole(UserRole.gameMaster);
           Navigator.pop(context);
         },
       ),
     ];
+  }
+
+  Widget _buildLanguageSelector(BuildContext context) {
+    final localeProvider = context.watch<LocaleProvider>();
+
+    return ListTile(
+      leading: Icon(
+        Icons.language,
+        color: Theme.of(context).colorScheme.onSurface,
+      ),
+      title: Text(
+        context.tr('language'),
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      trailing: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: localeProvider.locale.languageCode,
+          dropdownColor: Theme.of(context).cardColor,
+          items: [
+            DropdownMenuItem(
+              value: 'en',
+              child: Text(context.tr('language.english')),
+            ),
+            DropdownMenuItem(
+              value: 'tr',
+              child: Text(context.tr('language.turkish')),
+            ),
+          ],
+          onChanged: (languageCode) {
+            if (languageCode == null) return;
+            localeProvider.setLocale(Locale(languageCode));
+          },
+        ),
+      ),
+    );
   }
 
   // DÜZELTİLEN METOT: BuildContext parametre olarak eklendi

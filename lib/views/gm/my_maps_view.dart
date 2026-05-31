@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/maps_provider.dart';
 
 class MyMapsView extends StatefulWidget {
@@ -12,7 +13,6 @@ class MyMapsView extends StatefulWidget {
 }
 
 class _MyMapsViewState extends State<MyMapsView> {
-
   @override
   void initState() {
     super.initState();
@@ -34,16 +34,21 @@ class _MyMapsViewState extends State<MyMapsView> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Theme.of(context).cardColor,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
-
             Future<void> pickImage() async {
               final ImagePicker picker = ImagePicker();
-              final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+              final XFile? image = await picker.pickImage(
+                source: ImageSource.gallery,
+              );
               if (image != null) {
-                setModalState(() { localImagePath = image.path; });
+                setModalState(() {
+                  localImagePath = image.path;
+                });
               }
             }
 
@@ -51,18 +56,28 @@ class _MyMapsViewState extends State<MyMapsView> {
               child: Padding(
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-                  left: 20, right: 20, top: 20,
+                  left: 20,
+                  right: 20,
+                  top: 20,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Add New Map", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      context.tr('addNewMap'),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 16),
 
                     TextField(
                       controller: titleController,
-                      decoration: const InputDecoration(labelText: 'Map Name', border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        labelText: context.tr('mapName'),
+                        border: const OutlineInputBorder(),
+                      ),
                     ),
                     const SizedBox(height: 16),
 
@@ -70,17 +85,25 @@ class _MyMapsViewState extends State<MyMapsView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ChoiceChip(
-                          label: const Text("Pick from gallery"),
+                          label: Text(context.tr('pickFromGallery')),
                           selected: selectedMode == 0,
                           selectedColor: Theme.of(context).primaryColor,
-                          onSelected: (val) => setModalState(() { selectedMode = 0; localImagePath = null; urlController.clear(); }),
+                          onSelected: (val) => setModalState(() {
+                            selectedMode = 0;
+                            localImagePath = null;
+                            urlController.clear();
+                          }),
                         ),
                         const SizedBox(width: 12),
                         ChoiceChip(
-                          label: const Text("Enter URL"),
+                          label: Text(context.tr('enterUrl')),
                           selected: selectedMode == 1,
                           selectedColor: Theme.of(context).primaryColor,
-                          onSelected: (val) => setModalState(() { selectedMode = 1; localImagePath = null; urlController.clear(); }),
+                          onSelected: (val) => setModalState(() {
+                            selectedMode = 1;
+                            localImagePath = null;
+                            urlController.clear();
+                          }),
                         ),
                       ],
                     ),
@@ -91,24 +114,47 @@ class _MyMapsViewState extends State<MyMapsView> {
                         child: GestureDetector(
                           onTap: pickImage,
                           child: Container(
-                            height: 150, width: double.infinity,
+                            height: 150,
+                            width: double.infinity,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                              border: Border.all(
+                                color: Theme.of(
+                                  context,
+                                ).primaryColor.withOpacity(0.5),
+                              ),
                               borderRadius: BorderRadius.circular(12),
-                              color: Theme.of(context).primaryColor.withOpacity(0.1),
+                              color: Theme.of(
+                                context,
+                              ).primaryColor.withOpacity(0.1),
                               image: localImagePath != null
-                                  ? DecorationImage(image: FileImage(File(localImagePath!)), fit: BoxFit.cover)
+                                  ? DecorationImage(
+                                      image: FileImage(File(localImagePath!)),
+                                      fit: BoxFit.cover,
+                                    )
                                   : null,
                             ),
                             child: localImagePath == null
                                 ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add_photo_alternate, size: 40, color: Theme.of(context).primaryColorLight),
-                                const SizedBox(height: 8),
-                                Text("Open gallery", style: TextStyle(color: Theme.of(context).primaryColorLight)),
-                              ],
-                            )
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add_photo_alternate,
+                                        size: 40,
+                                        color: Theme.of(
+                                          context,
+                                        ).primaryColorLight,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        context.tr('openGallery'),
+                                        style: TextStyle(
+                                          color: Theme.of(
+                                            context,
+                                          ).primaryColorLight,
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 : null,
                           ),
                         ),
@@ -117,7 +163,11 @@ class _MyMapsViewState extends State<MyMapsView> {
                     if (selectedMode == 1)
                       TextField(
                         controller: urlController,
-                        decoration: const InputDecoration(labelText: 'Image URL', border: OutlineInputBorder(), prefixIcon: Icon(Icons.link)),
+                        decoration: InputDecoration(
+                          labelText: context.tr('imageUrl'),
+                          border: const OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.link),
+                        ),
                         onChanged: (val) => setModalState(() {}),
                       ),
 
@@ -125,10 +175,14 @@ class _MyMapsViewState extends State<MyMapsView> {
                       Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: Container(
-                          height: 150, width: double.infinity,
+                          height: 150,
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(image: NetworkImage(urlController.text), fit: BoxFit.cover),
+                            image: DecorationImage(
+                              image: NetworkImage(urlController.text),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -140,39 +194,55 @@ class _MyMapsViewState extends State<MyMapsView> {
                       child: isSaving
                           ? const Center(child: CircularProgressIndicator())
                           : ElevatedButton.icon(
-                        onPressed: () async {
-                          if (titleController.text.isEmpty) return;
+                              onPressed: () async {
+                                if (titleController.text.isEmpty) return;
 
-                          final String finalImageSource = selectedMode == 0
-                              ? (localImagePath ?? '')
-                              : urlController.text;
+                                final String finalImageSource =
+                                    selectedMode == 0
+                                    ? (localImagePath ?? '')
+                                    : urlController.text;
 
-                          if (finalImageSource.isEmpty) return;
+                                if (finalImageSource.isEmpty) return;
 
-                          setModalState(() => isSaving = true);
+                                setModalState(() => isSaving = true);
 
-                          // DUMMY LİSTE YERİNE BACKEND'E (PROVIDER'A) GÖNDERİYORUZ
-                          final success = await context.read<MapsProvider>().createMap(
-                              titleController.text,
-                              finalImageSource
-                          );
+                                // DUMMY LİSTE YERİNE BACKEND'E (PROVIDER'A) GÖNDERİYORUZ
+                                final success = await context
+                                    .read<MapsProvider>()
+                                    .createMap(
+                                      titleController.text,
+                                      finalImageSource,
+                                    );
 
-                          if (success && context.mounted) {
-                            Navigator.pop(context); // Modalı kapat
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Harita başarıyla veritabanına eklendi!")));
-                          } else {
-                            setModalState(() => isSaving = false);
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Hata oluştu!"), backgroundColor: Colors.red));
-                          }
-                        },
-                        icon: const Icon(Icons.save),
-                        label: const Text("Add map to pool"),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                        ),
-                      ),
+                                if (success && context.mounted) {
+                                  Navigator.pop(context); // Modalı kapat
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        context.tr('mapAddSuccess'),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  setModalState(() => isSaving = false);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(context.tr('genericError')),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.save),
+                              label: Text(context.tr('addMapToPool')),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                backgroundColor: Theme.of(context).primaryColor,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -187,7 +257,7 @@ class _MyMapsViewState extends State<MyMapsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Map Pool')),
+      appBar: AppBar(title: Text(context.tr('mapPool'))),
 
       // Consumer ile gerçek verileri dinliyoruz
       body: Consumer<MapsProvider>(
@@ -197,7 +267,12 @@ class _MyMapsViewState extends State<MyMapsView> {
           }
 
           if (mapsProvider.allMaps.isEmpty) {
-            return const Center(child: Text('No maps have been added yet.', style: TextStyle(color: Colors.grey)));
+            return Center(
+              child: Text(
+                context.tr('noMapsAdded'),
+                style: const TextStyle(color: Colors.grey),
+              ),
+            );
           }
 
           return GridView.builder(
@@ -212,7 +287,9 @@ class _MyMapsViewState extends State<MyMapsView> {
             itemBuilder: (context, index) {
               final map = mapsProvider.allMaps[index];
               // Resim HTTP ile başlıyorsa Network, yoksa cihazdaki File olarak kabul et
-              final isNetworkImage = map.imageUrl.startsWith('http') || map.imageUrl.startsWith('https');
+              final isNetworkImage =
+                  map.imageUrl.startsWith('http') ||
+                  map.imageUrl.startsWith('https');
 
               return GestureDetector(
                 onTap: () {
@@ -221,7 +298,9 @@ class _MyMapsViewState extends State<MyMapsView> {
                     context: context,
                     builder: (context) => Dialog(
                       backgroundColor: Colors.transparent,
-                      insetPadding: const EdgeInsets.all(10), // Kenarlardan hafif boşluk
+                      insetPadding: const EdgeInsets.all(
+                        10,
+                      ), // Kenarlardan hafif boşluk
                       child: InteractiveViewer(
                         panEnabled: true, // Kaydırmaya izin ver
                         minScale: 0.5,
@@ -230,7 +309,10 @@ class _MyMapsViewState extends State<MyMapsView> {
                           borderRadius: BorderRadius.circular(16),
                           child: isNetworkImage
                               ? Image.network(map.imageUrl, fit: BoxFit.contain)
-                              : Image.file(File(map.imageUrl), fit: BoxFit.contain),
+                              : Image.file(
+                                  File(map.imageUrl),
+                                  fit: BoxFit.contain,
+                                ),
                         ),
                       ),
                     ),
@@ -239,20 +321,29 @@ class _MyMapsViewState extends State<MyMapsView> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3)),
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor.withOpacity(0.3),
+                    ),
                     image: DecorationImage(
                       image: isNetworkImage
                           ? NetworkImage(map.imageUrl) as ImageProvider
                           : FileImage(File(map.imageUrl)),
                       fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.darken),
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.4),
+                        BlendMode.darken,
+                      ),
                     ),
                   ),
                   child: Center(
                     child: Text(
                       map.name,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

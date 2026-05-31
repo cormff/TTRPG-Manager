@@ -7,7 +7,8 @@ class RacesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DynamicRuleList(
       title: 'Races',
-      jsonPath: 'assets/data/races.json',
+      jsonPathEn: 'assets/data/races.json',
+      jsonPathTr: 'assets/data/races_tr.json',
     );
   }
 }

@@ -7,7 +7,8 @@ class ClassesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DynamicRuleList(
       title: 'Classes',
-      jsonPath: 'assets/data/classes.json',
+      jsonPathEn: 'assets/data/classes.json',
+      jsonPathTr: 'assets/data/classes_tr.json',
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/user_role_provider.dart';
 import '../../providers/games_provider.dart';
 import '../../models/game_model.dart';
@@ -40,20 +41,20 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('My Games'),
+        title: Text(context.tr('myGames')),
       ),
       body: gamesProvider.isLoading
           ? Center(child: CircularProgressIndicator(color: theme.primaryColor))
           : games.isEmpty
           ? _buildEmptyState(theme)
           : ListView.builder(
-        itemCount: games.length,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        itemBuilder: (context, index) {
-          final game = games[index];
-          return _buildGameTile(game, theme);
-        },
-      ),
+              itemCount: games.length,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              itemBuilder: (context, index) {
+                final game = games[index];
+                return _buildGameTile(game, theme, context);
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.primaryColor,
         onPressed: () {
@@ -66,7 +67,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
   }
 
   // Artık dynamic yerine oluşturduğumuz Game modelini bekliyoruz
-  Widget _buildGameTile(Game game, ThemeData theme) {
+  Widget _buildGameTile(Game game, ThemeData theme, BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -91,7 +92,9 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                game.description.isEmpty ? 'No description...' : game.description,
+                game.description.isEmpty
+                    ? context.tr('noDescription')
+                    : game.description,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium,
@@ -99,10 +102,14 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.people, size: 14, color: theme.textTheme.bodyMedium?.color),
+                  Icon(
+                    Icons.people,
+                    size: 14,
+                    color: theme.textTheme.bodyMedium?.color,
+                  ),
                   const SizedBox(width: 4),
                   Text(
-                    "${game.maxPlayers} Players",
+                    context.tr('playerCount', {'count': game.maxPlayers}),
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                   const SizedBox(width: 12),
@@ -113,7 +120,9 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    game.isPublic ? 'Public' : 'Private',
+                    game.isPublic
+                        ? context.tr('public')
+                        : context.tr('private'),
                     style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                 ],
@@ -124,15 +133,21 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
         trailing: Icon(Icons.chevron_right, color: theme.primaryColor),
         onTap: () {
           if (game.isFinished) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => FinishedGameDetailsView(game: game)));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FinishedGameDetailsView(game: game),
+              ),
+            );
           } else {
-          // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GameDetailsView(game: game),
-            ),
-          ); }
+            // Oyuna tıklandığında GameDetailsView sayfasına yönlendirip, Game objesini yolluyoruz
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameDetailsView(game: game),
+              ),
+            );
+          }
         },
       ),
     );
@@ -145,10 +160,7 @@ class _MyGamesGMViewState extends State<MyGamesGMView> {
         children: [
           Icon(Icons.map_outlined, size: 80, color: theme.hintColor),
           const SizedBox(height: 16),
-          Text(
-            "No games have been created yet.",
-            style: theme.textTheme.bodyLarge,
-          ),
+          Text(context.tr('noGamesCreated'), style: theme.textTheme.bodyLarge),
         ],
       ),
     );

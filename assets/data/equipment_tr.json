@@ -1,0 +1,104 @@
+{
+    "Equipment": {
+        "Equipment Rules": {
+            "Para ve Servet": "Altın (ap) standart servet birimidir. 1 ap = 10 gp = 100 bp. Platin (pp) nadirdir ve 10 ap değerindedir.",
+            "Zırh Yeterliliği": "Herkes zırh giyebilir, ama sadece yeterli olanlar onu etkili şekilde nasıl giyeceğini bilir. Yeterliliğiniz olmayan bir zırh giyerseniz, Güç veya Çeviklik içeren kontrollerde dezavantajınız olur ve büyü yapamazsınız.",
+            "Zırh Sınıfı (ZS)": "Zırh, giyenini saldırılardan korur. Zırhınız temel ZS'nizi belirler.",
+            "Silah Yeterliliği": "Sınıfınız, ırkınız ve yetenekleriniz belirli silah yeterlilikleri sağlar. Yeterlilik, saldırı atışına yeterlilik bonusunuzu eklemenize olanak sağlar.",
+            "Silah Özellikleri": "Birçok silah İncelik (Güç yerine Çeviklik), Ağır (küçük yaratıklar için dezavantaj) veya Çok Yönlü (tek veya çift elle kullanılabilir) gibi özel özelliklere sahiptir."
+        },
+        "Servet ve Paralar": {
+            "description": "Yaygın paralar, yapıldıkları metalin göreli değerine göre birkaç farklı birimde gelir.",
+            "Standart Döviz Kurları": {
+                "table": {
+                    "Para": ["Bakır (bp)", "Gümüş (gp)", "Elektrum (ep)", "Altın (ap)", "Platin (pp)"],
+                    "BP": ["1", "10", "50", "100", "1.000"],
+                    "AP": ["1/100", "1/10", "1/2", "1", "10"]
+                }
+            },
+            "Hazine Satışı": "Genel kural olarak, hasarsız silahlar, zırhlar ve diğer ekipmanlar pazarda maliyetlerinin yarısına satılır."
+        },
+        "Zırhlar ve Kalkanlar": {
+            "description": "Zırh tablosu yaygın zırh türlerinin maliyetini, ağırlığını ve diğer özelliklerini gösterir.",
+            "Hafif Zırh Listesi": {
+                "table": {
+                    "Zırh": ["Kapitone", "Deri", "Çivili Deri"],
+                    "Maliyet": ["5 ap", "10 ap", "45 ap"],
+                    "ZS": ["11 + Çev", "11 + Çev", "12 + Çev"],
+                    "Ağırlık": ["3,6 kg", "4,5 kg", "5,9 kg"]
+                }
+            },
+            "Orta Zırh Listesi": {
+                "table": {
+                    "Zırh": ["Post", "Zincir Gömlek", "Pul Zırh", "Göğüslük", "Yarım Plaka"],
+                    "Maliyet": ["10 ap", "50 ap", "50 ap", "400 ap", "750 ap"],
+                    "ZS": ["12 + Çev(maks 2)", "13 + Çev(maks 2)", "14 + Çev(maks 2)", "14 + Çev(maks 2)", "15 + Çev(maks 2)"],
+                    "Ağırlık": ["5,4 kg", "9 kg", "20 kg", "9 kg", "18 kg"]
+                }
+            },
+            "Ağır Zırh Listesi": {
+                "table": {
+                    "Zırh": ["Halka Zırh", "Zincir Zırh", "Yarık Zırh", "Plaka"],
+                    "Maliyet": ["30 ap", "75 ap", "200 ap", "1.500 ap"],
+                    "ZS": ["14", "16", "17", "18"],
+                    "Ağırlık": ["18 kg", "25 kg", "27 kg", "29,5 kg"]
+                }
+            },
+            "Giyme ve Çıkarma": {
+                "table": {
+                    "Kategori": ["Hafif Zırh", "Orta Zırh", "Ağır Zırh", "Kalkan"],
+                    "Giyme": ["1 dakika", "5 dakika", "10 dakika", "1 aksiyon"],
+                    "Çıkarma": ["1 dakika", "1 dakika", "5 dakika", "1 aksiyon"]
+                }
+            }
+        },
+        "Silahlar": {
+            "description": "Her silah yakın dövüş veya menzilli olarak sınıflandırılır.",
+            "Basit Yakın Dövüş": {
+                "table": {
+                    "Ad": ["Sopa", "Hançer", "El Baltası", "Cirit", "Topuz", "Mızrak"],
+                    "Hasar": ["1d4 E", "1d4 D", "1d6 K", "1d6 D", "1d6 E", "1d6 D"],
+                    "Maliyet": ["1 gp", "2 ap", "5 ap", "5 gp", "5 ap", "1 ap"],
+                    "Ağırlık": ["0,9 kg", "0,45 kg", "0,9 kg", "0,9 kg", "1,8 kg", "1,4 kg"]
+                }
+            },
+            "Savaş Yakın Dövüş": {
+                "table": {
+                    "Ad": ["Savaş Baltası", "Büyük Balta", "Büyük Kılıç", "Uzun Kılıç", "Mızrak", "Savaş Çekici"],
+                    "Hasar": ["1d8 K", "1d12 K", "2d6 K", "1d8 K", "1d8 D", "1d8 E"],
+                    "Maliyet": ["10 ap", "30 ap", "50 ap", "15 ap", "25 ap", "15 ap"],
+                    "Ağırlık": ["1,8 kg", "3,2 kg", "2,7 kg", "1,4 kg", "0,9 kg", "0,9 kg"]
+                }
+            }
+        },
+        "Araçlar": {
+            "description": "Bir araç, başka türlü yapamayacağınız bir şeyi yapmanıza yardımcı olur.",
+            "Araç Listesi": {
+                "table": {
+                    "Eşya": ["Simyacı malzemeleri", "Biracı malzemeleri", "Aşçı gereçleri", "Hırsız aletleri", "Zar seti", "Lavta"],
+                    "Maliyet": ["50 ap", "20 ap", "1 ap", "25 ap", "1 gp", "35 ap"],
+                    "Ağırlık": ["3,6 kg", "4 kg", "3,6 kg", "0,45 kg", "—", "0,9 kg"]
+                }
+            }
+        },
+        "Macera Ekipmanı": {
+            "description": "Bu bölüm hayatta kalma için gereken çeşitli eşyaları içerir.",
+            "Ekipman Tablosu": {
+                "table": {
+                    "Eşya": ["Sırt Çantası", "Uyku Tulumu", "İp (15m)", "Meşale", "Su Tulumu", "Erzak (1 gün)"],
+                    "Maliyet": ["2 ap", "1 ap", "1 ap", "1 bp", "2 gp", "5 gp"],
+                    "Ağırlık": ["2,3 kg", "3,2 kg", "4,5 kg", "0,45 kg", "2,3 kg", "0,9 kg"]
+                }
+            }
+        },
+        "Harcamalar ve Hizmetler": {
+            "description": "Yaşam ve hizmetler için standart maliyetler.",
+            "Yaşam Tarzları": {
+                "table": {
+                    "Yaşam Tarzı": ["Sefil", "Fakir", "Mütevazı", "Rahat", "Zengin", "Aristokrat"],
+                    "Günlük Fiyat": ["1 gp", "2 gp", "1 ap", "2 ap", "4 ap", "min 10 ap"]
+                }
+            }
+        }
+    }
+}

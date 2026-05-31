@@ -6,8 +6,9 @@ class EquipmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DynamicRuleList(
-      title: 'Equipment', // Buradaki isim JSON'daki en üstteki key ile aynı olmalı
-      jsonPath: 'assets/data/equipment.json',
+      title: 'Equipment',
+      jsonPathEn: 'assets/data/equipment.json',
+      jsonPathTr: 'assets/data/equipment_tr.json',
     );
   }
 }

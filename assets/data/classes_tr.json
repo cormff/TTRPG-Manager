@@ -1,0 +1,249 @@
+{
+    "Classes": {
+        "Class Features": {
+            "description": "Her sınıfın açıklaması, o sınıfa mensup üyelerin ortak özelliklerini içerir.",
+            "Can Puanları": "Sınıfınız Can Zarınızı ve başlangıç can puanlarınızı belirler.",
+            "Yeterlilikler": "Sınıfınız sayesinde karakteriniz belirli zırhlar, silahlar, araçlar, beceriler ve kurtulma atışlarında yeterlilik kazanır.",
+            "Ekipman": "Sınıfınız silahlar, zırh ve diğer macera ekipmanları dahil başlangıç ekipmanı sağlar."
+        },
+        "Barbar": {
+            "Barbarian Traits": {
+                "description": "İlkel bir geçmişe sahip, savaş öfkesine girebilen vahşi bir savaşçı.",
+                "Can Puanları": "Barbar seviyesi başına 1d12. 1. seviyede 12 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Basit silahlar, savaş silahları. Kurtulma atışları: Güç, Dayanıklılık.",
+                "Ekipman": "(a) bir büyük balta veya (b) herhangi bir savaş yakın dövüş silahı; (a) iki el baltası veya (b) herhangi bir basit silah; Bir kaşif çantası ve dört cirit.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Öfke": "Savaşta ilkel bir vahşetle savaşırsınız. Turunuzda bonus aksiyon olarak öfkeye girebilirsiniz. Öfke halindeyken Güç kontrollerinde ve kurtulma atışlarında avantaj, yakın dövüş saldırılarında bonus hasar ve ezici, delici, kesici hasara direnç kazanırsınız.",
+                        "Zırhsız Savunma": "Zırh giymediğinizde Zırh Sınıfınız 10 + Çeviklik değiştiriciniz + Dayanıklılık değiştiricinize eşittir."
+                    },
+                    "Level 2": {
+                        "Pervasız Saldırı": "2. seviyeden itibaren, savunmayı bir kenara bırakarak şiddetle saldırabilirsiniz. Turunuzdaki ilk saldırınızda pervasızca saldırmaya karar verebilirsiniz.",
+                        "Tehlike Hissi": "2. seviyede, yakındaki şeylerin olması gerektiği gibi olmadığını hissetme yeteneği kazanırsınız. Tuzaklar ve büyüler gibi görebildiğiniz etkilere karşı Çeviklik kurtulma atışlarında avantajınız vardır."
+                    },
+                    "Level 3": {
+                        "İlkel Yol": "3. seviyede, öfkenizin doğasını şekillendiren bir yol seçersiniz. Berserker Yolu veya Totem Savaşçısı Yolu gibi."
+                    }
+                }
+            }
+        },
+        "Ozan": {
+            "Bard Traits": {
+                "description": "Gücü yaratılışın müziğini yansıtan ilham verici bir büyücü.",
+                "Can Puanları": "Ozan seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh. Basit silahlar, el tezgahları, uzun kılıçlar, mızraklar, kısa kılıçlar. Seçtiğiniz üç müzik aleti. Kurtulma atışları: Çeviklik, Karizma.",
+                "Ekipman": "(a) bir mızrak, (b) bir uzun kılıç veya (c) herhangi bir basit silah; (a) bir diplomat çantası veya (b) bir gösterici çantası; Deri zırh ve bir hançer.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Büyü Yapma": "Gerçekliğin dokusunu dilekleriniz ve müziğinizle uyum içinde çözmeyi ve yeniden şekillendirmeyi öğrendiniz. Karizma, ozan büyüleriniz için büyü yeteneğinizdir.",
+                        "Ozanın İlhamı": "Etkileyici sözler veya müzikle başkalarına ilham verebilirsiniz. Bunu yapmak için turunuzda bonus aksiyon kullanarak sizi duyabilen 18 metre içindeki bir yaratığı seçersiniz. O yaratık bir Ozanın İlhamı zarı (d6) kazanır."
+                    },
+                    "Level 2": {
+                        "Her İşin Ustası": "2. seviyeden itibaren, yeterlilik bonusunuzu zaten içermeyen herhangi bir yetenek kontrolüne yarım yeterlilik bonusunuzu ekleyebilirsiniz.",
+                        "Dinlenme Şarkısı": "2. seviyeden itibaren, kısa dinlenme sırasında yaralı müttefiklerinizi canlandırmak için yatıştırıcı müzik kullanabilirsiniz."
+                    },
+                    "Level 3": {
+                        "Ozan Koleji": "3. seviyede, Bilgi Koleji veya Cesaret Koleji gibi ileri tekniklerini derinleştirmek için bir ozan koleji seçersiniz."
+                    }
+                }
+            }
+        },
+        "Rahip": {
+            "Cleric Traits": {
+                "description": "Rahipler, ölümlü dünya ile tanrıların uzak planları arasında aracılardır.",
+                "Can Puanları": "Rahip seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Tüm basit silahlar. Kurtulma atışları: Bilgelik, Karizma.",
+                "Ekipman": "(a) bir topuz veya (b) bir savaş çekici; (a) pul zırh, (b) deri zırh veya (c) zincir zırh; Bir kalkan ve kutsal sembol.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Büyü Yapma": "İlahi gücün kanalı olarak rahip büyüleri yapabilirsiniz. Bilgelik, büyü yeteneğinizdir.",
+                        "İlahi Alan": "Tanrınızla ilgili Yaşam, Işık veya Savaş gibi bir alan seçin. Seçiminiz alan büyüleri ve diğer özellikler sağlar."
+                    },
+                    "Level 2": {
+                        "İlahi Kanal": "2. seviyede, ilahi enerjiyi doğrudan tanrınızdan kanalize etme yeteneği kazanırsınız: Ölümsüzleri Kovma ve alanınız tarafından belirlenen bir etki."
+                    }
+                }
+            }
+        },
+        "Druid": {
+            "Druid Traits": {
+                "description": "Doğanın güçlerini kullanan ve hayvan formlarına bürünen Eski İnanç rahibi.",
+                "Can Puanları": "Druid seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar (metalden yapılmış zırh giymezler). Sopalar, hançerler, dartlar, ciritler, topuzlar. Bitkicilik seti. Kurtulma atışları: Zekâ, Bilgelik.",
+                "Ekipman": "(a) ahşap kalkan veya (b) herhangi bir basit silah; (a) bir pala veya (b) herhangi bir basit yakın dövüş silahı; Deri zırh, kaşif çantası ve druidik odak.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Druidce": "Druidlerin gizli dili olan Druidce'yi bilirsiniz.",
+                        "Büyü Yapma": "Doğanın ilahi özünden yararlanarak büyü yapabilirsiniz. Bilgelik, büyü yeteneğinizdir."
+                    },
+                    "Level 2": {
+                        "Vahşi Biçim": "2. seviyeden itibaren, daha önce gördüğünüz bir canavarın şeklini büyüyle alabilirsiniz.",
+                        "Druid Çemberi": "2. seviyede, Kara Çemberi veya Ay Çemberi gibi bir druid çemberi seçersiniz."
+                    }
+                }
+            }
+        },
+        "Savaşçı": {
+            "Fighter Traits": {
+                "description": "Savaşçılar silahlar ve zırhlarla rakipsiz bir ustalık ve savaş becerileri bilgisi paylaşırlar.",
+                "Can Puanları": "Savaşçı seviyesi başına 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Tüm zırhlar, kalkanlar. Basit silahlar, savaş silahları. Kurtulma atışları: Güç, Dayanıklılık.",
+                "Ekipman": "(a) zincir zırh veya (b) deri zırh, uzun yay ve 20 ok; (a) bir savaş silahı ve kalkan veya (b) iki savaş silahı.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Dövüş Stili": "Okçuluk, Savunma, Düello veya Büyük Silah Dövüşü gibi bir dövüş stili benimsersiniz.",
+                        "İkinci Rüzgâr": "Turunuzda, bonus aksiyon kullanarak 1d10 + savaşçı seviyeniz kadar can puanı geri kazanabilirsiniz."
+                    },
+                    "Level 2": {
+                        "Aksiyon Patlaması": "2. seviyeden itibaren, turunuzda normal aksiyonunuza ek olarak bir ek aksiyon alabilirsiniz."
+                    },
+                    "Level 3": {
+                        "Savaş Arketipi": "3. seviyede, Şampiyon veya Savaş Ustası gibi savaş stillerinde bir arketip seçersiniz."
+                    }
+                }
+            }
+        },
+        "Keşiş": {
+            "Monk Traits": {
+                "description": "Fiziksel ve ruhsal mükemmellik arayışında bedenin gücünü kullanan bir dövüş sanatları ustası.",
+                "Can Puanları": "Keşiş seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Basit silahlar, kısa kılıçlar. Kurtulma atışları: Güç, Çeviklik.",
+                "Ekipman": "(a) bir kısa kılıç veya (b) herhangi bir basit silah; (a) zindan çantası veya (b) kaşif çantası; 10 dart.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Zırhsız Savunma": "Zırh giymediğinizde ve kalkan taşımadığınızda ZS'niz 10 + Çeviklik değiştiriciniz + Bilgelik değiştiricinize eşittir.",
+                        "Dövüş Sanatları": "1. seviyede, silahsız saldırılar ve keşiş silahları kullanan dövüş stillerinde ustalık kazanırsınız."
+                    },
+                    "Level 2": {
+                        "Ki": "2. seviyeden itibaren, ki'nin mistik enerjisini kullanabilirsiniz. Darbe Yağmuru, Sabırlı Savunma ve Rüzgâr Adımı gibi ki özellikleri kullanabilirsiniz.",
+                        "Zırhsız Hareket": "2. seviyeden itibaren, zırh giymediğinizde hızınız 3 metre artar."
+                    },
+                    "Level 3": {
+                        "Manastır Geleneği": "3. seviyede, Açık El Yolu gibi bir manastır geleneğine kendinizi adarsınız."
+                    }
+                }
+            }
+        },
+        "Paladin": {
+            "Paladin Traits": {
+                "description": "Kutsal bir yemine bağlı kutsal bir savaşçı.",
+                "Can Puanları": "Paladin seviyesi başına 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Tüm zırhlar, kalkanlar. Basit silahlar, savaş silahları. Kurtulma atışları: Bilgelik, Karizma.",
+                "Ekipman": "(a) bir savaş silahı ve kalkan veya (b) iki savaş silahı; Zincir zırh ve kutsal sembol.",
+                "Class Traits": {
+                    "Level 1": {
+                        "İlahi Algı": "Güçlü kötülüğün varlığı duyularınıza hoş olmayan bir koku gibi yansır. Bir aksiyon olarak bu güçleri algılamak için farkındalığınızı açabilirsiniz.",
+                        "Şifa Eli": "Kutsal dokunuşunuz yaraları iyileştirebilir. Paladin seviyeniz x 5 kadar toplam can puanı geri kazandırabilirsiniz."
+                    },
+                    "Level 2": {
+                        "Dövüş Stili": "2. seviyede, Savunma veya Düello gibi bir dövüş stili benimsersiniz.",
+                        "Büyü Yapma": "2. seviyede, ilahi büyü yapma yeteneği kazanırsınız. Karizma, büyü yeteneğinizdir.",
+                        "İlahi Darbe": "2. seviyeden itibaren, yakın dövüş silahıyla vurduğunuzda büyü yuvası harcayarak ek ışık hasarı verebilirsiniz."
+                    },
+                    "Level 3": {
+                        "Kutsal Yemin": "3. seviyede, Bağlılık Yemini gibi sizi sonsuza dek paladin olarak bağlayan yemini edersiniz."
+                    }
+                }
+            }
+        },
+        "Korucu": {
+            "Ranger Traits": {
+                "description": "Medeniyetin sınırlarındaki tehditlere karşı savaşan bir savaşçı.",
+                "Can Puanları": "Korucu seviyesi başına 1d10. 1. seviyede 10 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh, orta zırh, kalkanlar. Basit silahlar, savaş silahları. Kurtulma atışları: Güç, Çeviklik.",
+                "Ekipman": "(a) pul zırh veya (b) deri zırh; (a) iki kısa kılıç veya (b) iki basit yakın dövüş silahı; Bir uzun yay ve 20 oklu sadak.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Tercih Edilen Düşman": "1. seviyeden itibaren, belirli bir düşman türünü inceleme, takip etme ve avlama konusunda önemli deneyiminiz vardır.",
+                        "Doğal Kaşif": "Bir tür doğal çevreyle özellikle tanışıksınız ve bu bölgelerde seyahat etme ve hayatta kalma konusunda ustasınız."
+                    },
+                    "Level 2": {
+                        "Dövüş Stili": "2. seviyede, Okçuluk veya İki Silah Dövüşü gibi bir dövüş stili benimsersiniz.",
+                        "Büyü Yapma": "2. seviyede, doğanın büyülü özünü kullanmayı öğrenirsiniz. Bilgelik, büyü yeteneğinizdir."
+                    },
+                    "Level 3": {
+                        "Korucu Arketipi": "3. seviyede, Avcı veya Canavar Ustası gibi bir arketip seçersiniz."
+                    }
+                }
+            }
+        },
+        "Düzenbaz": {
+            "Rogue Traits": {
+                "description": "Düzenbazlar beceri, gizlilik ve düşmanlarının zayıflıklarına güvenerek her durumda üstünlük sağlarlar.",
+                "Can Puanları": "Düzenbaz seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh. Basit silahlar, el tezgahları, uzun kılıçlar, mızraklar, kısa kılıçlar. Hırsız aletleri. Kurtulma atışları: Çeviklik, Zekâ.",
+                "Ekipman": "(a) bir mızrak veya (b) bir kısa kılıç; Deri zırh, iki hançer ve hırsız aletleri.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Uzmanlık": "1. seviyede, iki beceri yeterliliğinizi seçin. Bu yeterlilikleri kullanan yetenek kontrollerinde yeterlilik bonusunuz ikiye katlanır.",
+                        "Sinsi Saldırı": "1. seviyeden itibaren, saldırı atışında avantajınız varsa vurduğunuz yaratığa ek 1d6 hasar verebilirsiniz.",
+                        "Hırsız Argosu": "Düzenbaz eğitiminiz sırasında, normal konuşmaya gizli mesajlar gizlemenize olanak sağlayan hırsız argosunu öğrendiniz."
+                    },
+                    "Level 2": {
+                        "Kurnaz Aksiyon": "2. seviyeden itibaren, turunuzda bonus aksiyon olarak Koşu, Geri Çekilme veya Saklanma aksiyonu alabilirsiniz."
+                    },
+                    "Level 3": {
+                        "Düzenbaz Arketipi": "3. seviyede, Hırsız gibi bir arketip seçersiniz."
+                    }
+                }
+            }
+        },
+        "Büyüdoğumlu": {
+            "Sorcerer Traits": {
+                "description": "Bir armağan veya soy hattından gelen doğuştan büyüye dayanan bir büyücü.",
+                "Can Puanları": "Büyüdoğumlu seviyesi başına 1d6. 1. seviyede 6 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hançerler, dartlar, sapanlar, sopalar, hafif tezgahlar. Kurtulma atışları: Dayanıklılık, Karizma.",
+                "Ekipman": "(a) hafif tezgah ve 20 cıvata veya (b) herhangi bir basit silah; İki hançer.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Büyü Yapma": "Geçmişinizdeki bir olay sizi gizemli büyüyle doldurudu. Karizma, büyü yeteneğinizdir.",
+                        "Büyü Kökeni": "Ejderha Soy Hattı veya Vahşi Büyü gibi doğuştan büyü gücünüzün kaynağını tanımlayan bir köken seçin."
+                    },
+                    "Level 2": {
+                        "Büyü Kaynağı": "2. seviyede, içinizdeki derin bir büyü kaynağına erişirsiniz. Bu kaynak, çeşitli büyülü etkiler yaratmanıza olanak sağlayan büyü puanlarıyla temsil edilir."
+                    },
+                    "Level 3": {
+                        "Metabüyü": "3. seviyede, büyülerinizi ihtiyaçlarınıza göre bükerek değiştirme yeteneği kazanırsınız."
+                    }
+                }
+            }
+        },
+        "Pakt Büyücüsü": {
+            "Warlock Traits": {
+                "description": "Gücünü dış düzlemsel bir varlıkla yapılan anlaşmadan alan bir büyü kullanıcısı.",
+                "Can Puanları": "Pakt Büyücüsü seviyesi başına 1d8. 1. seviyede 8 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hafif zırh. Basit silahlar. Kurtulma atışları: Bilgelik, Karizma.",
+                "Ekipman": "(a) hafif tezgah ve 20 cıvata veya (b) herhangi bir basit silah; Deri zırh, herhangi bir basit silah ve iki hançer.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Öte Dünya Patronu": "1. seviyede, İblis, Peri Lordu veya Büyük Kadim Varlık gibi bir öte dünya varlığıyla anlaşma yaptınız.",
+                        "Pakt Büyüsü": "Gizemli araştırmanız ve patronunuz tarafından size bahşedilen büyü, büyü yapma yeteneği kazandırdı. Karizma, büyü yeteneğinizdir."
+                    },
+                    "Level 2": {
+                        "Kadim Çağrılar": "Okült bilgi çalışmanızda, size kalıcı büyülü yetenek kazandıran yasak bilgi parçalarını ortaya çıkardınız."
+                    },
+                    "Level 3": {
+                        "Pakt Armağanı": "3. seviyede, patronunuz sadık hizmetiniz için size bir armağan bahşeder: Zincir Paktı, Kılıç Paktı veya Kitap Paktı."
+                    }
+                }
+            }
+        },
+        "Büyücü": {
+            "Wizard Traits": {
+                "description": "Büyücüler, yaptıkları büyülerle tanımlanan ve sınıf olarak birleşen en üstün büyü kullanıcılarıdır.",
+                "Can Puanları": "Büyücü seviyesi başına 1d6. 1. seviyede 6 + Dayanıklılık değiştiriciniz.",
+                "Yeterlilikler": "Hançerler, dartlar, sapanlar, sopalar, hafif tezgahlar. Kurtulma atışları: Zekâ, Bilgelik.",
+                "Ekipman": "(a) bir sopa veya (b) bir hançer; Bir büyü kitabı.",
+                "Class Traits": {
+                    "Level 1": {
+                        "Büyü Yapma": "Gizemli büyünün öğrencisi olarak, gerçek gücünüzün ilk kıvılcımlarını gösteren büyüler içeren bir büyü kitabınız vardır. Zekâ, büyü yeteneğinizdir."
+                    },
+                    "Level 2": {
+                        "Gizemli İyileşme": "Büyü kitabınızı inceleyerek büyülü enerjinizin bir kısmını geri kazanmayı öğrendiniz.",
+                        "Gizemli Gelenek": "2. seviyede, Çağırma veya Koruma gibi sekiz okuldan birinde bir gizemli gelenek seçersiniz."
+                    }
+                }
+            }
+        }
+    }
+}

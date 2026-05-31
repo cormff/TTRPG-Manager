@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
 
@@ -9,7 +10,12 @@ class AuthProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   // --- KAYIT METODU ---
-  Future<void> register(String username, String email, String password, BuildContext context) async {
+  Future<void> register(
+    String username,
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     _isLoading = true;
     notifyListeners();
 
@@ -21,23 +27,26 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
 
     if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarılı!")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.tr('registerSuccess'))));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Kayıt Başarısız! Sunucuyu kontrol edin.")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.tr('registerFailed'))));
     }
   }
 
-// --- GİRİŞ METODU (GÜNCELLENMİŞ) ---
+  // --- GİRİŞ METODU (GÜNCELLENMİŞ) ---
   Future<Map<String, dynamic>?> login(String email, String password) async {
     _isLoading = true;
     notifyListeners();
 
     // AuthService artık bize ya kullanıcı verisini içeren bir Map döner ya da null döner
-    final Map<String, dynamic>? userData = await _authService.loginUser(email, password);
+    final Map<String, dynamic>? userData = await _authService.loginUser(
+      email,
+      password,
+    );
 
     _isLoading = false;
     notifyListeners();

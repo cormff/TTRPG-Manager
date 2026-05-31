@@ -1,0 +1,70 @@
+{
+    "Monsters": {
+        "Monster Rules": {
+            "İstatistik Blokları": "Bir canavarın istatistikleri, canavarı yönetmek için ihtiyacınız olan temel bilgileri sağlar.",
+            "Boyut Kategorileri": {
+                "table": {
+                    "Boyut": ["Minik", "Küçük", "Orta", "Büyük", "Dev", "Devasa"],
+                    "Alan": ["0,75 m", "1,5 m", "1,5 m", "3 m", "4,5 m", "6+ m"],
+                    "Örnekler": ["Şeytan Uşağı", "Goblin", "Ork", "Ogre", "Dev", "Kraken"]
+                }
+            },
+            "Tür": "Bir canavarın türü (Sapkın, Canavar, Ölümsüz vb.) temel doğasını ifade eder ve büyülerin onunla nasıl etkileştiğini etkiler.",
+            "Hizalama": "Bir canavarın hizalaması, eğilimine dair ipucu verir. Düşük zekâlı birçok yaratık 'Hizalamasız'dır.",
+            "Zırh Sınıfı": "Zırh, kalkan ve Çevikliği hesaba katar. Doğal zırh parantez içinde belirtilir.",
+            "Can Puanları": "Boyut ve Dayanıklılık tarafından belirlenir. Ortalama ve zar ifadesi olarak gösterilir.",
+            "Meydan Okuma Değeri": "Tehdit seviyesini gösterir. Canavarları yenmek Deneyim Puanı (DP) kazandırır.",
+            "Efsanevi Aksiyonlar": "Efsanevi yaratıklar, başka bir yaratığın turununun sonunda özel aksiyonlar alabilir."
+        },
+        "Aboleth": {
+            "İstatistikler": "Büyük sapkın, kurallı kötü",
+            "Zırh Sınıfı": "17 (doğal zırh)",
+            "Can Puanları": "135 (18d10 + 36)",
+            "Hız": "3 m, yüzme 12 m",
+            "Yetenekler": {
+                "table": {
+                    "GÜÇ": ["21(+5)"], "ÇEV": ["9(-1)"], "DAY": ["15(+2)"], "ZKA": ["18(+4)"], "BLG": ["15(+2)"], "KRZ": ["18(+4)"]
+                }
+            },
+            "Özellikler": "İki Yaşamlı, Mukus Bulutu, Yoklayıcı Telepati",
+            "Aksiyonlar": "• Çoklu Saldırı: Üç dokunaç saldırısı.\n• Dokunaç: +9 vuruş, 12 hasar + hastalık.\n• Kuyruk: +9 vuruş, 15 hasar.\n• Köleleştirme (3/Gün): Bilgelik kurtulma veya büyüleme.",
+            "Efsanevi Aksiyonlar": "Algıla, Kuyruk Darbesi, Psişik Boşaltma (2 Aksiyon)"
+        },
+        "Yetişkin Siyah Ejderha": {
+            "İstatistikler": "Dev ejderha, kaotik kötü",
+            "Zırh Sınıfı": "19 (doğal zırh)",
+            "Can Puanları": "195 (17d12 + 85)",
+            "Hız": "12 m, uçma 24 m, yüzme 12 m",
+            "Kurtulma Atışları": "Çev +7, Day +10, Blg +6, Krz +8",
+            "Hasar Bağışıklıkları": "Asit",
+            "Aksiyonlar": "• Çoklu Saldırı: Korku Varlığı ve 3 saldırı (Isırma, 2 Pençe).\n• Asit Nefesi (Yenileme 5–6): 54 (12d8) asit hasarı.",
+            "Efsanevi Aksiyonlar": "Algıla, Kuyruk Saldırısı, Kanat Saldırısı (2 Aksiyon)"
+        },
+        "Taklitçi": {
+            "İstatistikler": "Orta ucube (biçim değiştiren), nötr",
+            "Zırh Sınıfı": "12 (doğal zırh)",
+            "Can Puanları": "58 (9d8 + 18)",
+            "Hız": "4,5 m",
+            "Özellikler": "Biçim Değiştirme, Yapışkan, Sahte Görünüm, Tutucu",
+            "Aksiyonlar": "• Yalancı Ayak: +5 vuruş, 7 hasar + Yapışkan.\n• Isırma: +5 vuruş, 7 hasar + 4 asit hasarı."
+        },
+        "Zombi": {
+            "İstatistikler": "Orta ölümsüz, nötr kötü",
+            "Zırh Sınıfı": "8",
+            "Can Puanları": "22 (3d8 + 9)",
+            "Hız": "6 m",
+            "Özellikler": "Ölümsüz Metanet: 0 yerine 1 CP'ye düşme şansı.",
+            "Aksiyonlar": "Çarpma: +3 vuruş, 4 ezici hasar."
+        },
+        "Tarrasque": {
+            "İstatistikler": "Devasa ucube (titan), hizalamasız",
+            "Zırh Sınıfı": "25 (doğal zırh)",
+            "Can Puanları": "676 (33d20 + 330)",
+            "Hız": "12 m",
+            "Kurtulma Atışları": "Zkâ +5, Blg +9, Krz +9",
+            "Özellikler": "Efsanevi Direnç (3/Gün), Büyü Direnci, Yansıtıcı Kabuk, Kuşatma Canavarı",
+            "Aksiyonlar": "• Çoklu Saldırı: 5 saldırı (Isırma, 2 Pençe, Boynuz, Kuyruk) veya Yutma.\n• Korku Varlığı: ZB 17 Bilgelik kurtulma.",
+            "Efsanevi Aksiyonlar": "Saldırı, Hareket, Isırma (2 Aksiyon)"
+        }
+    }
+}

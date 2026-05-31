@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/auth_provider.dart'; // Bu importu ekle
 import '../../providers/user_role_provider.dart';
 import '../../widgets/custom_textfield.dart';
@@ -32,18 +33,29 @@ class _LoginViewState extends State<LoginView> {
     );
 
     if (userData != null) {
-      final int newUserId = userData['id']; // Yeni kullanıcının ID'sini alıyoruz
+      final int newUserId =
+          userData['id']; // Yeni kullanıcının ID'sini alıyoruz
 
-      userRoleProvider.setUserData(newUserId, userData['username'], _selectedRole);
+      userRoleProvider.setUserData(
+        newUserId,
+        userData['username'],
+        _selectedRole,
+      );
 
       if (mounted) {
         // ÇÖZÜM BURASI: Yeni hesaba geçer geçmez TÜM verileri çekiyoruz!
 
         // 1. Notları Çek
-        Provider.of<NotesProvider>(context, listen: false).fetchAllNotes(newUserId);
+        Provider.of<NotesProvider>(
+          context,
+          listen: false,
+        ).fetchAllNotes(newUserId);
 
         // 2. Rolüne göre Oyunları ve Haritaları Çek
-        final gamesProvider = Provider.of<GamesProvider>(context, listen: false);
+        final gamesProvider = Provider.of<GamesProvider>(
+          context,
+          listen: false,
+        );
         if (_selectedRole == UserRole.gameMaster) {
           // GM ise kendi oyunlarını ve haritalarını getir
           gamesProvider.fetchGMGames(newUserId);
@@ -60,8 +72,8 @@ class _LoginViewState extends State<LoginView> {
       // Giriş başarısız durumu
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Hatalı email veya şifre!'),
+          SnackBar(
+            content: Text(context.tr('loginFailed')),
             backgroundColor: Colors.red,
           ),
         );
@@ -74,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
     final isLoading = context.watch<AuthProvider>().isLoading;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: Text(context.tr('login'))),
       // ÇÖZÜM BURADA BAŞLIYOR: Center ve SingleChildScrollView eklendi
       body: Center(
         child: SingleChildScrollView(
@@ -84,46 +96,57 @@ class _LoginViewState extends State<LoginView> {
             children: [
               CustomTextField(
                 controller: _emailController,
-                labelText: 'Email',
+                labelText: context.tr('email'),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16.0),
               CustomTextField(
                 controller: _passwordController,
-                labelText: 'Password',
+                labelText: context.tr('password'),
                 obscureText: true,
               ),
               const SizedBox(height: 16.0),
               DropdownButtonFormField<UserRole>(
                 value: _selectedRole,
-                decoration: const InputDecoration(labelText: 'Select Role'),
-                items: const [
-                  DropdownMenuItem(value: UserRole.gameMaster, child: Text('Game Master')),
-                  DropdownMenuItem(value: UserRole.player, child: Text('Player')),
+                decoration: InputDecoration(
+                  labelText: context.tr('selectRole'),
+                ),
+                items: [
+                  DropdownMenuItem(
+                    value: UserRole.gameMaster,
+                    child: Text(context.tr('gameMaster')),
+                  ),
+                  DropdownMenuItem(
+                    value: UserRole.player,
+                    child: Text(context.tr('player')),
+                  ),
                 ],
                 onChanged: (UserRole? newValue) {
-                  if (newValue != null) setState(() => _selectedRole = newValue);
+                  if (newValue != null)
+                    setState(() => _selectedRole = newValue);
                 },
               ),
               const SizedBox(height: 24.0),
 
               isLoading
                   ? const CircularProgressIndicator()
-                  : PrimaryButton(
-                onPressed: _login,
-                text: 'Login',
-              ),
+                  : PrimaryButton(onPressed: _login, text: context.tr('login')),
 
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterView()),
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterView(),
+                    ),
                   );
                 },
-                child: const Text(
-                  "Don't have an account? Register",
-                  style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                child: Text(
+                  context.tr('dontHaveAccountRegister'),
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

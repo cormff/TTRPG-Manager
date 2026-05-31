@@ -1,6 +1,7 @@
 // lib/views/player/my_games_player_view.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/games_provider.dart';
 import '../../providers/user_role_provider.dart';
 import 'player_game_details_view.dart';
@@ -34,61 +35,75 @@ class _MyGamesPlayerViewState extends State<MyGamesPlayerView> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Joined Games'),
+        title: Text(context.tr('myJoinedGames')),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: gamesProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : myGames.isEmpty
-          ? const Center(
-        child: Text(
-          'You have not joined any games yet.',
-          style: TextStyle(color: Colors.grey, fontSize: 16),
-        ),
-      )
+          ? Center(
+              child: Text(
+                context.tr('noJoinedGames'),
+                style: const TextStyle(color: Colors.grey, fontSize: 16),
+              ),
+            )
           : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: myGames.length,
-        itemBuilder: (context, index) {
-          final game = myGames[index];
-          return Card(
-            margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            color: theme.cardColor,
-            elevation: 4,
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
-              leading: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: theme.primaryColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(Icons.casino, color: theme.primaryColorLight),
-              ),
-              title: Text(
-                game.title,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              subtitle: Text(
-                "${game.joinedPlayerIds.length} / ${game.maxPlayers} Players",
-                style: const TextStyle(color: Colors.white70),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey[600], size: 16),
-              onTap: () {
-                // Oyuncuyu detay sayfasına yönlendiriyoruz
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PlayerGameDetailsView(game: game),
+              padding: const EdgeInsets.all(16),
+              itemCount: myGames.length,
+              itemBuilder: (context, index) {
+                final game = myGames[index];
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  color: theme.cardColor,
+                  elevation: 4,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(16),
+                    leading: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: theme.primaryColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(Icons.casino, color: theme.primaryColorLight),
+                    ),
+                    title: Text(
+                      game.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    subtitle: Text(
+                      context.tr('joinedPlayerCount', {
+                        'current': game.joinedPlayerIds.length,
+                        'max': game.maxPlayers,
+                      }),
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.grey[600],
+                      size: 16,
+                    ),
+                    onTap: () {
+                      // Oyuncuyu detay sayfasına yönlendiriyoruz
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PlayerGameDetailsView(game: game),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
             ),
-          );
-        },
-      ),
     );
   }
 }
