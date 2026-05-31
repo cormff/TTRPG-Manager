@@ -5,9 +5,10 @@ class ClassesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DynamicRuleList(
-      title: 'Classes',
-      jsonPath: 'assets/data/classes.json',
+    final isTr = Localizations.localeOf(context).languageCode == 'tr';
+    return DynamicRuleList(
+      title: isTr ? 'Sınıflar' : 'Classes',
+      jsonPath: isTr ? 'assets/data/classes_tr.json' : 'assets/data/classes_en.json',
     );
   }
 }

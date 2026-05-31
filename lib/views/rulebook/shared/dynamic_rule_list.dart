@@ -24,19 +24,63 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
     _futureRuleData = loadDataFromJson();
   }
 
+  @override
+  void didUpdateWidget(covariant DynamicRuleList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.jsonPath != widget.jsonPath) {
+      setState(() {
+        _futureRuleData = loadDataFromJson();
+      });
+    }
+  }
+
   String? _getRuleImageUrl(String name) {
     final lowerName = name.toLowerCase();
     // Genel başlıklar veya açıklama içeren alt başlıklar için resim arama
-    if (lowerName.contains('traits') || lowerName.contains('features') || lowerName.contains('overview')) return null;
+    if (lowerName.contains('traits') ||
+        lowerName.contains('features') ||
+        lowerName.contains('overview') ||
+        lowerName.contains('özellik') ||
+        lowerName.contains('açıklama')) return null;
 
-    final categoryTitle = widget.title.toLowerCase().trim();
-    final itemName = name.trim().toLowerCase().replaceAll('-', '').replaceAll(' ', '');
+    final categoryTitle = widget.title.toLowerCase();
+    String itemName = name.trim().toLowerCase().replaceAll('-', '').replaceAll(' ', '');
 
-    if (categoryTitle.contains("race")) {
+    // Türkçeden İngilizceye eşleme (Resim dosyaları İngilizce ise aynı resimleri kullanmak için)
+    final Map<String, String> trToEnMapping = {
+      'cüce': 'dwarf',
+      'buçukluk': 'halfling',
+      'insan': 'human',
+      'ejderdoğan': 'dragonborn',
+      'yarıelf': 'halfelf',
+      'yarıork': 'halforc',
+      'gnom': 'gnome',
+      'elf': 'elf',
+      'tiefling': 'tiefling',
+      'barbar': 'barbarian',
+      'ozan': 'bard',
+      'ruhban': 'cleric',
+      'savaşçı': 'fighter',
+      'keşiş': 'monk',
+      'kolcu': 'ranger',
+      'düzenbaz': 'rogue',
+      'büyücüwizard': 'wizard',
+      'büyücüsorcerer': 'sorcerer',
+      'şeytanibilge': 'warlock',
+      'warlock': 'warlock',
+      'paladin': 'paladin',
+      'druid': 'druid',
+    };
+
+    if (trToEnMapping.containsKey(itemName)) {
+      itemName = trToEnMapping[itemName]!;
+    }
+
+    if (categoryTitle.contains("race") || categoryTitle.contains("ırk") || categoryTitle.contains("irk")) {
       return 'assets/images/races/$itemName.png';
     }
 
-    if (categoryTitle.contains("class")) {
+    if (categoryTitle.contains("class") || categoryTitle.contains("sınıf") || categoryTitle.contains("sinif")) {
       return 'assets/images/classes/$itemName.png';
     }
 
@@ -60,9 +104,13 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
         // --- HATA GİDERİCİ MANTIK BURASI ---
         // Sadece bu özel anahtar kelimeleri içeren ve belli isimlere sahip olanları "Genel Bilgi" sayıyoruz.
         // Boylece "Acid Splash" gibi içinde 's' harfi geçen her şeyi genel bilgi sanmayacak.
-        List<String> generalHeaders = ["Racial Traits", "Class Features", "Spellcasting Features", "Personal Characteristics", "Equipment Rules", "Monster Rules"];
+        List<String> generalHeaders = [
+          "Racial Traits", "Class Features", "Spellcasting Features", "Personal Characteristics", "Equipment Rules", "Monster Rules",
+          "Irk Özellikleri", "Sınıf Özellikleri", "Büyü Yapma Özellikleri", "Ekipman Kuralları", "Canavar Kuralları"
+        ];
         bool isGeneral = generalHeaders.contains(keyName) ||
-            (keyName.toLowerCase().contains("traits") && !keyName.contains("("));
+            (keyName.toLowerCase().contains("traits") && !keyName.contains("(")) ||
+            (keyName.toLowerCase().contains("özellikleri") && !keyName.contains("("));
 
         if (isGeneral || content is! Map) {
           traitsMap = content is Map ? Map<String, dynamic>.from(content) : {};
@@ -86,9 +134,15 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
           _processTrait(items, traitName, traitValue);
         });
 
-        categories.add(RuleCategory(
+          categories.add(RuleCategory(
           title: keyName,
-          icon: isGeneral ? Icons.auto_stories : (widget.title == "Spells" ? Icons.auto_awesome : (widget.title == "Monsters" ? Icons.pets : Icons.bookmark_border)),
+          icon: isGeneral 
+              ? Icons.auto_stories 
+              : (widget.title == "Spells" || widget.title == "Büyüler" 
+                  ? Icons.auto_awesome 
+                  : (widget.title == "Monsters" || widget.title == "Canavarlar" 
+                      ? Icons.pets 
+                      : Icons.bookmark_border)),
           items: items,
           isGeneralInfo: isGeneral,
           imageUrl: isGeneral ? null : _getRuleImageUrl(keyName),
@@ -334,9 +388,9 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
                                   ? Image.asset(
                                 category.imageUrl!,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => Icon(category.icon, size: 20),
+                                errorBuilder: (context, error, stackTrace) => Icon(category.icon, size: 20, color: Theme.of(context).colorScheme.primary),
                               )
-                                  : Icon(category.icon, size: 20),
+                                  : Icon(category.icon, size: 20, color: Theme.of(context).colorScheme.primary),
                             ),
                             title: Text(category.title, style: const TextStyle(fontWeight: FontWeight.bold)),
                             trailing: const Icon(Icons.chevron_right, size: 18),
@@ -392,11 +446,11 @@ class _DynamicRuleListState extends State<DynamicRuleList> {
                       const SizedBox(height: 4),
                       // --- İŞTE DEĞİŞİKLİĞİ BURAYA YAPTIK ---
                       Text(
-                        widget.title == "Spells"
+                        (widget.title == "Spells" || widget.title == "Büyüler")
                             ? "Everything you need to know about slots, concentration and components."
-                            : widget.title == "Equipment"
+                            : (widget.title == "Equipment" || widget.title == "Ekipman")
                             ? "Core rules for armor, weapons, wealth, and item management."
-                            : widget.title == "Monsters" // <-- Yeni Eklenti
+                            : (widget.title == "Monsters" || widget.title == "Canavarlar")
                             ? "Rules for creature stats, sizes, challenge ratings, and actions."
                             : "Essential mechanics and shared traits every player should know.",
                         style: const TextStyle(color: Colors.white70, fontSize: 13),

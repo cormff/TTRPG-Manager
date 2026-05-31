@@ -5,9 +5,10 @@ class RacesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DynamicRuleList(
-      title: 'Races',
-      jsonPath: 'assets/data/races.json',
+    final isTr = Localizations.localeOf(context).languageCode == 'tr';
+    return DynamicRuleList(
+      title: isTr ? 'Irklar' : 'Races',
+      jsonPath: isTr ? 'assets/data/races_tr.json' : 'assets/data/races_en.json',
     );
   }
 }

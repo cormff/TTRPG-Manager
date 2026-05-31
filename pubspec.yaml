@@ -38,6 +38,9 @@ dependencies:
   http: ^1.6.0
   image_picker: ^1.2.2
   shared_preferences: ^2.2.3
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +58,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -63,11 +67,16 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/data/races.json
-    - assets/data/classes.json
-    - assets/data/spell.json
-    - assets/data/equipment.json
-    - assets/data/monsters.json
+    - assets/data/races_en.json
+    - assets/data/classes_en.json
+    - assets/data/spell_en.json
+    - assets/data/equipment_en.json
+    - assets/data/monsters_en.json
+    - assets/data/races_tr.json
+    - assets/data/classes_tr.json
+    - assets/data/spell_tr.json
+    - assets/data/equipment_tr.json
+    - assets/data/monsters_tr.json
     - assets/images/races/
     - assets/images/classes/
     - assets/images/avatars/

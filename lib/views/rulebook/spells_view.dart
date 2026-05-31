@@ -6,9 +6,10 @@ class SpellsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DynamicRuleList(
-      title: 'Spells',
-      jsonPath: 'assets/data/spell.json',
+    final isTr = Localizations.localeOf(context).languageCode == 'tr';
+    return DynamicRuleList(
+      title: isTr ? 'Büyüler' : 'Spells',
+      jsonPath: isTr ? 'assets/data/spell_tr.json' : 'assets/data/spell_en.json',
     );
   }
 }

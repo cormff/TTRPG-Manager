@@ -61,14 +61,12 @@ class AppTheme {
       primary: Colors.deepPurple,
       secondary: Colors.deepPurpleAccent,
       surface: Colors.grey[850]!,
-      background: Colors.grey[900],
       error: Colors.redAccent,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: Colors.white,
-      onBackground: Colors.white,
       onError: Colors.black,
-    ).copyWith(background: Colors.grey[900]),
+    ),
   );
 
   // --- YENİ EKLENECEK AYDINLIK TEMA ---
