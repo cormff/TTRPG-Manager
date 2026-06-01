@@ -1,0 +1,166 @@
+{
+    "Spells": {
+        "Spellcasting Features": {
+            "description": "Magic permeates fantasy gaming worlds and often appears in the form of a spell. This chapter provides the rules for casting spells.",
+            "Spell Level": "Every spell has a level from 0 to 9. A spell’s level is a general indicator of how powerful it is. Cantrips are level 0.",
+            "Spell Slots": "When a character casts a spell, he or she expends a slot of that spell’s level or higher, effectively 'filling' a slot with the spell. Finishing a long rest restores any expended spell slots.",
+            "Casting Time": "Most spells require a single action to cast, but some spells require a bonus action, a reaction, or much more time to cast.",
+            "Components": "A spell’s components are the physical requirements you must meet in order to cast it: verbal (V), somatic (S), or material (M).",
+            "Duration": "A spell’s duration is the length of time the spell persists. It can be expressed in rounds, minutes, hours, or even years.",
+            "Concentration": "Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration, such a spell ends."
+        },
+        "Cantrips (Level 0)": {
+            "Acid Splash": {
+                "Casting Time": "1 action",
+                "Range": "60 feet",
+                "Components": "V, S",
+                "Duration": "Instantaneous",
+                "description": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.\n\nThis spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+            },
+            "Light": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, M (a firefly or phosphorescent moss)",
+                "Duration": "1 hour",
+                "description": "You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\n\nIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell."
+            },
+            "Mage Hand": {
+                "Casting Time": "1 action",
+                "Range": "30 feet",
+                "Components": "V, S",
+                "Duration": "1 minute",
+                "description": "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.\n\nYou can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.\n\nThe hand can’t attack, activate magic items, or carry more than 10 pounds."
+            }
+        },
+        "1st Level Spells": {
+            "Cure Wounds": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, S",
+                "Duration": "Instantaneous",
+                "description": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st."
+            },
+            "Magic Missile": {
+                "Casting Time": "1 action",
+                "Range": "120 feet",
+                "Components": "V, S",
+                "Duration": "Instantaneous",
+                "description": "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st."
+            },
+            "Shield": {
+                "Casting Time": "1 reaction, which you take when you are hit by an attack or targeted by the *magic missile* spell",
+                "Range": "Self",
+                "Components": "V, S",
+                "Duration": "1 round",
+                "description": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from *magic missile.*"
+            }
+        },
+        "2nd Level Spells": {
+            "Hold Person": {
+                "Casting Time": "1 action",
+                "Range": "60 feet",
+                "Components": "V, S, M (a small, straight piece of iron)",
+                "Duration": "Concentration, up to 1 minute",
+                "description": "Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them."
+            },
+            "Invisibility": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, S, M (an eyelash encased in gum arabic)",
+                "Duration": "Concentration, up to 1 hour",
+                "description": "A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd."
+            }
+        },
+        "3rd Level Spells": {
+            "Fireball": {
+                "Casting Time": "1 action",
+                "Range": "150 feet",
+                "Components": "V, S, M (a tiny ball of bat guano and sulfur)",
+                "Duration": "Instantaneous",
+                "description": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.\n\nThe fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."
+            },
+            "Fly": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, S, M (a wing feather from any bird)",
+                "Duration": "Concentration, up to 10 minutes",
+                "description": "You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd."
+            }
+        },
+        "4th Level Spells": {
+            "Banishment": {
+                "Casting Time": "1 action",
+                "Range": "60 feet",
+                "Components": "V, S, M (an item distasteful to the target)",
+                "Duration": "Concentration, up to 1 minute",
+                "description": "You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a Charisma saving throw or be banished.\n\nIf the target is native to the plane of existence you’re on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.\n\nIf the target is native to a different plane of existence than the one you’re on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn’t return.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th."
+            },
+            "Polymorph": {
+                "Casting Time": "1 action",
+                "Range": "60 feet",
+                "Components": "V, S, M (a caterpillar cocoon)",
+                "Duration": "Concentration, up to 1 hour",
+                "description": "This spell transforms a creature that you can see within range into a new form. An unwilling creature must make a Wisdom saving throw to avoid the effect. The spell has no effect on a shapechanger or a creature with 0 hit points.\n\nThe transformation lasts for the duration, or until the target drops to 0 hit points or dies. The new form can be any beast whose challenge rating is equal to or less than the target’s. The target’s game statistics, including mental ability scores, are replaced by the statistics of the chosen beast. It retains its alignment and personality.\n\nThe target assumes the hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed."
+            }
+        },
+        "5th Level Spells": {
+            "Greater Restoration": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, S, M (diamond dust worth at least 100 gp, which the spell consumes)",
+                "Duration": "Instantaneous",
+                "description": "You imbue a creature you touch with positive energy to undo a debilitating effect. You can reduce the target’s exhaustion level by one, or end one of the following effects on the target:\n• One effect that charmed or petrified the target\n• One curse, including the target’s attunement to a cursed magic item\n• Any reduction to one of the target’s ability scores\n• One effect reducing the target’s hit point maximum"
+            },
+            "Wall of Force": {
+                "Casting Time": "1 action",
+                "Range": "120 feet",
+                "Components": "V, S, M (a pinch of powder made by crushing a clear gemstone)",
+                "Duration": "Concentration, up to 10 minutes",
+                "description": "An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels.\n\nNothing can physically pass through the wall. It is immune to all damage and can’t be dispelled by dispel magic. A disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall."
+            }
+        },
+        "6th Level Spells": {
+            "Heal": {
+                "Casting Time": "1 action",
+                "Range": "60 feet",
+                "Components": "V, S",
+                "Duration": "Instantaneous",
+                "description": "Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain 70 hit points. This spell also ends blindness, deafness, and any diseases affecting the target. This spell has no effect on constructs or undead.\n\n***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, the amount of healing increases by 10 for each slot level above 6th."
+            },
+            "True Seeing": {
+                "Casting Time": "1 action",
+                "Range": "Touch",
+                "Components": "V, S, M (an ointment for the eyes that costs 25 gp; is made from mushroom powder, saffron, and fat; and is consumed by the spell)",
+                "Duration": "1 hour",
+                "description": "This spell gives the willing creature you touch the ability to see things as they actually are. For the duration, the creature has truesight, notices secret doors hidden by magic, and can see into the Ethereal Plane, all out to a range of 120 feet."
+            }
+        },
+        "7th Level Spells": {
+            "Teleport": {
+                "Casting Time": "1 action",
+                "Range": "10 feet",
+                "Components": "V",
+                "Duration": "Instantaneous",
+                "description": "This spell instantly transports you and up to eight willing creatures of your choice that you can see within range, or a single object that you can see within range, to a destination you select. If you target an object, it must be able to fit entirely inside a 10-foot cube, and it can’t be held or carried by an unwilling creature.\n\nThe destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully."
+            }
+        },
+        "8th Level Spells": {
+            "Antimagic Field": {
+                "Casting Time": "1 action",
+                "Range": "Self (10-foot-radius sphere)",
+                "Components": "V, S, M (a pinch of powdered iron or iron filings)",
+                "Duration": "Concentration, up to 1 hour",
+                "description": "A 10-foot-radius invisible sphere of antimagic surrounds you. This area is divorced from the magical energy that suffuses the multiverse. Within the sphere, spells can’t be cast, summoned creatures disappear, and even magic items become mundane. Until the spell ends, the sphere moves with you, centered on you.\n\nSpells and other magical effects, except those created by an artifact or a deity, are suppressed in the sphere and can’t protrude into it. A slot expended to cast a suppressed spell is consumed. While an effect is suppressed, it doesn’t function, but the time it spends suppressed counts against its duration."
+            }
+        },
+        "9th Level Spells": {
+            "Wish": {
+                "Casting Time": "1 action",
+                "Range": "Self",
+                "Components": "V",
+                "Duration": "Instantaneous",
+                "description": "Wish is the mightiest spell a mortal creature can cast. By simply speaking aloud, you can alter the very foundations of reality in accord with your desires.\n\nThe basic use of this spell is to duplicate any other spell of 8th level or lower. You don’t need to meet any requirements in that spell, including costly components. The spell simply takes effect."
+            }
+        }
+    }
+}

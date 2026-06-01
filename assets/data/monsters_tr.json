@@ -1,0 +1,70 @@
+{
+    "Canavarlar": {
+        "Canavar Kuralları": {
+            "İstatistik Blokları": "Bir canavarın istatistikleri, canavarı yönetmek için ihtiyaç duyduğunuz temel bilgileri sağlar.",
+            "Boyut Kategorileri": {
+                "tablo": {
+                    "Boyut": ["Minik", "Küçük", "Orta", "Büyük", "Devasa", "Muazzam"],
+                    "Alan": ["2.5 ft", "5 ft", "5 ft", "10 ft", "15 ft", "20+ ft"],
+                    "Örnekler": ["İmp", "Goblin", "Ork", "Ogre", "Dev", "Kraken"]
+                }
+            },
+            "Tür": "Bir canavarın türü (Anormallik, Canavar, Ölümsüz vb.) onun temel doğası hakkında bilgi verir ve büyülerin onunla nasıl etkileşime girdiğini etkiler.",
+            "Hizalama": "Bir canavarın hizalaması, mizacına dair bir ipucudur. Düşük zekalı birçok yaratık 'Tarafsız'dır.",
+            "Zırh Sınıfı": "Zırhı, kalkanları ve Çevikliği hesaba katar. Doğal zırh parantez içinde belirtilir.",
+            "Vuruş Puanları": "Boyut ve Dayanıklılığa göre belirlenir. Ortalama ve zar ifadesi olarak gösterilir.",
+            "Tehlike Derecesi": "Tehdit seviyesini gösterir. Canavarları yenmek Deneyim Puanı (XP) kazandırır.",
+            "Efsanevi Eylemler": "Efsanevi yaratıklar, başka bir yaratığın turunun sonunda özel eylemler gerçekleştirebilirler."
+        },
+        "Aboleth": {
+            "İstatistikler": "Büyük anormallik, düzenli kötü",
+            "Zırh Sınıfı": "17 (doğal zırh)",
+            "Vuruş Puanları": "135 (18d10 + 36)",
+            "Hız": "10 ft., yüzme 40 ft.",
+            "Yetenekler": {
+                "tablo": {
+                    "GÜÇ": ["21(+5)"], "ÇEV": ["9(-1)"], "DAY": ["15(+2)"], "ZEK": ["18(+4)"], "BİL": ["15(+2)"], "KAR": ["18(+4)"]
+                }
+            },
+            "Özellikler": "Amfibi, Mukus Bulutu, Zihin Okuyan Telepati",
+            "Eylemler": "• Çoklu Saldırı: Üç dokungaç saldırısı.\n• Dokungaç: Vurmak için +9, 12 hasar + hastalık.\n• Kuyruk: Vurmak için +9, 15 hasar.\n• Köleleştir (3/Gün): Bilgelik kurtarması veya büyülenir.",
+            "Efsanevi Eylemler": "Tespit Et, Kuyruk Darbesi, Psişik Tüketim (2 Eylem)"
+        },
+        "Yetişkin Siyah Ejderha": {
+            "İstatistikler": "Devasa ejderha, kaotik kötü",
+            "Zırh Sınıfı": "19 (doğal zırh)",
+            "Vuruş Puanları": "195 (17d12 + 85)",
+            "Hız": "40 ft., uçma 80 ft., yüzme 40 ft.",
+            "Kurtarma Atışları": "Çev +7, Day +10, Bil +6, Kar +8",
+            "Hasar Bağışıklıkları": "Asit",
+            "Eylemler": "• Çoklu Saldırı: Korkunç Varlık ve 3 saldırı (Isırık, 2 Pençe).\n• Asit Nefesi (Şarj 5–6): 54 (12d8) asit hasarı.",
+            "Efsanevi Eylemler": "Tespit Et, Kuyruk Saldırısı, Kanat Saldırısı (2 Eylem)"
+        },
+        "Mimik": {
+            "İstatistikler": "Orta canavarımsı (şekil değiştiren), tarafsız",
+            "Zırh Sınıfı": "12 (doğal zırh)",
+            "Vuruş Puanları": "58 (9d8 + 18)",
+            "Hız": "15 ft.",
+            "Özellikler": "Şekil Değiştiren, Yapışkan, Sahte Görünüm, Yakalayıcı",
+            "Eylemler": "• Yalancı Ayak: Vurmak için +5, 7 hasar + Yapışkan.\n• Isırık: Vurmak için +5, 7 hasar + 4 asit hasarı."
+        },
+        "Zombi": {
+            "İstatistikler": "Orta ölümsüz, tarafsız kötü",
+            "Zırh Sınıfı": "8",
+            "Vuruş Puanları": "22 (3d8 + 9)",
+            "Hız": "20 ft.",
+            "Özellikler": "Ölümsüz Dirayeti: 0 yerine 1 HP'ye düşme şansı.",
+            "Eylemler": "Çarpma: Vurmak için +3, 4 ezici hasar."
+        },
+        "Tarrasque": {
+            "İstatistikler": "Muazzam canavarımsı (titan), tarafsız (hizalanmamış)",
+            "Zırh Sınıfı": "25 (doğal zırh)",
+            "Vuruş Puanları": "676 (33d20 + 330)",
+            "Hız": "40 ft.",
+            "Kurtarma Atışları": "Zek +5, Bil +9, Kar +9",
+            "Özellikler": "Efsanevi Direnç (3/Gün), Büyü Direnci, Yansıtıcı Kabuk, Kuşatma Canavarı",
+            "Eylemler": "• Çoklu Saldırı: 5 saldırı (Isırık, 2 Pençe, Boynuzlar, Kuyruk) veya Yutma.\n• Korkunç Varlık: ZS 17 Bilgelik kurtarması.",
+            "Efsanevi Eylemler": "Saldır, Hareket Et, Çiğne (2 Eylem)"
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "Ekipman": {
+        "Ekipman Kuralları": {
+            "Madeni Paralar ve Zenginlik": "Altın (gp) zenginliğin standart birimidir. 1 gp = 10 sp = 100 cp. Platin (pp) nadirdir ve 10 gp değerindedir.",
+            "Zırh Yeterliliği": "Herkes zırh giyebilir ancak sadece yeterliliği olanlar onu nasıl etkili bir şekilde giyeceğini bilir. Yeterliliğiniz olmayan bir zırh giyerseniz, Güç veya Çeviklik içeren herhangi bir kontrol, kurtarma atışı veya saldırı zarında dezavantajınız olur ve büyü yapamazsınız.",
+            "Zırh Sınıfı (ZS)": "Zırh, giyen kişiyi saldırılara karşı korur. Zırhınız temel ZS'nizi belirler.",
+            "Silah Yeterliliği": "Sınıfınız, ırkınız ve ustalıklarınız size belirli silahlarla (Basit veya Askeri) yeterlilik kazandırır. Yeterlilik, saldırı zarına yeterlilik bonusunuzu eklemenizi sağlar.",
+            "Silah Özellikleri": "Çoğu silahın, İnce (Güç yerine Çeviklik kullanın), Ağır (küçük yaratıklar için dezavantaj) veya Çok Yönlü (tek veya iki el ile kullanılabilir) gibi özel özellikleri vardır."
+        },
+        "Zenginlik ve Madeni Paralar": {
+            "açıklama": "Ortak madeni paralar, yapıldıkları metalin göreceli değerine dayalı olarak birkaç farklı değere sahiptir.",
+            "Standart Döviz Kurları": {
+                "tablo": {
+                    "Para Birimi": ["Bakır (cp)", "Gümüş (sp)", "Elektrum (ep)", "Altın (gp)", "Platin (pp)"],
+                    "CP": ["1", "10", "50", "100", "1.000"],
+                    "GP": ["1/100", "1/10", "1/2", "1", "10"]
+                }
+            },
+            "Hazine Satmak": "Genel bir kural olarak, hasar görmemiş silahlar, zırhlar ve diğer ekipmanlar bir pazarda satıldığında maliyetlerinin yarısını getirir."
+        },
+        "Zırhlar ve Kalkanlar": {
+            "açıklama": "Zırh tablosu yaygın zırh türlerinin maliyetini, ağırlığını ve diğer özelliklerini gösterir.",
+            "Hafif Zırh Listesi": {
+                "tablo": {
+                    "Zırh": ["Dolgulu", "Deri", "Çivili Deri"],
+                    "Maliyet": ["5 gp", "10 gp", "45 gp"],
+                    "ZS": ["11 + Çev", "11 + Çev", "12 + Çev"],
+                    "Ağırlık": ["8 lb.", "10 lb.", "13 lb."]
+                }
+            },
+            "Orta Zırh Listesi": {
+                "tablo": {
+                    "Zırh": ["Hayvan Postu", "Zincir Gömlek", "Pul Zırh", "Göğüslük", "Yarım Plaka"],
+                    "Maliyet": ["10 gp", "50 gp", "50 gp", "400 gp", "750 gp"],
+                    "ZS": ["12 + Çev(maks 2)", "13 + Çev(maks 2)", "14 + Çev(maks 2)", "14 + Çev(maks 2)", "15 + Çev(maks 2)"],
+                    "Ağırlık": ["12 lb.", "20 lb.", "45 lb.", "20 lb.", "40 lb."]
+                }
+            },
+            "Ağır Zırh Listesi": {
+                "tablo": {
+                    "Zırh": ["Halka Zırh", "Zincir Zırh", "Parçalı Zırh", "Tam Plaka"],
+                    "Maliyet": ["30 gp", "75 gp", "200 gp", "1.500 gp"],
+                    "ZS": ["14", "16", "17", "18"],
+                    "Ağırlık": ["40 lb.", "55 lb.", "60 lb.", "65 lb."]
+                }
+            },
+            "Giyinme ve Çıkarma": {
+                "tablo": {
+                    "Kategori": ["Hafif Zırh", "Orta Zırh", "Ağır Zırh", "Kalkan"],
+                    "Giyinme": ["1 dakika", "5 dakika", "10 dakika", "1 eylem"],
+                    "Çıkarma": ["1 dakika", "1 dakika", "5 dakika", "1 eylem"]
+                }
+            }
+        },
+        "Silahlar": {
+            "açıklama": "Her silah yakın dövüş veya menzilli olarak sınıflandırılır.",
+            "Basit Yakın Dövüş": {
+                "tablo": {
+                    "İsim": ["Sopa", "Hançer", "El Baltası", "Cirit", "Gürz", "Mızrak"],
+                    "Hasar": ["1d4 Ezici", "1d4 Delici", "1d6 Kesici", "1d6 Delici", "1d6 Ezici", "1d6 Delici"],
+                    "Maliyet": ["1 sp", "2 gp", "5 gp", "5 sp", "5 gp", "1 gp"],
+                    "Ağırlık": ["2 lb.", "1 lb.", "2 lb.", "2 lb.", "4 lb.", "3 lb."]
+                }
+            },
+            "Askeri Yakın Dövüş": {
+                "tablo": {
+                    "İsim": ["Savaş Baltası", "Büyük Balta", "Büyük Kılıç", "Uzun Kılıç", "Meç", "Savaş Çekici"],
+                    "Hasar": ["1d8 Kesici", "1d12 Kesici", "2d6 Kesici", "1d8 Kesici", "1d8 Delici", "1d8 Ezici"],
+                    "Maliyet": ["10 gp", "30 gp", "50 gp", "15 gp", "25 gp", "15 gp"],
+                    "Ağırlık": ["4 lb.", "7 lb.", "6 lb.", "3 lb.", "2 lb.", "2 lb."]
+                }
+            }
+        },
+        "Aletler": {
+            "açıklama": "Bir alet, normalde yap"}
+        }
+    }

@@ -1,0 +1,70 @@
+{
+    "Monsters": {
+        "Monster Rules": {
+            "Stat Blocks": "A monster’s statistics provide the essential information that you need to run the monster.",
+            "Size Categories": {
+                "table": {
+                    "Size": ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"],
+                    "Space": ["2.5 ft", "5 ft", "5 ft", "10 ft", "15 ft", "20+ ft"],
+                    "Examples": ["Imp", "Goblin", "Orc", "Ogre", "Giant", "Kraken"]
+                }
+            },
+            "Type": "A monster’s type (Aberration, Beast, Undead, etc.) speaks to its fundamental nature and affects how spells interact with it.",
+            "Alignment": "A monster’s alignment clue to its disposition. Many low-intelligence creatures are 'Unaligned'.",
+            "Armor Class": "Takes into account armor, shields, and Dexterity. Natural armor is noted in parentheses.",
+            "Hit Points": "Determined by size and Constitution. Shown as average and die expression.",
+            "Challenge Rating": "Indicates the threat level. Defeating monsters awards Experience Points (XP).",
+            "Legendary Actions": "Legendary creatures can take special actions at the end of another creature's turn."
+        },
+        "Aboleth": {
+            "Stats": "Large aberration, lawful evil",
+            "Armor Class": "17 (natural armor)",
+            "Hit Points": "135 (18d10 + 36)",
+            "Speed": "10 ft., swim 40 ft.",
+            "Abilities": {
+                "table": {
+                    "STR": ["21(+5)"], "DEX": ["9(-1)"], "CON": ["15(+2)"], "INT": ["18(+4)"], "WIS": ["15(+2)"], "CHA": ["18(+4)"]
+                }
+            },
+            "Traits": "Amphibious, Mucous Cloud, Probing Telepathy",
+            "Actions": "• Multiattack: Three tentacle attacks.\n• Tentacle: +9 to hit, 12 dmg + disease.\n• Tail: +9 to hit, 15 dmg.\n• Enslave (3/Day): Wisdom save or charmed.",
+            "Legendary Actions": "Detect, Tail Swipe, Psychic Drain (2 Actions)"
+        },
+        "Adult Black Dragon": {
+            "Stats": "Huge dragon, chaotic evil",
+            "Armor Class": "19 (natural armor)",
+            "Hit Points": "195 (17d12 + 85)",
+            "Speed": "40 ft., fly 80 ft., swim 40 ft.",
+            "Saving Throws": "Dex +7, Con +10, Wis +6, Cha +8",
+            "Damage Immunities": "Acid",
+            "Actions": "• Multiattack: Frightful Presence and 3 attacks (Bite, 2 Claws).\n• Acid Breath (Recharge 5–6): 54 (12d8) acid damage.",
+            "Legendary Actions": "Detect, Tail Attack, Wing Attack (2 Actions)"
+        },
+        "Mimic": {
+            "Stats": "Medium monstrosity (shapechanger), neutral",
+            "Armor Class": "12 (natural armor)",
+            "Hit Points": "58 (9d8 + 18)",
+            "Speed": "15 ft.",
+            "Traits": "Shapechanger, Adhesive, False Appearance, Grappler",
+            "Actions": "• Pseudopod: +5 to hit, 7 dmg + Adhesive.\n• Bite: +5 to hit, 7 dmg + 4 acid dmg."
+        },
+        "Zombie": {
+            "Stats": "Medium undead, neutral evil",
+            "Armor Class": "8",
+            "Hit Points": "22 (3d8 + 9)",
+            "Speed": "20 ft.",
+            "Traits": "Undead Fortitude: Chance to drop to 1 HP instead of 0.",
+            "Actions": "Slam: +3 to hit, 4 bludgeoning damage."
+        },
+        "Tarrasque": {
+            "Stats": "Gargantuan monstrosity (titan), unaligned",
+            "Armor Class": "25 (natural armor)",
+            "Hit Points": "676 (33d20 + 330)",
+            "Speed": "40 ft.",
+            "Saving Throws": "Int +5, Wis +9, Cha +9",
+            "Traits": "Legendary Resistance (3/Day), Magic Resistance, Reflective Carapace, Siege Monster",
+            "Actions": "• Multiattack: 5 attacks (Bite, 2 Claws, Horns, Tail) or Swallow.\n• Frightful Presence: DC 17 Wisdom save.",
+            "Legendary Actions": "Attack, Move, Chomp (2 Actions)"
+        }
+    }
+}

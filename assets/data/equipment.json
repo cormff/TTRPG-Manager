@@ -1,0 +1,104 @@
+{
+    "Equipment": {
+        "Equipment Rules": {
+            "Coins and Wealth": "Gold (gp) is the standard unit of wealth. 1 gp = 10 sp = 100 cp. Platinum (pp) is rare and worth 10 gp.",
+            "Armor Proficiency": "Anyone can put on armor, but only those proficient know how to wear it effectively. If you wear armor you lack proficiency with, you have disadvantage on any check, saving throw, or attack roll involving Strength or Dexterity, and you can't cast spells.",
+            "Armor Class (AC)": "Armor protects its wearer from attacks. Your armor determines your base AC.",
+            "Weapon Proficiency": "Your class, race, and feats grant proficiency with specific weapons (Simple or Martial). Proficiency allows you to add your proficiency bonus to the attack roll.",
+            "Weapon Properties": "Many weapons have special properties like Finesse (use Dex instead of Str), Heavy (disadvantage for small creatures), or Versatile (can be used with one or two hands)."
+        },
+        "Wealth and Coins": {
+            "description": "Common coins come in several different denominations based on the relative worth of the metal from which they are made.",
+            "Standard Exchange Rates": {
+                "table": {
+                    "Coin": ["Copper (cp)", "Silver (sp)", "Electrum (ep)", "Gold (gp)", "Platinum (pp)"],
+                    "CP": ["1", "10", "50", "100", "1,000"],
+                    "GP": ["1/100", "1/10", "1/2", "1", "10"]
+                }
+            },
+            "Selling Treasure": "As a general rule, undamaged weapons, armor, and other equipment fetch half their cost when sold in a market."
+        },
+        "Armor and Shields": {
+            "description": "The Armor table shows the cost, weight, and other properties of the common types of armor.",
+            "Light Armor List": {
+                "table": {
+                    "Armor": ["Padded", "Leather", "Studded leather"],
+                    "Cost": ["5 gp", "10 gp", "45 gp"],
+                    "AC": ["11 + Dex", "11 + Dex", "12 + Dex"],
+                    "Weight": ["8 lb.", "10 lb.", "13 lb."]
+                }
+            },
+            "Medium Armor List": {
+                "table": {
+                    "Armor": ["Hide", "Chain shirt", "Scale mail", "Breastplate", "Half plate"],
+                    "Cost": ["10 gp", "50 gp", "50 gp", "400 gp", "750 gp"],
+                    "AC": ["12 + Dex(max 2)", "13 + Dex(max 2)", "14 + Dex(max 2)", "14 + Dex(max 2)", "15 + Dex(max 2)"],
+                    "Weight": ["12 lb.", "20 lb.", "45 lb.", "20 lb.", "40 lb."]
+                }
+            },
+            "Heavy Armor List": {
+                "table": {
+                    "Armor": ["Ring mail", "Chain mail", "Splint", "Plate"],
+                    "Cost": ["30 gp", "75 gp", "200 gp", "1,500 gp"],
+                    "AC": ["14", "16", "17", "18"],
+                    "Weight": ["40 lb.", "55 lb.", "60 lb.", "65 lb."]
+                }
+            },
+            "Donning and Doffing": {
+                "table": {
+                    "Category": ["Light Armor", "Medium Armor", "Heavy Armor", "Shield"],
+                    "Don": ["1 minute", "5 minutes", "10 minutes", "1 action"],
+                    "Doff": ["1 minute", "1 minute", "5 minutes", "1 action"]
+                }
+            }
+        },
+        "Weapons": {
+            "description": "Every weapon is classified as either melee or ranged.",
+            "Simple Melee": {
+                "table": {
+                    "Name": ["Club", "Dagger", "Handaxe", "Javelin", "Mace", "Spear"],
+                    "Damage": ["1d4 B", "1d4 P", "1d6 S", "1d6 P", "1d6 B", "1d6 P"],
+                    "Cost": ["1 sp", "2 gp", "5 gp", "5 sp", "5 gp", "1 gp"],
+                    "Weight": ["2 lb.", "1 lb.", "2 lb.", "2 lb.", "4 lb.", "3 lb."]
+                }
+            },
+            "Martial Melee": {
+                "table": {
+                    "Name": ["Battleaxe", "Greataxe", "Greatsword", "Longsword", "Rapier", "Warhammer"],
+                    "Damage": ["1d8 S", "1d12 S", "2d6 S", "1d8 S", "1d8 P", "1d8 B"],
+                    "Cost": ["10 gp", "30 gp", "50 gp", "15 gp", "25 gp", "15 gp"],
+                    "Weight": ["4 lb.", "7 lb.", "6 lb.", "3 lb.", "2 lb.", "2 lb."]
+                }
+            }
+        },
+        "Tools": {
+            "description": "A tool helps you to do something you couldn't otherwise do.",
+            "Tools List": {
+                "table": {
+                    "Item": ["Alchemist supplies", "Brewer's supplies", "Cook's utensils", "Thieves' tools", "Dice set", "Lute"],
+                    "Cost": ["50 gp", "20 gp", "1 gp", "25 gp", "1 sp", "35 gp"],
+                    "Weight": ["8 lb.", "9 lb.", "8 lb.", "1 lb.", "—", "2 lb."]
+                }
+            }
+        },
+        "Adventuring Gear": {
+            "description": "This section includes various items needed for survival.",
+            "Gear Table": {
+                "table": {
+                    "Item": ["Backpack", "Bedroll", "Rope (50ft)", "Torch", "Waterskin", "Rations (1 day)"],
+                    "Cost": ["2 gp", "1 gp", "1 gp", "1 cp", "2 sp", "5 sp"],
+                    "Weight": ["5 lb.", "7 lb.", "10 lb.", "1 lb.", "5 lb.", "2 lb."]
+                }
+            }
+        },
+        "Expenses and Services": {
+            "description": "Standard costs for living and services.",
+            "Lifestyles": {
+                "table": {
+                    "Lifestyle": ["Squalid", "Poor", "Modest", "Comfortable", "Wealthy", "Aristocratic"],
+                    "Price/Day": ["1 sp", "2 sp", "1 gp", "2 gp", "4 gp", "10 gp min"]
+                }
+            }
+        }
+    }
+}
