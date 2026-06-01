@@ -8,13 +8,13 @@ class CategoryDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. DEĞİŞİKLİK: Kategori "Genel Bilgi" ise resim alanını tamamen iptal et.
     final bool hasImage = category.imageUrl != null && !category.isGeneralInfo;
-
     final coreItems = category.items.where((i) => i.level == null).toList();
     final levelItems = category.items.where((i) => i.level != null).toList();
-
     levelItems.sort((a, b) => (a.level ?? 0).compareTo(b.level ?? 0));
+
+    // ÇÖZÜM: Temaya duyarlı gri
+    final dynamicGrey = Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
 
     return Scaffold(
       body: CustomScrollView(
@@ -23,9 +23,9 @@ class CategoryDetailView extends StatelessWidget {
             expandedHeight: hasImage ? 240 : null,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true, // Başlığı ortalamak daha şık durur
+              centerTitle: true,
               title: Text(
-                category.title,
+                category.title, // Veri JSON'dan geldiği için zaten Türkçe olacak
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -36,7 +36,6 @@ class CategoryDetailView extends StatelessWidget {
                   ? Image.asset(
                 category.imageUrl!,
                 fit: BoxFit.contain,
-                // 2. DEĞİŞİKLİK: "Image not found" yazısını kaldırıp sade bir kitap ikonu koyduk
                 errorBuilder: (context, error, stackTrace) => Container(
                   color: Theme.of(context).colorScheme.primary,
                   child: const Icon(Icons.auto_stories, color: Colors.white, size: 48),
@@ -48,8 +47,11 @@ class CategoryDetailView extends StatelessWidget {
           if (coreItems.isNotEmpty) ...[
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-                child: Text(context.tr('CORE FEATURES'), style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
+                padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+                child: Text(
+                    context.tr('CORE FEATURES'),
+                    style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: dynamicGrey)
+                ),
               ),
             ),
             SliverPadding(
@@ -65,8 +67,11 @@ class CategoryDetailView extends StatelessWidget {
           if (levelItems.isNotEmpty) ...[
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-                child: Text(context.tr('CLASS PROGRESSION'), style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: Colors.grey)),
+                padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+                child: Text(
+                    context.tr('CLASS PROGRESSION'),
+                    style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 12, color: dynamicGrey)
+                ),
               ),
             ),
             SliverPadding(

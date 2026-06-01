@@ -75,7 +75,31 @@ class _LoginViewState extends State<LoginView> {
     final isLoading = context.watch<AuthProvider>().isLoading;
 
     return Scaffold(
-      appBar: AppBar(title: Text(context.tr('Login'))),
+      appBar: AppBar(
+        title: Text(context.tr('Login')),
+        actions: [
+          TextButton.icon(
+            onPressed: () {
+              final langManager = context.read<LanguageManager>();
+              // O anki dili kontrol et
+              final isTr = langManager.currentLocale.languageCode == 'tr';
+              // Türkçe ise 'en' yap, İngilizce ise 'tr' yap
+              langManager.changeLanguage(isTr ? 'en' : 'tr');
+            },
+            icon: Icon(Icons.language, color: Colors.white),
+            label: Text(
+              // Butonun üzerinde aktif olan dili göster
+              context.watch<LanguageManager>().currentLocale.languageCode == 'tr' ? 'TR' : 'EN',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8), // Sağ kenardan hafif boşluk
+        ],
+      ),
       // ÇÖZÜM BURADA BAŞLIYOR: Center ve SingleChildScrollView eklendi
       body: Center(
         child: SingleChildScrollView(
@@ -83,21 +107,22 @@ class _LoginViewState extends State<LoginView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+// ... LoginView içinde ...
               CustomTextField(
                 controller: _emailController,
-                labelText: 'Email',
+                labelText: context.tr('Email'), // Çeviri eklendi
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16.0),
               CustomTextField(
                 controller: _passwordController,
-                labelText: 'Password',
+                labelText: context.tr('Password'), // Çeviri eklendi
                 obscureText: true,
               ),
               const SizedBox(height: 16.0),
               DropdownButtonFormField<UserRole>(
                 value: _selectedRole,
-                decoration: const InputDecoration(labelText: 'Select Role'),
+                decoration: InputDecoration(labelText: context.tr('Select Role')), // Çeviri eklendi
                 items: [
                   DropdownMenuItem(value: UserRole.gameMaster, child: Text(context.tr('Game Master'))),
                   DropdownMenuItem(value: UserRole.player, child: Text(context.tr('Player'))),
@@ -112,7 +137,7 @@ class _LoginViewState extends State<LoginView> {
                   ? const CircularProgressIndicator()
                   : PrimaryButton(
                 onPressed: _login,
-                text: 'Login',
+                text: context.tr('Login'), // Çeviri eklendi
               ),
 
               TextButton(
@@ -122,9 +147,9 @@ class _LoginViewState extends State<LoginView> {
                     MaterialPageRoute(builder: (context) => const RegisterView()),
                   );
                 },
-                child: const Text(
-                  "Don't have an account? Register",
-                  style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                child: Text(
+                  context.tr("Don't have an account? Register"), // Çeviri eklendi
+                  style: const TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

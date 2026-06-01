@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(1),
                           letterSpacing: 1.2,
                         ),
                       ),
@@ -53,6 +53,7 @@ class CustomDrawer extends StatelessWidget {
                 ..._buildGMMenuItems(context, userRoleProvider)
               else
                 ..._buildPlayerMenuItems(context, userRoleProvider),
+              const Divider(),
               const Divider(),
 
               _buildDrawerItem(

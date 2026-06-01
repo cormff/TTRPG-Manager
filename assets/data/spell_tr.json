@@ -1,0 +1,166 @@
+{
+    "Büyüler": {
+        "Büyü Yapma Özellikleri": {
+            "açıklama": "Sihir, fantastik oyun dünyalarına nüfuz eder ve genellikle bir büyü şeklinde ortaya çıkar. Bu bölüm büyü yapmanın kurallarını sağlar.",
+            "Büyü Seviyesi": "Her büyünün 0'dan 9'a kadar bir seviyesi vardır. Bir büyünün seviyesi onun ne kadar güçlü olduğunun genel bir göstergesidir. Büyücükler 0. seviyedir.",
+            "Büyü Yuvaları": "Bir karakter bir büyü yaptığında, o büyünün seviyesine veya daha yüksek bir seviyeye sahip bir yuvayı harcar, etkili bir şekilde bir yuvayı büyü ile 'doldurur'. Uzun bir dinlenmeyi bitirmek harcanan tüm büyü yuvalarını yeniler.",
+            "Yapma Süresi": "Çoğu büyüyü yapmak için tek bir eylem gerekir, ancak bazı büyüler bir bonus eylem, bir tepki veya yapmak için çok daha fazla zaman gerektirir.",
+            "Bileşenler": "Bir büyünün bileşenleri, onu yapmak için karşılamanız gereken fiziksel gereksinimlerdir: sözlü (V), somatik/hareket (S) veya materyal (M).",
+            "Süre": "Bir büyünün süresi büyünün ne kadar süre aktif kalacağıdır. Turlar, dakikalar, saatler ve hatta yıllar olarak ifade edilebilir.",
+            "Konsantrasyon": "Bazı büyüler, sihrini aktif tutmak için konsantrasyonunuzu korumanızı gerektirir. Konsantrasyonunuzu kaybederseniz, böyle bir büyü sona erer."
+        },
+        "Büyücükler (Seviye 0)": {
+            "Asit Sıçraması": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "60 fit",
+                "Bileşenler": "V, S",
+                "Süre": "Anında",
+                "açıklama": "Bir asit balonu fırlatırsınız. Menzil içinde bir yaratık seçin veya birbirine 5 fit mesafedeki menzil içinde iki yaratık seçin. Bir hedef Çeviklik kurtarma atışında başarılı olmalı veya 1d6 asit hasarı almalıdır.\n\nBu büyünün hasarı 5. seviyeye (2d6), 11. seviyeye (3d6) ve 17. seviyeye (4d6) ulaştığınızda 1d6 artar."
+            },
+            "Işık": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, M (ateşböceği veya fosforlu yosun)",
+                "Süre": "1 saat",
+                "açıklama": "Hiçbir boyutu 10 fitten büyük olmayan bir nesneye dokunursunuz. Büyü sona erene kadar nesne 20 fitlik bir yarıçap içinde parlak ışık ve ek 20 fit için loş ışık yayar..."
+            },
+            "Büyücü Eli": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "30 fit",
+                "Bileşenler": "V, S",
+                "Süre": "1 dakika",
+                "açıklama": "Menzil içinde seçtiğiniz bir noktada hayaletimsi, havada süzülen bir el belirir... El saldıramaz, sihirli eşyaları etkinleştiremez veya 10 libreden fazla yük taşıyamaz."
+            }
+        },
+        "1. Seviye Büyüler": {
+            "Yaraları İyileştir": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, S",
+                "Süre": "Anında",
+                "açıklama": "Dokunduğunuz bir yaratık, 1d8 + büyü yapma yeteneği değiştiricinize eşit sayıda vuruş puanı kazanır. Bu büyünün ölümsüzler veya yapılar üzerinde hiçbir etkisi yoktur.\n\n***Daha Yüksek Seviyelerde.*** Bu büyüyü 2. seviye veya daha yüksek bir büyü yuvası kullanarak yaptığınızda, iyileştirme 1. seviyenin üzerindeki her yuva seviyesi için 1d8 artar."
+            },
+            "Büyülü Füze": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "120 fit",
+                "Bileşenler": "V, S",
+                "Süre": "Anında",
+                "açıklama": "Büyülü güçten oluşan üç parlayan dart yaratırsınız. Her bir dart menzil içinde görebildiğiniz seçtiğiniz bir yaratığa isabet eder. Bir dart hedefine 1d4 + 1 kuvvet hasarı verir. Dartların hepsi aynı anda vurur..."
+            },
+            "Kalkan": {
+                "Yapma Süresi": "1 tepki, bir saldırıyla vurulduğunuzda veya *büyülü füze* büyüsü tarafından hedeflendiğinizde alırsınız",
+                "Menzil": "Kişisel",
+                "Bileşenler": "V, S",
+                "Süre": "1 tur",
+                "açıklama": "Görünmez bir büyülü güç bariyeri belirir ve sizi korur. Bir sonraki turunuzun başlangıcına kadar tetikleyen saldırı da dahil olmak üzere ZS'nize +5 bonus alırsınız ve *büyülü füze*den hasar almazsınız."
+            }
+        },
+        "2. Seviye Büyüler": {
+            "Kişiyi Tut": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "60 fit",
+                "Bileşenler": "V, S, M (küçük, düz bir demir parçası)",
+                "Süre": "Konsantrasyon, 1 dakikaya kadar",
+                "açıklama": "Menzil içinde görebildiğiniz bir insansı seçin. Hedef bir Bilgelik kurtarma atışında başarılı olmalı veya süre boyunca felç olmalıdır..."
+            },
+            "Görünmezlik": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, S, M (arap zamkı içine hapsedilmiş bir kirpik)",
+                "Süre": "Konsantrasyon, 1 saate kadar",
+                "açıklama": "Dokunduğunuz bir yaratık büyü sona erene kadar görünmez olur... Büyü, saldıran veya büyü yapan bir hedef için sona erer."
+            }
+        },
+        "3. Seviye Büyüler": {
+            "Ateş Topu": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "150 fit",
+                "Bileşenler": "V, S, M (küçük bir yarasa gübresi ve sülfür topu)",
+                "Süre": "Anında",
+                "açıklama": "İşaret parmağınızdan menzil içinde seçtiğiniz bir noktaya doğru parlak bir çizgi parlar ve ardından alçak bir kükreme ile alevden bir patlamaya dönüşür. Bu noktaya merkezlenmiş 20 fit yarıçaplı küre içindeki her yaratık Çeviklik kurtarma atışı yapmalıdır. Hedef başarısız bir kurtarmada 8d6 ateş hasarı, başarılı bir kurtarmada ise bu hasarın yarısını alır..."
+            },
+            "Uçuş": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, S, M (herhangi bir kuştan alınmış bir kanat tüyü)",
+                "Süre": "Konsantrasyon, 10 dakikaya kadar",
+                "açıklama": "Gönüllü bir yaratığa dokunursunuz. Hedef, süre boyunca 60 fitlik bir uçma hızı kazanır..."
+            }
+        },
+        "4. Seviye Büyüler": {
+            "Sürgün": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "60 fit",
+                "Bileşenler": "V, S, M (hedefin hoşlanmadığı bir eşya)",
+                "Süre": "Konsantrasyon, 1 dakikaya kadar",
+                "açıklama": "Menzil içinde görebildiğiniz bir yaratığı başka bir varoluş düzlemine göndermeye çalışırsınız. Hedef, Karizma kurtarma atışında başarılı olmalı veya sürgüne gönderilmelidir..."
+            },
+            "Şekil Değiştirme (Polymorph)": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "60 fit",
+                "Bileşenler": "V, S, M (bir tırtıl kozası)",
+                "Süre": "Konsantrasyon, 1 saate kadar",
+                "açıklama": "Bu büyü menzil içinde görebildiğiniz bir yaratığı yeni bir forma dönüştürür. Gönülsüz bir yaratık etkiden kaçınmak için bir Bilgelik kurtarma atışı yapmalıdır..."
+            }
+        },
+        "5. Seviye Büyüler": {
+            "Büyük İyileştirme": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, S, M (büyü tarafından tüketilen, en az 100 gp değerinde elmas tozu)",
+                "Süre": "Anında",
+                "açıklama": "Zayıflatıcı bir etkiyi geri almak için dokunduğunuz bir yaratığı pozitif enerjiyle aşılarsınız. Hedefin bitkinlik seviyesini bir azaltabilir veya hedef üzerindeki şu etkilerden birini sona erdirebilirsiniz: Büyülenme veya taşlaşma, Lanet, Yetenek skoru düşüşü, Maksimum vuruş puanı düşüşü."
+            },
+            "Güç Duvarı": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "120 fit",
+                "Bileşenler": "V, S, M (ezilmiş şeffaf bir değerli taştan yapılmış bir tutam toz)",
+                "Süre": "Konsantrasyon, 10 dakikaya kadar",
+                "açıklama": "Menzil içinde seçtiğiniz bir noktada görünmez bir güç duvarı ortaya çıkar... Hiçbir şey duvardan fiziksel olarak geçemez. Tüm hasarlara karşı bağışıktır ve büyü bozma (dispel magic) ile ortadan kaldırılamaz."
+            }
+        },
+        "6. Seviye Büyüler": {
+            "İyileştir": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "60 fit",
+                "Bileşenler": "V, S",
+                "Süre": "Anında",
+                "açıklama": "Menzil içinde görebildiğiniz bir yaratık seçin. Yaratığın içinden bir pozitif enerji dalgası geçerek 70 vuruş puanı kazanmasına neden olur. Bu büyü ayrıca körlüğü, sağırlığı ve hedefi etkileyen tüm hastalıkları sona erdirir."
+            },
+            "Gerçek Görüş": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Dokunma",
+                "Bileşenler": "V, S, M (25 gp değerinde göz merhemi; mantar tozu, safran ve yağdan yapılır ve büyü tarafından tüketilir)",
+                "Süre": "1 saat",
+                "açıklama": "Bu büyü dokunduğunuz gönüllü yaratığa nesneleri oldukları gibi görme yeteneği verir. Süre boyunca yaratık gerçek görüşe sahiptir, sihirle gizlenmiş gizli kapıları fark eder ve 120 fit menzile kadar Ethereal Düzlemi görebilir."
+            }
+        },
+        "7. Seviye Büyüler": {
+            "Işınlanma": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "10 fit",
+                "Bileşenler": "V",
+                "Süre": "Anında",
+                "açıklama": "Bu büyü sizi ve menzil içinde görebildiğiniz seçtiğiniz sekiz gönüllü yaratığı anında seçtiğiniz bir hedefe taşır."
+            }
+        },
+        "8. Seviye Büyüler": {
+            "Antimagic (Büyü Karşıtı) Alanı": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Kişisel (10 fit yarıçaplı küre)",
+                "Bileşenler": "V, S, M (bir tutam demir tozu veya demir talaşı)",
+                "Süre": "Konsantrasyon, 1 saate kadar",
+                "açıklama": "Sizi 10 fit yarıçaplı görünmez bir büyü karşıtı küre çevreler. Bu alan, çoklu evrene nüfuz eden büyülü enerjiden boşanmıştır. Kürenin içinde büyüler yapılamaz, çağrılan yaratıklar kaybolur ve sihirli eşyalar bile sıradan hale gelir."
+            }
+        },
+        "9. Seviye Büyüler": {
+            "Dilek": {
+                "Yapma Süresi": "1 eylem",
+                "Menzil": "Kişisel",
+                "Bileşenler": "V",
+                "Süre": "Anında",
+                "açıklama": "Dilek, ölümlü bir yaratığın yapabileceği en güçlü büyüdür. Sadece yüksek sesle konuşarak arzularınız doğrultusunda gerçekliğin temellerini değiştirebilirsiniz. Bu büyünün temel kullanımı 8. seviye veya daha düşük herhangi bir başka büyüyü kopyalamaktır. O büyünün gereksinimlerini, maliyetli bileşenler dahil olmak üzere karşılamanıza gerek yoktur. Büyü sadece etkisini gösterir."
+            }
+        }
+    }
+}
