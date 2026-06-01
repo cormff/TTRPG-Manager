@@ -42,11 +42,11 @@ class _RegisterViewState extends State<RegisterView> {
               final isTr = langManager.currentLocale.languageCode == 'tr';
               langManager.changeLanguage(isTr ? 'en' : 'tr');
             },
-            icon: Icon(Icons.language, color: Theme.of(context).colorScheme.primary),
+            icon: Icon(Icons.language, color: Colors.white),
             label: Text(
               context.watch<LanguageManager>().currentLocale.languageCode == 'tr' ? 'TR' : 'EN',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),

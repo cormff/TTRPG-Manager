@@ -54,7 +54,6 @@ class CustomDrawer extends StatelessWidget {
               else
                 ..._buildPlayerMenuItems(context, userRoleProvider),
               const Divider(),
-              const Divider(),
 
               _buildDrawerItem(
                 context: context,
