@@ -108,9 +108,6 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
     final charactersProvider = context.watch<CharactersProvider>();
     final allCharacters = charactersProvider.playerCharacters.reversed.toList();
 
-    final int dummyGamesCount = 2;
-    final int dummyCharactersCount = 8;
-
     return Scaffold(
         body: SafeArea(
             child: RefreshIndicator(
@@ -132,10 +129,10 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   : SizedBox(
                 height: 110,
                 child: allPlayerGames.isEmpty
-                    ? const Center(
+                    ? Center(
                   child: Text(
-                    "You have not joined any games yet.",
-                    style: TextStyle(color: Colors.grey),
+                    context.tr('You have not joined any games yet.'),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 )
                     : ListView.builder(
@@ -209,10 +206,10 @@ class _PlayerDashboardState extends State<PlayerDashboard> {
                   : SizedBox(
                 height: 100,
                 child: allCharacters.isEmpty
-                    ? const Center(
+                    ? Center(
                   child: Text(
-                    "No characters have been created yet.",
-                    style: TextStyle(color: Colors.grey),
+                    context.tr('No characters have been created yet.'),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 )
                     : ListView.builder(

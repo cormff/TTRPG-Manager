@@ -240,6 +240,8 @@ class LanguageManager with ChangeNotifier {
       'Username': 'Kullanıcı Adı',
       'Confirm Password': 'Şifreyi Onayla',
       'Already registered? Log in': 'Zaten kayıtlı mısın? Giriş Yap',
+      'You have not joined any games yet.': 'Henüz hiç oyuna katılmadınız.',
+      'No characters have been created yet.': 'Henüz hiç karakter oluşturulmamış.',
     },
 
     'en': {
@@ -467,6 +469,8 @@ class LanguageManager with ChangeNotifier {
       'Username': 'Username',
       'Confirm Password': 'Confirm Password',
       'Already registered? Log in': 'Already registered? Log in',
+      'You have not joined any games yet.': 'You have not joined any games yet.',
+      'No characters have been created yet.': 'No characters have been created yet.',
     }
   };
 

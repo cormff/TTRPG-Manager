@@ -173,7 +173,7 @@ class GameService {
     if (userIds.isEmpty) return {};
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:8080/api/users/usernames'),
+        Uri.parse('http://${ApiConfig.host}:8080/api/users/usernames'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(userIds),
       );
@@ -192,7 +192,7 @@ class GameService {
   // YENİ: Spesifik bir oyuna ait notları çeken metot
   Future<List<dynamic>> getGameNotes(int gameId) async {
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:8080/api/notes/game/$gameId'));
+      final response = await http.get(Uri.parse('http://${ApiConfig.host}:8080/api/notes/game/$gameId'));
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       }

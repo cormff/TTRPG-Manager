@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ttrpg_manager/providers/user_role_provider.dart';
 import 'package:ttrpg_manager/providers/characters_provider.dart';
+import 'package:ttrpg_manager/providers/games_provider.dart';
 import 'package:ttrpg_manager/providers/notes_provider.dart';
 import 'package:ttrpg_manager/providers/language_manager.dart'; // YENİ: Dil yöneticisi eklendi
 
@@ -73,6 +74,7 @@ class CustomDrawer extends StatelessWidget {
                 onTap: () {
                   Provider.of<NotesProvider>(context, listen: false).clearData();
                   Provider.of<CharactersProvider>(context, listen: false).clearData();
+                  Provider.of<GamesProvider>(context, listen: false).clearData();
                   userRoleProvider.setUserRole(UserRole.player);
                   Navigator.of(context).pushReplacementNamed('/login');
                 },

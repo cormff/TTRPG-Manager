@@ -87,7 +87,29 @@ class _RegisterViewState extends State<RegisterView> {
             authProvider.isLoading
                 ? const CircularProgressIndicator(color: Colors.deepPurple)
                 : PrimaryButton(
-              onPressed: () { /* ... aynı kontroller ... */ },
+              onPressed: () async {
+                if (_usernameController.text.trim().isEmpty ||
+                    _emailController.text.trim().isEmpty ||
+                    _passwordController.text.isEmpty ||
+                    _confirmPasswordController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(context.tr('Please fill all fields'))),
+                  );
+                  return;
+                }
+                if (_passwordController.text != _confirmPasswordController.text) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(context.tr('Passwords do not match!'))),
+                  );
+                  return;
+                }
+                await authProvider.register(
+                  _usernameController.text.trim(),
+                  _emailController.text.trim(),
+                  _passwordController.text,
+                  context,
+                );
+              },
               text: context.tr('Register'),
             ),
 
