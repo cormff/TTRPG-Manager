@@ -41,18 +41,28 @@ class NoteService {
 
   // Not Güncelleme
   Future<bool> updateNote(int id, Note note) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl/update/$id'),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(note.toJson()),
-    );
-    return response.statusCode == 200;
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/update/$id'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(note.toJson()),
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Not güncellenirken hata: $e");
+      return false;
+    }
   }
 
   // Not Silme
   Future<bool> deleteNote(int id) async {
-    final response = await http.delete(Uri.parse('$baseUrl/delete/$id'));
-    return response.statusCode == 200;
+    try {
+      final response = await http.delete(Uri.parse('$baseUrl/delete/$id'));
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Not silinirken hata: $e");
+      return false;
+    }
   }
 
   // YENİ: Spesifik bir oyuna ait kopyalanmış notları çeker

@@ -70,7 +70,9 @@ class NotesProvider with ChangeNotifier {
 
   Future<void> updateNote(int id, String title, String content, {String? tag, String? subTag}) async {
     final allNotes = [..._gmNotes, ..._playerNotes];
-    final existingNote = allNotes.firstWhere((n) => n.id == id);
+    final matchingNotes = allNotes.where((n) => n.id == id);
+    if (matchingNotes.isEmpty) return;
+    final existingNote = matchingNotes.first;
 
     final updatedNote = Note(
       id: id,
