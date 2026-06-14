@@ -5,24 +5,24 @@ import 'api_config.dart';
 class GameService {
   final String baseUrl = 'http://${ApiConfig.host}:8080/api/games';
 
-  // game_service.dart içindeki createGame metodu
+// game_service.dart içindeki createGame metodu
   Future<bool> createGame(
-    String title,
-    String description,
-    int maxPlayers,
-    bool isPublic,
-    int gmId,
-  ) async {
+      String title,
+      String description,
+      int maxPlayers,
+      bool isPublic,
+      int gmId,
+      ) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/create'), // Java API adresine göre değiştir
+        Uri.parse('$baseUrl/create'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "title": title,
           "description": description,
           "maxPlayers": maxPlayers,
-          "isPublic": isPublic,
-          "gmId": gmId, // <--- BURAYI DA JSON'A EKLEDİK
+          "publicGame": isPublic, // ÇÖZÜM BURASI: "isPublic" yerine "publicGame" yaptık
+          "gmId": gmId,
         }),
       );
 

@@ -10,6 +10,7 @@ import '../../providers/games_provider.dart';
 import '../../providers/maps_provider.dart';
 import '../../providers/notes_provider.dart';
 import 'package:ttrpg_manager/providers/language_manager.dart';
+import 'package:ttrpg_manager/providers/user_role_provider.dart';
 
 class GameDetailsView extends StatefulWidget {
   final Game game;
@@ -74,7 +75,8 @@ class _GameDetailsViewState extends State<GameDetailsView> {
     });
   }
 
-  Future<void> _saveChanges() async {
+  // ÇÖZÜM 1: Çeviri metinlerini dışarıdan parametre olarak alıyoruz
+  Future<void> _saveChanges(String successMsg, String failMsg) async {
     if (widget.game.id == null) return;
 
     setState(() => _isLoading = true);
@@ -88,6 +90,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
       widget.game.gmId,
     );
 
+    if (!mounted) return;
     setState(() => _isLoading = false);
 
     if (success) {
@@ -96,27 +99,25 @@ class _GameDetailsViewState extends State<GameDetailsView> {
       _currentMaxPlayers = _maxPlayers;
       _currentIsPublic = _isPublic;
 
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.tr('Game successfully updated!')), backgroundColor: Colors.green),
-        );
-        setState(() => _isEditing = false);
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(successMsg), backgroundColor: Colors.green),
+      );
+      // Düzenleme modundan çıkıp oyun detay görünümüne geçmeyi sağlar
+      setState(() => _isEditing = false);
     } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.tr('Update failed. Try again later.')), backgroundColor: Colors.red),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(failMsg), backgroundColor: Colors.red),
+      );
     }
   }
 
-  void _copyInviteCode() {
+  // ÇÖZÜM 2: Kopyalama bildirimini de parametreye bağladık
+  void _copyInviteCode(String msgText) {
     if (widget.game.inviteCode != null) {
       Clipboard.setData(ClipboardData(text: widget.game.inviteCode!));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('${context.tr('Invitation code copied:')} ${widget.game.inviteCode}'),
+          content: Text('$msgText ${widget.game.inviteCode}'),
           backgroundColor: Theme.of(context).primaryColor,
           duration: const Duration(seconds: 2),
         ),
@@ -128,8 +129,25 @@ class _GameDetailsViewState extends State<GameDetailsView> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
-    final primaryLight = theme.primaryColorLight;
     final textColor = theme.colorScheme.onSurface;
+
+    // ÇÖZÜM 3: Çökme riskini ortadan kaldırmak için tüm popup, alert ve snackbar
+    // çevirilerini GÜVENLİ OLAN 'build' metodu içinde bir kez hesaplıyoruz!
+    final String msgUpdateSuccess = context.tr('Game successfully updated!');
+    final String msgUpdateFail = context.tr('Update failed. Try again later.');
+    final String msgCopyCode = context.tr('Invitation code copied:');
+    final String msgFinishTitle = context.tr('Finish Campaing');
+    final String msgFinishContent = context.tr('Are you sure you want to finish this campaign? This action cannot be undone!');
+    final String msgCancel = context.tr('İptal');
+    final String msgYesEnd = context.tr('Yes, end the game');
+    final String msgFinishSuccess = context.tr('Game successfully finished!');
+    final String msgMapWarn = context.tr('Firstly a map has to be added to map pool!');
+    final String msgMaps = context.tr('Maps');
+    final String msgMapLinked = context.tr('Map linked!');
+    final String msgNoteWarn = context.tr('Firstly a note has to be added to note pool!');
+    final String msgNotes = context.tr('Notes');
+    final String msgNoteAdded = context.tr('Added');
+    final String msgNoteError = context.tr('Error occured while adding the note.');
 
     return Scaffold(
         appBar: AppBar(
@@ -186,7 +204,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                         ),
                         IconButton(
                           icon: Icon(Icons.copy, color: primaryColor),
-                          onPressed: _copyInviteCode,
+                          onPressed: () => _copyInviteCode(msgCopyCode),
                           tooltip: context.tr('Copy code'),
                         ),
                       ],
@@ -270,7 +288,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
-                      onPressed: _saveChanges,
+                      onPressed: () => _saveChanges(msgUpdateSuccess, msgUpdateFail),
                       icon: const Icon(Icons.save),
                       label: Text(context.tr('Save Changes')),
                       style: ElevatedButton.styleFrom(
@@ -293,14 +311,14 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                             context: context,
                             builder: (context) => AlertDialog(
                               backgroundColor: theme.cardColor,
-                              title: Text(context.tr('Finish Campaing'), style: TextStyle(color: textColor)),
-                              content: Text(context.tr('Are you sure you want to finish this campaign? This action cannot be undone!'), style: TextStyle(color: textColor.withOpacity(0.7))),
+                              title: Text(msgFinishTitle, style: TextStyle(color: textColor)),
+                              content: Text(msgFinishContent, style: TextStyle(color: textColor.withOpacity(0.7))),
                               actions: [
-                                TextButton(onPressed: () => Navigator.pop(context, false), child: Text(context.tr('İptal'), style: const TextStyle(color: Colors.grey))),
+                                TextButton(onPressed: () => Navigator.pop(context, false), child: Text(msgCancel, style: const TextStyle(color: Colors.grey))),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                                   onPressed: () => Navigator.pop(context, true),
-                                  child: Text(context.tr('Yes, end the game'), style: const TextStyle(color: Colors.white)),
+                                  child: Text(msgYesEnd, style: const TextStyle(color: Colors.white)),
                                 ),
                               ],
                             ),
@@ -310,7 +328,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                             final success = await context.read<GamesProvider>().finishGame(widget.game.id!, widget.game.gmId);
                             if (success && context.mounted) {
                               Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text(context.tr('Game successfully finished!')), backgroundColor: Colors.green));
+                              ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text(msgFinishSuccess), backgroundColor: Colors.green));
                             }
                           }
                         },
@@ -338,7 +356,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                           if (allMaps.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(context.tr('Firstly a map has to be added to map pool!'))),
+                              SnackBar(content: Text(msgMapWarn)),
                             );
                             return;
                           }
@@ -358,7 +376,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        context.tr('Maps'),
+                                        msgMaps,
                                         style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 16),
@@ -375,15 +393,18 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                                               onTap: () async {
                                                 Navigator.pop(context);
 
+// "Map linked!" mesajından hemen önceki kod
+                                                final currentUserId = context.read<UserRoleProvider>().userId; // YENİ
                                                 final success = await context.read<MapsProvider>().createMap(
                                                   map.name,
                                                   map.imageUrl,
+                                                  currentUserId!, // <--- YENİ EKLENDİ
                                                   gameId: widget.game.id,
                                                 );
 
                                                 if (success && context.mounted) {
                                                   ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text(context.tr('Map linked!')), backgroundColor: Colors.green),
+                                                    SnackBar(content: Text(msgMapLinked), backgroundColor: Colors.green),
                                                   );
                                                 }
                                               },
@@ -504,7 +525,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                           if (allNotes.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(context.tr('Firstly a note has to be added to note pool!'))),
+                              SnackBar(content: Text(msgNoteWarn)),
                             );
                             return;
                           }
@@ -525,7 +546,7 @@ class _GameDetailsViewState extends State<GameDetailsView> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        context.tr('Notes'),
+                                        msgNotes,
                                         style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 16),
@@ -553,11 +574,11 @@ class _GameDetailsViewState extends State<GameDetailsView> {
 
                                                   if (success && context.mounted) {
                                                     ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(content: Text(context.tr('Added')), backgroundColor: Colors.green),
+                                                      SnackBar(content: Text(msgNoteAdded), backgroundColor: Colors.green),
                                                     );
                                                   } else if (context.mounted) {
                                                     ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(content: Text(context.tr('Error occured while adding the note.')), backgroundColor: Colors.red),
+                                                      SnackBar(content: Text(msgNoteError), backgroundColor: Colors.red),
                                                     );
                                                   }
                                                 },

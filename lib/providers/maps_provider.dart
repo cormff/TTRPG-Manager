@@ -22,26 +22,23 @@ class MapsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // 2. Tüm Havuzu Getir
-  Future<void> fetchAllMaps() async {
+// DEĞİŞTİRİLEN: Parametre eklendi
+  Future<void> fetchAllMaps(int ownerId) async {
     _isLoading = true;
     notifyListeners();
-    _allMaps = await _mapService.getAllMaps();
+    _allMaps = await _mapService.getAllMaps(ownerId);
     _isLoading = false;
     notifyListeners();
   }
 
-  // 3. Harita Kaydet ve Havuzu Yenile
-  Future<bool> createMap(String name, String imageUrl, {int? gameId}) async {
-    // Modelimizi oluşturuyoruz
-    final newMap = GameMap(name: name, imageUrl: imageUrl, gameId: gameId);
+  // DEĞİŞTİRİLEN: Haritayı kimin oluşturduğu parametresi eklendi
+  Future<bool> createMap(String name, String imageUrl, int ownerId, {int? gameId}) async {
+    final newMap = GameMap(name: name, imageUrl: imageUrl, ownerId: ownerId, gameId: gameId);
 
-    // Servise yolluyoruz
     final success = await _mapService.createMap(newMap);
 
     if (success) {
-      // Eğer başarılıysa havuzu hemen güncelle ki ekrana yansısın
-      await fetchAllMaps();
+      await fetchAllMaps(ownerId); // Havuzu yenilerken kendi ID'mizi veriyoruz
       if (gameId != null) {
         await fetchMapsForGame(gameId);
       }

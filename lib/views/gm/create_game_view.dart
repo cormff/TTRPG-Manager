@@ -18,13 +18,12 @@ class _CreateGameViewState extends State<CreateGameView> {
   bool _isPublic = true;
   bool _isLoading = false;
 
-  void _submitForm() async {
+  void _submitForm(String successMsg, String errorMsg) async {
     final currentUserId = Provider.of<UserRoleProvider>(context, listen: false).userId;
     if (currentUserId == null) return;
 
     setState(() => _isLoading = true);
 
-    // Servis yerine Provider'ı kullanıyoruz
     final success = await Provider.of<GamesProvider>(context, listen: false).createGame(
       _titleController.text,
       _descController.text,
@@ -33,16 +32,38 @@ class _CreateGameViewState extends State<CreateGameView> {
       currentUserId,
     );
 
+    if (!mounted) return;
     setState(() => _isLoading = false);
 
-    if (success && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('Oyun Başarıyla Oluşturuldu!'))));
-      Navigator.pop(context);
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(successMsg),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      // ÇÖZÜM BURADA: Sayfaların üst üste binmesini kesin olarak engelliyoruz!
+      // 1. Önce "Ana Menü" (Dashboard) hariç açık olan tüm sayfaları (eski Oyunlarım sayfası dahil) kapatır.
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      // 2. Ardından tek ve taptaze bir "Oyunlarım" sayfası açar.
+      Navigator.of(context).pushNamed('/my_games_gm_view');
+
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMsg),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final successMsg = context.tr('Oyun Başarıyla Oluşturuldu!');
+    final errorMsg = context.tr('Oyun oluşturulurken hata oluştu!');
+
     return Scaffold(
       appBar: AppBar(title: Text(context.tr('Create New Campaign'))),
       body: SingleChildScrollView(
@@ -87,7 +108,7 @@ class _CreateGameViewState extends State<CreateGameView> {
             _isLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
-              onPressed: _submitForm,
+              onPressed: () => _submitForm(successMsg, errorMsg),
               style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
               child: Text(context.tr('Create Campaign')),
             ),

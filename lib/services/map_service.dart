@@ -20,10 +20,10 @@ class MapService {
     return [];
   }
 
-  // 2. Havuzdaki Tüm Haritaları Getir (YENİ EKLENDİ)
-  Future<List<GameMap>> getAllMaps() async {
+// DEĞİŞTİRİLEN: Kişiye özel havuzu getir
+  Future<List<GameMap>> getAllMaps(int ownerId) async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/all'));
+      final response = await http.get(Uri.parse('$baseUrl/all/$ownerId')); // ownerId eklendi
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => GameMap.fromJson(json)).toList();

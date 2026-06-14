@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../providers/maps_provider.dart';
 import 'package:ttrpg_manager/providers/language_manager.dart';
+import 'package:ttrpg_manager/providers/user_role_provider.dart';
 
 class MyMapsView extends StatefulWidget {
   const MyMapsView({super.key});
@@ -14,12 +15,16 @@ class MyMapsView extends StatefulWidget {
 
 class _MyMapsViewState extends State<MyMapsView> {
 
+// 1. initState Kısmı:
   @override
   void initState() {
     super.initState();
-    // Sayfa açıldığında veritabanındaki tüm haritaları çek
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MapsProvider>().fetchAllMaps();
+      // YENİ: Giriş yapmış kullanıcının ID'sini alıp sadece ona ait olanları çekiyoruz
+      final userId = context.read<UserRoleProvider>().userId;
+      if (userId != null) {
+        context.read<MapsProvider>().fetchAllMaps(userId);
+      }
     });
   }
 
@@ -157,11 +162,13 @@ class _MyMapsViewState extends State<MyMapsView> {
 
                           if (finalImageSource.isEmpty) return;
 
-                          setModalState(() => isSaving = true);
+                          final currentUserId = context.read<UserRoleProvider>().userId; // EKLENEN
 
+                          setModalState(() => isSaving = true);
                           final success = await context.read<MapsProvider>().createMap(
                               titleController.text,
-                              finalImageSource
+                              finalImageSource,
+                              currentUserId! // <--- YENİ: ID'yi de gönderiyoruz
                           );
 
                           if (success && context.mounted) {

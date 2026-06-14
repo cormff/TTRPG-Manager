@@ -3,12 +3,14 @@ class GameMap {
   final String name;
   final String imageUrl;
   final int? gameId;
+  final int? ownerId; // YENİ EKLENDİ
 
   GameMap({
     this.id,
     required this.name,
     required this.imageUrl,
     this.gameId,
+    this.ownerId, // YENİ
   });
 
   factory GameMap.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class GameMap {
       name: json['name'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       gameId: json['gameId'],
+      ownerId: json['ownerId'], // YENİ
     );
   }
 
@@ -25,6 +28,7 @@ class GameMap {
       'name': name,
       'imageUrl': imageUrl,
       'gameId': gameId,
+      'ownerId': ownerId, // YENİ
     };
   }
 }

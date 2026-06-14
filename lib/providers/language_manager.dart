@@ -242,6 +242,7 @@ class LanguageManager with ChangeNotifier {
       'Already registered? Log in': 'Zaten kayıtlı mısın? Giriş Yap',
       'You have not joined any games yet.': 'Henüz hiç oyuna katılmadınız.',
       'No characters have been created yet.': 'Henüz hiç karakter oluşturulmamış.',
+      'Oyun oluşturulurken hata oluştu!': 'Oyun oluşturulurken hata oluştu!',
     },
 
     'en': {
@@ -471,6 +472,7 @@ class LanguageManager with ChangeNotifier {
       'Already registered? Log in': 'Already registered? Log in',
       'You have not joined any games yet.': 'You have not joined any games yet.',
       'No characters have been created yet.': 'No characters have been created yet.',
+      'Oyun oluşturulurken hata oluştu!': 'Game creation failed!',
     }
   };
 

@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
         if (_selectedRole == UserRole.gameMaster) {
           // GM ise kendi oyunlarını ve haritalarını getir
           gamesProvider.fetchGMGames(newUserId);
-          Provider.of<MapsProvider>(context, listen: false).fetchAllMaps();
+          Provider.of<MapsProvider>(context, listen: false).fetchAllMaps(newUserId); // <--- DEĞİŞEN SATIR
         } else {
           // Oyuncu ise katıldığı oyunları getir
           // Not: Kendi provider'ındaki metoda göre ismi fetchJoinedGames veya fetchPlayerGames olabilir
